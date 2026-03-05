@@ -73,8 +73,7 @@ export default function Home() {
                 <CyberSection level={userLevel} />
                 <SyntaxTable />
                 <IntegrationProjects level={userLevel} />
-                <IntegrationProjects level={userLevel} />
-                <Pricing />
+                {/* <Pricing /> */}
                 <TestimonialsSlider />
                 <Resources />
                 <NewsSection />

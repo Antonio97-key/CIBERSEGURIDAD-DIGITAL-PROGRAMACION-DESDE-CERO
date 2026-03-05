@@ -34,7 +34,6 @@ export default function Header() {
         { name: t('header.nav.cyber') || 'Ciberseguridad', href: '#cyber' },
         { name: t('header.nav.prog') || 'Programación', href: '#prog' },
         { name: t('header.nav.projects') || 'Proyectos', href: '#integracion' },
-        { name: t('header.nav.pricing') || 'Planes', href: '#planes' },
         { name: t('header.nav.news') || 'Noticias', href: '#noticias' },
         { name: t('header.nav.trust') || 'Confianza', href: '#confianza' },
         { name: t('header.nav.resources') || 'Recursos', href: '#recursos' },
