@@ -139,6 +139,55 @@
                 "p1": "Next.js 14 presenta potentes capacidades del lado del servidor con Server Actions. Sin embargo, estas características conllevan nuevas responsabilidades de seguridad para los desarrolladores.",
                 "p2": "Un error común es no validar los permisos del usuario dentro de Server Actions. Adopta siempre que el cliente está comprometido y verifica el token de sesión al comienzo de toda operación sensible.",
                 "p3": "Además, las configuraciones adecuadas de CORS y la configuración estricta de cookies (HttpOnly, Secure, SameSite) son fundamentales para proteger flujos de autenticación en aplicaciones web."
+            },
+            {
+                "title": "Criptografía Post-Cuántica: Preparándonos para el Futuro",
+                "desc": "Cómo la computación cuántica cambiará el cifrado actual y qué algoritmos son resistentes.",
+                "p1": "La computación cuántica amenaza con romper gran parte de la criptografía de clave pública que usamos hoy. Esto incluye RSA y criptografía de curva elíptica.",
+                "p2": "NIST ya está estandarizando nuevos algoritmos resistentes a ataques cuánticos. Es vital que las organizaciones comiencen a planificar la transición hacia una agilidad criptográfica.",
+                "p3": "La criptografía basada en redes y en códigos son algunas de las propuestas más sólidas para asegurar el futuro de nuestras comunicaciones digitales."
+            },
+            {
+                "title": "Ataques de Cadena de Suministro: El Riesgo Invisible",
+                "desc": "Análisis de cómo las dependencias de software pueden ser el punto de entrada para atacantes.",
+                "p1": "En 2026, los ataques de cadena de suministro siguen siendo una de las mayores amenazas. Un solo paquete comprometido en npm o PyPI puede afectar a miles de aplicaciones.",
+                "p2": "Implementar un SBOM (Software Bill of Materials) es ahora un requisito estándar para la transparencia y seguridad en el desarrollo de software profesional.",
+                "p3": "La verificación de firmas y el escaneo automático de vulnerabilidades en tiempo de construcción son las primeras líneas de defensa contra este tipo de filtraciones."
+            },
+            {
+                "title": "IA en Ciberseguridad: ¿Defensa o Amenaza?",
+                "desc": "Cómo los modelos de lenguaje están siendo usados tanto para detectar ataques como para crearlos.",
+                "p1": "La inteligencia artificial ha transformado el SOC moderno, permitiendo la detección de anomalías en milisegundos. Sin embargo, los atacantes también usan IA para generar phishing altamente convincente.",
+                "p2": "Estamos en una carrera armamentista tecnológica. La capacidad de automatizar la búsqueda de vulnerabilidades está acelerando tanto el parcheo como la explotación de fallos.",
+                "p3": "El factor humano sigue siendo el eslabón más débil, pero la IA está ayudando a crear simulaciones de entrenamiento personalizadas para mejorar la resiliencia organizacional."
+            },
+            {
+                "title": "Privacidad de Datos en la Era del Metaverso",
+                "desc": "Los nuevos desafíos que presentan los entornos inmersivos para la protección de la identidad.",
+                "p1": "Con el auge de los espacios digitales inmersivos, la cantidad de datos biométricos y de comportamiento recolectados no tiene precedentes. Esto plantea dilemas éticos y de seguridad.",
+                "p2": "La legislación actual está luchando para mantenerse al día con la rapidez de estas tecnologías. El consentimiento informado y la minimización de datos son principios clave.",
+                "p3": "Asegurar la identidad en el metaverso requiere soluciones descentralizadas (DID) que permitan al usuario tener el control total sobre quién accede a su información."
+            },
+            {
+                "title": "Seguridad en Dispositivos IoT Industriales",
+                "desc": "Cómo proteger la infraestructura crítica de ataques dirigidos a sistemas de control.",
+                "p1": "La convergencia de OT e IT ha abierto nuevas superficies de ataque en fábricas y plantas de energía. La seguridad perimetral tradicional ya no es suficiente en estos entornos.",
+                "p2": "Implementar segmentación de red estricta y monitoreo continuo del tráfico industrial es esencial para prevenir interrupciones críticas en los servicios básicos.",
+                "p3": "Muchos dispositivos IoT carecen de capacidades básicas de actualización, lo que los convierte en botnets potenciales permanentes si no se gestionan correctamente."
+            },
+            {
+                "title": "El Auge del Ransomware as a Service (RaaS)",
+                "desc": "Cómo el modelo de negocio del cibercrimen se ha vuelto extremadamente profesional y accesible.",
+                "p1": "El ransomware ya no es solo para hackers expertos. El modelo de afiliación permite que cualquier atacante con pocos conocimientos despliegue ataques masivos a cambio de una comisión.",
+                "p2": "La doble extorsión, donde además de cifrar los datos se amenaza con filtrarlos, se ha convertido en la norma para maximizar las ganancias de los grupos delictivos.",
+                "p3": "Las copias de seguridad desconectadas (offline) y los planes de respuesta ante incidentes probados son la única forma real de no ceder ante las demandas de rescate."
+            },
+            {
+                "title": "Bugs de Día Cero y el Mercado de Vulnerabilidades",
+                "desc": "Un vistazo a cómo se descubren y comercializan los fallos de seguridad no documentados.",
+                "p1": "Los fallos de 'día cero' son extremadamente valiosos en el mercado negro y gris. Empresas y gobiernos compiten por obtener información antes de que sea pública.",
+                "p2": "Los programas de Bug Bounty han ayudado a que muchos investigadores éticos reporten estos fallos directamente a las empresas a cambio de recompensas justas.",
+                "p3": "La responsabilidad de los fabricantes de software para emitir parches rápidos es mayor que nunca, en un mundo donde un exploit puede compartirse globalmente en minutos."
             }
         ]
     },
