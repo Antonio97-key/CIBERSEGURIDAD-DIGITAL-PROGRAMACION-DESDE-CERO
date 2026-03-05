@@ -1,0 +1,226 @@
+{
+    "header": {
+        "title": "SEGURIDAD DIGITAL",
+        "subtitle": "+ Programación desde Cero",
+        "nav": {
+            "home": "Inicio",
+            "cyber": "Ciberseguridad",
+            "prog": "Programación",
+            "projects": "Proyectos",
+            "trust": "Confianza",
+            "resources": "Recursos",
+            "community": "Comunidad",
+            "news": "Noticias",
+            "pricing": "Planes"
+        },
+        "theme": "Tema actual:",
+        "language": "Idioma"
+    },
+    "hero": {
+        "badge": "Plataforma Educativa Gratuita",
+        "title_1": "Seguridad Digital",
+        "title_2": "+ Programación",
+        "title_3": "desde Cero",
+        "subtitle": "Aprende ciberseguridad y programación básica con ejemplos prácticos, herramientas gratuitas y proyectos reales.",
+        "subtitle_sub": "Diseñado para principiantes — sin experiencia previa necesaria.",
+        "cta_start": "Comenzar Ahora",
+        "cta_explore": "Explorar Programación",
+        "stats": {
+            "levels": "Niveles",
+            "languages": "Lenguajes",
+            "free": "Gratis"
+        }
+    },
+    "levelSelector": {
+        "question": "¿Cuál es tu nivel?",
+        "beginner": "Principiante",
+        "advanced": "Avanzado"
+    },
+    "cyber": {
+        "badge": "Módulo Temático",
+        "title": "De Cero a Hacker Ético",
+        "subtitle": "Un camino estructurado para entender cómo funcionan los ataques y cómo prevenirlos.",
+        "start_quiz": "Comenzar Quizz",
+        "level": "Nivel"
+    },
+    "syntax": {
+        "badge": "Cheatsheet Interactivo",
+        "title": "Sintaxis Comparada",
+        "subtitle": "Explora las diferencias clave entre Python y JavaScript. Haz clic en las filas para practicar.",
+        "choose_language": "Elige un lenguaje:",
+        "live_editor": "Editor Interactivo en vivo",
+        "run_code": "Ejecutar Código"
+    },
+    "projects": {
+        "badge": "De la Teoría a la Práctica",
+        "title": "Proyectos de Integración",
+        "subtitle": "Proyectos prácticos que combinan conceptos de ciberseguridad y programación.",
+        "view_code": "Ver Código",
+        "level": {
+            "beginner": "Principiante",
+            "intermediate": "Intermedio",
+            "advanced": "Avanzado"
+        },
+        "p1": {
+            "title": "Detector de URLs Sospechosas",
+            "desc": "Analiza URLs contra phishing."
+        },
+        "p2": {
+            "title": "Generador de Contraseñas Seguras",
+            "desc": "Generador de contraseñas fuertes."
+        },
+        "p3": {
+            "title": "Analizador de Encabezados HTTP",
+            "desc": "Verifica encabezados HTTP."
+        },
+        "p4": {
+            "title": "Cifrador de Mensajes",
+            "desc": "Cifrado César."
+        }
+    },
+    "trust": {
+        "badge": "Por qué elegirnos",
+        "title": "Tecnología moderna y diseño intuitivo",
+        "subtitle": "Una plataforma diseñada para facilitar el aprendizaje con las mejores herramientas."
+    },
+    "testimonials": {
+        "badge": "Testimonios",
+        "title": "Lo que dicen nuestros estudiantes",
+        "subtitle": "Personas reales compartiendo sus experiencias con la plataforma."
+    },
+    "resources": {
+        "badge": "Recursos",
+        "title": "Herramientas y Glosario",
+        "subtitle": "Todo lo que necesitas para continuar tu aprendizaje."
+    },
+    "community": {
+        "badge": "Comunidad",
+        "title": "Foro de Estudiantes",
+        "subtitle": "Comparte tus dudas, proyectos y conecta con otros."
+    },
+    "footer": {
+        "desc": "Plataforma educativa para aprender ciberseguridad y programación básica con ejemplos prácticos y proyectos reales.",
+        "col1": "Plataforma",
+        "col2": "Comunidad",
+        "col3": "Legal",
+        "links": {
+            "contribute": "Contribuir",
+            "faq": "FAQ",
+            "privacy": "Privacidad",
+            "terms": "Términos",
+            "cookies": "Cookies"
+        },
+        "rights": "Todos los derechos reservados.",
+        "made_with": "Hecho con ❤️ para la comunidad"
+    },
+    "news": {
+        "badge": "Actualidad",
+        "title": "Noticias y Tendencias",
+        "subtitle": "Mantente al día con lo último en ciberseguridad.",
+        "read_more": "Leer más",
+        "fallback": [
+            {
+                "title": "Guía Definitiva de Seguridad Web en 2026",
+                "desc": "Aprende las últimas técnicas para asegurar aplicaciones modernas contra amenazas emergentes.",
+                "p1": "La seguridad es un campo en constante evolución. Con el auge de nuevas arquitecturas y ataques impulsados por IA, mantener las aplicaciones web seguras se ha convertido en un desafío mayor que nunca.",
+                "p2": "Desde autenticación robusta hasta escaneo continuo, los desarrolladores deben adoptar una mentalidad de confianza cero. Exploremos las estrategias fundamentales para proteger los datos de los usuarios.",
+                "p3": "El primer paso para asegurar cualquier plataforma es comprender su superficie de ataque. Esto incluye analizar dependencias de terceros, aplicar políticas estrictas y validar todas las entradas."
+            },
+            {
+                "title": "Entendiendo la Arquitectura Zero Trust",
+                "desc": "Por qué la seguridad perimetral ya no es suficiente y cómo implementar confianza cero.",
+                "p1": "Durante décadas, la seguridad empresarial se basó en el enfoque de castillo y foso. Una vez dentro del perímetro, se confiaba en la red. Este modelo es defectuoso en la era del trabajo remoto y la nube.",
+                "p2": "La Arquitectura Zero Trust opera bajo un principio simple: 'nunca confíes, siempre verifica'. Cada solicitud, independientemente de su origen, debe ser estrictamente autenticada y autorizada.",
+                "p3": "Implementar Zero Trust requiere una combinación de gestión de identidad sólida, autenticación multifactor y controles de acceso granulares adaptados a los roles organizacionales."
+            },
+            {
+                "title": "Mejores Prácticas de Seguridad en Next.js 14",
+                "desc": "Una inmersión profunda en la seguridad de Server Actions, cookies y endpoints del app router.",
+                "p1": "Next.js 14 presenta potentes capacidades del lado del servidor con Server Actions. Sin embargo, estas características conllevan nuevas responsabilidades de seguridad para los desarrolladores.",
+                "p2": "Un error común es no validar los permisos del usuario dentro de Server Actions. Adopta siempre que el cliente está comprometido y verifica el token de sesión al comienzo de toda operación sensible.",
+                "p3": "Además, las configuraciones adecuadas de CORS y la configuración estricta de cookies (HttpOnly, Secure, SameSite) son fundamentales para proteger flujos de autenticación en aplicaciones web."
+            }
+        ]
+    },
+    "pricing": {
+        "badge": "Planes",
+        "title": "Invierte en tu Futuro",
+        "subtitle": "Comienza gratis y sube de nivel.",
+        "period": {
+            "forever": "para siempre",
+            "monthly": "/ mes"
+        },
+        "free": {
+            "name": "Gratis",
+            "feat1": "Niveles básicos",
+            "feat2": "Editor limitado",
+            "feat3": "Proyectos",
+            "feat4": "Comunidad",
+            "btn": "Plan Actual"
+        },
+        "premium": {
+            "name": "Premium",
+            "feat1": "Laboratorios Avanzados",
+            "feat2": "Vulnerabilidades",
+            "feat3": "Feedback",
+            "feat4": "Soporte",
+            "btn": "Mejorar"
+        },
+        "vip": {
+            "name": "VIP",
+            "feat1": "Todo Premium",
+            "feat2": "Mentoría",
+            "feat3": "Certificaciones",
+            "feat4": "Anticipado",
+            "btn": "Obtener"
+        },
+        "badge_recommended": "Más Popular"
+    },
+    "cyber_levels": {
+        "l1": {
+            "title": "Fundamentos de Redes",
+            "desc": "Viaje de datos",
+            "t1": "Modelo OSI",
+            "t2": "TCP/IP",
+            "t3": "Puertos comunes",
+            "t4": "DNS y Spoofing",
+            "q": "¿Qué puerto es comúnmente usado para tráfico web no encriptado (HTTP)?"
+        },
+        "l2": {
+            "title": "Criptografía Básica",
+            "desc": "Cifrado",
+            "t1": "Cifrado Simétrico vs Asimétrico",
+            "t2": "Hashes (MD5, SHA-256)",
+            "t3": "Certificados SSL/TLS",
+            "t4": "Gestión de claves",
+            "q": "¿Cuál de los siguientes NO es un algoritmo de hashing seguro hoy en día?"
+        },
+        "l3": {
+            "title": "Malware y Amenazas",
+            "desc": "Virus",
+            "t1": "Virus vs Gusanos",
+            "t2": "Ransomware",
+            "t3": "Troyanos",
+            "t4": "Spyware & Adware",
+            "q": "¿Qué tipo de malware 'secuestra' tus archivos y pide un pago para liberarlos?"
+        },
+        "l4": {
+            "title": "Ingeniería Social",
+            "desc": "Social",
+            "t1": "Phishing",
+            "t2": "Baiting",
+            "t3": "Tailgating",
+            "t4": "Pretexting",
+            "q": "Recibes un correo urgente pidiendo que inicies sesión. Esto es un ejemplo de:"
+        },
+        "l5": {
+            "title": "Seguridad en Aplicaciones Web",
+            "desc": "OWASP",
+            "t1": "Inyección SQL",
+            "t2": "Cross-Site Scripting (XSS)",
+            "t3": "CSRF",
+            "t4": "Autenticación rota",
+            "q": "¿Qué ataque consiste en inyectar scripts maliciosos en páginas web vistas por otros?"
+        }
+    }
+}

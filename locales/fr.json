@@ -1,0 +1,86 @@
+{
+    "header": {
+        "title": "SÉCURITÉ NUMÉRIQUE",
+        "subtitle": "+ Programmation de Zéro",
+        "nav": {
+            "home": "Accueil",
+            "cyber": "Cybersécurité",
+            "prog": "Programmation",
+            "projects": "Projets",
+            "trust": "Confiance",
+            "resources": "Ressources",
+            "community": "Communauté"
+        },
+        "theme": "Thème actuel:",
+        "language": "Langue"
+    },
+    "hero": {
+        "badge": "Plateforme Éducative Gratuite",
+        "title_1": "Sécurité Numérique",
+        "title_2": "+ Programmation",
+        "title_3": "de Zéro",
+        "subtitle": "Apprenez la cybersécurité et la programmation de base avec des exemples pratiques, des outils gratuits et des projets réels.",
+        "subtitle_sub": "Conçu pour les débutants — aucune expérience préalable requise.",
+        "cta_start": "Commencer",
+        "cta_explore": "Explorer la Programmation",
+        "stats": {
+            "levels": "Niveaux",
+            "languages": "Langages",
+            "free": "Gratuit"
+        }
+    },
+    "levelSelector": {
+        "question": "Quel est votre niveau?",
+        "beginner": "Débutant",
+        "advanced": "Avancé"
+    },
+    "cyber": {
+        "badge": "Module Thématique",
+        "title": "De Zéro à Hacker Éthique",
+        "subtitle": "Un parcours structuré pour comprendre le fonctionnement des attaques et comment les prévenir.",
+        "start_quiz": "Démarrer le Quiz",
+        "level": "Niveau"
+    },
+    "syntax": {
+        "badge": "Aide-mémoire Interactif",
+        "title": "Syntaxe Comparée",
+        "subtitle": "Explorez les différences clés entre Python et JavaScript. Cliquez sur les lignes pour pratiquer.",
+        "choose_language": "Choisissez un langage:",
+        "live_editor": "Éditeur Interactif en Direct",
+        "run_code": "Exécuter le Code"
+    },
+    "projects": {
+        "badge": "De la Théorie à la Pratique",
+        "title": "Projets d'Intégration",
+        "subtitle": "Projets pratiques combinant concepts de cybersécurité et programmation.",
+        "view_code": "Voir le Code"
+    },
+    "trust": {
+        "badge": "Pourquoi nous choisir",
+        "title": "Technologie moderne et design intuitif",
+        "subtitle": "Une plateforme conçue pour faciliter l'apprentissage avec les meilleurs outils."
+    },
+    "testimonials": {
+        "badge": "Témoignages",
+        "title": "Ce que nos étudiants disent",
+        "subtitle": "De vraies personnes partageant leurs expériences avec la plateforme."
+    },
+    "resources": {
+        "badge": "Ressources",
+        "title": "Outils et Glossaire",
+        "subtitle": "Tout ce dont vous avez besoin pour continuer à apprendre."
+    },
+    "community": {
+        "badge": "Communauté",
+        "title": "Forum des Étudiants",
+        "subtitle": "Partagez vos doutes, vos projets et connectez-vous avec les autres."
+    },
+    "footer": {
+        "desc": "Plateforme éducative pour apprendre la cybersécurité et la programmation de base avec des exemples pratiques et des projets réels.",
+        "col1": "Plateforme",
+        "col2": "Communauté",
+        "col3": "Légal",
+        "rights": "Tous droits réservés.",
+        "made_with": "Fait avec ❤️ pour la communauté"
+    }
+}

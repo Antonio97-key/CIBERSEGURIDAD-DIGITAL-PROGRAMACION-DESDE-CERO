@@ -1,0 +1,86 @@
+{
+    "header": {
+        "title": "数字安全",
+        "subtitle": "+ 从零开始编程",
+        "nav": {
+            "home": "首页",
+            "cyber": "网络安全",
+            "prog": "编程",
+            "projects": "项目",
+            "trust": "信任",
+            "resources": "资源",
+            "community": "社区"
+        },
+        "theme": "当前主题:",
+        "language": "语言"
+    },
+    "hero": {
+        "badge": "免费教育平台",
+        "title_1": "数字安全",
+        "title_2": "+ 编程",
+        "title_3": "从零开始",
+        "subtitle": "通过实际例子，免费工具和真实项目学习网络安全和基础编程。",
+        "subtitle_sub": "专为初学者设计 — 无需任何经验。",
+        "cta_start": "现在开始",
+        "cta_explore": "探索编程",
+        "stats": {
+            "levels": "级别",
+            "languages": "语言",
+            "free": "免费"
+        }
+    },
+    "levelSelector": {
+        "question": "你的水平是什么?",
+        "beginner": "初学者",
+        "advanced": "高级"
+    },
+    "cyber": {
+        "badge": "主题模块",
+        "title": "从零到道德黑客",
+        "subtitle": "理解攻击如何运作以及如何防范的结构化路径。",
+        "start_quiz": "开始测验",
+        "level": "级别"
+    },
+    "syntax": {
+        "badge": "互动备忘单",
+        "title": "比较语法",
+        "subtitle": "探索Python和JavaScript之间的主要区别。点击行进行练习。",
+        "choose_language": "选择一种语言:",
+        "live_editor": "实时互动编辑器",
+        "run_code": "运行代码"
+    },
+    "projects": {
+        "badge": "从理论到实践",
+        "title": "综合项目",
+        "subtitle": "结合网络安全概念和编程的实践项目。",
+        "view_code": "查看代码"
+    },
+    "trust": {
+        "badge": "为什么选择我们",
+        "title": "现代技术和直观设计",
+        "subtitle": "一个旨在通过最佳工具促进学习的平台。"
+    },
+    "testimonials": {
+        "badge": "推荐信",
+        "title": "我们的学生怎么说",
+        "subtitle": "真实的人分享他们在平台上的经验。"
+    },
+    "resources": {
+        "badge": "资源",
+        "title": "工具和词汇表",
+        "subtitle": "继续学习所需的一切。"
+    },
+    "community": {
+        "badge": "社区",
+        "title": "学生论坛",
+        "subtitle": "分享你的疑惑，项目，并与他人连接。"
+    },
+    "footer": {
+        "desc": "学习网络安全和基础编程的教育平台，提供实际例子和真实项目。",
+        "col1": "平台",
+        "col2": "社区",
+        "col3": "法律",
+        "rights": "版权所有。",
+        "made_with": "用❤️为社区制作"
+    }
+}

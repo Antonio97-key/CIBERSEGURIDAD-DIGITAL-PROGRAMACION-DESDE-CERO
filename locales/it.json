@@ -1,0 +1,86 @@
+{
+    "header": {
+        "title": "SICUREZZA DIGITALE",
+        "subtitle": "+ Programmazione da Zero",
+        "nav": {
+            "home": "Home",
+            "cyber": "Cybersecurity",
+            "prog": "Programmazione",
+            "projects": "Progetti",
+            "trust": "Fiducia",
+            "resources": "Risorse",
+            "community": "Comunità"
+        },
+        "theme": "Tema attuale:",
+        "language": "Lingua"
+    },
+    "hero": {
+        "badge": "Piattaforma Didattica Gratuita",
+        "title_1": "Sicurezza Digitale",
+        "title_2": "+ Programmazione",
+        "title_3": "da Zero",
+        "subtitle": "Impara la sicurezza informatica e la programmazione di base con esempi pratici, strumenti gratuiti e progetti reali.",
+        "subtitle_sub": "Progettato per principianti — nessuna esperienza precedente richiesta.",
+        "cta_start": "Inizia Ora",
+        "cta_explore": "Esplora Programmazione",
+        "stats": {
+            "levels": "Livelli",
+            "languages": "Linguaggi",
+            "free": "Gratis"
+        }
+    },
+    "levelSelector": {
+        "question": "Qual è il tuo livello?",
+        "beginner": "Principiante",
+        "advanced": "Avanzato"
+    },
+    "cyber": {
+        "badge": "Modulo Tematico",
+        "title": "Da Zero a Hacker Etico",
+        "subtitle": "Un percorso strutturato per capire come funzionano gli attacchi e come prevenirli.",
+        "start_quiz": "Inizia il Quiz",
+        "level": "Livello"
+    },
+    "syntax": {
+        "badge": "Cheatsheet Interattivo",
+        "title": "Sintassi Comparata",
+        "subtitle": "Esplora le differenze chiave tra Python e JavaScript. Clicca sulle righe per esercitarti.",
+        "choose_language": "Scegli un linguaggio:",
+        "live_editor": "Editor Interattivo dal Vivo",
+        "run_code": "Esegui il Codice"
+    },
+    "projects": {
+        "badge": "Dalla Teoria alla Pratica",
+        "title": "Progetti di Integrazione",
+        "subtitle": "Progetti pratici che combinano concetti di sicurezza informatica e programmazione.",
+        "view_code": "Vedi Codice"
+    },
+    "trust": {
+        "badge": "Perché sceglierci",
+        "title": "Tecnologia moderna e design intuitivo",
+        "subtitle": "Una piattaforma progettata per facilitare l'apprendimento con i migliori strumenti."
+    },
+    "testimonials": {
+        "badge": "Testimonianze",
+        "title": "Cosa dicono i nostri studenti",
+        "subtitle": "Persone reali condividono le loro esperienze con la piattaforma."
+    },
+    "resources": {
+        "badge": "Risorse",
+        "title": "Strumenti e Glossario",
+        "subtitle": "Tutto il necessario per continuare a imparare."
+    },
+    "community": {
+        "badge": "Comunità",
+        "title": "Forum degli Studenti",
+        "subtitle": "Condividi i tuoi dubbi, progetti e connettiti con gli altri."
+    },
+    "footer": {
+        "desc": "Piattaforma educativa per imparare la sicurezza informatica e la programmazione di base con esempi pratici e progetti reali.",
+        "col1": "Piattaforma",
+        "col2": "Comunità",
+        "col3": "Legale",
+        "rights": "Tutti i diritti riservati.",
+        "made_with": "Fatto con ❤️ per la comunità"
+    }
+}
