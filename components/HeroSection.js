@@ -24,12 +24,6 @@ export default function HeroSection() {
 
             {/* Content */}
             <div className="relative z-10 text-center px-4 sm:px-6 max-w-4xl mx-auto">
-                {/* Badge */}
-                <div className="inline-flex items-center gap-2 mb-8 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 animate-fade-in">
-                    <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-                    <span className="text-sm font-medium text-white/90">{t('hero.badge')}</span>
-                </div>
-
                 {/* Title */}
                 <h1 className="text-4xl sm:text-5xl md:text-7xl font-extrabold text-white mb-6 tracking-tight animate-slide-up">
                     {t('hero.title_1')}
@@ -84,9 +78,9 @@ export default function HeroSection() {
                 {/* Stats */}
                 <div className="mt-16 grid grid-cols-3 gap-6 max-w-lg mx-auto animate-fade-in" style={{ animationDelay: '0.8s' }}>
                     {[
-                        { value: '5', label: t('hero.stats.levels') },
-                        { value: '2', label: t('hero.stats.languages') },
-                        { value: '100%', label: t('hero.stats.free') },
+                        { value: '60+', label: 'Lecciones' },
+                        { value: '20+', label: 'Proyectos' },
+                        { value: '24/7', label: 'Comunidad' },
                     ].map(({ value, label }) => (
                         <div key={label} className="text-center">
                             <div className="text-2xl sm:text-3xl font-bold text-white">{value}</div>

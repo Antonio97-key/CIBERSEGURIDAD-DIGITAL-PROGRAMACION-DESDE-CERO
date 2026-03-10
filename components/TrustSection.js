@@ -14,9 +14,9 @@ export default function TrustSection() {
             description: 'Sitio protegido con SSL/TLS y headers de seguridad avanzados.',
         },
         {
-            icon: '💰',
-            title: '100% Gratuito',
-            description: 'Acceso completo a todo el contenido sin costo ni suscripciones.',
+            icon: '💎',
+            title: 'Certificación VIP',
+            description: 'Obtén certificados de nivel profesional al completar proyectos avanzados.',
         },
         {
             icon: '🎓',
