@@ -13,7 +13,7 @@ export default function App({ Component, pageProps }) {
                 <ThemeProvider>
                     <DefaultSeo
                         title="Seguridad Digital + Programación desde Cero"
-                        description="Aprende ciberseguridad y programación básica con ejemplos prácticos, herramientas gratuitas y proyectos reales. Recurso educativo para principiantes."
+                        description="Domina la ciberseguridad y programación avanzada con metodologías profesionales, laboratorios de élite y proyectos reales de alto nivel."
                         canonical="https://seguridad-digital.vercel.app"
                         openGraph={{
                             type: 'website',
@@ -21,7 +21,7 @@ export default function App({ Component, pageProps }) {
                             url: 'https://seguridad-digital.vercel.app',
                             siteName: 'Seguridad Digital + Programación desde Cero',
                             title: 'Seguridad Digital + Programación desde Cero',
-                            description: 'Aprende ciberseguridad y programación básica con ejemplos prácticos.',
+                            description: 'Domina la ciberseguridad y programación avanzada con metodologías profesionales y laboratorios de élite.',
                             images: [
                                 {
                                     url: '/og-image.jpg',
@@ -33,7 +33,7 @@ export default function App({ Component, pageProps }) {
                         }}
                         additionalMetaTags={[
                             { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-                            { name: 'keywords', content: 'ciberseguridad, programación, principiantes, python, javascript, seguridad digital' },
+                            { name: 'keywords', content: 'ciberseguridad avanzada, programación profesional, hacking ético, laboratorios de élite, seguridad digital premium' },
                             { name: 'author', content: 'Seguridad Digital' },
                             { name: 'theme-color', content: '#3b82f6' },
                         ]}

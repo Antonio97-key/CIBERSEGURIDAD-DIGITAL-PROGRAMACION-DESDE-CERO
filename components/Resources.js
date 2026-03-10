@@ -3,20 +3,20 @@ import { useLanguage } from '../lib/LanguageContext';
 
 const resources = [
     {
-        category: 'Herramientas Gratuitas',
+        category: 'Herramientas de Élite',
         icon: '🛠️',
         items: [
-            { name: 'Visual Studio Code', desc: 'Editor de código gratuito y extensible', url: 'https://code.visualstudio.com/', tag: 'Editor' },
-            { name: 'Python.org', desc: 'Descarga e instala Python gratis', url: 'https://python.org/', tag: 'Lenguaje' },
-            { name: 'Node.js', desc: 'Entorno de ejecución JavaScript', url: 'https://nodejs.org/', tag: 'Runtime' },
+            { name: 'Visual Studio Code', desc: 'Editor de código profesional y extensible', url: 'https://code.visualstudio.com/', tag: 'Editor' },
+            { name: 'Python.org', desc: 'Instalación de Python de grado industrial', url: 'https://python.org/', tag: 'Lenguaje' },
+            { name: 'Node.js', desc: 'Entorno de ejecución JavaScript escalable', url: 'https://nodejs.org/', tag: 'Runtime' },
             { name: 'Git', desc: 'Control de versiones para tu código', url: 'https://git-scm.com/', tag: 'Herramienta' },
         ],
     },
     {
-        category: 'Plataformas de Aprendizaje',
+        category: 'Academias Profesionales',
         icon: '📚',
         items: [
-            { name: 'freeCodeCamp', desc: 'Cursos interactivos gratuitos de programación', url: 'https://freecodecamp.org/', tag: 'Curso' },
+            { name: 'freeCodeCamp', desc: 'Currículo interactivo de código abierto', url: 'https://freecodecamp.org/', tag: 'Curso' },
             { name: 'TryHackMe', desc: 'Laboratorios prácticos de ciberseguridad', url: 'https://tryhackme.com/', tag: 'Seguridad' },
             { name: 'HackerRank', desc: 'Retos de programación por niveles', url: 'https://hackerrank.com/', tag: 'Práctica' },
             { name: 'Codecademy', desc: 'Aprende programación interactivamente', url: 'https://codecademy.com/', tag: 'Curso' },

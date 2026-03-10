@@ -19,8 +19,8 @@
         "title_1": "数字安全",
         "title_2": "+ 编程",
         "title_3": "从零开始",
-        "subtitle": "通过实际例子，免费工具和真实项目学习网络安全和基础编程。",
-        "subtitle_sub": "专为初学者设计 — 无需任何经验。",
+        "subtitle": "通过专业方法、精英实验室和高级真实项目掌握网络安全和高级编程。",
+        "subtitle_sub": "专为初学者、中级和高级用户设计 — 为各个级别的经验量身定制的技术挑战。",
         "cta_start": "现在开始",
         "cta_explore": "探索编程",
         "stats": {
@@ -178,6 +178,40 @@
                 "desc": "真实项目和互动练习。"
             }
         ]
+    },
+    "pricing": {
+        "badge": "套餐",
+        "title": "投资您的未来",
+        "subtitle": "尊享精品内容体验。",
+        "period": {
+            "forever": "永久",
+            "monthly": "/ 月"
+        },
+        "free": {
+            "name": "VIP 初始版",
+            "feat1": "基础等级",
+            "feat2": "有限编辑器",
+            "feat3": "项目库",
+            "feat4": "社群",
+            "btn": "当前套餐"
+        },
+        "premium": {
+            "name": "高级版",
+            "feat1": "高级实验室",
+            "feat2": "漏洞分析",
+            "feat3": "专家反馈",
+            "feat4": "技术支持",
+            "btn": "立即升级"
+        },
+        "vip": {
+            "name": "VIP尊享版",
+            "feat1": "全部高级功能",
+            "feat2": "导师指导",
+            "feat3": "专业认证",
+            "feat4": "优先体验",
+            "btn": "立即加入"
+        },
+        "badge_recommended": "最热门"
     },
     "testimonials": {
         "badge": "推荐信",

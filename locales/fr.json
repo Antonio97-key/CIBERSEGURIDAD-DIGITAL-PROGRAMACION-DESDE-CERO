@@ -179,6 +179,40 @@
             }
         ]
     },
+    "pricing": {
+        "badge": "Forfaits",
+        "title": "Investissez dans votre Avenir",
+        "subtitle": "Accès premium à des contenus d'élite.",
+        "period": {
+            "forever": "pour toujours",
+            "monthly": "/ mois"
+        },
+        "free": {
+            "name": "VIP Initiale",
+            "feat1": "Niveaux de base",
+            "feat2": "Éditeur limité",
+            "feat3": "Projets",
+            "feat4": "Communauté",
+            "btn": "Plan Actuel"
+        },
+        "premium": {
+            "name": "Premium",
+            "feat1": "Laboratoires Avancés",
+            "feat2": "Vulnérabilités",
+            "feat3": "Feedback",
+            "feat4": "Support",
+            "btn": "Améliorer"
+        },
+        "vip": {
+            "name": "VIP",
+            "feat1": "Tout Premium",
+            "feat2": "Mentorat",
+            "feat3": "Certifications",
+            "feat4": "Anticipé",
+            "btn": "Obtenir"
+        },
+        "badge_recommended": "Plus Populaire"
+    },
     "testimonials": {
         "badge": "Témoignages",
         "title": "Ce que nos étudiants disent",

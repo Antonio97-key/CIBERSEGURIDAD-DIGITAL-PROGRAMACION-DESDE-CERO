@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react';
 import dynamic from 'next/dynamic';
+import Link from 'next/link';
 import { useLanguage } from '../lib/LanguageContext';
 import { Highlight, themes } from 'prism-react-renderer';
 

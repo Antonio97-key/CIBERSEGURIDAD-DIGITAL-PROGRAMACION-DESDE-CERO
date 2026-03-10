@@ -22,12 +22,12 @@ export default function Pricing() {
 // ... (rest of plans)
         {
             id: 'free',
-            name: t('pricing.free.name') || 'Gratis',
+            name: t('pricing.free.name') || 'VIP Inicial',
             price: '$0',
-            period: t('pricing.period.forever') || 'para siempre',
+            period: t('pricing.period.forever') || 'acceso básico',
             features: [
-                t('pricing.free.feat1') || 'Acceso completo a todos los niveles básicos',
-                t('pricing.free.feat2') || 'Editor de código interactivo limitado',
+                t('pricing.free.feat1') || 'Acceso a módulos fundamentales de élite',
+                t('pricing.free.feat2') || 'Editor de código interactivo profesional',
                 t('pricing.free.feat3') || 'Proyectos de integración introductorios',
                 t('pricing.free.feat4') || 'Acceso a la comunidad y foro'
             ],
@@ -112,7 +112,7 @@ export default function Pricing() {
                             </ul>
 
                             {plan.id === 'free' ? (
-                                <button className={`btn-3d w-full ${plan.buttonClass}`}>
+                                <button className={`btn-3d w-full ${plan.buttonClass}`} style={{ cursor: 'pointer' }}>
                                     {plan.buttonText}
                                 </button>
                             ) : (

@@ -19,8 +19,8 @@
         "title_1": "Sicurezza Digitale",
         "title_2": "+ Programmazione",
         "title_3": "da Zero",
-        "subtitle": "Impara la sicurezza informatica e la programmazione di base con esempi pratici, strumenti gratuiti e progetti reali.",
-        "subtitle_sub": "Progettato per principianti — nessuna esperienza precedente richiesta.",
+        "subtitle": "Padroneggia la sicurezza informatica e la programmazione avanzata con metodologie professionali, laboratori d'élite e progetti reali di alto livello.",
+        "subtitle_sub": "Strutturato per principianti, intermedi e avanzati — sfide tecniche su misura per ogni livello di esperienza.",
         "cta_start": "Inizia Ora",
         "cta_explore": "Esplora Programmazione",
         "stats": {
@@ -178,6 +178,40 @@
                 "desc": "Progetti reali ed esercizi interattivi."
             }
         ]
+    },
+    "pricing": {
+        "badge": "Piani",
+        "title": "Investi nel tuo Futuro",
+        "subtitle": "Accesso premium a contenuti d'élite.",
+        "period": {
+            "forever": "per sempre",
+            "monthly": "/ mese"
+        },
+        "free": {
+            "name": "VIP Iniziale",
+            "feat1": "Livelli base",
+            "feat2": "Editor limitato",
+            "feat3": "Progetti",
+            "feat4": "Comunità",
+            "btn": "Piano Attuale"
+        },
+        "premium": {
+            "name": "Premium",
+            "feat1": "Laboratori Avanzati",
+            "feat2": "Vulnerabilità",
+            "feat3": "Feedback",
+            "feat4": "Supporto",
+            "btn": "Migliora"
+        },
+        "vip": {
+            "name": "VIP",
+            "feat1": "Tutto Premium",
+            "feat2": "Mentorship",
+            "feat3": "Certificazioni",
+            "feat4": "Anticipato",
+            "btn": "Ottieni"
+        },
+        "badge_recommended": "Più Popolare"
     },
     "testimonials": {
         "badge": "Testimonianze",
