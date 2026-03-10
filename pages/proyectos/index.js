@@ -2,8 +2,10 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import ProjectsDashboard from '../../components/ProjectsDashboard';
 import Head from 'next/head';
+import { useLanguage } from '../../lib/LanguageContext';
 
 export default function ProyectosPage() {
+    const { t } = useLanguage();
     return (
         <div className="min-h-screen bg-black text-white selection:bg-primary-500/30">
             <Head>
@@ -18,14 +20,14 @@ export default function ProyectosPage() {
                           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-400 opacity-75"></span>
                           <span className="relative inline-flex rounded-full h-2 w-2 bg-primary-500"></span>
                         </span>
-                        Laboratorio Real-World
+                        {t('projects.badge') || 'Laboratorio Real-World'}
                     </div>
                     
                     <h1 className="text-5xl md:text-7xl font-black tracking-tighter mb-8 italic">
-                        Construye el <span className="gradient-text">Futuro Seguro</span>
+                        {t('projects.title_prefix') || 'Construye el'} <span className="gradient-text">{t('projects.title_accent') || 'Futuro Seguro'}</span>
                     </h1>
                     <p className="text-xl text-gray-500 font-medium leading-relaxed">
-                        Aplica tus conocimientos en retos prácticos. Desde escáneres de red hasta sistemas biométricos, desarrolla herramientas que protejan el mundo digital.
+                        {t('projects.subtitle') || 'Aplica tus conocimientos en retos prácticos. Desde escáneres de red hasta sistemas biométricos, desarrolla herramientas que protejan el mundo digital.'}
                     </p>
                 </header>
 

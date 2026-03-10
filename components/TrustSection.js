@@ -2,48 +2,52 @@ import { useLanguage } from '../lib/LanguageContext';
 
 export default function TrustSection() {
     const { t } = useLanguage();
-    const badges = [
+    const trustItems = t('trust.items', { returnObjects: true }) || [];
+    
+    // Fallback in case Translation doesn't return objects correctly
+    const displayItems = Array.isArray(trustItems) ? trustItems : [
         {
             icon: '🛡️',
-            title: 'Contenido Verificado',
-            description: 'Material revisado por profesionales en ciberseguridad y desarrollo.',
+            title: t('trust.title_fallback_1') || 'Contenido Verificado',
+            desc: t('trust.desc_fallback_1') || 'Material revisado por profesionales en ciberseguridad.'
         },
         {
             icon: '🔒',
-            title: 'Conexión Segura',
-            description: 'Sitio protegido con SSL/TLS y headers de seguridad avanzados.',
-        },
-        {
-            icon: '💎',
-            title: 'Certificación VIP',
-            description: 'Obtén certificados de nivel profesional al completar proyectos avanzados.',
-        },
-        {
-            icon: '🎓',
-            title: 'Aprendizaje Práctico',
-            description: 'Proyectos reales y ejercicios interactivos, no solo teoría.',
-        },
+            title: t('trust.title_fallback_2') || 'Conexión Segura',
+            desc: t('trust.desc_fallback_2') || 'Protección SSL/TLS avanzada.'
+        }
     ];
 
     return (
-        <section id="confianza" className="relative py-20 section-alt">
-            <div className="section-container">
-                <div className="text-center mb-16">
-                    <span className="chip chip-green mb-4 inline-flex">✅ {t('trust.badge')}</span>
-                    <h2 className="section-title gradient-text">{t('trust.title')}</h2>
-                    <p className="section-subtitle mx-auto">
-                        {t('trust.subtitle')}
+        <section id="confianza" className="relative py-24 bg-graphite-900 overflow-hidden">
+            {/* Background Accent */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-primary-500/20 to-transparent" />
+            
+            <div className="section-container relative z-10">
+                <div className="text-center mb-20 animate-slide-up">
+                    <span className="px-4 py-1 rounded-full bg-green-500/10 text-green-400 text-[10px] font-black uppercase tracking-[0.2em] mb-6 inline-block border border-green-500/20">
+                        {t('trust.badge') || 'Confianza'}
+                    </span>
+                    <h2 className="text-4xl md:text-5xl font-black text-white mb-6 tracking-tight">
+                        {t('trust.title') || 'Tecnología moderna y diseño intuitivo'}
+                    </h2>
+                    <p className="text-lg text-gray-500 max-w-2xl mx-auto font-medium">
+                        {t('trust.subtitle') || 'Una plataforma diseñada para facilitar el aprendizaje con las mejores herramientas.'}
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    {badges.map((badge, idx) => (
-                        <div key={idx} className="glass-card p-6 text-center group hover:border-primary-300 dark:hover:border-primary-700 transition-all duration-300">
-                            <div className="w-16 h-16 rounded-2xl bg-primary-50 dark:bg-primary-900/20 flex items-center justify-center mx-auto mb-4 text-3xl group-hover:scale-110 transition-transform duration-300">
-                                {badge.icon}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    {displayItems.map((item, idx) => (
+                        <div key={idx} className="group p-8 rounded-[32px] bg-white/[0.02] border border-white/5 hover:border-primary-500/30 transition-all duration-500 hover:bg-white/[0.04]">
+                            <div className="w-16 h-16 rounded-2xl bg-primary-500/10 flex items-center justify-center mb-8 group-hover:scale-110 group-hover:bg-primary-500/20 transition-all duration-500 text-3xl">
+                                {item.icon}
                             </div>
-                            <h3 className="font-bold text-gray-900 dark:text-white mb-2 text-sm">{badge.title}</h3>
-                            <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">{badge.description}</p>
+                            <h3 className="text-xl font-black text-white mb-4 tracking-tight group-hover:text-primary-400 transition-colors">
+                                {item.title}
+                            </h3>
+                            <p className="text-gray-500 font-medium leading-relaxed">
+                                {item.desc}
+                            </p>
                         </div>
                     ))}
                 </div>

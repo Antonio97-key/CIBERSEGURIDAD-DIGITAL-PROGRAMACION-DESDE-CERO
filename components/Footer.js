@@ -27,11 +27,44 @@ export default function Footer() {
             ],
         },
         {
-            title: 'Legal & Soporte',
+            title: t('footer.col3') || 'Legal & Soporte',
             links: [
-                { label: 'Privacidad', action: () => setActivePolicy(siteConfig.policies.privacy) },
-                { label: 'Términos', action: () => setActivePolicy(siteConfig.policies.terms) },
-                { label: 'Cookies', action: () => setActivePolicy(siteConfig.policies.cookies) },
+                { 
+                    label: t('policies.privacy.title') || 'Privacidad', 
+                    action: () => setActivePolicy({
+                        title: t('policies.privacy.title'),
+                        content: [
+                            t('policies.privacy.p1'),
+                            t('policies.privacy.p2'),
+                            t('policies.privacy.p3'),
+                            t('policies.privacy.p4')
+                        ].filter(Boolean)
+                    }) 
+                },
+                { 
+                    label: t('policies.terms.title') || 'Términos', 
+                    action: () => setActivePolicy({
+                        title: t('policies.terms.title'),
+                        content: [
+                            t('policies.terms.p1'),
+                            t('policies.terms.p2'),
+                            t('policies.terms.p3'),
+                            t('policies.terms.p4')
+                        ].filter(Boolean)
+                    }) 
+                },
+                { 
+                    label: t('policies.cookies.title') || 'Cookies', 
+                    action: () => setActivePolicy({
+                        title: t('policies.cookies.title'),
+                        content: [
+                            t('policies.cookies.p1'),
+                            t('policies.cookies.p2'),
+                            t('policies.cookies.p3'),
+                            t('policies.cookies.p4')
+                        ].filter(Boolean)
+                    }) 
+                },
             ],
         },
     ];

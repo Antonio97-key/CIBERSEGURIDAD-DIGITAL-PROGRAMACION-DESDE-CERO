@@ -1,7 +1,10 @@
 import { projects } from '../data/projects';
 import Link from 'next/link';
+import { useLanguage } from '../lib/LanguageContext';
 
 export default function ProjectsDashboard() {
+    const { t } = useLanguage();
+
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects.map((project) => (
@@ -13,11 +16,13 @@ export default function ProjectsDashboard() {
                         {/* Status/Badge */}
                         <div className="flex justify-between items-start mb-6">
                             <span className="px-3 py-1 rounded-full bg-white/5 text-[10px] font-black uppercase tracking-widest text-primary-400 border border-white/5">
-                                {project.category}
+                                {t(`projects.level.${project.difficulty.toLowerCase()}`) || project.category}
                             </span>
                             <div className="flex items-center gap-2">
                                 <span className={`w-2 h-2 rounded-full ${project.difficulty === 'Principiante' ? 'bg-green-500' : 'bg-orange-500'}`}></span>
-                                <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">{project.difficulty}</span>
+                                <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">
+                                    {t(`projects.level.${project.difficulty.toLowerCase()}`) || project.difficulty}
+                                </span>
                             </div>
                         </div>
 
@@ -34,12 +39,14 @@ export default function ProjectsDashboard() {
                                     </svg>
                                 )}
                             </div>
-                            <h3 className="text-2xl font-black text-white tracking-tight line-clamp-1">{project.title}</h3>
+                            <h3 className="text-2xl font-black text-white tracking-tight line-clamp-1">
+                                {t(`projects_data.${project.id.replace(/-/g, '_')}.title`) || project.title}
+                            </h3>
                         </div>
 
                         {/* Description */}
                         <p className="text-gray-500 text-sm font-medium leading-relaxed mb-8 flex-grow">
-                            {project.description}
+                            {t(`projects_data.${project.id.replace(/-/g, '_')}.desc`) || project.description}
                         </p>
 
                         {/* Footer Info */}
@@ -55,7 +62,7 @@ export default function ProjectsDashboard() {
                                     <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                                     </svg>
-                                    {project.goals.length} Pasos
+                                    {(t(`projects_data.${project.id.replace(/-/g, '_')}.goals`) || project.goals).length} {t('projects.steps') || 'Pasos'}
                                 </span>
                             </div>
                             

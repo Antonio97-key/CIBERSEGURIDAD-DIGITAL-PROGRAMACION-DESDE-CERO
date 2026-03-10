@@ -1,7 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
 import Editor from '@monaco-editor/react';
+import { useLanguage } from '../lib/LanguageContext';
 
 export default function CodePlayground({ initialCode = '', language = 'javascript', title = 'Editor Interactivo' }) {
+    const { t } = useLanguage();
     const [code, setCode] = useState(initialCode);
     const [output, setOutput] = useState([]);
     const [isRunning, setIsRunning] = useState(false);
@@ -91,7 +93,7 @@ export default function CodePlayground({ initialCode = '', language = 'javascrip
                     <div>
                         <h3 className="text-xl font-black text-white tracking-tight">{title}</h3>
                         <span className="text-[10px] font-black uppercase tracking-[0.2em] text-primary-500">
-                            Ambiente de Pruebas: {language === 'javascript' ? 'Node.js/Navegador' : 'Python 3.11'}
+                            {t('curriculum_ui.playground.title') || 'Ambiente de Pruebas'}: {language === 'javascript' ? 'Node.js/Navegador' : 'Python 3.11'}
                         </span>
                     </div>
                 </div>
@@ -101,7 +103,7 @@ export default function CodePlayground({ initialCode = '', language = 'javascrip
                         onClick={() => { setCode(initialCode); setOutput([]); setStdout(''); }}
                         className="px-4 py-2 text-xs font-bold text-gray-400 hover:text-white transition-colors"
                     >
-                        Reiniciar
+                        {t('curriculum_ui.playground.reset') || 'Reiniciar'}
                     </button>
                     <button
                         onClick={runCode}
@@ -115,7 +117,7 @@ export default function CodePlayground({ initialCode = '', language = 'javascrip
                                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
                             </svg>
                         )}
-                        {isRunning ? 'Ejecutando...' : 'Correr Script'}
+                        {isRunning ? (t('curriculum_ui.playground.running') || 'Ejecutando...') : (t('curriculum_ui.playground.run') || 'Correr Script')}
                     </button>
                 </div>
             </div>
@@ -158,7 +160,7 @@ export default function CodePlayground({ initialCode = '', language = 'javascrip
                     <div className="p-4 bg-white/5 border-b border-white/5 flex items-center justify-between">
                         <div className="flex items-center gap-2">
                             <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
-                            <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Consola de Salida</span>
+                            <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">{t('curriculum_ui.playground.output_label') || 'Consola de Salida'}</span>
                         </div>
                         <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Runtime: {isRunning ? 'Busy' : 'Idle'}</span>
                     </div>
@@ -183,7 +185,7 @@ export default function CodePlayground({ initialCode = '', language = 'javascrip
                                 <svg className="w-16 h-16 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                                 </svg>
-                                <p className="font-bold tracking-widest uppercase text-xs">Esperando ejecución...</p>
+                                <p className="font-bold tracking-widest uppercase text-xs">{t('curriculum_ui.playground.waiting') || 'Esperando ejecución...'}</p>
                             </div>
                         )}
                     </div>
@@ -193,8 +195,8 @@ export default function CodePlayground({ initialCode = '', language = 'javascrip
             {/* Footer Tip */}
             <div className="p-4 bg-primary-500/5 border-t border-white/5">
                 <p className="text-[10px] font-medium text-gray-500 text-center italic">
-                    <span className="font-black text-primary-500 uppercase not-italic mr-2">Dato Hacking:</span>
-                    Python se ejecuta localmente en tu navegador usando Pyodide (WebAssembly). Tu código no sale de tu máquina.
+                    <span className="font-black text-primary-500 uppercase not-italic mr-2">{t('curriculum_ui.playground.hacking_tip') || 'Dato Hacking'}:</span>
+                    {t('curriculum_ui.playground.python_tip') || 'Python se ejecuta localmente en tu navegador usando Pyodide (WebAssembly). Tu código no sale de tu máquina.'}
                 </p>
             </div>
         </div>

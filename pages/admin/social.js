@@ -1,71 +1,74 @@
 import { useState } from 'react';
+import { useRouter } from 'next/router';
+import { useLanguage } from '../../lib/LanguageContext';
 import { siteConfig } from '../../data/siteConfig';
-import Header from '../../components/Header';
-import Footer from '../../components/Footer';
-import Head from 'next/head';
 
-export default function AdminSocial() {
+export default function SocialAdmin() {
+    const { t } = useLanguage();
+    const router = useRouter();
     const [links, setLinks] = useState(siteConfig.socialLinks);
-    const [saving, setSaving] = useState(false);
+    const [status, setStatus] = useState('');
 
     const handleUpdate = (id, newUrl) => {
         setLinks(links.map(link => link.id === id ? { ...link, url: newUrl } : link));
     };
 
     const saveChanges = () => {
-        setSaving(true);
-        // This would normally be a Supabase update to a 'config' table
+        setStatus('Guardando...');
+        // In a real app, this would be an API call to update a database or JSON file
         setTimeout(() => {
-            setSaving(false);
-            alert('Configuración guardada exitosamente en la base de datos central.');
-        }, 1200);
+            console.log('Nuevos enlaces para siteConfig:', links);
+            setStatus('Cambios guardados localmente (Para persistencia real, actualiza data/siteConfig.js)');
+        }, 1000);
     };
 
     return (
-        <div className="min-h-screen bg-black text-white selection:bg-primary-500/30">
-            <Head>
-                <title>Admin Area | Gestión de Redes</title>
-            </Head>
-            <Header />
+        <div className="min-h-screen bg-graphite-950 text-white p-8">
+            <div className="max-w-4xl mx-auto">
+                <header className="mb-12">
+                    <button onClick={() => router.back()} className="text-primary-400 mb-4 hover:underline">← Volver</button>
+                    <h1 className="text-4xl font-black tracking-tighter uppercase">Panel de Gestión Social</h1>
+                    <p className="text-gray-400 font-medium">Modifica los enlaces de redes sociales que aparecen en el footer.</p>
+                </header>
 
-            <main className="max-w-4xl mx-auto px-4 py-24">
-                <div className="mb-12">
-                    <span className="text-[10px] font-black uppercase tracking-[0.4em] text-primary-500 mb-4 block">Panel de Control</span>
-                    <h1 className="text-4xl font-black italic tracking-tighter">Gestión de <span className="gradient-text">Redes Sociales</span></h1>
-                    <p className="text-gray-500 mt-4 font-medium">Actualiza los enlaces de la comunidad global sin modificar el código fuente.</p>
-                </div>
-
-                <div className="space-y-6">
-                    {links.map(link => (
-                        <div key={link.id} className="glass-card p-10 flex flex-col md:flex-row items-center gap-8 group hover:border-primary-500/30 transition-all">
-                            <div className="w-16 h-16 rounded-[25px] bg-white/5 border border-white/5 flex items-center justify-center text-primary-500 group-hover:scale-110 transition-transform">
-                                <span className="text-xl font-black">{link.icon}</span>
+                <div className="grid gap-6">
+                    {links.map((link) => (
+                        <div key={link.id} className="bg-white/5 border border-white/10 rounded-3xl p-6 flex flex-col md:flex-row items-center gap-6">
+                            <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary-500 to-purple-600 flex items-center justify-center text-2xl font-black">
+                                {link.icon}
                             </div>
                             <div className="flex-1 w-full">
-                                <label className="block text-[10px] font-black uppercase tracking-widest text-gray-600 mb-3">{link.name} URL</label>
+                                <label className="block text-[10px] font-black uppercase tracking-widest text-primary-500 mb-2">
+                                    {link.name} (ID: {link.id})
+                                </label>
                                 <input 
                                     type="text" 
                                     value={link.url}
                                     onChange={(e) => handleUpdate(link.id, e.target.value)}
-                                    className="w-full bg-black/50 border border-white/5 rounded-2xl p-4 text-sm focus:border-primary-500 outline-none transition-all"
+                                    className="w-full bg-white/5 border border-white/5 rounded-xl px-4 py-3 text-lg font-medium focus:outline-none focus:border-primary-500 transition-all"
                                 />
                             </div>
                         </div>
                     ))}
                 </div>
 
-                <div className="mt-12 flex justify-end">
+                <div className="mt-12 flex items-center justify-between gap-6">
+                    <p className="text-xs font-bold text-green-500">{status}</p>
                     <button 
                         onClick={saveChanges}
-                        disabled={saving}
-                        className="px-12 py-5 rounded-2xl bg-white text-black font-black text-xs uppercase tracking-widest hover:bg-primary-500 hover:text-white transition-all shadow-2xl active:scale-95"
+                        className="px-10 py-4 rounded-2xl bg-primary-500 text-white font-black text-xs uppercase tracking-widest hover:bg-primary-400 transition-all shadow-xl shadow-primary-500/20 active:scale-95"
                     >
-                        {saving ? 'Sincronizando...' : 'Guardar Cambios Globales'}
+                        Guardar Configuración
                     </button>
                 </div>
-            </main>
 
-            <Footer />
+                <div className="mt-20 p-8 bg-primary-500/10 border border-primary-500/20 rounded-3xl">
+                    <h3 className="text-primary-400 font-black uppercase tracking-widest text-sm mb-4">Nota de Implementación</h3>
+                    <p className="text-gray-400 font-medium leading-relaxed">
+                        Este panel está preparado para interactuar con una API. Actualmente, los cambios se reflejan en el estado local. Para aplicar los cambios de forma permanente en esta versión estática, edita manualmente el archivo <code className="bg-white/10 px-2 py-1 rounded">data/siteConfig.js</code>. En la versión de producción, esto estará sincronizado con Supabase.
+                    </p>
+                </div>
+            </div>
         </div>
     );
 }

@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import { useLanguage } from '../lib/LanguageContext';
 
 export default function CTFChallenge({ challenge }) {
+    const { t } = useLanguage();
     const [flag, setFlag] = useState('');
     const [isCorrect, setIsCorrect] = useState(false);
     const [error, setError] = useState(false);
@@ -28,10 +30,10 @@ export default function CTFChallenge({ challenge }) {
                     <div>
                         <div className="flex items-center gap-3 mb-4">
                             <span className="px-4 py-1 rounded-full bg-red-500 text-white text-[10px] font-black uppercase tracking-[0.2em] shadow-lg shadow-red-500/20">
-                                Desafío CTF
+                                {t('curriculum_ui.ctf.badge') || 'Desafío CTF'}
                             </span>
                             <span className="px-3 py-1 rounded-full bg-white/5 text-gray-400 text-[10px] font-bold uppercase tracking-widest border border-white/5">
-                                Nivel: {challenge.difficulty || 'Básico'}
+                                {t('curriculum_ui.ctf.level') || 'Nivel'}: {challenge.difficulty || 'Básico'}
                             </span>
                         </div>
                         <h3 className="text-3xl md:text-4xl font-black text-white tracking-tight">
@@ -40,7 +42,7 @@ export default function CTFChallenge({ challenge }) {
                     </div>
                     <div className="flex items-center gap-4">
                         <div className="bg-white/5 p-4 rounded-2xl border border-white/5 flex flex-col items-center">
-                            <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1">Recompensa</span>
+                            <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1">{t('curriculum_ui.ctf.reward') || 'Recompensa'}</span>
                             <span className="text-xl font-black text-yellow-500">+{challenge.points || 100} XP</span>
                         </div>
                     </div>
@@ -57,8 +59,8 @@ export default function CTFChallenge({ challenge }) {
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={4} d="M5 13l4 4L19 7" />
                             </svg>
                         </div>
-                        <h4 className="text-4xl font-black text-white mb-3 tracking-tight">¡FLAG CAPTURADA!</h4>
-                        <p className="text-green-400 font-bold mb-8 uppercase tracking-widest text-sm">Has completado este reto con éxito</p>
+                        <h4 className="text-4xl font-black text-white mb-3 tracking-tight">{t('curriculum_ui.ctf.success') || '¡FLAG CAPTURADA!'}</h4>
+                        <p className="text-green-400 font-bold mb-8 uppercase tracking-widest text-sm">{t('curriculum_ui.ctf.success_msg') || 'Has completado este reto con éxito'}</p>
                         <div className="p-6 bg-black/40 rounded-2xl font-mono text-xl border border-white/5 text-gray-300 select-all">
                             {challenge.flag}
                         </div>
@@ -71,7 +73,7 @@ export default function CTFChallenge({ challenge }) {
                                     type="text"
                                     value={flag}
                                     onChange={(e) => setFlag(e.target.value)}
-                                    placeholder="hack_the_planet{...}"
+                                    placeholder={t('curriculum_ui.ctf.placeholder') || 'hack_the_planet{...}'}
                                     className={`w-full bg-black/50 border-2 rounded-2xl p-5 pl-14 font-mono text-lg transition-all outline-none focus:ring-4 focus:ring-blue-500/20 ${
                                         error ? 'border-red-500 animate-shake' : 'border-white/10 focus:border-blue-500 text-white'
                                     }`}
@@ -86,7 +88,7 @@ export default function CTFChallenge({ challenge }) {
                                 onClick={checkFlag}
                                 className="btn-3d btn-3d-primary py-5 px-10 text-lg font-black min-w-[200px]"
                             >
-                                Enviar Flag
+                                {t('curriculum_ui.ctf.submit') || 'Enviar Flag'}
                             </button>
                         </div>
 
@@ -98,11 +100,11 @@ export default function CTFChallenge({ challenge }) {
                                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
-                                {showHint ? 'Ocultar Pista' : 'Necesito una pista (-50 XP)'}
+                                {showHint ? (t('curriculum_ui.ctf.hide_hint') || 'Ocultar Pista') : (t('curriculum_ui.ctf.show_hint') || 'Necesito una pista (-50 XP)')}
                             </button>
                             {error && (
                                 <span className="text-red-500 font-bold text-sm animate-pulse uppercase tracking-widest">
-                                    Flag Incorrecta
+                                    {t('curriculum_ui.ctf.wrong') || 'Flag Incorrecta'}
                                 </span>
                             )}
                         </div>
@@ -110,7 +112,7 @@ export default function CTFChallenge({ challenge }) {
                         {showHint && (
                             <div className="animate-fade-in p-6 bg-blue-500/5 border border-blue-500/20 rounded-2xl">
                                 <p className="text-blue-400 font-medium italic">
-                                    <span className="font-black uppercase not-italic mr-2">Pista:</span> {challenge.hint}
+                                    <span className="font-black uppercase not-italic mr-2">{t('curriculum_ui.ctf.hint_label') || 'Pista'}:</span> {challenge.hint}
                                 </p>
                             </div>
                         )}

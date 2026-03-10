@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import { useLanguage } from '../lib/LanguageContext';
 
 export default function LessonQuiz({ quiz }) {
+    const { t } = useLanguage();
     const [selectedOption, setSelectedOption] = useState(null);
     const [showResult, setShowResult] = useState(false);
     const [isCorrect, setIsCorrect] = useState(false);
@@ -27,7 +29,7 @@ export default function LessonQuiz({ quiz }) {
 
             <div className="relative z-10">
                 <span className="inline-block px-3 py-1 rounded-lg bg-blue-500/20 text-blue-400 text-xs font-black uppercase tracking-widest mb-6">
-                    Check de Conocimiento
+                    {t('curriculum_ui.quiz.badge') || 'Check de Conocimiento'}
                 </span>
                 
                 <h3 className="text-2xl font-black text-white mb-8 leading-tight">
@@ -68,7 +70,7 @@ export default function LessonQuiz({ quiz }) {
                         disabled={selectedOption === null}
                         className={`btn-3d w-full py-4 text-lg ${selectedOption === null ? 'opacity-50 cursor-not-allowed' : 'btn-3d-primary'}`}
                     >
-                        Validar Respuesta
+                        {t('curriculum_ui.quiz.validate') || 'Validar Respuesta'}
                     </button>
                 ) : (
                     <div className="animate-fade-in">
@@ -80,7 +82,7 @@ export default function LessonQuiz({ quiz }) {
                                     <svg className="w-6 h-6 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M6 18L18 6M6 6l12 12" /></svg>
                                 )}
                                 <span className={`text-xl font-black ${isCorrect ? 'text-green-400' : 'text-red-400'}`}>
-                                    {isCorrect ? '¡Excelente!' : 'Casi lo logras'}
+                                    {isCorrect ? (t('curriculum_ui.quiz.correct') || '¡Excelente!') : (t('curriculum_ui.quiz.wrong') || 'Casi lo logras')}
                                 </span>
                             </div>
                             <p className="text-gray-300 font-medium">{quiz.explanation}</p>
@@ -89,7 +91,7 @@ export default function LessonQuiz({ quiz }) {
                             onClick={handleReset}
                             className="text-blue-500 font-bold hover:underline block mx-auto py-2"
                         >
-                            Intentar de nuevo
+                            {t('curriculum_ui.quiz.retry') || 'Intentar de nuevo'}
                         </button>
                     </div>
                 )}

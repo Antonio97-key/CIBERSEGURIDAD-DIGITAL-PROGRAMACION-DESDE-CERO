@@ -15,7 +15,7 @@
         "language": "Langue"
     },
     "hero": {
-        "badge": "Plateforme Éducative Gratuite",
+        "badge": "Expérience Éducative Premium",
         "title_1": "Sécurité Numérique",
         "title_2": "+ Programmation",
         "title_3": "de Zéro",
@@ -24,9 +24,12 @@
         "cta_start": "Commencer",
         "cta_explore": "Explorer la Programmation",
         "stats": {
-            "levels": "Niveaux",
-            "languages": "Langages",
-            "free": "Gratuit"
+            "certification": "Certification",
+            "idioms": "Idiomes",
+            "vip": "Accès VIP",
+            "lessons": "Leçons",
+            "projects": "Projets",
+            "community": "Communauté"
         }
     },
     "levelSelector": {
@@ -53,12 +56,128 @@
         "badge": "De la Théorie à la Pratique",
         "title": "Projets d'Intégration",
         "subtitle": "Projets pratiques combinant concepts de cybersécurité et programmation.",
-        "view_code": "Voir le Code"
+        "view_code": "Voir le Code",
+        "level": {
+            "beginner": "Débutant",
+            "intermediate": "Intermédiaire",
+            "advanced": "Avancé"
+        }
+    },
+    "projects_data": {
+        "port_scanner": {
+            "title": "Scanner de Ports de Base",
+            "desc": "Développez un script en Python pour vérifier si les ports courants (80, 443, 22) sont ouverts sur une IP locale.",
+            "goals": [
+                "Comprendre l'utilisation de la bibliothèque socket.",
+                "Gérer les exceptions de connexion.",
+                "Formater la sortie console."
+            ]
+        },
+        "pass_validator": {
+            "title": "Validateur de Mots de Passe Pro",
+            "desc": "Créez un outil qui évalue la sécurité d'un mot de passe en fonction de la longueur, des caractères spéciaux et des chiffres.",
+            "goals": [
+                "Utilisation des expressions régulières (Regex).",
+                "Logique conditionnelle imbriquée.",
+                "Interaction avec le DOM (optionnel)."
+            ]
+        }
+    },
+    "curriculum": {
+        "ciberseguridad": {
+            "redes": {
+                "title": "Fondamentaux des Réseaux",
+                "desc": "Comprenez comment les informations voyagent de votre appareil à un serveur à l'autre bout du monde.",
+                "lessons": {
+                    "modelo_osi": {
+                        "title": "Le Modèle OSI",
+                        "quiz": {
+                            "question": "Quelle est la fonction principale de la couche Liaison de données (Couche 2) dans le modèle OSI ?",
+                            "options": [
+                                "Adressage logique et routage (IP)",
+                                "Transfert fiable de trames via une liaison physique (MAC)",
+                                "Présentation des données et chiffrement",
+                                "Gestion des sessions entre applications"
+                            ],
+                            "explanation": "La couche 2 (Liaison de données) s'occupe de l'adressage physique (MAC) et du transfert de trames entre nœuds adjacents."
+                        }
+                    },
+                    "tcp_ip": {
+                        "title": "TCP/IP en profondeur",
+                        "challenge": {
+                            "title": "Le Flag du Handshake",
+                            "desc": "Lors d'un Handshake en 3 étapes, le serveur a envoyé un flag caché dans l'en-tête personnalisé 'X-Security-Flag'. Si le SYN avait le numéro de séquence 1000 et le SYN-ACK avait 2000, quel est le flag si le format est 'SYN{sec_number}' ?",
+                            "hint": "Le flag utilise le numéro de séquence du premier paquet envoyé par le client."
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "curriculum_ui": {
+        "module_prefix": "Module",
+        "reading_suffix": "de lecture approfondie",
+        "part_of": "Fait partie de",
+        "completed": "✓ Leçon Complétée",
+        "mark_complete": "Marquer comme Complétée (+100 XP)",
+        "login_to_save": "Connectez-vous pour sauvegarder votre progression",
+        "quiz": {
+            "badge": "Vérification des Connaissances",
+            "validate": "Valider la Réponse",
+            "correct": "Excellent !",
+            "wrong": "Presque !",
+            "retry": "Réessayer"
+        },
+        "ctf": {
+            "badge": "Défi CTF",
+            "level": "Niveau",
+            "reward": "Récompense",
+            "success": "FLAG CAPTURÉE !",
+            "success_msg": "Vous avez réussi ce défi avec succès",
+            "placeholder": "hack_the_planet{...}",
+            "submit": "Envoyer le Flag",
+            "show_hint": "Besoin d'un indice (-50 XP)",
+            "hide_hint": "Masquer l'indice",
+            "wrong": "Flag Incorrect",
+            "hint_label": "Indice"
+        },
+        "playground": {
+            "title": "Environnement de Test",
+            "reset": "Réinitialiser",
+            "run": "Lancer le Script",
+            "running": "Exécution...",
+            "output_label": "Console de Sortie",
+            "waiting": "En attente d'exécution...",
+            "hacking_tip": "Dato Hacking",
+            "python_tip": "Python s'exécute localement dans votre navigateur via Pyodide (WebAssembly). Votre code ne quitte pas votre machine."
+        }
     },
     "trust": {
         "badge": "Pourquoi nous choisir",
-        "title": "Technologie moderne et design intuitif",
-        "subtitle": "Une plateforme conçue pour faciliter l'apprentissage avec les meilleurs outils."
+        "title": "Technologie Moderne et Design Intuitif",
+        "subtitle": "Une plateforme conçue pour faciliter l'apprentissage avec les meilleurs outils.",
+        "items": [
+            {
+                "icon": "🛡️",
+                "title": "Contenu Vérifié",
+                "desc": "Matériel révisé par des professionnels de la sécurité."
+            },
+            {
+                "icon": "🔒",
+                "title": "Connexion Sécurisée",
+                "desc": "Protection SSL/TLS et headers de sécurité avancés."
+            },
+            {
+                "icon": "💎",
+                "title": "Certification VIP",
+                "desc": "Certificats professionnels pour des projets avancés."
+            },
+            {
+                "icon": "🎓",
+                "title": "Apprentissage Pratique",
+                "desc": "Projets réels et exercices interactifs."
+            }
+        ]
     },
     "testimonials": {
         "badge": "Témoignages",
@@ -74,6 +193,29 @@
         "badge": "Communauté",
         "title": "Forum des Étudiants",
         "subtitle": "Partagez vos doutes, vos projets et connectez-vous avec les autres."
+    },
+    "policies": {
+        "privacy": {
+            "title": "Politique de Confidentialité",
+            "p1": "Chez SÉCURITÉ NUMÉRIQUE, la protection de vos données personnelles est notre priorité absolue. Nous collectons des informations limitées, telles que votre nom et votre adresse e-mail, uniquement pour personnaliser votre expérience d'apprentissage et vous envoyer des mises à jour critiques sur la cybersécurité. Toutes les données sont stockées à l'aide d'un cryptage de niveau bancaire et ne sont jamais partagées avec des tiers à des fins commerciales.",
+            "p2": "Nous mettons en œuvre des mesures techniques et organisationnelles robustes pour empêcher l'accès non autorisé, l'altération ou la divulgation de vos informations. Cela comprend des audits de sécurité réguliers et des protocolli HTTPS obligatoires sur toute la plateforme. Vous conservez le contrôle total de vos données et pouvez demander leur rectification ou suppression à tout moment depuis votre panneau de configuration.",
+            "p3": "Notre engagement envers la transparence signifie que nous vous informerons toujours de tout changement dans la façon dont nous traitons vos informations. Si nous choisissons d'intégrer de nouveaux services nécessitant un traitement de données supplémentaire, nous solliciterons votre consentement explicite avant de procéder. La confiance est le fondement de notre communauté de hackers éthiques.",
+            "p4": "En utilisant notre plateforme, vous acceptez les termes de cette politique. Si vous avez des questions techniques sur la façon dont nous protégeons votre empreinte numérique, notre équipe de support de sécurité est toujours disponible pour vous fournir des détails techniques approfondis sur notre infrastructure de confidentialité."
+        },
+        "terms": {
+            "title": "Conditions d'Utilisation",
+            "p1": "L'accès à SÉCURITÉ NUMÉRIQUE accorde une licence limitée, non exclusive et révocable pour utiliser nos ressources éducatives à des fins strictement légales et pédagogiques. L'utilisation des connaissances acquises sur cette plateforme pour le piratage malveillant, l'intrusion non autorisée dans des systèmes externes ou toute autre pratique contrevenant au droit pénal informatique est strictement interdite.",
+            "p2": "Toute la propriété intellectuelle, y compris le programme, les laboratoires 3D et le code de l'éditeur interactif, appartient exclusivement à SÉCURITÉ NUMÉRIQUE. La reproduction totale ou partielle de ce contenu sans consentement préalable fera l'objet de poursuites judiciaires. Nous encourageons les utilisateurs à partager leurs réussites, mais en respectant toujours la paternité de nos matériels originaux.",
+            "p3": "Nous nous réservons le droit de suspendre ou d'annuler des comptes démontrant un comportement abusif, des tentatives d'attaque contre notre infrastructure ou une violation des normes de la communauté. La sécurité de notre plateforme est une responsabilité partagée, et nous attendons de nos étudiants qu'ils agissent avec l'intégrité technique qui définit un professionnel de la cybersécurité.",
+            "p4": "SÉCURITÉ NUMÉRIQUE n'est pas responsable des conséquences dérivées de l'utilisation abusive des outils et techniques enseignés. L'objectif est défensif et professionnel ; l'étudiant assume l'entière responsabilité légale de ses actes en dehors de l'environnement contrôlé de nos laboratoires virtuels."
+        },
+        "cookies": {
+            "title": "Politique relative aux Cookies",
+            "p1": "Notre plateforme utilise des 'cookies' et des technologies similaires pour garantir que le laboratoire interactif et l'éditeur de code fonctionnent avec la rapidité extrême que nous promettons. Ces petits morceaux de données stockent vos préférences de thème (Mode Sombre/Clair), votre progression dans les leçons et maintiennent votre session active en toute sécurité.",
+            "p2": "Nous utilisons trois catégories de cookies : Essentiels (nécessaires au fonctionnement technique), de Performance (nous aident à comprendre quelles leçons sont les plus populaires) et de Personnalisation (mémorisent votre langue et vos paramètres d'éditeur). Aucun cookie de SÉCURITÉ NUMÉRIQUE n'est utilisé pour suivre votre activité sur des sites tiers ou pour de la publicité intrusive.",
+            "p3": "Vous avez le pouvoir de gérer vos préférences en matière de cookies via les paramètres de votre navigateur. Veuillez toutefois noter que la désactivation des cookies essentiels pourrait affecter négativement la fonctionnalité du Monaco Editor et la validation en temps réel de vos retos CTF.",
+            "p4": "Nous mettons régulièrement à jour notre infrastructure pour nous conformer aux réglementations mondiales en matière de confidentialité (telles que le RGPD). Cette politique de cookies reste alignée sur les normes les plus élevées de transparence technique afin que vous sachiez toujours quelles données sont traitées dans votre navigateur local."
+        }
     },
     "footer": {
         "desc": "Plateforme éducative pour apprendre la cybersécurité et la programmation de base avec des exemples pratiques et des projets réels.",

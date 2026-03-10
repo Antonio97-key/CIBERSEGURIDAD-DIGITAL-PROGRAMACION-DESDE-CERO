@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useAuth } from '../../../lib/AuthContext';
+import { useLanguage } from '../../../lib/LanguageContext';
 import { curriculum, getLessonContent } from '../../../data/curriculum';
 import NavigationButtons from '../../../components/NavigationButtons';
 import CodeBlock from '../../../components/CodeBlock';
@@ -10,6 +11,7 @@ import CodePlayground from '../../../components/CodePlayground';
 
 export default function LessonPage() {
     const router = useRouter();
+    const { t } = useLanguage();
     const { user, progress, updateProgress } = useAuth();
     const { module, lesson } = router.query;
 
@@ -99,7 +101,7 @@ export default function LessonPage() {
     return (
         <>
             <Head>
-                <title>{lessonData.title} | {modData.title}</title>
+                <title>{t(`curriculum.ciberseguridad.${module}.lessons.${lesson.replace(/-/g, '_')}.title`) || lessonData.title} | {t(`curriculum.ciberseguridad.${module}.title`) || modData.title}</title>
             </Head>
             
             <div className="max-w-4xl mx-auto py-12 px-6 animate-fade-in">
@@ -107,25 +109,25 @@ export default function LessonPage() {
                     <div className="flex items-center gap-4 mb-8">
                         <span className="px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-[0.2em] shadow-xl" 
                             style={{ backgroundColor: 'var(--color-badge-bg)', color: 'var(--color-primary)', border: '1px solid rgba(59, 130, 246, 0.2)' }}>
-                            Módulo {currentIndex + 1}
+                            {t('curriculum.module_prefix') || 'Módulo'} {currentIndex + 1}
                         </span>
                         <div className="flex items-center gap-2 text-xs text-gray-500 font-bold bg-white/5 px-4 py-2 rounded-xl border border-white/5">
                             <span className="relative flex h-2 w-2">
                                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
                                 <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
                             </span>
-                            {lessonData.readingTime} de lectura profunda
+                            {lessonData.readingTime} {t('curriculum.reading_suffix') || 'de lectura profunda'}
                         </div>
                     </div>
                     
                     <h1 className="text-6xl font-black mb-8 tracking-tighter leading-[1.1] text-white">
-                        {lessonData.title}
+                        {t(`curriculum.ciberseguridad.${module}.lessons.${lesson.replace(/-/g, '_')}.title`) || lessonData.title}
                     </h1>
                     
                     <div className="flex items-center gap-3 text-gray-500 font-medium">
-                        <span>Parte de</span>
+                        <span>{t('curriculum.part_of') || 'Parte de'}</span>
                         <div className="h-px w-8 bg-white/10"></div>
-                        <span className="text-blue-500 font-bold uppercase tracking-wider text-sm">{modData.title}</span>
+                        <span className="text-blue-500 font-bold uppercase tracking-wider text-sm">{t(`curriculum.ciberseguridad.${module}.title`) || modData.title}</span>
                     </div>
                 </header>
                 
@@ -135,26 +137,30 @@ export default function LessonPage() {
 
                 {lessonData.quiz && (
                     <div className="mt-20">
-                        <LessonQuiz quiz={lessonData.quiz} />
+                        <LessonQuiz quiz={t(`curriculum.ciberseguridad.${module}.lessons.${lesson.replace(/-/g, '_')}.quiz`) || lessonData.quiz} />
                     </div>
                 )}
 
                 {lessonData.challenge && (
                     <div className="mt-10">
-                        <CTFChallenge challenge={lessonData.challenge} />
+                        <CTFChallenge challenge={t(`curriculum.ciberseguridad.${module}.lessons.${lesson.replace(/-/g, '_')}.challenge`) || lessonData.challenge} />
                     </div>
                 )}
 
                 {lessonData.playground && (
                     <div className="mt-20">
                         <div className="mb-8">
-                            <h3 className="text-2xl font-black text-white mb-2">Pruébalo tú mismo</h3>
-                            <p className="text-gray-500 font-medium">Experimenta con el código siguiendo los conceptos de esta lección.</p>
+                            <h3 className="text-2xl font-black text-white mb-2">
+                                {t(`curriculum.ciberseguridad.${module}.lessons.${lesson.replace(/-/g, '_')}.playground.title`) || 'Pruébalo tú mismo'}
+                            </h3>
+                            <p className="text-gray-500 font-medium">
+                                {t(`curriculum.ciberseguridad.${module}.lessons.${lesson.replace(/-/g, '_')}.playground.desc`) || 'Experimenta con el código siguiendo los conceptos de esta lección.'}
+                            </p>
                         </div>
                         <CodePlayground 
                             language={lessonData.playground.language || 'javascript'} 
                             initialCode={lessonData.playground.initialCode}
-                            title={lessonData.playground.title || 'Laboratorio de Práctica'}
+                            title={t(`curriculum.ciberseguridad.${module}.lessons.${lesson.replace(/-/g, '_')}.playground.title`) || lessonData.playground.title || 'Laboratorio de Práctica'}
                         />
                     </div>
                 )}
@@ -167,11 +173,11 @@ export default function LessonPage() {
                             className={`group relative px-12 py-5 rounded-2xl font-black text-xs uppercase tracking-[0.3em] transition-all overflow-hidden ${isCompleted ? 'bg-green-500/10 border border-green-500/30 text-green-500 cursor-default' : 'bg-primary-500 text-white hover:bg-primary-400 active:scale-95 shadow-2xl shadow-primary-500/20'}`}
                         >
                             <span className="relative z-10 flex items-center gap-3">
-                                {isCompleted ? '✓ Lección Completada' : 'Marcar como Completada (+100 XP)'}
+                                {isCompleted ? (t('curriculum.completed') || '✓ Lección Completada') : (t('curriculum.mark_complete') || 'Marcar como Completada (+100 XP)')}
                             </span>
                             {!isCompleted && <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>}
                         </button>
-                        {!user && <p className="mt-4 text-[10px] font-black text-gray-600 uppercase tracking-widest">Inicia sesión para guardar tu progreso</p>}
+                        {!user && <p className="mt-4 text-[10px] font-black text-gray-600 uppercase tracking-widest">{t('curriculum.login_to_save') || 'Inicia sesión para guardar tu progreso'}</p>}
                     </div>
 
                     <div className="mb-8 text-center">

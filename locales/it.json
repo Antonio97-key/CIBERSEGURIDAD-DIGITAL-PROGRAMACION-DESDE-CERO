@@ -15,7 +15,7 @@
         "language": "Lingua"
     },
     "hero": {
-        "badge": "Piattaforma Didattica Gratuita",
+        "badge": "Esperienza Educativa Premium",
         "title_1": "Sicurezza Digitale",
         "title_2": "+ Programmazione",
         "title_3": "da Zero",
@@ -24,9 +24,12 @@
         "cta_start": "Inizia Ora",
         "cta_explore": "Esplora Programmazione",
         "stats": {
-            "levels": "Livelli",
-            "languages": "Linguaggi",
-            "free": "Gratis"
+            "certification": "Certificazione",
+            "idioms": "Idiomi",
+            "vip": "Accesso VIP",
+            "lessons": "Lezioni",
+            "projects": "Progetti",
+            "community": "Comunità"
         }
     },
     "levelSelector": {
@@ -53,12 +56,128 @@
         "badge": "Dalla Teoria alla Pratica",
         "title": "Progetti di Integrazione",
         "subtitle": "Progetti pratici che combinano concetti di sicurezza informatica e programmazione.",
-        "view_code": "Vedi Codice"
+        "view_code": "Vedi Codice",
+        "level": {
+            "beginner": "Principiante",
+            "intermediate": "Intermedio",
+            "advanced": "Avanzato"
+        }
+    },
+    "projects_data": {
+        "port_scanner": {
+            "title": "Scanner di Porte Base",
+            "desc": "Sviluppa uno script in Python per verificare se le porte comuni (80, 443, 22) sono aperte su un IP locale.",
+            "goals": [
+                "Capire l'uso della libreria socket.",
+                "Gestire le eccezioni di connessione.",
+                "Formattare l'output in console."
+            ]
+        },
+        "pass_validator": {
+            "title": "Validatore di Password Pro",
+            "desc": "Crea uno strumento che valuti la sicurezza di una password in base a lunghezza, caratteri speciali e numeri.",
+            "goals": [
+                "Uso di espressioni regolari (Regex).",
+                "Logica condizionale nidificata.",
+                "Interazione con il DOM (opzionale)."
+            ]
+        }
+    },
+    "curriculum": {
+        "ciberseguridad": {
+            "redes": {
+                "title": "Fondamenti di Reti",
+                "desc": "Capisci come viaggiano le informazioni dal tuo dispositivo a un server dall'altra parte del mondo.",
+                "lessons": {
+                    "modelo_osi": {
+                        "title": "Il Modello OSI",
+                        "quiz": {
+                            "question": "Qual è la funzione principale del Livello di Collegamento Dati (Livello 2) nel modello OSI?",
+                            "options": [
+                                "Indirizzamento logico e instradamento (IP)",
+                                "Trasferimento affidabile di frame attraverso un collegamento fisico (MAC)",
+                                "Presentazione dei dati e crittografia",
+                                "Gestione delle sessioni tra applicazioni"
+                            ],
+                            "explanation": "Il Livello 2 (Data Link) si occupa dell'indirizzamento fisico (MAC) e del trasferimento di frame tra nodi adiacenti."
+                        }
+                    },
+                    "tcp_ip": {
+                        "title": "TCP/IP in profondità",
+                        "challenge": {
+                            "title": "Il Flag dell'Handshake",
+                            "desc": "Durante un Handshake a 3 vie, il server ha inviato un flag nascosto nell'header personalizzato 'X-Security-Flag'. Se il SYN aveva il numero di sequenza 1000 e il SYN-ACK aveva 2000, qual è il flag se il formato è 'SYN{sec_number}'?",
+                            "hint": "Il flag utilizza il numero di sequenza del primo pacchetto inviato dal client."
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "curriculum_ui": {
+        "module_prefix": "Modulo",
+        "reading_suffix": "di lettura profonda",
+        "part_of": "Parte di",
+        "completed": "✓ Lezione Completata",
+        "mark_complete": "Segna come Completata (+100 XP)",
+        "login_to_save": "Accedi per salvare i tuoi progressi",
+        "quiz": {
+            "badge": "Controllo Conoscenza",
+            "validate": "Valuta Risposta",
+            "correct": "Eccellente!",
+            "wrong": "Quasi fatta",
+            "retry": "Riprova"
+        },
+        "ctf": {
+            "badge": "Sfida CTF",
+            "level": "Livello",
+            "reward": "Ricompensa",
+            "success": "FLAG CATTURATA!",
+            "success_msg": "Hai completato con successo questa sfida",
+            "placeholder": "hack_the_planet{...}",
+            "submit": "Invia Flag",
+            "show_hint": "Ho bisogno di un indizio (-50 XP)",
+            "hide_hint": "Nascondi Indizio",
+            "wrong": "Flag Errata",
+            "hint_label": "Indizio"
+        },
+        "playground": {
+            "title": "Ambiente di Prova",
+            "reset": "Reinizia",
+            "run": "Esegui Script",
+            "running": "In esecuzione...",
+            "output_label": "Console di Output",
+            "waiting": "In attesa di esecuzione...",
+            "hacking_tip": "Consiglio Hacking",
+            "python_tip": "Python viene eseguito localmente nel tuo browser usando Pyodide (WebAssembly). Il tuo codice non lascia il tuo computer."
+        }
     },
     "trust": {
         "badge": "Perché sceglierci",
-        "title": "Tecnologia moderna e design intuitivo",
-        "subtitle": "Una piattaforma progettata per facilitare l'apprendimento con i migliori strumenti."
+        "title": "Tecnologia Moderna e Design Intuitivo",
+        "subtitle": "Una piattaforma progettata per facilitare l'apprendimento con i migliori strumenti.",
+        "items": [
+            {
+                "icon": "🛡️",
+                "title": "Contenuto Verificato",
+                "desc": "Materiale revisionato da professionisti della sicurezza."
+            },
+            {
+                "icon": "🔒",
+                "title": "Connessione Sicura",
+                "desc": "Protezione SSL/TLS e header di sicurezza avanzati."
+            },
+            {
+                "icon": "💎",
+                "title": "Certificazione VIP",
+                "desc": "Certificati professionali per progetti avanzati."
+            },
+            {
+                "icon": "🎓",
+                "title": "Apprendimento Pratico",
+                "desc": "Progetti reali ed esercizi interattivi."
+            }
+        ]
     },
     "testimonials": {
         "badge": "Testimonianze",
@@ -74,6 +193,29 @@
         "badge": "Comunità",
         "title": "Forum degli Studenti",
         "subtitle": "Condividi i tuoi dubbi, progetti e connettiti con gli altri."
+    },
+    "policies": {
+        "privacy": {
+            "title": "Informativa sulla Privacy",
+            "p1": "In SICUREZZA DIGITALE, la protezione dei tuoi dati personali è la nostra massima priorità. Raccogliamo informazioni limitate, come il tuo nome e la tua email, esclusivamente per personalizzare la tua esperienza di apprendimento e inviarti aggiornamenti critici sulla sicurezza informatica. Tutti i dati sono archiviati utilizzando una crittografia di livello bancario e non vengono mai condivisi con terze parti a fini commerciali.",
+            "p2": "Implementiamo solide misure tecniche e organizzative per prevenire l'accesso non autorizzato, l'alterazione o la divulgazione delle tue informazioni. Ciò include regolari audit di sicurezza e protocolli HTTPS obbligatori in tutta la piattaforma. Mantieni il pieno controllo sui tuoi dati e puoi richiederne la rettifica o la cancellazione in qualsiasi momento dal tuo pannello delle impostazioni.",
+            "p3": "Il nostro impegno per la trasparenza significa che ti informeremo sempre su eventuali modifiche nel modo in cui gestiamo le tue informazioni. Se scegliamo di integrare nuovi servizi che richiedono un ulteriore trattamento dei dati, richiederemo il tuo consenso esplicito prima di procedere. La fiducia è la base della nostra comunità di hacker etici.",
+            "p4": "Utilizzando la nostra piattaforma, accetti i termini di questa informativa. Se hai domande tecniche su come proteggiamo la tua impronta digitale, il nostro team di supporto alla sicurezza è sempre disponibile per fornirti dettagli tecnici approfonditi sulla nostra infrastruttura per la privacy."
+        },
+        "terms": {
+            "title": "Termini di Servizio",
+            "p1": "L'accesso a SICUREZZA DIGITALE garantisce una licenza limitata, non esclusiva e revocabile per utilizzare le nostre risorse educative a fini strettamente legali e pedagogici. È severamente vietato l'uso delle conoscenze acquisite su questa piattaforma per hacking dannoso, intrusione non autorizzata in sistemi esterni o qualsiasi altra pratica che contravvenga al diritto penale informatico.",
+            "p2": "Tutta la proprietà intellettuale, inclusi il curriculum, i laboratori 3D e il codice dell'editor interattivo, appartiene esclusivamente a SICUREZZA DIGITALE. La riproduzione totale o parziale di questo contenuto senza previo consenso sarà perseguita legalmente. Incoraggiamo gli utenti a condividere i propri risultati, ma rispettando sempre la paternità dei nostri materiali originali.",
+            "p3": "Ci riserviamo il diritto di sospendere o cancellare account che dimostrino comportamenti abusivi, tentativi di attacco contro la nostra infrastruttura o violazione delle norme della comunità. La sicurezza della nostra piattaforma è una responsabilità condivisa e ci aspettiamo che i nostri studenti agiscamo con l'integrità tecnica che definisce un professionista della sicurezza informatica.",
+            "p4": "SICUREZZA DIGITALE non è responsabile delle conseguenze derivanti dall'uso improprio degli strumenti e delle tecniche insegnate. L'obiettivo è difensivo e professionale; lo studente si assume la piena responsabilità legale per le sue azioni al di fuori dell'ambiente controllato dei nostri laboratori virtuali."
+        },
+        "cookies": {
+            "title": "Informativa sui Cookie",
+            "p1": "La nostra piattaforma utilizza 'cookie' e tecnologie simili per garantire che il laboratorio interattivo e l'editor di codice funzionino con l'estrema velocità che promettiamo. Questi piccoli pezzi di dati memorizzano le tue preferenze sul tema (Modalità Scura/Chiara), i tuoi progressi nelle lezioni e mantengono la tua sessione attiva in modo sicuro.",
+            "p2": "Utilizziamo tre categorie di cookie: Essenziali (necessari per il funzionamento tecnico), di Prestazione (ci aiutano a capire quali lezioni sono più popolari) e di Personalizzazione (ricordano la tua lingua e le impostazioni dell'editor). Nessun cookie di SICUREZZA DIGITALE viene utilizzato per tracciare la tua attività su siti web di terze parti o per scopi pubblicitari invadenti.",
+            "p3": "Hai il potere di gestire le tue preferenze sui cookie tramite le impostazioni del tuo browser. Tuttavia, tieni presente che la disattivazione dei cookie essenziali potrebbe influire negativamente sulla funzionalità del Monaco Editor e sulla convalida in tempo reale dei tuoi retos CTF.",
+            "p4": "Aggiorniamo regolarmente la nostra infrastruttura per conformarci alle normative globali sulla privacy (come il GDPR). Questa informativa sui cookie rimane allineata ai più alti standard di trasparenza tecnica, in modo che tu sappia sempre quali dati vengono elaborati nel tuo browser locale."
+        }
     },
     "footer": {
         "desc": "Piattaforma educativa per imparare la sicurezza informatica e la programmazione di base con esempi pratici e progetti reali.",

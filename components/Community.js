@@ -178,11 +178,6 @@ export default function Community() {
                         </div>
                     </div>
                     {/* Info Note */}
-                    <div className="mt-8 p-4 rounded-2xl bg-primary-50/50 dark:bg-primary-900/40 border border-primary-200/50 dark:border-primary-800/30 text-center">
-                        <p className="text-xs text-gray-600 dark:text-gray-200">
-                            💡 Conecta tu base de datos Supabase para comentarios en tiempo real y persistentes.
-                        </p>
-                    </div>
                 </div>
             </div>
         </section>

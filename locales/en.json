@@ -17,7 +17,7 @@
         "language": "Language"
     },
     "hero": {
-        "badge": "Free Educational Platform",
+        "badge": "Premium Educational Experience",
         "title_1": "Digital Security",
         "title_2": "+ Programming",
         "title_3": "from Scratch",
@@ -26,9 +26,12 @@
         "cta_start": "Start Now",
         "cta_explore": "Explore Programming",
         "stats": {
-            "levels": "Levels",
-            "languages": "Languages",
-            "free": "Free"
+            "certification": "Certification",
+            "idioms": "Idioms",
+            "vip": "VIP Access",
+            "lessons": "Lessons",
+            "projects": "Projects",
+            "community": "Community"
         }
     },
     "levelSelector": {
@@ -65,6 +68,56 @@
         "badge": "Community",
         "title": "Student Forum",
         "subtitle": "Share your doubts, projects and connect with others."
+    },
+    "trust": {
+        "badge": "Why choose us",
+        "title": "Modern Technology and Intuitive Design",
+        "subtitle": "A platform designed to facilitate learning with the best tools.",
+        "items": [
+            {
+                "icon": "🛡️",
+                "title": "Verified Content",
+                "desc": "Material reviewed by cybersecurity professionals."
+            },
+            {
+                "icon": "🔒",
+                "title": "Secure Connection",
+                "desc": "SSL/TLS protection and advanced security headers."
+            },
+            {
+                "icon": "💎",
+                "title": "VIP Certification",
+                "desc": "Professional certificates for advanced projects."
+            },
+            {
+                "icon": "🎓",
+                "title": "Practical Learning",
+                "desc": "Real projects and interactive exercises."
+            }
+        ]
+    },
+    "policies": {
+        "privacy": {
+            "title": "Privacy Policy",
+            "p1": "At DIGITAL SECURITY, the protection of your personal data is our top priority. We collect limited information, such as your name and email, solely to personalize your learning experience and send you critical cybersecurity updates. All data is stored using bank-grade encryption and is never shared with third parties for commercial purposes.",
+            "p2": "We implement robust technical and organizational measures to prevent unauthorized access, alteration, or disclosure of your information. This includes regular security audits and mandatory HTTPS protocols across the platform. You maintain full control over your data and can request its rectification or deletion at any time from your settings panel.",
+            "p3": "Our commitment to transparency means we will always inform you about any changes in how we handle your information. If we choose to integrate new services that require additional data processing, we will seek your explicit consent before proceeding. Trust is the foundation of our ethical hacker community.",
+            "p4": "By using our platform, you agree to the terms of this policy. If you have any technical questions about how we protect your digital footprint, our security support team is always available to provide deep technical details about our privacy infrastructure."
+        },
+        "terms": {
+            "title": "Terms of Service",
+            "p1": "Access to DIGITAL SECURITY grants a limited, non-exclusive, and revocable license to use our educational resources for strictly legal and pedagogical purposes. The use of knowledge acquired on this platform for malicious hacking, unauthorized intrusion into external systems, or any other practice that contravenes computer criminal law is strictly prohibited.",
+            "p2": "All intellectual property, including the curriculum, 3D labs, and interactive editor code, belongs exclusively to DIGITAL SECURITY. Total or partial reproduction of this content without prior consent will be legally pursued. We encourage users to share their achievements, but always respecting the authorship of our original materials.",
+            "p3": "We reserve the right to suspend or cancel accounts demonstrating abusive behavior, attempted attacks against our infrastructure, or violation of community standards. The security of our platform is a shared responsibility, and we expect our students to act with the technical integrity that defines a cybersecurity professional.",
+            "p4": "DIGITAL SECURITY is not responsible for the consequences derived from the improper use of the tools and techniques taught. The objective is defensive and professional; the student assumes full legal responsibility for their actions outside the controlled environment of our virtual labs."
+        },
+        "cookies": {
+            "title": "Cookie Policy",
+            "p1": "Our platform uses 'cookies' and similar technologies to ensure that the interactive lab and code editor work with the extreme speed we promise. These small pieces of data store your theme preferences (Dark/Light Mode), your lesson progress, and keep your session active securely.",
+            "p2": "We use three categories of cookies: Essential (necessary for technical operation), Performance (help us understand which lessons are most popular), and Personalization (remember your language and editor settings). No DIGITAL SECURITY cookies are used to track your activity on third-party websites or for intrusive advertising.",
+            "p3": "You have the power to manage your cookie preferences through your browser settings. However, please note that disabling essential cookies could negatively affect the functionality of the Monaco Editor and the real-time validation of your CTF challenges.",
+            "p4": "We periodically update our infrastructure to comply with global privacy regulations (such as GDPR). This cookie policy stays aligned with the highest standards of technical transparency so you always know what data is being processed in your local browser."
+        }
     },
     "footer": {
         "desc": "Educational platform to learn cybersecurity and basic programming with practical examples and real projects.",
@@ -113,13 +166,13 @@
     "pricing": {
         "badge": "Plans",
         "title": "Invest in Your Future",
-        "subtitle": "Start for free and level up.",
+        "subtitle": "Premium access to elite content.",
         "period": {
             "forever": "forever",
             "monthly": "/ month"
         },
         "free": {
-            "name": "Free",
+            "name": "VIP Basic",
             "feat1": "Basic levels",
             "feat2": "Limited editor",
             "feat3": "Projects",
@@ -143,6 +196,44 @@
             "btn": "Get VIP"
         },
         "badge_recommended": "Most Popular"
+    },
+    "curriculum_ui": {
+        "module_prefix": "Module",
+        "reading_suffix": "of deep reading",
+        "part_of": "Part of",
+        "completed": "✓ Lesson Completed",
+        "mark_complete": "Mark as Completed (+100 XP)",
+        "login_to_save": "Log in to save your progress",
+        "quiz": {
+            "badge": "Knowledge Check",
+            "validate": "Validate Answer",
+            "correct": "Excellent!",
+            "wrong": "Almost there",
+            "retry": "Try again"
+        },
+        "ctf": {
+            "badge": "CTF Challenge",
+            "level": "Level",
+            "reward": "Reward",
+            "success": "FLAG CAPTURED!",
+            "success_msg": "You have successfully completed this challenge",
+            "placeholder": "hack_the_planet{...}",
+            "submit": "Submit Flag",
+            "show_hint": "I need a hint (-50 XP)",
+            "hide_hint": "Hide Hint",
+            "wrong": "Incorrect Flag",
+            "hint_label": "Hint"
+        },
+        "playground": {
+            "title": "Test Environment",
+            "reset": "Reset",
+            "run": "Run Script",
+            "running": "Running...",
+            "output_label": "Output Console",
+            "waiting": "Waiting for execution...",
+            "hacking_tip": "Hacking Tip",
+            "python_tip": "Python runs locally in your browser using Pyodide (WebAssembly). Your code does not leave your machine."
+        }
     },
     "projects": {
         "badge": "From Theory to Practice",

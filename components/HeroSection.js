@@ -75,16 +75,16 @@ export default function HeroSection() {
                     </a>
                 </div>
 
-                {/* Stats */}
-                <div className="mt-16 grid grid-cols-3 gap-6 max-w-lg mx-auto animate-fade-in" style={{ animationDelay: '0.8s' }}>
+                <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-2xl mx-auto animate-fade-in" style={{ animationDelay: '0.8s' }}>
                     {[
-                        { value: '60+', label: 'Lecciones' },
-                        { value: '20+', label: 'Proyectos' },
-                        { value: '24/7', label: 'Comunidad' },
+                        { value: '5+', label: t('hero.stats.idioms') || 'Idiomas' },
+                        { value: '💎', label: t('hero.stats.certification') || 'Certificación VIP' },
+                        { value: '60+', label: t('hero.stats.lessons') || 'Lecciones' },
+                        { value: '24/7', label: t('hero.stats.community') || 'Comunidad' },
                     ].map(({ value, label }) => (
                         <div key={label} className="text-center">
                             <div className="text-2xl sm:text-3xl font-bold text-white">{value}</div>
-                            <div className="text-xs sm:text-sm text-white/60 mt-1">{label}</div>
+                            <div className="text-[10px] sm:text-xs text-white/60 mt-1 uppercase tracking-widest font-black">{label}</div>
                         </div>
                     ))}
                 </div>

@@ -77,7 +77,7 @@ export default function Pricing() {
                     <span className="chip chip-purple mb-4 inline-flex">💎 {t('pricing.badge') || 'Planes'}</span>
                     <h2 className="section-title gradient-text">{t('pricing.title') || 'Invierte en tu Futuro'}</h2>
                     <p className="section-subtitle mx-auto">
-                        {t('pricing.subtitle') || 'Comienza con nuestro extenso plan gratuito y sube de nivel cuando estés listo para dominar la ciberseguridad y el desarrollo a nivel profesional.'}
+                        {t('pricing.subtitle') || 'Acceso exclusivo a laboratorios de élite y certificaciones profesionales de ciberseguridad.'}
                     </p>
                 </div>
 

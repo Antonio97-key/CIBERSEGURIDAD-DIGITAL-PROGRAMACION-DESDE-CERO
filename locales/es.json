@@ -17,7 +17,7 @@
         "language": "Idioma"
     },
     "hero": {
-        "badge": "Plataforma Educativa Gratuita",
+        "badge": "Experiencia Educativa Premium",
         "title_1": "Seguridad Digital",
         "title_2": "+ Programación",
         "title_3": "desde Cero",
@@ -26,9 +26,12 @@
         "cta_start": "Comenzar Ahora",
         "cta_explore": "Explorar Programación",
         "stats": {
-            "levels": "Niveles",
-            "languages": "Lenguajes",
-            "free": "Gratis"
+            "certification": "Certificación",
+            "idioms": "Idiomas",
+            "vip": "Acceso VIP",
+            "lessons": "Lecciones",
+            "projects": "Proyectos",
+            "community": "Comunidad"
         }
     },
     "levelSelector": {
@@ -60,28 +63,207 @@
             "beginner": "Principiante",
             "intermediate": "Intermedio",
             "advanced": "Avanzado"
+        }
+    },
+    "projects_data": {
+        "port_scanner": {
+            "title": "Escáner de Puertos Básico",
+            "desc": "Desarrolla un script en Python que verifique si los puertos más comunes (80, 443, 22) están abiertos en una IP local.",
+            "goals": [
+                "Entender el uso de la librería socket.",
+                "Manejar excepciones de conexión.",
+                "Formatear la salida en consola."
+            ]
         },
-        "p1": {
-            "title": "Detector de URLs Sospechosas",
-            "desc": "Analiza URLs contra phishing."
+        "pass_validator": {
+            "title": "Validador de Contraseñas Pro",
+            "desc": "Crea una herramienta que evalúe la seguridad de una contraseña basándose en longitud, caracteres especiales y números.",
+            "goals": [
+                "Uso de expresiones regulares (Regex).",
+                "Lógica condicional anidada.",
+                "Interacción con el DOM (opcional)."
+            ]
         },
-        "p2": {
-            "title": "Generador de Contraseñas Seguras",
-            "desc": "Generador de contraseñas fuertes."
+        "ip_calculator": {
+            "title": "Calculadora de Subredes IPv4",
+            "desc": "Un conversor que toma una dirección IP y una máscara de subred para calcular la dirección de red y broadcast.",
+            "goals": [
+                "Manipulación de bits y operaciones binarias.",
+                "Conversión de decimal a binario.",
+                "Validación de formatos IP."
+            ]
         },
-        "p3": {
-            "title": "Analizador de Encabezados HTTP",
-            "desc": "Verifica encabezados HTTP."
+        "log_analyzer": {
+            "title": "Analizador Forense de Logs",
+            "desc": "Desarrolla una herramienta que analice logs de servidor buscando patrones de fuerza bruta (múltiples 401 en poco tiempo).",
+            "goals": [
+                "Procesamiento de strings y arrays.",
+                "Detección de patrones temporales.",
+                "Generación de alertas visuales."
+            ]
+        }
+    },
+    "curriculum": {
+        "ciberseguridad": {
+            "redes": {
+                "title": "Fundamentos de Redes",
+                "desc": "Comprender cómo viaja la información desde tu dispositivo hasta un servidor en el otro lado del mundo.",
+                "lessons": {
+                    "modelo_osi": {
+                        "title": "El Modelo OSI",
+                        "quiz": {
+                            "question": "¿Cuál es la función principal de la Capa de Enlace de Datos (Capa 2) en el modelo OSI?",
+                            "options": [
+                                "Direccionamiento lógico y enrutamiento (IP)",
+                                "Transferencia fiable de tramas a través de un enlace físico (MAC)",
+                                "Presentación de datos y cifrado",
+                                "Gestión de sesiones entre aplicaciones"
+                            ],
+                            "explanation": "La Capa 2 (Data Link) se encarga del direccionamiento físico (MAC) y la transferencia de tramas entre nodos adyacentes."
+                        }
+                    },
+                    "tcp_ip": {
+                        "title": "TCP/IP en profundidad",
+                        "challenge": {
+                            "title": "El Flag del Handshake",
+                            "desc": "Durante un Handshake de 3 vías, el servidor envió un flag oculto en la cabecera personalizada 'X-Security-Flag'. Si el SYN tuvo el número de secuencia 1000 y el SYN-ACK tuvo el 2000, ¿cuál es el flag si el formato es 'SYN{sec_number}'?",
+                            "hint": "La flag utiliza el número de secuencia del primer paquete enviado por el cliente."
+                        }
+                    },
+                    "puertos": {
+                        "title": "Puertos y Servicios",
+                        "playground": {
+                            "title": "Simulador de Port Scanning"
+                        }
+                    }
+                }
+            },
+            "criptografia": {
+                "title": "Criptografía",
+                "desc": "Aprende cómo se protege la información mediante algoritmos matemáticos.",
+                "lessons": {
+                    "historia": { "title": "Historia de la criptografía" },
+                    "simetrico": { "title": "Cifrado simétrico en detalle" },
+                    "asimetrico": { "title": "Cifrado asimétrico y RSA" },
+                    "hash": {
+                        "title": "Funciones Hash",
+                        "playground": {
+                            "title": "Generador de Integridad (Pseudo-Hash)"
+                        }
+                    }
+                }
+            }
         },
-        "p4": {
-            "title": "Cifrador de Mensajes",
-            "desc": "Cifrado César."
+        "programacion": {
+            "python": {
+                "title": "Python para Seguridad",
+                "lessons": {
+                    "intro": { "title": "Introducción a Python" },
+                    "variables": { "title": "Variables y Tipos" }
+                }
+            },
+            "javascript": {
+                "title": "JavaScript y Seguridad Web",
+                "lessons": {
+                    "intro": {
+                        "title": "Fundamentos de JS",
+                        "quiz": {
+                            "question": "¿Qué palabra clave se usa para declarar una variable que no cambiará su valor?",
+                            "options": ["let", "var", "const", "fixed"],
+                            "explanation": "'const' (Constant) se utiliza para declarar variables cuyo valor no puede ser reasignado tras su inicialización."
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "curriculum_ui": {
+        "module_prefix": "Módulo",
+        "reading_suffix": "de lectura profunda",
+        "part_of": "Parte de",
+        "completed": "✓ Lección Completada",
+        "mark_complete": "Marcar como Completada (+100 XP)",
+        "login_to_save": "Inicia sesión para guardar tu progreso",
+        "quiz": {
+            "badge": "Check de Conocimiento",
+            "validate": "Validar Respuesta",
+            "correct": "¡Excelente!",
+            "wrong": "Casi lo logras",
+            "retry": "Intentar de nuevo"
+        },
+        "ctf": {
+            "badge": "Desafío CTF",
+            "level": "Nivel",
+            "reward": "Recompensa",
+            "success": "¡FLAG CAPTURADA!",
+            "success_msg": "Has completado este reto con éxito",
+            "placeholder": "hack_the_planet{...}",
+            "submit": "Enviar Flag",
+            "show_hint": "Necesito una pista (-50 XP)",
+            "hide_hint": "Ocultar Pista",
+            "wrong": "Flag Incorrecta",
+            "hint_label": "Pista"
+        },
+        "playground": {
+            "title": "Ambiente de Pruebas",
+            "reset": "Reiniciar",
+            "run": "Correr Script",
+            "running": "Ejecutando...",
+            "output_label": "Consola de Salida",
+            "waiting": "Esperando ejecución...",
+            "hacking_tip": "Dato Hacking",
+            "python_tip": "Python se ejecuta localmente en tu navegador usando Pyodide (WebAssembly). Tu código no sale de tu máquina."
         }
     },
     "trust": {
         "badge": "Por qué elegirnos",
         "title": "Tecnología moderna y diseño intuitivo",
-        "subtitle": "Una plataforma diseñada para facilitar el aprendizaje con las mejores herramientas."
+        "subtitle": "Una plataforma diseñada para facilitar el aprendizaje con las mejores herramientas.",
+        "items": [
+            {
+                "icon": "🛡️",
+                "title": "Contenido Verificado",
+                "desc": "Material revisado por profesionales en ciberseguridad."
+            },
+            {
+                "icon": "🔒",
+                "title": "Conexión Segura",
+                "desc": "Protección SSL/TLS y headers de seguridad avanzados."
+            },
+            {
+                "icon": "💎",
+                "title": "Certificación VIP",
+                "desc": "Certificados profesionales para proyectos avanzados."
+            },
+            {
+                "icon": "🎓",
+                "title": "Aprendizaje Práctico",
+                "desc": "Proyectos reales y ejercicios interactivos."
+            }
+        ]
+    },
+    "policies": {
+        "privacy": {
+            "title": "Política de Privacidad",
+            "p1": "En SEGURIDAD DIGITAL, la protección de sus datos personales es nuestra máxima prioridad. Recopilamos información limitada, como su nombre y correo electrónico, únicamente para personalizar su experiencia de aprendizaje y enviarle actualizaciones críticas sobre seguridad cibernética. Todos los datos se almacenan utilizando encriptación de grado bancario y nunca se comparten con terceros con fines comerciales.",
+            "p2": "Implementamos medidas técnicas y organizativas robustas para prevenir el acceso no autorizado, la alteración o la divulgación de su información. Esto incluye auditorías de seguridad periódicas y el uso de protocolos HTTPS obligatorios en toda la plataforma. Usted mantiene el control total sobre sus datos y puede solicitar su rectificación o eliminación en cualquier momento desde su panel de configuración.",
+            "p3": "Nuestro compromiso con la transparencia significa que siempre le informaremos sobre cualquier cambio en la forma en que manejamos su información. Si optamos por integrar nuevos servicios que requieran procesamiento de datos adicional, solicitaremos su consentimiento explícito antes de proceder. La confianza es la base de nuestra comunidad de hackers éticos.",
+            "p4": "Al utilizar nuestra plataforma, usted acepta los términos de esta política. Si tiene alguna duda técnica sobre cómo protegemos su huella digital, nuestro equipo de soporte de seguridad está siempre disponible para brindarle detalles técnicos profundos sobre nuestra infraestructura de privacidad."
+        },
+        "terms": {
+            "title": "Términos de Servicio",
+            "p1": "El acceso a SEGURIDAD DIGITAL otorga una licencia limitada, no exclusiva y revocable para utilizar nuestros recursos educativos con fines estrictamente legales y pedagógicos. Queda terminantemente prohibido el uso de los conocimientos adquiridos en esta plataforma para actividades de hacking malicioso, intrusión no autorizada en sistemas externos o cualquier otra práctica que contravenga la ley penal informática.",
+            "p2": "Toda la propiedad intelectual, incluyendo el currículo, los laboratorios 3D y el código del editor interactivo, pertenece exclusivamente a SEGURIDAD DIGITAL. La reproducción total o parcial de este contenido sin consentimiento previo será perseguida legalmente. Animamos a los usuarios a compartir sus logros, pero siempre respetando la autoría de nuestros materiales originales.",
+            "p3": "Nos reservamos el derecho de suspender o cancelar cuentas que demuestren comportamientos abusivos, intentos de ataque contra nuestra infraestructura o violación de las normas de convivencia de la comunidad. La seguridad de nuestra plataforma es una responsabilidad compartida, y esperamos que nuestros estudiantes actúen con la integridad técnica que define a un profesional de la ciberseguridad.",
+            "p4": "SEGURIDAD DIGITAL no se hace responsable de las consecuencias derivadas del uso indebido de las herramientas y técnicas enseñadas. El objetivo es defensivo y profesional; el estudiante asume total responsabilidad legal por sus acciones fuera del entorno controlado de nuestros laboratorios virtuales."
+        },
+        "cookies": {
+            "title": "Política de Cookies",
+            "p1": "Nuestra plataforma utiliza 'cookies' y tecnologías similares para garantizar que el laboratorio interactivo y el editor de código funcionen con la rapidez extrema que prometemos. Estas pequeñas piezas de datos almacenan sus preferencias de tema (Modo Oscuro/Claro), su progreso en las lecciones y mantienen su sesión activa de forma segura.",
+            "p2": "Utilizamos tres categorías de cookies: Esenciales (necesarias para el funcionamiento técnico), de Rendimiento (nos ayudan a entender qué lecciones son más populares) y de Personalización (recuerdan su idioma y configuración de editor). Ninguna cookie de SEGURIDAD DIGITAL se utiliza para rastrear su actividad en sitios web de terceros o para publicidad intrusiva.",
+            "p3": "Usted tiene el poder de gestionar sus preferencias de cookies a través de la configuración de su navegador. Sin embargo, tenga en cuenta que deshabilitar las cookies esenciales podría afectar negativamente la funcionalidad del Monaco Editor y la validación de sus retos CTF en tiempo real.",
+            "p4": "Periódicamente actualizamos nuestra infraestructura para cumplir con las normativas globales de privacidad (como GDPR). Esta política de cookies se mantiene alineada con los más altos estándares de transparencia técnica para que usted siempre sepa qué datos se están procesando en su navegador local."
+        }
     },
     "testimonials": {
         "badge": "Testimonios",
@@ -194,13 +376,13 @@
     "pricing": {
         "badge": "Planes",
         "title": "Invierte en tu Futuro",
-        "subtitle": "Comienza gratis y sube de nivel.",
+        "subtitle": "Acceso premium a contenido de élite.",
         "period": {
             "forever": "para siempre",
             "monthly": "/ mes"
         },
         "free": {
-            "name": "Gratis",
+            "name": "Básico VIP",
             "feat1": "Niveles básicos",
             "feat2": "Editor limitado",
             "feat3": "Proyectos",
