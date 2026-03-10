@@ -1,9 +1,25 @@
+import { useState } from 'react';
 import { useLanguage } from '../lib/LanguageContext';
+import { PayPalButtons } from "@paypal/react-paypal-js";
+import { useAuth } from '../lib/AuthContext';
 
 export default function Pricing() {
     const { t } = useLanguage();
+    const { user, updateProgress } = useAuth();
+    const [buying, setBuying] = useState(null);
+
+    const handlePaymentSuccess = async (planId) => {
+        if (!user) return;
+        // Update user status in Supabase
+        await updateProgress({ 
+            subscription: planId,
+            plan_expiry: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString() // 30 days
+        });
+        alert(`¡Gracias! Tu plan ${planId.toUpperCase()} ha sido activado. Ya tienes acceso total a los laboratorios.`);
+    };
 
     const plans = [
+// ... (rest of plans)
         {
             id: 'free',
             name: t('pricing.free.name') || 'Gratis',
@@ -95,9 +111,33 @@ export default function Pricing() {
                                 ))}
                             </ul>
 
-                            <button className={`btn-3d w-full ${plan.buttonClass}`}>
-                                {plan.buttonText}
-                            </button>
+                            {plan.id === 'free' ? (
+                                <button className={`btn-3d w-full ${plan.buttonClass}`}>
+                                    {plan.buttonText}
+                                </button>
+                            ) : (
+                                <div className="mt-4">
+                                    <PayPalButtons
+                                        style={{ layout: "vertical", shape: "pill", label: "pay" }}
+                                        createOrder={(data, actions) => {
+                                            return actions.order.create({
+                                                purchase_units: [
+                                                    {
+                                                        amount: {
+                                                            value: plan.price.replace('$', '').replace('/m', '').replace('/u', ''),
+                                                        },
+                                                    },
+                                                ],
+                                            });
+                                        }}
+                                        onApprove={(data, actions) => {
+                                            return actions.order.capture().then((details) => {
+                                                handlePaymentSuccess(plan.id);
+                                            });
+                                        }}
+                                    />
+                                </div>
+                            )}
                         </div>
                     ))}
                 </div>

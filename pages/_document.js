@@ -2,7 +2,7 @@ import { Html, Head, Main, NextScript } from 'next/document';
 
 export default function Document() {
     return (
-        <Html lang="es" data-theme="white">
+        <Html lang="es">
             <Head>
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
                 <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -14,6 +14,22 @@ export default function Document() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <body className="antialiased">
+                <script
+                    dangerouslySetInnerHTML={{
+                        __html: `
+                            (function() {
+                                try {
+                                    var savedTheme = localStorage.getItem('sd-theme');
+                                    if (savedTheme) {
+                                        document.documentElement.setAttribute('data-theme', savedTheme);
+                                    } else {
+                                        document.documentElement.setAttribute('data-theme', 'white');
+                                    }
+                                } catch (e) {}
+                            })();
+                        `,
+                    }}
+                />
                 <Main />
                 <NextScript />
             </body>

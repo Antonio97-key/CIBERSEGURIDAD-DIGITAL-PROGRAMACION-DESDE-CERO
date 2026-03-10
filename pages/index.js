@@ -9,10 +9,10 @@ import IntegrationProjects from '../components/IntegrationProjects';
 import TrustSection from '../components/TrustSection';
 import TestimonialsSlider from '../components/TestimonialsSlider';
 import Resources from '../components/Resources';
-import Community from '../components/Community';
+import Forum from '../components/Forum';
+import CVEFeed from '../components/CVEFeed';
 import Footer from '../components/Footer';
 import Pricing from '../components/Pricing';
-import NewsSection from '../components/NewsSection';
 
 export default function Home() {
     const { t } = useLanguage();
@@ -73,11 +73,11 @@ export default function Home() {
                 <CyberSection level={userLevel} />
                 <SyntaxTable />
                 <IntegrationProjects level={userLevel} />
-                {/* <Pricing /> */}
+                <Pricing />
                 <TestimonialsSlider />
                 <Resources />
-                <NewsSection />
-                <Community />
+                <CVEFeed />
+                <Forum />
             </main>
 
             <Footer />

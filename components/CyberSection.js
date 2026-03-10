@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Link from 'next/link';
 import { useLanguage } from '../lib/LanguageContext';
 import QuizForm from './QuizForm';
 
@@ -20,6 +21,7 @@ export default function CyberSection({ level }) {
     const levels = [
         {
             id: 1,
+            module: 'redes',
             title: t('cyber_levels.l1.title') || 'Fundamentos de Redes',
             description: t('cyber_levels.l1.desc') || 'Aprende cómo viajan los datos por Internet y dónde están las vulnerabilidades más comunes.',
             icon: '🌐',
@@ -36,6 +38,7 @@ export default function CyberSection({ level }) {
         },
         {
             id: 2,
+            module: 'criptografia',
             title: t('cyber_levels.l2.title') || 'Criptografía Básica',
             description: t('cyber_levels.l2.desc') || 'Entiende cómo se protege la información mediante cifrado y algoritmos de hashing.',
             icon: '🔐',
@@ -52,6 +55,7 @@ export default function CyberSection({ level }) {
         },
         {
             id: 3,
+            module: 'malware',
             title: t('cyber_levels.l3.title') || 'Malware y Amenazas',
             description: t('cyber_levels.l3.desc') || 'Conoce los diferentes tipos de software malicioso y cómo infectan los sistemas.',
             icon: '🦠',
@@ -68,6 +72,7 @@ export default function CyberSection({ level }) {
         },
         {
             id: 4,
+            module: 'ingenieria-social',
             title: t('cyber_levels.l4.title') || 'Ingeniería Social',
             description: t('cyber_levels.l4.desc') || 'Aprende cómo los atacantes manipulan a las personas para eludir los controles tecnológicos.',
             icon: '🎣',
@@ -84,6 +89,7 @@ export default function CyberSection({ level }) {
         },
         {
             id: 5,
+            module: 'web-security',
             title: t('cyber_levels.l5.title') || 'Seguridad en Aplicaciones Web',
             description: t('cyber_levels.l5.desc') || 'Explora las vulnerabilidades más comunes en el desarrollo web moderno.',
             icon: '💻',
@@ -148,22 +154,35 @@ export default function CyberSection({ level }) {
                                 className={`glass-card p-6 sm:p-8 transition-all duration-500 ${!isAccessible ? 'opacity-40 pointer-events-none blur-[2px]' : ''
                                     } ${isCompleted ? 'ring-2 ring-green-400/50' : ''}`}
                             >
-                                <div className="flex items-start gap-4">
+                                <div className="flex flex-col md:flex-row items-start gap-4">
                                     {/* Level Icon */}
-                                    <div className={`flex-shrink-0 w-14 h-14 rounded-2xl ${colors.bg} ${colors.border} border-2 flex items-center justify-center text-2xl`}>
+                                    <div className={`flex-shrink-0 w-14 h-14 rounded-2xl ${colors.bg} ${colors.border} border-2 flex items-center justify-center text-2xl mb-4 md:mb-0`}>
                                         {isCompleted ? '✅' : lvl.icon}
                                     </div>
 
                                     {/* Content */}
-                                    <div className="flex-1 min-w-0">
-                                        <div className="flex items-center gap-3 mb-3 flex-wrap">
-                                            <h3 className="text-lg font-bold text-gray-900 dark:text-white">
-                                                {lvl.title}
-                                            </h3>
-                                            {isCompleted && (
-                                                <span className="chip chip-green text-[10px]">Completado</span>
+                                    <div className="flex-1 min-w-0 w-full">
+                                        <div className="flex items-center justify-between mb-3 flex-wrap gap-2">
+                                            <div className="flex items-center gap-3">
+                                                <h3 className="text-lg font-bold text-gray-900 dark:text-white">
+                                                    {lvl.title}
+                                                </h3>
+                                                {isCompleted && (
+                                                    <span className="chip chip-green text-[10px]">Completado</span>
+                                                )}
+                                            </div>
+                                            
+                                            {isAccessible && (
+                                                <Link href={`/ciberseguridad/${lvl.module}`} 
+                                                      className="btn-3d btn-3d-primary text-xs py-2 px-4 whitespace-nowrap">
+                                                    Explorar Módulo 🚀
+                                                </Link>
                                             )}
                                         </div>
+
+                                        <p className="text-sm text-gray-500 dark:text-gray-400 mb-4 italic">
+                                            {lvl.description}
+                                        </p>
 
                                         <ul className="space-y-2 mb-6">
                                             {lvl.content.map((item, idx) => (

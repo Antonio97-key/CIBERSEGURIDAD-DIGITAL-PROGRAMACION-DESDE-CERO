@@ -101,7 +101,7 @@ export default function SyntaxTable() {
                 </div>
 
                 {/* Tab Navigation */}
-                <div className="flex justify-center mb-10">
+                <div className="flex flex-col items-center mb-10 gap-6">
                     <div className="inline-flex bg-gray-100 dark:bg-graphite-700 rounded-2xl p-1.5">
                         {[
                             { id: 'tabla', label: '📊 Tabla Comparativa', icon: null },
@@ -118,6 +118,12 @@ export default function SyntaxTable() {
                                 {tab.label}
                             </button>
                         ))}
+                    </div>
+
+                    <div className="flex flex-wrap justify-center gap-3">
+                        <Link href="/programacion/python" className="btn-3d btn-3d-primary text-xs py-2 px-4">🐍 Aprender Python</Link>
+                        <Link href="/programacion/javascript" className="btn-3d btn-3d-secondary text-xs py-2 px-4">📜 Aprender JavaScript</Link>
+                        <Link href="/programacion/bash" className="btn-3d btn-3d-primary text-xs py-2 px-4" style={{ filter: 'hue-rotate(150deg)' }}>🐚 Aprender Bash</Link>
                     </div>
                 </div>
 

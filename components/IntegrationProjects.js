@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useLanguage } from '../lib/LanguageContext';
-// Moving projects inside to support dynamic translations
+import { Highlight, themes } from 'prism-react-renderer';
 
 const difficultyColors = {
     'Principiante': 'chip-green',
@@ -263,9 +263,23 @@ console.log("✅ Correcto:   " + (mensaje === descifrado));`,
                             {/* Code Block */}
                             <div className={`transition-all duration-500 overflow-hidden ${activeProject === project.id ? 'max-h-[800px] opacity-100' : 'max-h-0 opacity-0'}`}>
                                 <div className="border-t border-gray-100 dark:border-gray-700/50">
-                                    <pre className="text-xs p-5 bg-gray-900 text-green-400 overflow-x-auto font-mono leading-relaxed">
-                                        <code>{project.code}</code>
-                                    </pre>
+                                    <Highlight 
+                                        theme={themes.nightOwl} 
+                                        code={project.code} 
+                                        language={project.tech.includes('Python') ? 'python' : 'javascript'}
+                                    >
+                                        {({ className, style, tokens, getLineProps, getTokenProps }) => (
+                                            <pre className={`text-xs p-5 overflow-x-auto font-mono leading-relaxed ${className}`} style={{ ...style, margin: 0 }}>
+                                                {tokens.map((line, i) => (
+                                                    <div key={i} {...getLineProps({ line })}>
+                                                        {line.map((token, key) => (
+                                                            <span key={key} {...getTokenProps({ token })} />
+                                                        ))}
+                                                    </div>
+                                                ))}
+                                            </pre>
+                                        )}
+                                    </Highlight>
                                 </div>
                             </div>
                         </div>

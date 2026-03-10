@@ -1,9 +1,16 @@
 import { useState, useEffect, useRef } from 'react';
+import { useRouter } from 'next/router';
+import { useAuth } from '../lib/AuthContext';
 import { useTheme, THEME_COLORS } from '../lib/ThemeContext';
 import { useLanguage, LANGUAGES } from '../lib/LanguageContext';
+import GlobalSearch from './GlobalSearch';
+import AuthModal from './AuthModal';
 
 export default function Header() {
+    const router = useRouter();
+    const { user, signOut } = useAuth();
     const [isOpen, setIsOpen] = useState(false);
+    const [authModalOpen, setAuthModalOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const [moonAnimating, setMoonAnimating] = useState(false);
     const [langMenuOpen, setLangMenuOpen] = useState(false);
@@ -31,20 +38,32 @@ export default function Header() {
 
     const navLinks = [
         { name: t('header.nav.home') || 'Inicio', href: '#hero' },
+        { name: 'Laboratorio', href: '/playground' },
+        { name: t('header.nav.projects') || 'Proyectos', href: '/proyectos' },
+        user && { name: 'Mi Perfil', href: '/dashboard' },
         { name: t('header.nav.cyber') || 'Ciberseguridad', href: '#cyber' },
         { name: t('header.nav.prog') || 'Programación', href: '#prog' },
-        { name: t('header.nav.projects') || 'Proyectos', href: '#integracion' },
         { name: t('header.nav.news') || 'Noticias', href: '#noticias' },
-        { name: t('header.nav.trust') || 'Confianza', href: '#confianza' },
-        { name: t('header.nav.resources') || 'Recursos', href: '#recursos' },
         { name: t('header.nav.community') || 'Comunidad', href: '#comunidad' },
-    ];
+    ].filter(Boolean);
 
     const handleNavClick = (e, href) => {
+        if (href.startsWith('/')) {
+            setIsOpen(false);
+            return;
+        }
         e.preventDefault();
         setIsOpen(false);
+        
+        if (router.pathname !== '/' && href.startsWith('#')) {
+            router.push('/' + href);
+            return;
+        }
+        
         const target = document.querySelector(href);
-        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
     };
 
     const handleThemeClick = () => {
@@ -64,7 +83,7 @@ export default function Header() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between">
                     {/* Logo */}
-                    <a href="#hero" onClick={(e) => handleNavClick(e, '#hero')} className="flex items-center gap-3 group">
+                    <a href="/" onClick={(e) => handleNavClick(e, '#hero')} className="flex items-center gap-3 group">
                         <div
                             className="w-10 h-10 rounded-xl gradient-bg flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300"
                         >
@@ -105,6 +124,18 @@ export default function Header() {
 
                     {/* Actions */}
                     <div className="flex items-center gap-2 sm:gap-3">
+                        <GlobalSearch />
+                        
+                        {/* Auth Button */}
+                        <button 
+                            onClick={() => user ? signOut() : setAuthModalOpen(true)}
+                            className="hidden md:flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white/5 border border-white/5 text-[10px] font-black uppercase tracking-widest text-white hover:bg-primary-500 transition-all duration-300 shadow-xl hover:shadow-primary-500/20 active:scale-95"
+                        >
+                            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                            </svg>
+                            {user ? 'Salir' : 'Entrar'}
+                        </button>
 
                         {/* Language Switcher */}
                         <div className="relative" ref={langMenuRef}>
@@ -249,6 +280,10 @@ export default function Header() {
                     </div>
                 </nav>
             </div>
+            <AuthModal 
+                isOpen={authModalOpen} 
+                onClose={() => setAuthModalOpen(false)} 
+            />
         </header>
     );
 }
