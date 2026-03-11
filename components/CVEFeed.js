@@ -30,14 +30,14 @@ export default function CVEFeed() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
                     <div>
-                        <span className="text-[10px] font-black uppercase tracking-[0.3em] text-primary-500 mb-4 block">
+                        <span className="px-4 py-1.5 rounded-full bg-red-500/10 text-red-500 text-sm font-black uppercase tracking-[0.3em] mb-6 inline-block border border-red-500/20">
                             Alertas en Tiempo Real
                         </span>
-                        <h2 className="text-4xl md:text-5xl font-black tracking-tighter italic">
+                        <h2 className="text-4xl md:text-6xl font-black tracking-tighter uppercase drop-shadow-md">
                             Monitor de <span className="gradient-text">Vulnerabilidades</span>
                         </h2>
                     </div>
-                    <p className="font-semibold max-w-md" style={{ color: 'var(--color-text-muted)' }}>
+                    <p className="text-xl md:text-2xl font-bold max-w-lg leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
                         Feed directo de la base de datos nacional de vulnerabilidades (NVD). Mantente actualizado con las últimas amenazas globales.
                     </p>
                 </div>
@@ -70,15 +70,17 @@ export default function CVEFeed() {
                     )}
                 </div>
 
-                <div className="mt-12 text-center">
+                <div className="mt-16 text-center">
                     <a 
                         href="https://nvd.nist.gov/vuln/search"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-block px-8 py-4 rounded-xl shadow-md text-xs font-black uppercase tracking-widest transition-all hover:-translate-y-1"
-                        style={{ backgroundColor: 'var(--color-surface)', color: 'var(--color-text)', border: '1px solid var(--color-border)' }}
+                        className="btn-3d btn-3d-primary px-12 py-5 shadow-2xl"
                     >
-                        Ver Archivo Completo
+                        <svg className="w-6 h-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                        Ver Archivo Completo (NVD)
                     </a>
                 </div>
             </div>

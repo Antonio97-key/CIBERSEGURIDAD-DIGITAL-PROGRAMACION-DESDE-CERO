@@ -96,7 +96,7 @@ export default function SyntaxTable() {
                 <div className="text-center mb-16">
                     <span className="chip chip-purple mb-4 inline-flex">💻 {t('syntax.badge')}</span>
                     <h2 className="section-title gradient-text">{t('syntax.title')}</h2>
-                    <p className="section-subtitle mx-auto">
+                    <p className="text-2xl font-bold mx-auto text-gray-800 dark:text-gray-200" style={{ maxWidth: '800px' }}>
                         {t('syntax.subtitle')}
                     </p>
                 </div>
@@ -121,10 +121,10 @@ export default function SyntaxTable() {
                         ))}
                     </div>
 
-                    <div className="flex flex-wrap justify-center gap-3">
-                        <Link href="/programacion/python" className="btn-3d btn-3d-primary text-xs py-2 px-4">🐍 Aprender Python</Link>
-                        <Link href="/programacion/javascript" className="btn-3d btn-3d-secondary text-xs py-2 px-4">📜 Aprender JavaScript</Link>
-                        <Link href="/programacion/bash" className="btn-3d btn-3d-primary text-xs py-2 px-4" style={{ filter: 'hue-rotate(150deg)' }}>🐚 Aprender Bash</Link>
+                    <div className="flex flex-wrap justify-center gap-3 mt-4">
+                        <p className="text-sm font-semibold opacity-70 border border-current px-4 py-2 rounded-full" style={{ color: 'var(--color-primary)' }}>
+                            Explora la sintaxis comparada para fortalecer tus bases lógicas
+                        </p>
                     </div>
                 </div>
 
@@ -134,18 +134,22 @@ export default function SyntaxTable() {
                         {syntaxData.map((item, idx) => (
                             <div
                                 key={idx}
-                                className="glass-card overflow-hidden cursor-pointer"
+                                className="glass-card overflow-hidden cursor-pointer hover:shadow-2xl hover:border-primary-500 transition-all duration-300 transform hover:-translate-y-1"
                                 onClick={() => setExpandedRow(expandedRow === idx ? null : idx)}
                             >
                                 {/* Header Row */}
-                                <div className="p-5 flex items-center justify-between">
-                                    <div className="flex items-center gap-3">
-                                        <span className="w-8 h-8 rounded-lg bg-primary-100 dark:bg-primary-900/30 flex items-center justify-center text-sm font-bold text-primary-600 dark:text-primary-400">
+                                <div className="p-6 md:p-8 flex items-center justify-between group">
+                                    <div className="flex items-center gap-5">
+                                        <span className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-primary-100 dark:bg-primary-900/50 flex items-center justify-center text-lg md:text-xl font-black text-primary-600 dark:text-primary-400 shadow-sm group-hover:scale-110 transition-transform">
                                             {idx + 1}
                                         </span>
                                         <div>
-                                            <h3 className="font-extrabold text-lg text-gray-900 dark:text-white">{item.elemento}</h3>
-                                            <p className="text-base font-medium text-gray-600 dark:text-gray-300 mt-1">{item.queEs}</p>
+                                            <h3 className="font-extrabold text-xl md:text-2xl text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+                                                {item.elemento}
+                                            </h3>
+                                            <p className="text-lg font-medium text-gray-600 dark:text-gray-300 mt-2">
+                                                {item.queEs}
+                                            </p>
                                         </div>
                                     </div>
                                     <svg

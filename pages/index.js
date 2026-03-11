@@ -9,7 +9,8 @@ import IntegrationProjects from '../components/IntegrationProjects';
 import TrustSection from '../components/TrustSection';
 import TestimonialsSlider from '../components/TestimonialsSlider';
 import Resources from '../components/Resources';
-import Forum from '../components/Forum';
+import Community from '../components/Community';
+import NewsSection from '../components/NewsSection';
 import CVEFeed from '../components/CVEFeed';
 import Footer from '../components/Footer';
 import Pricing from '../components/Pricing';
@@ -73,11 +74,13 @@ export default function Home() {
                 <CyberSection level={userLevel} />
                 <SyntaxTable />
                 <IntegrationProjects level={userLevel} />
+                <TrustSection />
                 <Pricing />
                 <TestimonialsSlider />
+                <NewsSection />
                 <Resources />
                 <CVEFeed />
-                <Forum />
+                <Community />
             </main>
 
             <Footer />

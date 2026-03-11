@@ -119,25 +119,29 @@ export default function CyberSection({ level }) {
                 {/* Section Header */}
                 <div className="text-center mb-16">
                     <span className="chip chip-blue mb-4 inline-flex">🛡️ {t('cyber.badge')}</span>
-                    <h2 className="section-title gradient-text">{t('cyber.title')}</h2>
-                    <p className="section-subtitle mx-auto">
-                        {t('cyber.subtitle')}
+                    <h2 className="text-[30px] font-black gradient-text mb-4" style={{ color: 'var(--color-primary)' }}>{t('cyber.title') || 'De Cero a Hacker Ético'}</h2>
+                    <p className="text-[22px] md:text-[26px] font-black mx-auto mb-10 leading-relaxed" style={{ color: 'var(--color-text)', maxWidth: '800px' }}>
+                        {t('cyber.subtitle') || 'Un camino estructurado para entender cómo funcionan los ataques y cómo prevenirlos.'}
                     </p>
                 </div>
 
                 {/* Progress Bar */}
                 <div className="max-w-2xl mx-auto mb-12">
-                    <div className="flex items-center justify-between mb-3">
-                        <span className="text-sm font-medium text-gray-600 dark:text-gray-300">Tu progreso</span>
-                        <span className="text-sm font-bold gradient-text">
+                    <div className="flex items-center justify-between mb-4">
+                        <span className="text-lg font-bold uppercase tracking-widest text-gray-900 dark:text-white bg-gray-100 dark:bg-gray-800 px-4 py-1.5 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm">
+                            Tu progreso
+                        </span>
+                        <span className="text-xl font-black gradient-text bg-primary-50 dark:bg-primary-900/20 px-4 py-1.5 rounded-xl border border-primary-100 dark:border-primary-800/30">
                             {completedLevels.length} / {levels.length} niveles
                         </span>
                     </div>
-                    <div className="w-full h-3 rounded-full bg-gray-200 dark:bg-graphite-700 overflow-hidden">
+                    <div className="w-full h-4 rounded-full bg-gray-200 dark:bg-graphite-700 overflow-hidden shadow-inner border border-gray-300 dark:border-gray-600">
                         <div
-                            className="h-full rounded-full gradient-bg transition-all duration-700 ease-out"
+                            className="h-full rounded-full gradient-bg transition-all duration-1000 ease-out relative"
                             style={{ width: `${(completedLevels.length / levels.length) * 100}%` }}
-                        />
+                        >
+                            <div className="absolute inset-0 bg-white/20 animate-pulse"></div>
+                        </div>
                     </div>
                 </div>
 

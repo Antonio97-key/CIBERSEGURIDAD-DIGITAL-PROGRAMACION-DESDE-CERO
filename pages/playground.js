@@ -37,7 +37,7 @@ for i in range(3):
     return (
         <div className="min-h-screen bg-black pt-24 pb-12 px-6">
             <Head>
-                <title>Code Playground | Seguridad Digital</title>
+                <title>Code Playground | Ciberseguridad Digital</title>
             </Head>
 
             <div className="max-w-6xl mx-auto">

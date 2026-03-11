@@ -9,7 +9,7 @@ export default function ProyectosPage() {
     return (
         <div className="min-h-screen bg-black text-white selection:bg-primary-500/30">
             <Head>
-                <title>Laboratorio de Proyectos | Seguridad Digital</title>
+                <title>Laboratorio de Proyectos | Ciberseguridad Digital</title>
             </Head>
             <Header />
 

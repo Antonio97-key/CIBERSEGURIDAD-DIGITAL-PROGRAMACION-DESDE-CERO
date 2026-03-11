@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { supabase } from '../lib/supabase';
+import { useRouter } from 'next/router';
 
 export default function AuthModal({ isOpen, onClose }) {
+    const router = useRouter();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
@@ -15,16 +17,33 @@ export default function AuthModal({ isOpen, onClose }) {
 
         try {
             if (isSignUp) {
-                const { error } = await supabase.auth.signUp({ email, password });
+                const { error } = await supabase.auth.signUp({ 
+                    email, 
+                    password,
+                    options: {
+                        emailRedirectTo: window.location.origin
+                    }
+                });
                 if (error) throw error;
                 alert('¡Registro exitoso! Revisa tu email para confirmar.');
             } else {
                 const { error } = await supabase.auth.signInWithPassword({ email, password });
                 if (error) throw error;
+                onClose();
+                router.push('/dashboard');
+                return;
             }
             onClose();
         } catch (err) {
-            setError(err.message);
+            let msg = err.message;
+            if (msg.includes('Invalid login credentials')) {
+                msg = 'Credenciales de acceso inválidas. Verifica tu email y clave.';
+            } else if (msg.includes('User already registered')) {
+                msg = 'Este usuario ya está registrado.';
+            } else if (msg.includes('Password should be at least')) {
+                msg = 'La clave debe tener al menos 6 caracteres.';
+            }
+            setError(msg);
         } finally {
             setLoading(false);
         }
@@ -57,7 +76,7 @@ export default function AuthModal({ isOpen, onClose }) {
                         <input 
                             type="email" 
                             required 
-                            className="w-full bg-black/50 border border-white/5 rounded-2xl px-6 py-4 text-sm outline-none focus:border-primary-500 transition-all font-medium"
+                            className="w-full bg-black/50 text-white border border-white/5 rounded-2xl px-6 py-4 text-sm outline-none focus:border-primary-500 transition-all font-medium"
                             placeholder="hacker@defensa.com"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
@@ -68,7 +87,7 @@ export default function AuthModal({ isOpen, onClose }) {
                         <input 
                             type="password" 
                             required 
-                            className="w-full bg-black/50 border border-white/5 rounded-2xl px-6 py-4 text-sm outline-none focus:border-primary-500 transition-all font-medium"
+                            className="w-full bg-black/50 text-white border border-white/5 rounded-2xl px-6 py-4 text-sm outline-none focus:border-primary-500 transition-all font-medium"
                             placeholder="••••••••"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}

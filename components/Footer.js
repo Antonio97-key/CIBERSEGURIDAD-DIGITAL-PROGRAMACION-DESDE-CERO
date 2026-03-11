@@ -98,7 +98,7 @@ export default function Footer() {
                                     </svg>
                                 </div>
                                 <div>
-                                    <span className="text-xl font-black gradient-text tracking-tighter uppercase">Seguridad Digital</span>
+                                    <span className="text-xl font-black gradient-text tracking-tighter uppercase">Ciberseguridad Digital</span>
                                     <span className="block text-[10px] font-black tracking-[0.3em] uppercase opacity-50">
                                         + Prog. desde Cero
                                     </span>

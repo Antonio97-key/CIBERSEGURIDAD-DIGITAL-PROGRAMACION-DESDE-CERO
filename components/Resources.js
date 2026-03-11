@@ -97,8 +97,8 @@ export default function Resources() {
                     <div className="space-y-10 animate-fade-in">
                         {resources.map((category) => (
                             <div key={category.category}>
-                                <h3 className="text-xl font-extrabold mb-6 flex items-center gap-3" style={{ color: 'var(--color-text)' }}>
-                                    <span className="text-3xl">{category.icon}</span>
+                                <h3 className="text-3xl font-black mb-8 flex items-center gap-4" style={{ color: 'var(--color-text)' }}>
+                                    <span className="text-4xl">{category.icon}</span>
                                     {category.category}
                                 </h3>
                                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -110,15 +110,15 @@ export default function Resources() {
                                             rel="noopener noreferrer"
                                             className="glass-card p-5 group block"
                                         >
-                                            <div className="flex items-start justify-between mb-3">
-                                                <h4 className="font-extrabold text-base transition-colors" style={{ color: 'var(--color-text)' }}>
+                                            <div className="flex items-start justify-between mb-4">
+                                                <h4 className="font-extrabold text-xl transition-colors leading-tight" style={{ color: 'var(--color-primary)' }}>
                                                     {item.name}
                                                 </h4>
-                                                <svg className="w-4 h-4 text-gray-400 group-hover:text-primary-500 transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                                <svg className="w-5 h-5 text-gray-400 group-hover:text-primary-500 transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                                     <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                                                 </svg>
                                             </div>
-                                            <p className="text-sm font-medium mb-4 leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>{item.desc}</p>
+                                            <p className="text-base font-semibold mb-6 leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>{item.desc}</p>
                                             <span className="chip chip-blue text-xs font-bold">{item.tag}</span>
                                         </a>
                                     ))}
@@ -148,11 +148,11 @@ export default function Resources() {
                         {/* Glossary Grid */}
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                             {filteredGlossary.map((item) => (
-                                <div key={item.term} className="glass-card p-5">
-                                    <h4 className="font-extrabold text-base mb-3" style={{ color: 'var(--color-primary)' }}>
+                                <div key={item.term} className="glass-card p-6">
+                                    <h4 className="font-black text-xl mb-4" style={{ color: 'var(--color-primary)' }}>
                                         {item.term}
                                     </h4>
-                                    <p className="text-sm font-medium leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
+                                    <p className="text-base font-semibold leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
                                         {item.def}
                                     </p>
                                 </div>

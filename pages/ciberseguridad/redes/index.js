@@ -5,7 +5,7 @@ export default function RedesModule() {
     return (
         <>
             <Head>
-                <title>Fundamentos de Redes | Seguridad Digital</title>
+                <title>Fundamentos de Redes | Ciberseguridad Digital</title>
             </Head>
             
             <div className="prose prose-invert max-w-none">

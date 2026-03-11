@@ -1,4 +1,4 @@
-# Seguridad Digital + Programación desde Cero
+# Ciberseguridad Digital + Programación desde Cero
 
 Plataforma educativa moderna sobre ciberseguridad y programación básica.
 

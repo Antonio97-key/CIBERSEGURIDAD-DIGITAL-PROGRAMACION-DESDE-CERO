@@ -19,7 +19,7 @@ export default function Layout({ children }) {
         return (
             <>
                 <Head>
-                    <title>Seguridad Digital + Programación desde Cero</title>
+                    <title>Ciberseguridad Digital</title>
                 </Head>
                 {children}
             </>

@@ -82,18 +82,18 @@ export default function GlobalSearch() {
         <>
             <button
                 onClick={() => setIsOpen(true)}
-                className="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm transition-all duration-200 border w-48 xl:w-64 group"
+                className="relative w-10 h-10 lg:w-48 xl:w-64 lg:px-3 lg:py-1.5 rounded-xl lg:rounded-lg flex items-center justify-center lg:justify-start gap-2 text-sm transition-all duration-300 group shadow-md lg:shadow-none hover:scale-110 lg:hover:scale-100 border"
                 style={{ 
                     backgroundColor: 'var(--color-surface)',
                     borderColor: 'var(--color-border)',
                     color: 'var(--color-text-muted)'
                 }}
             >
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="w-5 h-5 lg:w-4 lg:h-4 text-gray-500 lg:text-current" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
-                <span className="flex-1 text-left">Buscar...</span>
-                <span className="flex items-center gap-0.5 text-xs font-semibold px-1.5 rounded" style={{ backgroundColor: 'var(--color-bg)', border: '1px solid var(--color-border)' }}>
+                <span className="hidden lg:block flex-1 text-left">Buscar...</span>
+                <span className="hidden lg:flex items-center gap-0.5 text-xs font-semibold px-1.5 rounded" style={{ backgroundColor: 'var(--color-bg)', border: '1px solid var(--color-border)' }}>
                     <kbd className="font-sans">Ctrl</kbd> <kbd className="font-sans">K</kbd>
                 </span>
             </button>

@@ -16,7 +16,7 @@ export default function ModuleIndex() {
     return (
         <>
             <Head>
-                <title>{modData.title} | Seguridad Digital</title>
+                <title>{modData.title} | Ciberseguridad Digital</title>
             </Head>
             
             <div className="prose prose-invert max-w-none animate-fade-in">

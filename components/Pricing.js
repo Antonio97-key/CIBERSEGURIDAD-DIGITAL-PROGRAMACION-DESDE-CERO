@@ -71,13 +71,20 @@ export default function Pricing() {
     ];
 
     return (
-        <section id="planes" className="relative py-20">
-            <div className="section-container">
-                <div className="text-center mb-16 px-4">
-                    <span className="chip chip-purple mb-4 inline-flex">💎 {t('pricing.badge') || 'Planes'}</span>
-                    <h2 className="section-title gradient-text">{t('pricing.title') || 'Invierte en tu Futuro'}</h2>
-                    <p className="section-subtitle mx-auto">
-                        {t('pricing.subtitle') || 'Acceso exclusivo a laboratorios de élite y certificaciones profesionales de ciberseguridad.'}
+        <section id="planes" className="relative py-24 bg-graphite-900 overflow-hidden">
+            <div className="section-container relative z-10">
+                <div className="text-center mb-20 animate-slide-up">
+                    <span className="px-4 py-1.5 rounded-full bg-primary-500/10 text-primary-500 text-sm font-black uppercase tracking-[0.3em] mb-8 inline-block border border-primary-500/20">
+                        {t('pricing.badge') || 'Planes de Estudio'}
+                    </span>
+                    <h2 className="text-6xl md:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-secondary-400 mb-8 tracking-tighter uppercase drop-shadow-sm">
+                        PLANES
+                    </h2>
+                    <p className="text-2xl md:text-3xl font-extrabold text-white max-w-3xl mx-auto leading-relaxed border-y border-white/10 py-6 mb-4">
+                        Acceso <span className="text-primary-400">premium</span> a contenido de <span className="text-yellow-400">élite</span>.
+                    </p>
+                    <p className="text-lg text-gray-400 max-w-2xl mx-auto font-medium">
+                        {t('pricing.subtitle') || 'Invierte en tu futuro y domina la ciberseguridad con laboratorios 100% prácticos.'}
                     </p>
                 </div>
 
@@ -118,6 +125,7 @@ export default function Pricing() {
                             ) : (
                                 <div className="mt-4">
                                     <PayPalButtons
+                                        fundingSource={"paypal"}
                                         style={{ layout: "vertical", shape: "pill", label: "pay" }}
                                         createOrder={(data, actions) => {
                                             return actions.order.create({

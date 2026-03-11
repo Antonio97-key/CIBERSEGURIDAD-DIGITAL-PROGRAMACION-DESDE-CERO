@@ -5,7 +5,7 @@ export default function TCPIP() {
     return (
         <>
             <Head>
-                <title>TCP/IP en profundidad | Seguridad Digital</title>
+                <title>TCP/IP en profundidad | Ciberseguridad Digital</title>
             </Head>
             
             <div className="prose prose-invert max-w-none">

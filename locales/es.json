@@ -18,7 +18,7 @@
     },
     "hero": {
         "badge": "Experiencia Educativa Premium",
-        "title_1": "Seguridad Digital",
+        "title_1": "Ciberseguridad Digital",
         "title_2": "+ Programación",
         "title_3": "desde Cero",
         "subtitle": "Domina la ciberseguridad y programación avanzada con metodologías profesionales, laboratorios de élite y proyectos reales de alto nivel.",
@@ -49,7 +49,7 @@
     "syntax": {
         "badge": "Cheatsheet Interactivo",
         "title": "Sintaxis Comparada",
-        "subtitle": "Explora las diferencias clave entre Python y JavaScript. Haz clic en las filas para practicar.",
+        "subtitle": "Explora las diferencias clave entre Python, JavaScript y otros lenguajes para practicar.",
         "choose_language": "Elige un lenguaje:",
         "live_editor": "Editor Interactivo en vivo",
         "run_code": "Ejecutar Código"

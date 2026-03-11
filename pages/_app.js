@@ -12,29 +12,29 @@ export default function App({ Component, pageProps }) {
             <AuthProvider>
                 <ThemeProvider>
                     <DefaultSeo
-                        title="Seguridad Digital + Programación desde Cero"
-                        description="Domina la ciberseguridad y programación avanzada con metodologías profesionales, laboratorios de élite y proyectos reales de alto nivel."
-                        canonical="https://seguridad-digital.vercel.app"
+                        title="Ciberseguridad Digital"
+                        description="Domina la ciberseguridad avanzada con metodologías profesionales, laboratorios de élite y proyectos reales de alto nivel."
+                        canonical="https://ciberseguridad-digital-programacion.vercel.app"
                         openGraph={{
                             type: 'website',
                             locale: 'es_DO',
-                            url: 'https://seguridad-digital.vercel.app',
-                            siteName: 'Seguridad Digital + Programación desde Cero',
-                            title: 'Seguridad Digital + Programación desde Cero',
-                            description: 'Domina la ciberseguridad y programación avanzada con metodologías profesionales y laboratorios de élite.',
+                            url: 'https://ciberseguridad-digital-programacion.vercel.app',
+                            siteName: 'Ciberseguridad Digital',
+                            title: 'Ciberseguridad Digital',
+                            description: 'Domina la ciberseguridad avanzada con metodologías profesionales y laboratorios de élite.',
                             images: [
                                 {
                                     url: '/og-image.jpg',
                                     width: 1200,
                                     height: 630,
-                                    alt: 'Seguridad Digital + Programación desde Cero',
+                                    alt: 'Ciberseguridad Digital',
                                 },
                             ],
                         }}
                         additionalMetaTags={[
                             { name: 'viewport', content: 'width=device-width, initial-scale=1' },
                             { name: 'keywords', content: 'ciberseguridad avanzada, programación profesional, hacking ético, laboratorios de élite, seguridad digital premium' },
-                            { name: 'author', content: 'Seguridad Digital' },
+                            { name: 'author', content: 'Ciberseguridad Digital' },
                             { name: 'theme-color', content: '#3b82f6' },
                         ]}
                         additionalLinkTags={[

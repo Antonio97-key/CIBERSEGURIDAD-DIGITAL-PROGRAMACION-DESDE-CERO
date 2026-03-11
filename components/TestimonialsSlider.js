@@ -3,29 +3,61 @@ import { useLanguage } from '../lib/LanguageContext';
 
 const testimonials = [
     {
-        name: 'Carlos Méndez',
-        role: 'Estudiante de Ingeniería',
-        text: 'Esta plataforma me ayudó a entender la ciberseguridad de forma práctica. Los quizzes y proyectos hacen que todo sea más fácil de aprender.',
-        avatar: 'CM',
-    },
-    {
-        name: 'María Paulino',
-        role: 'Emprendedora Digital',
-        text: 'Gracias a los proyectos de integración pude implementar seguridad básica en mi negocio online. ¡Excelente recurso gratuito!',
-        avatar: 'MP',
-    },
-    {
-        name: 'José Rodríguez',
-        role: 'Desarrollador Junior',
-        text: 'El editor interactivo y la tabla comparativa Python vs JavaScript son geniales para practicar sin instalar nada.',
+        name: 'José Ramón',
+        role: 'Estudiante de Redes',
+        date: '12 febrero 2026',
+        text: 'Excelente plataforma. Me ayudó mucho a entender los fundamentos de la ciberseguridad.',
         avatar: 'JR',
     },
     {
         name: 'Ana García',
-        role: 'Profesora de Informática',
-        text: 'Uso esta plataforma como material complementario en mis clases. El contenido está bien estructurado y actualizado.',
+        role: 'Profesora de Matemáticas',
+        date: '27 enero 2026',
+        text: 'Muy clara y fácil de seguir. La recomiendo para cualquier persona que quiera iniciarse en seguridad informática.',
         avatar: 'AG',
     },
+    {
+        name: 'Carlos M.',
+        role: 'Entusiasta de TI',
+        date: '18 diciembre 2025',
+        text: 'Excelente plataforma, me ayudó mucho a entender la ciberseguridad.',
+        avatar: 'CM',
+    },
+    {
+        name: 'Maya P.',
+        role: 'Desarrolladora Web',
+        date: '9 febrero 2026',
+        text: 'Los ejercicios prácticos son lo mejor de la plataforma.',
+        avatar: 'MP',
+    },
+    {
+        name: 'José R.',
+        role: 'Estudiante Universitario',
+        date: '21 enero 2026',
+        text: 'Muy buena explicación de los conceptos básicos de hacking ético.',
+        avatar: 'JR',
+    },
+    {
+        name: 'David L.',
+        role: 'Ingeniero de Sistemas',
+        date: '2 marzo 2026',
+        text: 'Una herramienta imprescindible para cualquier profesional IT que quiera reforzar sus conocimientos de red.',
+        avatar: 'DL',
+    },
+    {
+        name: 'Sofía T.',
+        role: 'Analista de Datos',
+        date: '15 noviembre 2025',
+        text: 'Me encantó la comparativa entre Python y JavaScript. Fue justo lo que necesitaba para mi trabajo.',
+        avatar: 'ST',
+    },
+    {
+        name: 'Luis F.',
+        role: 'Desarrollador Junior',
+        date: '5 marzo 2026',
+        text: 'La interfaz es increíblemente fluida y los retos estilo CTF te motivan a seguir aprendiendo cada día.',
+        avatar: 'LF',
+    }
 ];
 
 export default function TestimonialsSlider() {
@@ -77,7 +109,7 @@ export default function TestimonialsSlider() {
                                         </p>
 
                                         <h4 className="font-bold text-sm" style={{ color: 'var(--color-text)' }}>{t.name}</h4>
-                                        <p className="text-xs mt-1" style={{ color: 'var(--color-text-muted)' }}>{t.role}</p>
+                                        <p className="text-xs mt-1" style={{ color: 'var(--color-text-muted)' }}>{t.role} • <span className="text-primary-500 italic">{t.date}</span></p>
                                     </div>
                                 </div>
                             ))}
