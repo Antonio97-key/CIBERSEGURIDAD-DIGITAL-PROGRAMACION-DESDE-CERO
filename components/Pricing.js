@@ -71,19 +71,19 @@ export default function Pricing() {
     ];
 
     return (
-        <section id="planes" className="relative py-24 bg-graphite-900 overflow-hidden">
+        <section id="planes" className="relative py-24 overflow-hidden section-alt">
             <div className="section-container relative z-10">
-                <div className="text-center mb-20 animate-slide-up">
-                    <span className="px-4 py-1.5 rounded-full bg-primary-500/10 text-primary-500 text-sm font-black uppercase tracking-[0.3em] mb-8 inline-block border border-primary-500/20">
-                        {t('pricing.badge') || 'Planes de Estudio'}
+                <div className="text-center mb-16 animate-slide-up">
+                    <span className="chip chip-blue mb-4 inline-flex">
+                        💎 {t('pricing.badge') || 'Planes de Estudio'}
                     </span>
-                    <h2 className="text-6xl md:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-secondary-400 mb-8 tracking-tighter uppercase drop-shadow-sm">
+                    <h2 className="section-title gradient-text">
                         PLANES
                     </h2>
-                    <p className="text-2xl md:text-3xl font-extrabold text-white max-w-3xl mx-auto leading-relaxed border-y border-white/10 py-6 mb-4">
-                        Acceso <span className="text-primary-400">premium</span> a contenido de <span className="text-yellow-400">élite</span>.
+                    <p className="text-lg md:text-xl font-bold mb-4 mx-auto" style={{ color: 'var(--color-text)', maxWidth: '36rem' }}>
+                        Acceso <span style={{ color: 'var(--color-primary)' }}>premium</span> a contenido de <span className="text-yellow-500">élite</span>.
                     </p>
-                    <p className="text-lg text-gray-400 max-w-2xl mx-auto font-medium">
+                    <p className="section-subtitle mx-auto">
                         {t('pricing.subtitle') || 'Invierte en tu futuro y domina la ciberseguridad con laboratorios 100% prácticos.'}
                     </p>
                 </div>
