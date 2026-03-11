@@ -241,6 +241,13 @@ export default function Dashboard() {
                                 </div>
                                 <div className="space-y-4">
                                     {[
+                                        { 
+                                            icon: '👋', 
+                                            title: `¡Hola, ${profile?.display_name || (user?.email?.split('@')[0]) || 'Hacker'}!`, 
+                                            desc: 'Gracias por iniciar sesión con nosotros. Te va a ir muy bien, vas a aprender mucho en esta comunidad muy interactiva y profesional. ¡Prepárate para dominar la ciberseguridad!', 
+                                            time: 'Recién llegado', 
+                                            color: '#10b981' 
+                                        },
                                         { icon: '🚀', title: '¡Bienvenido al Nivel Legendario!', desc: 'Has completado satisfactoriamente tus primeros desafíos. Tu rango ha sido actualizado.', time: 'Hace 5 min', color: '#3b82f6' },
                                         { icon: '📰', title: 'Nueva lección disponible: SQL Injection', desc: 'Aprende a proteger tus bases de datos con nuestra nueva guía práctica.', time: 'Ayer', color: '#8b5cf6' },
                                         { icon: '🏆', title: 'Badge de Honor: Criptógrafo', desc: 'Felicidades, has obtenido una nueva insignia por tus logros en criptografía.', time: 'Hace 2 días', color: '#eab308' },
