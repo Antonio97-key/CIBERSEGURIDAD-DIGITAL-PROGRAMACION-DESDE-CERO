@@ -145,7 +145,7 @@ export default function Header() {
                                 className="relative w-10 h-10 rounded-xl flex items-center justify-center hover:scale-110 transition-all duration-300 group"
                                 style={{
                                     backgroundColor: langMenuOpen ? 'var(--color-primary)' : 'var(--color-surface-hover)',
-                                    color: langMenuOpen ? 'var(--color-button-text)' : 'inherit',
+                                    color: langMenuOpen ? 'var(--color-button-text)' : 'var(--color-text)',
                                     border: '1px solid var(--color-border)',
                                 }}
                                 aria-label={t('header.language')}
