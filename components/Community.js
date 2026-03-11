@@ -9,17 +9,20 @@ export default function Community() {
     const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const [dynamicLinks, setDynamicLinks] = useState({ telegram: '#', whatsapp: '#' });
+    const [dynamicLinks, setDynamicLinks] = useState({ 
+        telegram: 'https://t.me/+mjkMgsxIhAJlMTVh', 
+        whatsapp: 'https://chat.whatsapp.com/F76SLVgtcEZCzNJs3oTkhE?mode=gi_t' 
+    });
 
     useEffect(() => {
         const fetchLinks = async () => {
             try {
                 const { data } = await supabase.from('platform_settings').select('value').eq('id', 'social_links').single();
                 if (data && data.value) {
-                    setDynamicLinks({
-                        telegram: data.value.telegram || '#',
-                        whatsapp: data.value.whatsapp || '#'
-                    });
+                    setDynamicLinks(prev => ({
+                        telegram: data.value.telegram && data.value.telegram !== '#' ? data.value.telegram : prev.telegram,
+                        whatsapp: data.value.whatsapp && data.value.whatsapp !== '#' ? data.value.whatsapp : prev.whatsapp
+                    }));
                 }
             } catch (e) { console.error("Error fetching community links:", e); }
         };

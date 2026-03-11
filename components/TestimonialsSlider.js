@@ -7,56 +7,70 @@ const testimonials = [
         role: 'Estudiante de Redes',
         date: '12 febrero 2026',
         text: 'Excelente plataforma. Me ayudó mucho a entender los fundamentos de la ciberseguridad.',
-        avatar: 'JR',
+        avatar: 'https://randomuser.me/api/portraits/men/32.jpg',
     },
     {
         name: 'Ana García',
         role: 'Profesora de Matemáticas',
         date: '27 enero 2026',
         text: 'Muy clara y fácil de seguir. La recomiendo para cualquier persona que quiera iniciarse en seguridad informática.',
-        avatar: 'AG',
+        avatar: 'https://randomuser.me/api/portraits/women/44.jpg',
     },
     {
         name: 'Carlos M.',
-        role: 'Entusiasta de TI',
+        role: 'Comerciante Independiente',
         date: '18 diciembre 2025',
-        text: 'Excelente plataforma, me ayudó mucho a entender la ciberseguridad.',
-        avatar: 'CM',
+        text: 'Ahora sé cómo asegurar mejor la web de mi negocio de los ataques comunes. Me sirvió enormemente.',
+        avatar: 'https://randomuser.me/api/portraits/men/50.jpg',
     },
     {
         name: 'Maya P.',
         role: 'Desarrolladora Web',
         date: '9 febrero 2026',
-        text: 'Los ejercicios prácticos son lo mejor de la plataforma.',
+        text: 'Los laboratorios prácticos son lo mejor de la plataforma, muy dinámicos.',
         avatar: 'MP',
     },
     {
-        name: 'José R.',
-        role: 'Estudiante Universitario',
+        name: 'Javier R.',
+        role: 'Bachiller Graduado',
         date: '21 enero 2026',
-        text: 'Muy buena explicación de los conceptos básicos de hacking ético.',
-        avatar: 'JR',
+        text: 'Acabo de salir del colegio y este sitio me dio una base sólida en hacking ético antes de ir a la U.',
+        avatar: 'https://randomuser.me/api/portraits/men/22.jpg',
     },
     {
         name: 'David L.',
-        role: 'Ingeniero de Sistemas',
+        role: 'Soporte Técnico',
         date: '2 marzo 2026',
-        text: 'Una herramienta imprescindible para cualquier profesional IT que quiera reforzar sus conocimientos de red.',
-        avatar: 'DL',
+        text: 'Una herramienta imprescindible para cualquier persona en soporte que quiera aprender sobre redes y puertos.',
+        avatar: 'https://randomuser.me/api/portraits/men/85.jpg',
     },
     {
         name: 'Sofía T.',
-        role: 'Analista de Datos',
+        role: 'Estudiante de Secundaria',
         date: '15 noviembre 2025',
-        text: 'Me encantó la comparativa entre Python y JavaScript. Fue justo lo que necesitaba para mi trabajo.',
-        avatar: 'ST',
+        text: 'Me encantó la comparativa entre Python y JavaScript. Fue súper fácil de entender paso a paso.',
+        avatar: 'https://randomuser.me/api/portraits/women/68.jpg',
     },
     {
-        name: 'Luis F.',
+        name: 'Luis Fernando',
         role: 'Desarrollador Junior',
         date: '5 marzo 2026',
-        text: 'La interfaz es increíblemente fluida y los retos estilo CTF te motivan a seguir aprendiendo cada día.',
+        text: 'La interfaz gráfica es fluida. Los retos tipo CTF en verdad te motivan a seguir investigando.',
         avatar: 'LF',
+    },
+    {
+        name: 'Valentina C.',
+        role: 'Emprendedora',
+        date: '11 febrero 2026',
+        text: 'Aprendí a no caer en ataques de phishing básicos. Fundamental para mi vida diaria.',
+        avatar: 'https://randomuser.me/api/portraits/women/12.jpg',
+    },
+    {
+        name: 'Andrés G.',
+        role: 'Ingeniero de Sistemas',
+        date: '25 febrero 2026',
+        text: 'Increíble calidad en el currículo de TCP/IP y protocolos. Aporta mucho valor incluso para profesionales.',
+        avatar: 'AG',
     }
 ];
 
@@ -93,11 +107,15 @@ export default function TestimonialsSlider() {
                                 <div key={idx} className="w-full flex-shrink-0 px-4">
                                     <div className="glass-card p-8 text-center">
                                         {/* Avatar */}
-                                        <div
-                                            className="w-16 h-16 rounded-full mx-auto mb-5 flex items-center justify-center text-xl font-bold text-white gradient-bg"
-                                        >
-                                            {t.avatar}
-                                        </div>
+                                        {t.avatar.startsWith('http') ? (
+                                            <div className="w-16 h-16 rounded-full mx-auto mb-5 overflow-hidden ring-4 ring-primary-500/20 shadow-lg">
+                                                <img src={t.avatar} alt={t.name} className="w-full h-full object-cover" />
+                                            </div>
+                                        ) : (
+                                            <div className="w-16 h-16 rounded-full mx-auto mb-5 flex items-center justify-center text-xl font-bold text-white gradient-bg shadow-lg ring-4 ring-primary-500/20">
+                                                {t.avatar}
+                                            </div>
+                                        )}
 
                                         {/* Quote */}
                                         <svg className="w-8 h-8 mx-auto mb-4 opacity-20" style={{ color: 'var(--color-primary)' }} fill="currentColor" viewBox="0 0 24 24">

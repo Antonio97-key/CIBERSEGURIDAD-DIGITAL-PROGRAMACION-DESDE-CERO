@@ -46,7 +46,28 @@ export default function QuizForm({ question, options, onComplete }) {
                     ))}
                 </div>
 
-                <button type="submit" className="btn-3d btn-3d-primary text-sm">
+                <button 
+                    type="submit" 
+                    className="w-full py-3 text-sm font-bold uppercase tracking-wider rounded-xl transition-all duration-300 mt-2"
+                    style={{ 
+                        backgroundColor: 'rgba(59, 130, 246, 0.1)', 
+                        color: 'var(--color-primary)', 
+                        border: '1px solid rgba(59, 130, 246, 0.2)',
+                        boxShadow: '0 4px 0 rgba(59, 130, 246, 0.2)'
+                    }}
+                    onMouseDown={(e) => {
+                        e.currentTarget.style.transform = 'translateY(4px)';
+                        e.currentTarget.style.boxShadow = '0 0 0 rgba(59, 130, 246, 0.2)';
+                    }}
+                    onMouseUp={(e) => {
+                        e.currentTarget.style.transform = 'translateY(0)';
+                        e.currentTarget.style.boxShadow = '0 4px 0 rgba(59, 130, 246, 0.2)';
+                    }}
+                    onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = 'translateY(0)';
+                        e.currentTarget.style.boxShadow = '0 4px 0 rgba(59, 130, 246, 0.2)';
+                    }}
+                >
                     Verificar Respuesta
                 </button>
 

@@ -180,7 +180,26 @@ export default function CyberSection({ level }) {
                                             
                                             {isAccessible && (
                                                 <Link href={`/ciberseguridad/${lvl.module}`} 
-                                                      className="btn-3d btn-3d-primary text-xs py-2 px-4 whitespace-nowrap">
+                                                      className="text-[11px] md:text-xs font-bold uppercase tracking-wider rounded-xl transition-all duration-300 py-2 px-4 whitespace-nowrap text-center block md:inline-block"
+                                                      style={{ 
+                                                          backgroundColor: 'rgba(59, 130, 246, 0.1)', 
+                                                          color: 'var(--color-primary)', 
+                                                          border: '1px solid rgba(59, 130, 246, 0.2)',
+                                                          boxShadow: '0 4px 0 rgba(59, 130, 246, 0.2)'
+                                                      }}
+                                                      onMouseDown={(e) => {
+                                                          e.currentTarget.style.transform = 'translateY(4px)';
+                                                          e.currentTarget.style.boxShadow = '0 0 0 rgba(59, 130, 246, 0.2)';
+                                                      }}
+                                                      onMouseUp={(e) => {
+                                                          e.currentTarget.style.transform = 'translateY(0)';
+                                                          e.currentTarget.style.boxShadow = '0 4px 0 rgba(59, 130, 246, 0.2)';
+                                                      }}
+                                                      onMouseLeave={(e) => {
+                                                          e.currentTarget.style.transform = 'translateY(0)';
+                                                          e.currentTarget.style.boxShadow = '0 4px 0 rgba(59, 130, 246, 0.2)';
+                                                      }}
+                                                >
                                                     Explorar Módulo 🚀
                                                 </Link>
                                             )}
@@ -214,7 +233,25 @@ export default function CyberSection({ level }) {
                                         {!lvl.quiz && !isCompleted && isAccessible && (
                                             <button
                                                 onClick={() => completeLevel(lvl.id)}
-                                                className="btn-3d btn-3d-secondary text-sm"
+                                                className="w-full md:w-auto py-2 px-6 text-[11px] md:text-xs font-bold uppercase tracking-wider rounded-xl transition-all duration-300 mt-2"
+                                                style={{ 
+                                                    backgroundColor: 'rgba(59, 130, 246, 0.1)', 
+                                                    color: 'var(--color-primary)', 
+                                                    border: '1px solid rgba(59, 130, 246, 0.2)',
+                                                    boxShadow: '0 4px 0 rgba(59, 130, 246, 0.2)'
+                                                }}
+                                                onMouseDown={(e) => {
+                                                    e.currentTarget.style.transform = 'translateY(4px)';
+                                                    e.currentTarget.style.boxShadow = '0 0 0 rgba(59, 130, 246, 0.2)';
+                                                }}
+                                                onMouseUp={(e) => {
+                                                    e.currentTarget.style.transform = 'translateY(0)';
+                                                    e.currentTarget.style.boxShadow = '0 4px 0 rgba(59, 130, 246, 0.2)';
+                                                }}
+                                                onMouseLeave={(e) => {
+                                                    e.currentTarget.style.transform = 'translateY(0)';
+                                                    e.currentTarget.style.boxShadow = '0 4px 0 rgba(59, 130, 246, 0.2)';
+                                                }}
                                             >
                                                 Marcar como completado
                                             </button>
