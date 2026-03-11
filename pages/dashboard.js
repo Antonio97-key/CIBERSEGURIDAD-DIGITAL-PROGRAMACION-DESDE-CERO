@@ -4,110 +4,332 @@ import Footer from '../components/Footer';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import { useLanguage } from '../lib/LanguageContext';
 
 export default function Dashboard() {
-    const { user, loading, progress } = useAuth();
+    const { user, loading, progress, updateProgress, profile, updateProfile, signOut } = useAuth();
+    const { t } = useLanguage();
     const router = useRouter();
+    const [activeTab, setActiveTab] = useState('panel');
+    const [editMode, setEditMode] = useState(false);
+    const [editForm, setEditForm] = useState({ display_name: '', bio: '' });
+    const [saveSuccess, setSaveSuccess] = useState(false);
 
     useEffect(() => {
-// ...
         if (!loading && !user) {
             router.push('/');
         }
     }, [user, loading]);
 
-    if (loading || !user) return <div className="min-h-screen bg-black flex items-center justify-center text-primary-500 font-black uppercase tracking-[0.3em]">Cargando Terminal...</div>;
+    useEffect(() => {
+        if (profile) {
+            setEditForm({ display_name: profile.display_name, bio: profile.bio });
+        }
+    }, [profile]);
+
+    if (loading || !user) return (
+        <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: 'var(--color-background)' }}>
+            <div className="text-center">
+                <div className="w-16 h-16 rounded-2xl gradient-bg flex items-center justify-center mx-auto mb-6 animate-pulse">
+                    <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                </div>
+                <p className="text-sm font-bold uppercase tracking-widest" style={{ color: 'var(--color-primary)' }}>Cargando Terminal...</p>
+            </div>
+        </div>
+    );
+
+    const handleSaveProfile = async () => {
+        await updateProfile(editForm);
+        setEditMode(false);
+        setSaveSuccess(true);
+        setTimeout(() => setSaveSuccess(false), 3000);
+    };
+
+    const tabs = [
+        { id: 'panel', label: '🏠 Panel Principal', icon: '📊' },
+        { id: 'perfil', label: '👤 Mi Perfil', icon: '👤' },
+        { id: 'progreso', label: '📈 Progreso', icon: '📈' },
+        { id: 'config', label: '⚙️ Configuración', icon: '⚙️' },
+    ];
+
+    const statsCards = [
+        { title: 'Lecciones Vistas', value: progress.lessons?.length || progress.completedLessons?.length || 0, total: 60, color: 'primary' },
+        { title: 'Proyectos Labs', value: progress.projects?.length || progress.completedProjects?.length || 0, total: 20, color: 'purple' },
+        { title: 'Módulos Dominados', value: Math.floor((progress.xp || 0) / 500), total: 10, color: 'green' },
+        { title: 'Challenges CTF', value: Math.floor((progress.xp || 0) / 100), total: 50, color: 'red' },
+    ];
+
+    const activityItems = [
+        { icon: '📖', text: 'Completaste "Modelo OSI"', time: 'Hace 2 horas' },
+        { icon: '💻', text: 'Iniciaste "ARP Spoofer"', time: 'Hace 5 horas' },
+        { icon: '🎯', text: 'Nuevo Badge: Cripto-Analista', time: 'Hace 1 día' },
+        { icon: '🚪', text: 'Acceso autorizado', time: 'Hace 2 días' },
+    ];
 
     return (
-        <div className="min-h-screen bg-black text-white selection:bg-primary-500/30">
+        <div className="min-h-screen" style={{ backgroundColor: 'var(--color-background)' }}>
             <Head>
-                <title>Comando Central | {user.email}</title>
+                <title>Dashboard | Ciberseguridad Digital</title>
             </Head>
             <Header />
 
-            <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20">
                 {/* Profile Header */}
-                <header className="flex flex-col md:flex-row items-center gap-10 mb-20 bg-graphite-900/50 border border-white/5 p-12 rounded-[50px] backdrop-blur-sm relative overflow-hidden">
-                    <div className="absolute top-0 right-0 p-12 opacity-5 pointer-events-none">
-                        <svg className="w-64 h-64 text-primary-500" fill="currentColor" viewBox="0 0 24 24">
+                <header className="flex flex-col md:flex-row items-center gap-8 mb-12 p-8 md:p-12 rounded-3xl relative overflow-hidden" style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)', boxShadow: 'var(--shadow-card)' }}>
+                    <div className="absolute top-0 right-0 p-8 opacity-5 pointer-events-none">
+                        <svg className="w-48 h-48" style={{ color: 'var(--color-primary)' }} fill="currentColor" viewBox="0 0 24 24">
                             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08s5.97 1.09 6 3.08c-1.29 1.94-3.5 3.22-6 3.22z"/>
                         </svg>
                     </div>
 
                     <div className="relative group">
-                        <div className="w-32 h-32 md:w-40 md:h-40 rounded-full bg-gradient-to-br from-primary-500 to-purple-600 p-1 transition-transform duration-500 group-hover:rotate-12">
-                            <div className="w-full h-full rounded-full bg-graphite-900 flex items-center justify-center overflow-hidden border-4 border-black">
-                                <span className="text-4xl md:text-5xl font-black text-white">{user.email[0].toUpperCase()}</span>
+                        <div className="w-28 h-28 md:w-36 md:h-36 rounded-full p-1 transition-transform duration-500 group-hover:rotate-6" style={{ background: 'var(--gradient-primary)' }}>
+                            <div className="w-full h-full rounded-full flex items-center justify-center overflow-hidden" style={{ backgroundColor: 'var(--color-background)', border: '4px solid var(--color-border)' }}>
+                                <span className="text-4xl md:text-5xl font-black" style={{ color: 'var(--color-primary)' }}>{(profile.display_name || user.email)[0].toUpperCase()}</span>
                             </div>
                         </div>
-                        <div className="absolute -bottom-2 -right-2 bg-primary-500 text-black px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest border-4 border-black">
+                        <div className="absolute -bottom-2 -right-2 px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest" style={{ background: 'var(--gradient-primary)', color: 'var(--color-button-text)', border: '4px solid var(--color-background)' }}>
                             LVL {progress.level}
                         </div>
                     </div>
 
                     <div className="flex-grow text-center md:text-left">
-                        <h1 className="text-3xl md:text-4xl font-black tracking-tighter mb-4">{user.email}</h1>
-                        <div className="flex flex-wrap items-center justify-center md:justify-start gap-4">
-                            <div className="px-5 py-2 rounded-xl bg-white/5 border border-white/5 flex items-center gap-2">
-                                <div className="w-2 h-2 rounded-full bg-primary-500 animate-pulse"></div>
-                                <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">Estado: Activo</span>
+                        <h1 className="text-2xl md:text-3xl font-black tracking-tight mb-3" style={{ color: 'var(--color-text)' }}>
+                            {profile.display_name || user.email}
+                        </h1>
+                        <p className="text-sm mb-4" style={{ color: 'var(--color-text-muted)' }}>{user.email}</p>
+                        <div className="flex flex-wrap items-center justify-center md:justify-start gap-3">
+                            <div className="px-4 py-2 rounded-xl flex items-center gap-2" style={{ backgroundColor: 'var(--color-badge-bg)', border: '1px solid var(--color-border)' }}>
+                                <div className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: 'var(--color-primary)' }}></div>
+                                <span className="text-[10px] font-black uppercase tracking-widest" style={{ color: 'var(--color-text-muted)' }}>Activo</span>
                             </div>
-                            <div className="px-5 py-2 rounded-xl bg-white/5 border border-white/5 flex items-center gap-2">
-                                <span className="text-[10px] font-black uppercase tracking-widest text-primary-500">{progress.xp} XP acumulados</span>
+                            <div className="px-4 py-2 rounded-xl flex items-center gap-2" style={{ backgroundColor: 'var(--color-badge-bg)', border: '1px solid var(--color-border)' }}>
+                                <span className="text-[10px] font-black uppercase tracking-widest" style={{ color: 'var(--color-primary)' }}>{progress.xp} XP</span>
                             </div>
-                            <div className="px-5 py-2 rounded-xl bg-white/5 border border-white/5 flex items-center gap-2 text-orange-500">
-                                <span className="text-[10px] font-black uppercase tracking-widest">🔥 {progress.streak} días racha</span>
+                            <div className="px-4 py-2 rounded-xl flex items-center gap-2" style={{ backgroundColor: 'var(--color-badge-bg)', border: '1px solid var(--color-border)' }}>
+                                <span className="text-[10px] font-black uppercase tracking-widest" style={{ color: 'var(--color-text-muted)' }}>🔥 {progress.streak} días racha</span>
                             </div>
                         </div>
                     </div>
-                    
-                    <button className="px-8 py-4 rounded-2xl bg-white text-black font-black text-xs uppercase tracking-widest hover:bg-primary-500 hover:text-white transition-all shadow-xl active:scale-95">
-                        Editar Perfil
-                    </button>
+
+                    {profile.role === 'admin' || profile.role === 'superadmin' ? (
+                        <button
+                            onClick={() => router.push('/admin')}
+                            className="btn-3d btn-3d-secondary px-6 py-3 text-xs shrink-0"
+                        >
+                            🛡️ Panel Admin
+                        </button>
+                    ) : null}
                 </header>
 
-                {/* Stats Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
-                    <StatCard title="Lecciones Vistas" value={progress.lessons?.length || 0} total={60} color="primary" />
-                    <StatCard title="Proyectos Labs" value={progress.projects?.length || 0} total={20} color="purple" />
-                    <StatCard title="Módulos Dominados" value={Math.floor((progress.xp || 0) / 500)} total={10} color="green" />
-                    <StatCard title="Challenges CTF" value={Math.floor((progress.xp || 0) / 100)} total={50} color="red" />
+                {/* Tab Navigation */}
+                <div className="flex overflow-x-auto hide-scrollbar gap-2 mb-10 pb-2">
+                    {tabs.map(tab => (
+                        <button
+                            key={tab.id}
+                            onClick={() => setActiveTab(tab.id)}
+                            className="px-6 py-3 rounded-2xl text-sm font-bold whitespace-nowrap transition-all duration-300 shrink-0"
+                            style={{
+                                backgroundColor: activeTab === tab.id ? 'var(--color-primary)' : 'var(--color-surface)',
+                                color: activeTab === tab.id ? 'var(--color-button-text)' : 'var(--color-text)',
+                                border: '1px solid var(--color-border)',
+                                boxShadow: activeTab === tab.id ? 'var(--shadow-elevation)' : 'none',
+                                transform: activeTab === tab.id ? 'translateY(-2px)' : 'none'
+                            }}
+                        >
+                            {tab.label}
+                        </button>
+                    ))}
                 </div>
 
-                {/* Badges & Activity */}
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-                    <section className="lg:col-span-2">
-                        <h3 className="text-2xl font-black mb-8 flex items-center gap-3 italic">
-                            Badges de Honor
-                        </h3>
-                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-6">
-                            {progress.badges.map(badge => (
-                                <div key={badge} className="aspect-square rounded-[40px] bg-white/5 border border-white/5 flex flex-col items-center justify-center gap-4 group hover:bg-white/10 transition-all cursor-default">
-                                    <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary-500/20 to-purple-600/20 flex items-center justify-center text-primary-500 group-hover:scale-110 transition-transform">
-                                        <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                                        </svg>
-                                    </div>
-                                    <span className="text-[10px] font-black uppercase tracking-widest text-gray-500">{badge}</span>
-                                </div>
+                {/* TAB: Panel Principal */}
+                {activeTab === 'panel' && (
+                    <div className="animate-fade-in">
+                        {/* Stats Grid */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                            {statsCards.map(stat => (
+                                <StatCard key={stat.title} {...stat} />
                             ))}
-                            <div className="aspect-square rounded-[40px] border border-dashed border-white/10 flex flex-col items-center justify-center gap-4 opacity-50">
-                                <div className="w-12 h-12 rounded-full border border-dashed border-white/20 flex items-center justify-center text-gray-600 text-2xl">+</div>
-                                <span className="text-[10px] font-black uppercase tracking-widest text-gray-600">Bloqueado</span>
+                        </div>
+
+                        {/* Badges & Activity */}
+                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                            <section className="lg:col-span-2">
+                                <h3 className="text-xl font-black mb-6" style={{ color: 'var(--color-text)' }}>🏆 Badges de Honor</h3>
+                                <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                                    {(progress.badges || []).map(badge => (
+                                        <div key={badge} className="aspect-square rounded-3xl flex flex-col items-center justify-center gap-3 group hover:scale-105 transition-all cursor-default" style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)' }}>
+                                            <div className="w-14 h-14 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform" style={{ background: 'var(--gradient-primary)', opacity: 0.15 }}>
+                                                <svg className="w-7 h-7" style={{ color: 'var(--color-primary)' }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                                                </svg>
+                                            </div>
+                                            <span className="text-[10px] font-black uppercase tracking-widest" style={{ color: 'var(--color-text-muted)' }}>{badge}</span>
+                                        </div>
+                                    ))}
+                                    <div className="aspect-square rounded-3xl flex flex-col items-center justify-center gap-3 opacity-40" style={{ border: '2px dashed var(--color-border)' }}>
+                                        <div className="w-10 h-10 rounded-full flex items-center justify-center text-2xl" style={{ border: '2px dashed var(--color-border)', color: 'var(--color-text-muted)' }}>+</div>
+                                        <span className="text-[10px] font-black uppercase tracking-widest" style={{ color: 'var(--color-text-muted)' }}>Bloqueado</span>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <section className="p-8 rounded-3xl" style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)' }}>
+                                <h3 className="text-lg font-black mb-6" style={{ color: 'var(--color-text)' }}>📋 Actividad Reciente</h3>
+                                <div className="space-y-6">
+                                    {activityItems.map((item, i) => (
+                                        <div key={i} className="flex gap-4">
+                                            <div className="w-10 h-10 rounded-xl flex items-center justify-center text-lg shrink-0" style={{ backgroundColor: 'var(--color-badge-bg)' }}>{item.icon}</div>
+                                            <div>
+                                                <p className="text-sm font-bold" style={{ color: 'var(--color-text)' }}>{item.text}</p>
+                                                <p className="text-[10px] font-bold uppercase tracking-widest mt-1" style={{ color: 'var(--color-text-muted)' }}>{item.time}</p>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                )}
+
+                {/* TAB: Mi Perfil */}
+                {activeTab === 'perfil' && (
+                    <div className="animate-fade-in max-w-2xl mx-auto">
+                        <div className="p-8 md:p-10 rounded-3xl" style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)', boxShadow: 'var(--shadow-card)' }}>
+                            <div className="flex items-center justify-between mb-8">
+                                <h3 className="text-xl font-black" style={{ color: 'var(--color-text)' }}>Información del Perfil</h3>
+                                {!editMode && (
+                                    <button onClick={() => setEditMode(true)} className="btn-3d btn-3d-primary px-5 py-2 text-xs">
+                                        ✏️ Editar
+                                    </button>
+                                )}
+                            </div>
+
+                            {saveSuccess && (
+                                <div className="mb-6 p-4 rounded-xl text-center" style={{ backgroundColor: 'var(--color-badge-bg)', border: '1px solid var(--color-primary)' }}>
+                                    <p className="text-sm font-bold" style={{ color: 'var(--color-primary)' }}>✅ Perfil actualizado correctamente</p>
+                                </div>
+                            )}
+
+                            {editMode ? (
+                                <div className="space-y-6">
+                                    <div>
+                                        <label className="text-[10px] font-black uppercase tracking-widest mb-2 block" style={{ color: 'var(--color-text-muted)' }}>Nombre para mostrar</label>
+                                        <input
+                                            type="text"
+                                            value={editForm.display_name}
+                                            onChange={(e) => setEditForm({ ...editForm, display_name: e.target.value })}
+                                            className="w-full px-6 py-4 rounded-2xl text-sm outline-none transition-all font-medium"
+                                            style={{ backgroundColor: 'var(--color-input-bg)', color: 'var(--color-text)', border: '1px solid var(--color-border)' }}
+                                            placeholder="Tu nombre"
+                                        />
+                                    </div>
+                                    <div>
+                                        <label className="text-[10px] font-black uppercase tracking-widest mb-2 block" style={{ color: 'var(--color-text-muted)' }}>Biografía</label>
+                                        <textarea
+                                            value={editForm.bio}
+                                            onChange={(e) => setEditForm({ ...editForm, bio: e.target.value })}
+                                            className="w-full px-6 py-4 rounded-2xl text-sm outline-none transition-all font-medium resize-none min-h-[120px]"
+                                            style={{ backgroundColor: 'var(--color-input-bg)', color: 'var(--color-text)', border: '1px solid var(--color-border)' }}
+                                            placeholder="Cuéntanos sobre ti..."
+                                        />
+                                    </div>
+                                    <div className="flex gap-4">
+                                        <button onClick={handleSaveProfile} className="btn-3d btn-3d-primary px-8 py-3 text-xs flex-1">
+                                            💾 Guardar Cambios
+                                        </button>
+                                        <button onClick={() => { setEditMode(false); setEditForm({ display_name: profile.display_name, bio: profile.bio }); }} className="btn-3d btn-3d-outline px-6 py-3 text-xs">
+                                            Cancelar
+                                        </button>
+                                    </div>
+                                </div>
+                            ) : (
+                                <div className="space-y-6">
+                                    <InfoRow label="Nombre" value={profile.display_name || 'Sin definir'} />
+                                    <InfoRow label="Email" value={user.email} />
+                                    <InfoRow label="Biografía" value={profile.bio || 'Sin biografía aún'} />
+                                    <InfoRow label="Rol" value={profile.role === 'admin' ? '🛡️ Administrador' : profile.role === 'superadmin' ? '👑 Superadministrador' : '👤 Usuario'} />
+                                    <InfoRow label="Nivel" value={`Nivel ${progress.level}`} />
+                                    <InfoRow label="XP Total" value={`${progress.xp} puntos de experiencia`} />
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                )}
+
+                {/* TAB: Progreso */}
+                {activeTab === 'progreso' && (
+                    <div className="animate-fade-in">
+                        {/* XP Progress Bar */}
+                        <div className="p-8 rounded-3xl mb-8" style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)' }}>
+                            <div className="flex items-center justify-between mb-4">
+                                <h3 className="text-lg font-black" style={{ color: 'var(--color-text)' }}>Experiencia Total</h3>
+                                <span className="text-2xl font-black" style={{ color: 'var(--color-primary)' }}>{progress.xp} XP</span>
+                            </div>
+                            <div className="h-4 w-full rounded-full overflow-hidden" style={{ backgroundColor: 'var(--color-badge-bg)' }}>
+                                <div className="h-full rounded-full transition-all duration-1000" style={{ width: `${Math.min((progress.xp / 5000) * 100, 100)}%`, background: 'var(--gradient-primary)' }}></div>
+                            </div>
+                            <p className="text-xs mt-3 font-bold" style={{ color: 'var(--color-text-muted)' }}>
+                                {5000 - progress.xp > 0 ? `${5000 - progress.xp} XP para el siguiente nivel` : '¡Nivel máximo alcanzado!'}
+                            </p>
+                        </div>
+
+                        {/* Stats Grid */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                            {statsCards.map(stat => (
+                                <StatCard key={stat.title} {...stat} />
+                            ))}
+                        </div>
+
+                        {/* Streak & Badges */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div className="p-8 rounded-3xl text-center" style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)' }}>
+                                <p className="text-6xl font-black mb-2" style={{ color: 'var(--color-primary)' }}>🔥 {progress.streak}</p>
+                                <p className="text-sm font-bold uppercase tracking-widest" style={{ color: 'var(--color-text-muted)' }}>Días de racha activa</p>
+                            </div>
+                            <div className="p-8 rounded-3xl text-center" style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)' }}>
+                                <p className="text-6xl font-black mb-2" style={{ color: 'var(--color-primary)' }}>🏅 {progress.badges?.length || 0}</p>
+                                <p className="text-sm font-bold uppercase tracking-widest" style={{ color: 'var(--color-text-muted)' }}>Badges obtenidos</p>
                             </div>
                         </div>
-                    </section>
+                    </div>
+                )}
 
-                    <section className="bg-graphite-900 border border-white/5 rounded-[40px] p-10">
-                        <h3 className="text-xl font-black mb-8">Actividad Reciente</h3>
-                        <div className="space-y-8">
-                            <ActivityItem icon="📖" text="Completaste 'Modelo OSI'" time="hace 2 horas" />
-                            <ActivityItem icon="💻" text="Iniciaste 'ARP Spoofer'" time="hace 5 horas" />
-                            <ActivityItem icon="🎯" text="Nuevo Badge: Cripto-Analista" time="hace 1 día" />
-                            <ActivityItem icon="🚪" text="Acceso autorizado desde CDMX" time="hace 2 días" />
+                {/* TAB: Configuración */}
+                {activeTab === 'config' && (
+                    <div className="animate-fade-in max-w-2xl mx-auto space-y-6">
+                        <div className="p-8 rounded-3xl" style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)' }}>
+                            <h3 className="text-lg font-black mb-6" style={{ color: 'var(--color-text)' }}>🔑 Seguridad de la Cuenta</h3>
+                            <div className="space-y-4">
+                                <InfoRow label="Email" value={user.email} />
+                                <InfoRow label="Proveedor" value="Supabase Auth" />
+                                <InfoRow label="Verificado" value="✅ Confirmado" />
+                            </div>
                         </div>
-                    </section>
-                </div>
+
+                        <div className="p-8 rounded-3xl" style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)' }}>
+                            <h3 className="text-lg font-black mb-6" style={{ color: 'var(--color-text)' }}>🎨 Preferencias</h3>
+                            <p className="text-sm font-medium mb-4" style={{ color: 'var(--color-text-muted)' }}>
+                                Puedes cambiar el tema y el idioma desde los botones en la barra de navegación superior.
+                            </p>
+                        </div>
+
+                        <div className="p-8 rounded-3xl" style={{ border: '1px solid rgba(239,68,68,0.3)', backgroundColor: 'rgba(239,68,68,0.05)' }}>
+                            <h3 className="text-lg font-black mb-4 text-red-500">⚠️ Zona de peligro</h3>
+                            <p className="text-sm font-medium mb-6" style={{ color: 'var(--color-text-muted)' }}>
+                                Al cerrar sesión perderás el acceso temporal a tu dashboard.
+                            </p>
+                            <button
+                                onClick={signOut}
+                                className="px-8 py-3 rounded-2xl bg-red-500 text-white font-black text-xs uppercase tracking-widest hover:bg-red-600 transition-all active:scale-95"
+                            >
+                                Cerrar Sesión
+                            </button>
+                        </div>
+                    </div>
+                )}
             </main>
 
             <Footer />
@@ -116,39 +338,33 @@ export default function Dashboard() {
 }
 
 function StatCard({ title, value, total, color }) {
-    const percentage = (value / total) * 100;
-    const colorClasses = {
-        primary: 'bg-primary-500',
-        purple: 'bg-purple-500',
-        green: 'bg-green-500',
-        red: 'bg-red-500'
+    const percentage = total > 0 ? (value / total) * 100 : 0;
+    const colorMap = {
+        primary: 'var(--color-primary)',
+        purple: '#8b5cf6',
+        green: '#22c55e',
+        red: '#ef4444'
     };
 
     return (
-        <div className="p-8 bg-graphite-900 border border-white/5 rounded-[40px] hover:border-white/10 transition-all">
-            <h4 className="text-[10px] font-black uppercase tracking-widest text-gray-500 mb-6">{title}</h4>
-            <div className="flex items-baseline gap-2 mb-4">
-                <span className="text-4xl font-black">{value}</span>
-                <span className="text-gray-600 text-sm">/ {total}</span>
+        <div className="p-6 rounded-3xl hover:scale-[1.02] transition-all" style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)', boxShadow: 'var(--shadow-elevation)' }}>
+            <h4 className="text-[10px] font-black uppercase tracking-widest mb-4" style={{ color: 'var(--color-text-muted)' }}>{title}</h4>
+            <div className="flex items-baseline gap-2 mb-3">
+                <span className="text-3xl font-black" style={{ color: 'var(--color-text)' }}>{value}</span>
+                <span className="text-sm" style={{ color: 'var(--color-text-muted)' }}>/ {total}</span>
             </div>
-            <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
-                <div 
-                    className={`h-full ${colorClasses[color]} transition-all duration-1000`} 
-                    style={{ width: `${percentage}%` }}
-                ></div>
+            <div className="h-1.5 w-full rounded-full overflow-hidden" style={{ backgroundColor: 'var(--color-badge-bg)' }}>
+                <div className="h-full rounded-full transition-all duration-1000" style={{ width: `${percentage}%`, backgroundColor: colorMap[color] }}></div>
             </div>
         </div>
     );
 }
 
-function ActivityItem({ icon, text, time }) {
+function InfoRow({ label, value }) {
     return (
-        <div className="flex gap-4">
-            <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-lg">{icon}</div>
-            <div>
-                <p className="text-sm font-bold text-gray-300">{text}</p>
-                <p className="text-[10px] font-black uppercase tracking-widest text-gray-600 mt-1">{time}</p>
-            </div>
+        <div className="flex flex-col sm:flex-row sm:items-center gap-2 py-4" style={{ borderBottom: '1px solid var(--color-border)' }}>
+            <span className="text-[10px] font-black uppercase tracking-widest sm:w-32 shrink-0" style={{ color: 'var(--color-text-muted)' }}>{label}</span>
+            <span className="text-sm font-semibold" style={{ color: 'var(--color-text)' }}>{value}</span>
         </div>
     );
 }
