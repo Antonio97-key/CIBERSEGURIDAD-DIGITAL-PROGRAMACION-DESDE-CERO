@@ -93,7 +93,53 @@ CREATE POLICY "Users manage own progress"
   USING (auth.uid() = user_id);
 
 -- ============================================
--- 6. Para hacerte SUPERADMIN (ejecutar UNA VEZ con tu user ID)
--- Reemplaza 'TU_USER_ID' con tu UUID de auth.users
+-- 6. Configuración de Plataforma (Redes y Links Dinámicos)
 -- ============================================
--- UPDATE profiles SET role = 'superadmin' WHERE id = 'TU_USER_ID';
+CREATE TABLE IF NOT EXISTS platform_settings (
+  id TEXT PRIMARY KEY,
+  value JSONB NOT NULL,
+  updated_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_by UUID REFERENCES auth.users
+);
+
+ALTER TABLE platform_settings ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Anyone can read platform settings" 
+  ON platform_settings FOR SELECT USING (true);
+
+CREATE POLICY "Superadmins can update platform settings" 
+  ON platform_settings FOR ALL USING (
+    EXISTS (SELECT 1 FROM profiles WHERE id = auth.uid() AND role = 'superadmin')
+  );
+
+-- Insertar configuración inicial
+INSERT INTO platform_settings (id, value) 
+VALUES ('social_links', '{"facebook": "#", "instagram": "#", "tiktok": "#", "github": "#", "discord": "#", "whatsapp": "#"}'::jsonb)
+ON CONFLICT (id) DO NOTHING;
+
+-- ============================================
+-- 7. Tabla Suscripciones de Usuarios (Planes)
+-- ============================================
+CREATE TABLE IF NOT EXISTS user_subscriptions (
+  user_id UUID REFERENCES auth.users ON DELETE CASCADE PRIMARY KEY,
+  plan_id TEXT NOT NULL DEFAULT 'free',
+  status TEXT NOT NULL DEFAULT 'active',
+  expires_at TIMESTAMPTZ,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+ALTER TABLE user_subscriptions ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Users read own subscription" 
+  ON user_subscriptions FOR SELECT USING (auth.uid() = user_id);
+
+CREATE POLICY "Admins manage all subscriptions" 
+  ON user_subscriptions FOR ALL USING (
+    EXISTS (SELECT 1 FROM profiles WHERE id = auth.uid() AND role IN ('admin', 'superadmin'))
+  );
+
+-- ============================================
+-- 8. Para hacerte SUPERADMIN (ejecutar UNA VEZ con tu correo)
+-- ============================================
+-- UPDATE profiles SET role = 'superadmin' WHERE email = 'antoniocorporan40@gmail.com';

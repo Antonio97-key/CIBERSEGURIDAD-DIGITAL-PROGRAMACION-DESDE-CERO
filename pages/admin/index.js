@@ -16,6 +16,12 @@ export default function AdminPanel() {
     const [platformSettings, setPlatformSettings] = useState({
         maintenanceMode: false, registrationOpen: true, emailNotifications: true,
     });
+    
+    // Social Links state
+    const [socialLinks, setSocialLinks] = useState({
+        facebook: '#', instagram: '#', tiktok: '#', github: '#', discord: '#', whatsapp: '#'
+    });
+    const [savingLinks, setSavingLinks] = useState(false);
 
     useEffect(() => {
         if (!loading && !user) { router.push('/'); return; }
@@ -25,8 +31,36 @@ export default function AdminPanel() {
     }, [user, loading, profile]);
 
     useEffect(() => {
-        if (user && (profile.role === 'admin' || profile.role === 'superadmin')) fetchUsers();
+        if (user && (profile.role === 'admin' || profile.role === 'superadmin')) {
+            fetchUsers();
+            fetchPlatformSettings();
+        }
     }, [user, profile]);
+
+    const fetchPlatformSettings = async () => {
+        try {
+            const { data, error } = await supabase.from('platform_settings').select('value').eq('id', 'social_links').single();
+            if (data && data.value) setSocialLinks(data.value);
+            // Ignore error gracefully, fall back to default
+        } catch (e) {
+            console.error("Error fetching settings:", e);
+        }
+    };
+
+    const handleSaveSocialLinks = async () => {
+        if (profile.role !== 'superadmin') { alert('Solo superadmin puede modificar links.'); return; }
+        setSavingLinks(true);
+        try {
+            const { error } = await supabase.from('platform_settings').upsert({ id: 'social_links', value: socialLinks, updated_by: user.id });
+            if (error) throw error;
+            alert("Enlaces guardados exitosamente.");
+        } catch (error) {
+            console.error(error);
+            alert("Error al guardar enlaces.");
+        } finally {
+            setSavingLinks(false);
+        }
+    };
 
     const fetchUsers = async () => {
         try {
@@ -317,14 +351,14 @@ export default function AdminPanel() {
                                 <table className="w-full">
                                     <thead>
                                         <tr style={{ borderBottom: '2px solid var(--color-border)' }}>
-                                            {['Usuario', 'Email', 'Rol', 'XP', 'Registro', ...(profile.role === 'superadmin' ? ['Acciones'] : [])].map((h, i) => (
-                                                <th key={h} className={`px-5 py-4 text-left text-[10px] font-black uppercase tracking-widest ${i === 1 || i === 4 ? 'hidden md:table-cell' : ''} ${i === 3 ? 'hidden lg:table-cell' : ''}`} style={{ color: 'var(--color-text-muted)' }}>{h}</th>
+                                            {['Usuario', 'Email', 'Rol', 'Plan', 'Progreso', 'Registro', ...(profile.role === 'superadmin' ? ['Acciones'] : [])].map((h, i) => (
+                                                <th key={h} className={`px-5 py-4 text-left text-[10px] font-black uppercase tracking-widest ${i === 1 || i === 5 ? 'hidden md:table-cell' : ''} ${i === 3 || i === 4 ? 'hidden lg:table-cell' : ''}`} style={{ color: 'var(--color-text-muted)' }}>{h}</th>
                                             ))}
                                         </tr>
                                     </thead>
                                     <tbody>
                                         {loadingUsers ? (
-                                            <tr><td colSpan={6} className="px-6 py-12 text-center"><span className="animate-pulse font-bold" style={{ color: 'var(--color-primary)' }}>Cargando...</span></td></tr>
+                                            <tr><td colSpan={7} className="px-6 py-12 text-center"><span className="animate-pulse font-bold" style={{ color: 'var(--color-primary)' }}>Cargando...</span></td></tr>
                                         ) : users.map(u => {
                                             const b = getRoleBadge(u.role);
                                             return (
@@ -332,7 +366,32 @@ export default function AdminPanel() {
                                                     <td className="px-5 py-4"><div className="flex items-center gap-3"><div className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-black shrink-0" style={{ background: 'var(--gradient-primary)', color: 'white' }}>{(u.display_name || 'U')[0].toUpperCase()}</div><span className="text-sm font-bold truncate" style={{ color: 'var(--color-text)' }}>{u.display_name || '—'}</span></div></td>
                                                     <td className="px-5 py-4 hidden md:table-cell"><span className="text-xs" style={{ color: 'var(--color-text-muted)' }}>{u.email || '—'}</span></td>
                                                     <td className="px-5 py-4"><span className="px-3 py-1 rounded-full text-[10px] font-black" style={{ backgroundColor: b.bg, color: b.color }}>{b.label}</span></td>
-                                                    <td className="px-5 py-4 hidden lg:table-cell"><span className="text-sm font-bold" style={{ color: 'var(--color-primary)' }}>{u.xp || 0}</span></td>
+                                                    
+                                                    {/* PLAN COLUMN */}
+                                                    <td className="px-5 py-4 hidden lg:table-cell">
+                                                        {u.plan_id === 'pro' ? (
+                                                            <div className="flex flex-col">
+                                                                <span className="text-[10px] font-black uppercase tracking-widest text-purple-500 whitespace-nowrap">✨ PRO</span>
+                                                                <span className="text-[9px] font-bold text-gray-500 whitespace-nowrap">12 Días rest.</span>
+                                                            </div>
+                                                        ) : (
+                                                            <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">Gratis</span>
+                                                        )}
+                                                    </td>
+
+                                                    {/* PROGRESS COLUMN */}
+                                                    <td className="px-5 py-4 hidden lg:table-cell">
+                                                        <div className="flex flex-col gap-1 w-24">
+                                                            <div className="flex items-center justify-between text-[10px] font-bold">
+                                                                <span style={{ color: 'var(--color-primary)' }}>{u.xp || 0} XP</span>
+                                                                <span style={{ color: 'var(--color-text-muted)' }}>{u.completed_lessons || 0}/42</span>
+                                                            </div>
+                                                            <div className="w-full h-1.5 rounded-full overflow-hidden" style={{ backgroundColor: 'var(--color-border)' }}>
+                                                                <div className="h-full rounded-full transition-all duration-500" style={{ width: `${Math.min(((u.completed_lessons || 0) / 42) * 100, 100)}%`, backgroundColor: 'var(--color-primary)' }} />
+                                                            </div>
+                                                        </div>
+                                                    </td>
+
                                                     <td className="px-5 py-4 hidden md:table-cell"><span className="text-xs" style={{ color: 'var(--color-text-muted)' }}>{new Date(u.created_at).toLocaleDateString()}</span></td>
                                                     {profile.role === 'superadmin' && (
                                                         <td className="px-5 py-4"><div className="flex items-center gap-2">
@@ -372,32 +431,71 @@ export default function AdminPanel() {
 
                     {/* ==================== PLATAFORMA ==================== */}
                     {activeSection === 'plataforma' && (
-                        <div className="space-y-6 max-w-2xl">
+                        <div className="space-y-6 max-w-4xl">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div className="p-6 rounded-3xl" style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)' }}>
+                                    <h3 className="text-lg font-black mb-6" style={{ color: 'var(--color-text)' }}>🔧 Controles</h3>
+                                    <div className="space-y-4">
+                                        {[
+                                            { key: 'maintenanceMode', label: 'Modo Mantenimiento', desc: 'Desactiva acceso público', danger: true },
+                                            { key: 'registrationOpen', label: 'Registro Abierto', desc: 'Acepta nuevos usuarios' },
+                                            { key: 'emailNotifications', label: 'Notif. Email', desc: 'Emails automáticos al registrar' },
+                                        ].map(s => (
+                                            <div key={s.key} className="flex items-center justify-between gap-4 py-3" style={{ borderBottom: '1px solid var(--color-border)' }}>
+                                                <div><p className="text-sm font-bold" style={{ color: 'var(--color-text)' }}>{s.label}</p><p className="text-xs" style={{ color: 'var(--color-text-muted)' }}>{s.desc}</p></div>
+                                                <button onClick={() => setPlatformSettings(p => ({ ...p, [s.key]: !p[s.key] }))} className="w-12 h-7 rounded-full relative transition-all duration-300 shrink-0" style={{ backgroundColor: platformSettings[s.key] ? (s.danger ? '#ef4444' : '#22c55e') : 'var(--color-border)' }}>
+                                                    <div className="w-5 h-5 bg-white rounded-full absolute top-1 transition-all duration-300 shadow-md" style={{ left: platformSettings[s.key] ? '26px' : '4px' }} />
+                                                </button>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                                
+                                <div className="p-6 rounded-3xl flex flex-col justify-between" style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)' }}>
+                                    <div>
+                                        <h3 className="text-lg font-black mb-4" style={{ color: 'var(--color-text)' }}>🌐 Sistema</h3>
+                                        {[['Plataforma', 'Ciberseguridad Digital'], ['Versión', 'v2.6'], ['Estado', '🟢 Producción'], ['DB', 'Supabase (PostgreSQL)'], ['Hosting', 'Vercel'], ['Auth', 'Supabase + JWT'], ['SSL', '✅ Activo']].map(([l, v]) => (
+                                            <div key={l} className="flex items-center gap-2 py-1.5" style={{ borderBottom: '1px solid var(--color-border)' }}>
+                                                <span className="text-[10px] font-black uppercase tracking-widest w-28 shrink-0" style={{ color: 'var(--color-text-muted)' }}>{l}</span>
+                                                <span className="text-sm font-semibold" style={{ color: 'var(--color-text)' }}>{v}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* SOCIAL LINKS CARD */}
                             <div className="p-6 rounded-3xl" style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)' }}>
-                                <h3 className="text-lg font-black mb-6" style={{ color: 'var(--color-text)' }}>🔧 Controles</h3>
-                                <div className="space-y-4">
-                                    {[
-                                        { key: 'maintenanceMode', label: 'Modo Mantenimiento', desc: 'Desactiva acceso público', danger: true },
-                                        { key: 'registrationOpen', label: 'Registro Abierto', desc: 'Acepta nuevos usuarios' },
-                                        { key: 'emailNotifications', label: 'Notif. Email', desc: 'Emails automáticos al registrar' },
-                                    ].map(s => (
-                                        <div key={s.key} className="flex items-center justify-between gap-4 py-3" style={{ borderBottom: '1px solid var(--color-border)' }}>
-                                            <div><p className="text-sm font-bold" style={{ color: 'var(--color-text)' }}>{s.label}</p><p className="text-xs" style={{ color: 'var(--color-text-muted)' }}>{s.desc}</p></div>
-                                            <button onClick={() => setPlatformSettings(p => ({ ...p, [s.key]: !p[s.key] }))} className="w-12 h-7 rounded-full relative transition-all duration-300 shrink-0" style={{ backgroundColor: platformSettings[s.key] ? (s.danger ? '#ef4444' : '#22c55e') : 'var(--color-border)' }}>
-                                                <div className="w-5 h-5 bg-white rounded-full absolute top-1 transition-all duration-300 shadow-md" style={{ left: platformSettings[s.key] ? '26px' : '4px' }} />
-                                            </button>
+                                <div className="flex items-center justify-between mb-6">
+                                    <div>
+                                        <h3 className="text-lg font-black" style={{ color: 'var(--color-text)' }}>🔗 Enlaces de Comunidad</h3>
+                                        <p className="text-xs" style={{ color: 'var(--color-text-muted)' }}>URLs dinámicas para Footer y sección Comunidad</p>
+                                    </div>
+                                    <button 
+                                        className="px-4 py-2 rounded-xl text-xs font-black text-white hover:scale-105 transition-transform" 
+                                        style={{ background: 'var(--gradient-primary)' }}
+                                        onClick={() => handleSaveSocialLinks()}
+                                    >
+                                        {savingLinks ? 'Guardando...' : 'Guardar Cambios'}
+                                    </button>
+                                </div>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    {Object.entries(socialLinks).map(([network, url]) => (
+                                        <div key={network} className="flex flex-col gap-1.5">
+                                            <label className="text-[10px] font-black uppercase tracking-widest pl-1" style={{ color: 'var(--color-text-muted)' }}>
+                                                {network.charAt(0).toUpperCase() + network.slice(1)}
+                                            </label>
+                                            <input
+                                                type="url"
+                                                value={url}
+                                                onChange={(e) => setSocialLinks(prev => ({...prev, [network]: e.target.value}))}
+                                                placeholder={`URL de ${network}...`}
+                                                className="w-full px-4 py-2.5 rounded-xl text-sm outline-none transition-all focus:ring-2 focus:ring-[var(--color-primary)]"
+                                                style={{ backgroundColor: 'var(--color-background)', color: 'var(--color-text)', border: '1px solid var(--color-border)' }}
+                                            />
                                         </div>
                                     ))}
                                 </div>
-                            </div>
-                            <div className="p-6 rounded-3xl" style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)' }}>
-                                <h3 className="text-lg font-black mb-4" style={{ color: 'var(--color-text)' }}>🌐 Sistema</h3>
-                                {[['Plataforma', 'Ciberseguridad Digital'], ['Versión', 'v2.6'], ['Estado', '🟢 Producción'], ['DB', 'Supabase (PostgreSQL)'], ['Hosting', 'Vercel'], ['Auth', 'Supabase + JWT'], ['SSL', '✅ Activo']].map(([l, v]) => (
-                                    <div key={l} className="flex items-center gap-2 py-2" style={{ borderBottom: '1px solid var(--color-border)' }}>
-                                        <span className="text-[10px] font-black uppercase tracking-widest w-28 shrink-0" style={{ color: 'var(--color-text-muted)' }}>{l}</span>
-                                        <span className="text-sm font-semibold" style={{ color: 'var(--color-text)' }}>{v}</span>
-                                    </div>
-                                ))}
                             </div>
                         </div>
                     )}
@@ -437,53 +535,74 @@ export default function AdminPanel() {
                             <div className="p-6 rounded-3xl" style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)' }}>
                                 <p className="text-xs mb-4" style={{ color: 'var(--color-text-muted)' }}>Ejecuta en <strong>Supabase → SQL Editor</strong>:</p>
                                 <pre className="p-4 rounded-2xl text-[11px] overflow-x-auto font-mono leading-relaxed" style={{ backgroundColor: 'var(--color-background)', color: 'var(--color-text)', border: '1px solid var(--color-border)' }}>
-{`CREATE TABLE IF NOT EXISTS profiles (
-  id UUID REFERENCES auth.users PRIMARY KEY,
-  display_name TEXT,
-  bio TEXT, avatar_url TEXT,
-  role TEXT DEFAULT 'user',
-  email TEXT, xp INTEGER DEFAULT 0,
-  level INTEGER DEFAULT 1,
+{`-- ============================================
+-- SQL Completo (Ejecutar en Supabase -> SQL Editor)
+-- ============================================
+
+-- 1. Tabla Perfiles
+CREATE TABLE IF NOT EXISTS profiles (
+  id UUID REFERENCES auth.users ON DELETE CASCADE PRIMARY KEY,
+  display_name TEXT, bio TEXT, avatar_url TEXT,
+  role TEXT DEFAULT 'user' CHECK (role IN ('user', 'admin', 'superadmin')),
+  email TEXT, xp INTEGER DEFAULT 0, level INTEGER DEFAULT 1,
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
 ALTER TABLE profiles ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Users read own" ON profiles FOR SELECT USING (auth.uid() = id);
+CREATE POLICY "Users update own" ON profiles FOR UPDATE USING (auth.uid() = id);
+CREATE POLICY "Users insert own" ON profiles FOR INSERT WITH CHECK (auth.uid() = id);
+CREATE POLICY "Admins read all" ON profiles FOR SELECT USING (EXISTS (SELECT 1 FROM profiles WHERE id = auth.uid() AND role IN ('admin', 'superadmin')));
+CREATE POLICY "Superadmin update all" ON profiles FOR UPDATE USING (EXISTS (SELECT 1 FROM profiles WHERE id = auth.uid() AND role = 'superadmin'));
 
-CREATE POLICY "Users read own" ON profiles
-  FOR SELECT USING (auth.uid() = id);
-CREATE POLICY "Users update own" ON profiles
-  FOR UPDATE USING (auth.uid() = id);
-CREATE POLICY "Users insert own" ON profiles
-  FOR INSERT WITH CHECK (auth.uid() = id);
+-- 2. Progreso de Usuario
+CREATE TABLE IF NOT EXISTS user_progress (
+  user_id UUID REFERENCES auth.users ON DELETE CASCADE PRIMARY KEY,
+  data_json JSONB DEFAULT '{"lessons":[],"projects":[],"xp":0,"level":1,"streak":0}'::jsonb,
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+ALTER TABLE user_progress ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Users manage own progress" ON user_progress FOR ALL USING (auth.uid() = user_id);
 
-CREATE POLICY "Admins read all" ON profiles
-  FOR SELECT USING (
-    EXISTS (SELECT 1 FROM profiles
-      WHERE id = auth.uid()
-      AND role IN ('admin', 'superadmin'))
-  );
-CREATE POLICY "Superadmin update all" ON profiles
-  FOR UPDATE USING (
-    EXISTS (SELECT 1 FROM profiles
-      WHERE id = auth.uid()
-      AND role = 'superadmin')
-  );
+-- 3. Configuración de Plataforma (Redes y Links Dinámicos)
+CREATE TABLE IF NOT EXISTS platform_settings (
+  id TEXT PRIMARY KEY,
+  value JSONB NOT NULL,
+  updated_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_by UUID REFERENCES auth.users
+);
+ALTER TABLE platform_settings ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Anyone can read platform settings" ON platform_settings FOR SELECT USING (true);
+CREATE POLICY "Superadmins can update platform settings" ON platform_settings FOR ALL USING (EXISTS (SELECT 1 FROM profiles WHERE id = auth.uid() AND role = 'superadmin'));
+
+INSERT INTO platform_settings (id, value) 
+VALUES ('social_links', '{"facebook": "#", "instagram": "#", "tiktok": "#", "github": "#", "discord": "#", "whatsapp": "#"}'::jsonb)
+ON CONFLICT (id) DO NOTHING;
+
+-- 4. Suscripciones de Usuarios (Planes)
+CREATE TABLE IF NOT EXISTS user_subscriptions (
+  user_id UUID REFERENCES auth.users ON DELETE CASCADE PRIMARY KEY,
+  plan_id TEXT NOT NULL DEFAULT 'free',
+  status TEXT NOT NULL DEFAULT 'active',
+  expires_at TIMESTAMPTZ,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+ALTER TABLE user_subscriptions ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Users read own sub" ON user_subscriptions FOR SELECT USING (auth.uid() = user_id);
+CREATE POLICY "Admins manage subs" ON user_subscriptions FOR ALL USING (EXISTS (SELECT 1 FROM profiles WHERE id = auth.uid() AND role IN ('admin', 'superadmin')));
 
 -- Auto-create profile on signup
-CREATE OR REPLACE FUNCTION handle_new_user()
-RETURNS TRIGGER AS $$
+CREATE OR REPLACE FUNCTION handle_new_user() RETURNS TRIGGER AS $$
 BEGIN
   INSERT INTO profiles (id, display_name, email, role)
-  VALUES (NEW.id, SPLIT_PART(NEW.email,'@',1), NEW.email,
-    CASE WHEN NEW.email = 'antoniocorporan40@gmail.com'
-    THEN 'superadmin' ELSE 'user' END);
+  VALUES (NEW.id, SPLIT_PART(NEW.email,'@',1), NEW.email, CASE WHEN NEW.email = 'antoniocorporan40@gmail.com' THEN 'superadmin' ELSE 'user' END);
   RETURN NEW;
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;
 
-CREATE OR REPLACE TRIGGER on_auth_user_created
-  AFTER INSERT ON auth.users
-  FOR EACH ROW EXECUTE FUNCTION handle_new_user();`}
+DROP TRIGGER IF EXISTS on_auth_user_created ON auth.users;
+CREATE TRIGGER on_auth_user_created AFTER INSERT ON auth.users FOR EACH ROW EXECUTE FUNCTION handle_new_user();`}
                                 </pre>
                             </div>
                         </div>
