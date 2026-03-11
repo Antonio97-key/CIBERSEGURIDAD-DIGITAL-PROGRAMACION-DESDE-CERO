@@ -49,13 +49,6 @@ export default function Dashboard() {
         setTimeout(() => setSaveSuccess(false), 3000);
     };
 
-    const tabs = [
-        { id: 'panel', label: '🏠 Panel Principal', icon: '📊' },
-        { id: 'perfil', label: '👤 Mi Perfil', icon: '👤' },
-        { id: 'progreso', label: '📈 Progreso', icon: '📈' },
-        { id: 'config', label: '⚙️ Configuración', icon: '⚙️' },
-    ];
-
     const statsCards = [
         { title: 'Lecciones Vistas', value: progress.lessons?.length || progress.completedLessons?.length || 0, total: 60, color: 'primary' },
         { title: 'Proyectos Labs', value: progress.projects?.length || progress.completedProjects?.length || 0, total: 20, color: 'purple' },
@@ -84,193 +77,253 @@ export default function Dashboard() {
                     <DashboardSidebar activeTab={activeTab} setActiveTab={setActiveTab} />
 
                     {/* Main Content Area */}
-                    <div className="flex-1 min-w-0 w-full animate-fade-in">
+                    <div className="flex-1 min-w-0 w-full">
                         {/* TAB: Panel Principal */}
-                {activeTab === 'panel' && (
-                    <div className="animate-fade-in">
-                        {/* Stats Grid */}
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-                            {statsCards.map(stat => (
-                                <StatCard key={stat.title} {...stat} />
-                            ))}
-                        </div>
-
-                        {/* Badges & Activity */}
-                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                            <section className="lg:col-span-2">
-                                <h3 className="text-xl font-black mb-6" style={{ color: 'var(--color-text)' }}>🏆 Badges de Honor</h3>
-                                <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                                    {(progress.badges || []).map(badge => (
-                                        <div key={badge} className="aspect-square rounded-3xl flex flex-col items-center justify-center gap-3 group hover:scale-105 transition-all cursor-default" style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)' }}>
-                                            <div className="w-14 h-14 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform" style={{ background: 'var(--gradient-primary)', opacity: 0.15 }}>
-                                                <svg className="w-7 h-7" style={{ color: 'var(--color-primary)' }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                                                </svg>
-                                            </div>
-                                            <span className="text-[10px] font-black uppercase tracking-widest" style={{ color: 'var(--color-text-muted)' }}>{badge}</span>
-                                        </div>
-                                    ))}
-                                    <div className="aspect-square rounded-3xl flex flex-col items-center justify-center gap-3 opacity-40" style={{ border: '2px dashed var(--color-border)' }}>
-                                        <div className="w-10 h-10 rounded-full flex items-center justify-center text-2xl" style={{ border: '2px dashed var(--color-border)', color: 'var(--color-text-muted)' }}>+</div>
-                                        <span className="text-[10px] font-black uppercase tracking-widest" style={{ color: 'var(--color-text-muted)' }}>Bloqueado</span>
-                                    </div>
-                                </div>
-                            </section>
-
-                            <section className="p-8 rounded-3xl" style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)' }}>
-                                <h3 className="text-lg font-black mb-6" style={{ color: 'var(--color-text)' }}>📋 Actividad Reciente</h3>
-                                <div className="space-y-6">
-                                    {activityItems.map((item, i) => (
-                                        <div key={i} className="flex gap-4">
-                                            <div className="w-10 h-10 rounded-xl flex items-center justify-center text-lg shrink-0" style={{ backgroundColor: 'var(--color-badge-bg)' }}>{item.icon}</div>
-                                            <div>
-                                                <p className="text-sm font-bold" style={{ color: 'var(--color-text)' }}>{item.text}</p>
-                                                <p className="text-[10px] font-bold uppercase tracking-widest mt-1" style={{ color: 'var(--color-text-muted)' }}>{item.time}</p>
-                                            </div>
-                                        </div>
+                        {activeTab === 'panel' && (
+                            <div className="animate-fade-in">
+                                {/* Stats Grid */}
+                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                                    {statsCards.map(stat => (
+                                        <StatCard key={stat.title} {...stat} />
                                     ))}
                                 </div>
-                            </section>
-                        </div>
-                    </div>
-                )}
 
-                {/* TAB: Mi Perfil */}
-                {activeTab === 'perfil' && (
-                    <div className="animate-fade-in max-w-2xl mx-auto">
-                        <div className="p-8 md:p-10 rounded-3xl" style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)', boxShadow: 'var(--shadow-card)' }}>
-                            <div className="flex items-center justify-between mb-8">
-                                <h3 className="text-xl font-black" style={{ color: 'var(--color-text)' }}>Información del Perfil</h3>
-                                {!editMode && (
-                                    <button onClick={() => setEditMode(true)} className="btn-3d btn-3d-primary px-5 py-2 text-xs">
-                                        ✏️ Editar
+                                {/* Badges & Activity */}
+                                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                                    <section className="lg:col-span-2">
+                                        <h3 className="text-xl font-black mb-6" style={{ color: 'var(--color-text)' }}>🏆 Badges de Honor</h3>
+                                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                                            {(progress.badges || []).map(badge => (
+                                                <div key={badge} className="aspect-square rounded-3xl flex flex-col items-center justify-center gap-3 group hover:scale-105 transition-all cursor-default" style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)' }}>
+                                                    <div className="w-14 h-14 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform" style={{ background: 'var(--gradient-primary)', opacity: 0.15 }}>
+                                                        <svg className="w-7 h-7" style={{ color: 'var(--color-primary)' }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                                                        </svg>
+                                                    </div>
+                                                    <span className="text-[10px] font-black uppercase tracking-widest" style={{ color: 'var(--color-text-muted)' }}>{badge}</span>
+                                                </div>
+                                            ))}
+                                            <div className="aspect-square rounded-3xl flex flex-col items-center justify-center gap-3 opacity-40" style={{ border: '2px dashed var(--color-border)' }}>
+                                                <div className="w-10 h-10 rounded-full flex items-center justify-center text-2xl" style={{ border: '2px dashed var(--color-border)', color: 'var(--color-text-muted)' }}>+</div>
+                                                <span className="text-[10px] font-black uppercase tracking-widest" style={{ color: 'var(--color-text-muted)' }}>Bloqueado</span>
+                                            </div>
+                                        </div>
+                                    </section>
+
+                                    <section className="p-8 rounded-3xl" style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)' }}>
+                                        <h3 className="text-lg font-black mb-6" style={{ color: 'var(--color-text)' }}>📋 Actividad Reciente</h3>
+                                        <div className="space-y-6">
+                                            {activityItems.map((item, i) => (
+                                                <div key={i} className="flex gap-4">
+                                                    <div className="w-10 h-10 rounded-xl flex items-center justify-center text-lg shrink-0" style={{ backgroundColor: 'var(--color-badge-bg)' }}>{item.icon}</div>
+                                                    <div>
+                                                        <p className="text-sm font-bold" style={{ color: 'var(--color-text)' }}>{item.text}</p>
+                                                        <p className="text-[10px] font-bold uppercase tracking-widest mt-1" style={{ color: 'var(--color-text-muted)' }}>{item.time}</p>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </section>
+                                </div>
+                            </div>
+                        )}
+
+                        {/* TAB: Laboratorio CTF */}
+                        {activeTab === 'laboratorio' && (
+                            <div className="animate-fade-in">
+                                <div className="p-12 md:p-20 rounded-[40px] border-2 border-dashed flex flex-col items-center text-center gap-6" style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-surface)' }}>
+                                    <div className="w-24 h-24 rounded-3xl bg-blue-500/10 flex items-center justify-center text-5xl mb-4">🧪</div>
+                                    <h3 className="text-3xl font-black" style={{ color: 'var(--color-text)' }}>Laboratorio CTF Central</h3>
+                                    <p className="max-w-md text-lg font-medium" style={{ color: 'var(--color-text-muted)' }}>Esta sección está siendo preparada para recibir tus desafíos de Capturar la Bandera. Pronto podrás competir con otros hackers.</p>
+                                    <button onClick={() => router.push('/playground')} className="btn-3d btn-3d-primary px-10 py-4 text-xs">
+                                        🚀 Ir al Playground Mientras Tanto
                                     </button>
-                                )}
-                            </div>
-
-                            {saveSuccess && (
-                                <div className="mb-6 p-4 rounded-xl text-center" style={{ backgroundColor: 'var(--color-badge-bg)', border: '1px solid var(--color-primary)' }}>
-                                    <p className="text-sm font-bold" style={{ color: 'var(--color-primary)' }}>✅ Perfil actualizado correctamente</p>
                                 </div>
-                            )}
+                            </div>
+                        )}
 
-                            {editMode ? (
-                                <div className="space-y-6">
-                                    <div>
-                                        <label className="text-[10px] font-black uppercase tracking-widest mb-2 block" style={{ color: 'var(--color-text-muted)' }}>Nombre para mostrar</label>
-                                        <input
-                                            type="text"
-                                            value={editForm.display_name}
-                                            onChange={(e) => setEditForm({ ...editForm, display_name: e.target.value })}
-                                            className="w-full px-6 py-4 rounded-2xl text-sm outline-none transition-all font-medium"
-                                            style={{ backgroundColor: 'var(--color-input-bg)', color: 'var(--color-text)', border: '1px solid var(--color-border)' }}
-                                            placeholder="Tu nombre"
-                                        />
+                        {/* TAB: Certificados */}
+                        {activeTab === 'certificados' && (
+                            <div className="animate-fade-in">
+                                <div className="p-12 md:p-20 rounded-[40px] border-2 border-dashed flex flex-col items-center text-center gap-6" style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-surface)' }}>
+                                    <div className="w-24 h-24 rounded-3xl bg-yellow-500/10 flex items-center justify-center text-5xl mb-4">🎓</div>
+                                    <h3 className="text-3xl font-black" style={{ color: 'var(--color-text)' }}>Tus Logros Académicos</h3>
+                                    <p className="max-w-md text-lg font-medium" style={{ color: 'var(--color-text-muted)' }}>Aún no has generado certificados. Completa los desafíos finales de cada módulo para desbloquear tus credenciales oficiales.</p>
+                                    <button onClick={() => setActiveTab('progreso')} className="btn-3d btn-3d-outline px-10 py-4 text-xs">
+                                        📈 Revisar mi Progreso Actual
+                                    </button>
+                                </div>
+                            </div>
+                        )}
+
+                        {/* TAB: Mi Perfil */}
+                        {activeTab === 'perfil' && (
+                            <div className="animate-fade-in max-w-2xl mx-auto">
+                                <div className="p-8 md:p-10 rounded-3xl" style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)', boxShadow: 'var(--shadow-card)' }}>
+                                    <div className="flex items-center justify-between mb-8">
+                                        <h3 className="text-xl font-black" style={{ color: 'var(--color-text)' }}>Información del Perfil</h3>
+                                        {!editMode && (
+                                            <button onClick={() => setEditMode(true)} className="btn-3d btn-3d-primary px-5 py-2 text-xs">
+                                                ✏️ Editar
+                                            </button>
+                                        )}
                                     </div>
-                                    <div>
-                                        <label className="text-[10px] font-black uppercase tracking-widest mb-2 block" style={{ color: 'var(--color-text-muted)' }}>Biografía</label>
-                                        <textarea
-                                            value={editForm.bio}
-                                            onChange={(e) => setEditForm({ ...editForm, bio: e.target.value })}
-                                            className="w-full px-6 py-4 rounded-2xl text-sm outline-none transition-all font-medium resize-none min-h-[120px]"
-                                            style={{ backgroundColor: 'var(--color-input-bg)', color: 'var(--color-text)', border: '1px solid var(--color-border)' }}
-                                            placeholder="Cuéntanos sobre ti..."
-                                        />
+
+                                    {saveSuccess && (
+                                        <div className="mb-6 p-4 rounded-xl text-center" style={{ backgroundColor: 'var(--color-badge-bg)', border: '1px solid var(--color-primary)' }}>
+                                            <p className="text-sm font-bold" style={{ color: 'var(--color-primary)' }}>✅ Perfil actualizado correctamente</p>
+                                        </div>
+                                    )}
+
+                                    {editMode ? (
+                                        <div className="space-y-6">
+                                            <div>
+                                                <label className="text-[10px] font-black uppercase tracking-widest mb-2 block" style={{ color: 'var(--color-text-muted)' }}>Nombre para mostrar</label>
+                                                <input
+                                                    type="text"
+                                                    value={editForm.display_name}
+                                                    onChange={(e) => setEditForm({ ...editForm, display_name: e.target.value })}
+                                                    className="w-full px-6 py-4 rounded-2xl text-sm outline-none transition-all font-medium"
+                                                    style={{ backgroundColor: 'var(--color-input-bg)', color: 'var(--color-text)', border: '1px solid var(--color-border)' }}
+                                                    placeholder="Tu nombre"
+                                                />
+                                            </div>
+                                            <div>
+                                                <label className="text-[10px] font-black uppercase tracking-widest mb-2 block" style={{ color: 'var(--color-text-muted)' }}>Biografía</label>
+                                                <textarea
+                                                    value={editForm.bio}
+                                                    onChange={(e) => setEditForm({ ...editForm, bio: e.target.value })}
+                                                    className="w-full px-6 py-4 rounded-2xl text-sm outline-none transition-all font-medium resize-none min-h-[120px]"
+                                                    style={{ backgroundColor: 'var(--color-input-bg)', color: 'var(--color-text)', border: '1px solid var(--color-border)' }}
+                                                    placeholder="Cuéntanos sobre ti..."
+                                                />
+                                            </div>
+                                            <div className="flex gap-4">
+                                                <button onClick={handleSaveProfile} className="btn-3d btn-3d-primary px-8 py-3 text-xs flex-1">
+                                                    💾 Guardar Cambios
+                                                </button>
+                                                <button onClick={() => { setEditMode(false); setEditForm({ display_name: profile.display_name, bio: profile.bio }); }} className="btn-3d btn-3d-outline px-6 py-3 text-xs">
+                                                    Cancelar
+                                                </button>
+                                            </div>
+                                        </div>
+                                    ) : (
+                                        <div className="space-y-6">
+                                            <InfoRow label="Nombre" value={profile.display_name || 'Sin definir'} />
+                                            <InfoRow label="Email" value={user.email} />
+                                            <InfoRow label="Biografía" value={profile.bio || 'Sin biografía aún'} />
+                                            <InfoRow label="Rol" value={profile.role === 'admin' ? '🛡️ Administrador' : profile.role === 'superadmin' ? '👑 Superadministrador' : '👤 Usuario'} />
+                                            
+                                            <div className="pt-8 border-t" style={{ borderColor: 'var(--color-border)' }}>
+                                                <h4 className="text-[10px] font-black uppercase tracking-widest mb-6" style={{ color: 'var(--color-text-muted)' }}>Progreso de Rango (Niveles)</h4>
+                                                <div className="grid grid-cols-3 sm:grid-cols-6 gap-3">
+                                                    {[1, 2, 3, 4, 5, 6].map((lvl) => {
+                                                        const isCurrent = progress.level === lvl;
+                                                        const isUnlocked = progress.level >= lvl;
+                                                        return (
+                                                            <div 
+                                                                key={lvl} 
+                                                                className={`p-3 rounded-2xl flex flex-col items-center justify-center gap-2 transition-all ${isCurrent ? 'scale-110 shadow-xl z-10' : ''}`}
+                                                                style={{ 
+                                                                    backgroundColor: isCurrent ? '#000000' : isUnlocked ? 'var(--color-badge-bg)' : 'var(--color-surface)',
+                                                                    border: isCurrent ? '2px solid var(--color-primary)' : '1px solid var(--color-border)',
+                                                                    color: isCurrent ? '#ffffff' : isUnlocked ? 'var(--color-text)' : 'var(--color-text-muted)',
+                                                                    opacity: isUnlocked ? 1 : 0.5
+                                                                }}
+                                                            >
+                                                                <span className="text-[10px] font-black">Lvl {lvl}</span>
+                                                                <span className="text-[7px] font-bold uppercase">{isCurrent ? 'ACTUAL' : isUnlocked ? 'OK' : 'LOCK'}</span>
+                                                            </div>
+                                                        );
+                                                    })}
+                                                </div>
+                                                <div className="mt-8 p-6 rounded-3xl bg-primary-500/5 border border-primary-500/10">
+                                                    <div className="flex justify-between items-center mb-2">
+                                                        <span className="text-[10px] font-black uppercase tracking-widest" style={{ color: 'var(--color-text-muted)' }}>Puntos de Experiencia</span>
+                                                        <span className="text-xl font-black" style={{ color: 'var(--color-primary)' }}>{(progress.xp || 0).toLocaleString()} XP</span>
+                                                    </div>
+                                                    <div className="h-1.5 w-full bg-black/10 rounded-full overflow-hidden">
+                                                        <div className="h-full bg-primary-500 transition-all duration-1000" style={{ width: `${Math.min(((progress.xp || 0) / getNextLevelTarget(progress.level || 1)) * 100, 100)}%` }}></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        )}
+
+                        {/* TAB: Progreso */}
+                        {activeTab === 'progreso' && (
+                            <div className="animate-fade-in">
+                                {/* XP Progress Bar */}
+                                <div className="p-8 rounded-3xl mb-8" style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)' }}>
+                                    <div className="flex items-center justify-between mb-4">
+                                        <h3 className="text-lg font-black" style={{ color: 'var(--color-text)' }}>Experiencia Total</h3>
+                                        <span className="text-2xl font-black" style={{ color: 'var(--color-primary)' }}>{progress.xp || 0} XP</span>
                                     </div>
-                                    <div className="flex gap-4">
-                                        <button onClick={handleSaveProfile} className="btn-3d btn-3d-primary px-8 py-3 text-xs flex-1">
-                                            💾 Guardar Cambios
-                                        </button>
-                                        <button onClick={() => { setEditMode(false); setEditForm({ display_name: profile.display_name, bio: profile.bio }); }} className="btn-3d btn-3d-outline px-6 py-3 text-xs">
-                                            Cancelar
-                                        </button>
+                                    <div className="h-4 w-full rounded-full overflow-hidden" style={{ backgroundColor: 'var(--color-badge-bg)' }}>
+                                        <div className="h-full rounded-full transition-all duration-1000" style={{ width: `${Math.min(((progress.xp || 0) / getNextLevelTarget(progress.level || 1)) * 100, 100)}%`, background: 'var(--gradient-primary)' }}></div>
+                                    </div>
+                                    <p className="text-xs mt-3 font-bold" style={{ color: 'var(--color-text-muted)' }}>
+                                        {progress.level >= 6 ? '¡Nivel máximo alcanzado!' : `${getNextLevelTarget(progress.level || 1) - (progress.xp || 0)} XP para el siguiente nivel`}
+                                    </p>
+                                </div>
+
+                                {/* Stats Grid */}
+                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                                    {statsCards.map(stat => (
+                                        <StatCard key={stat.title} {...stat} />
+                                    ))}
+                                </div>
+
+                                {/* Streak & Badges */}
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                    <div className="p-8 rounded-3xl text-center" style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)' }}>
+                                        <p className="text-6xl font-black mb-2" style={{ color: 'var(--color-primary)' }}>🔥 {progress.streak}</p>
+                                        <p className="text-sm font-bold uppercase tracking-widest" style={{ color: 'var(--color-text-muted)' }}>Días de racha activa</p>
+                                    </div>
+                                    <div className="p-8 rounded-3xl text-center" style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)' }}>
+                                        <p className="text-6xl font-black mb-2" style={{ color: 'var(--color-primary)' }}>🏅 {progress.badges?.length || 0}</p>
+                                        <p className="text-sm font-bold uppercase tracking-widest" style={{ color: 'var(--color-text-muted)' }}>Badges obtenidos</p>
                                     </div>
                                 </div>
-                            ) : (
-                                <div className="space-y-6">
-                                    <InfoRow label="Nombre" value={profile.display_name || 'Sin definir'} />
-                                    <InfoRow label="Email" value={user.email} />
-                                    <InfoRow label="Biografía" value={profile.bio || 'Sin biografía aún'} />
-                                    <InfoRow label="Rol" value={profile.role === 'admin' ? '🛡️ Administrador' : profile.role === 'superadmin' ? '👑 Superadministrador' : '👤 Usuario'} />
-                                    <InfoRow label="Nivel" value={`Nivel ${progress.level}`} />
-                                    <InfoRow label="XP Total" value={`${progress.xp} puntos de experiencia`} />
+                            </div>
+                        )}
+
+                        {/* TAB: Configuración */}
+                        {activeTab === 'config' && (
+                            <div className="animate-fade-in max-w-2xl mx-auto space-y-6">
+                                <div className="p-8 rounded-3xl" style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)' }}>
+                                    <h3 className="text-lg font-black mb-6" style={{ color: 'var(--color-text)' }}>🔑 Seguridad de la Cuenta</h3>
+                                    <div className="space-y-4">
+                                        <InfoRow label="Email" value={user.email} />
+                                        <InfoRow label="Proveedor" value="Supabase Auth" />
+                                        <InfoRow label="Verificado" value="✅ Confirmado" />
+                                    </div>
                                 </div>
-                            )}
-                        </div>
-                    </div>
-                )}
 
-                {/* TAB: Progreso */}
-                {activeTab === 'progreso' && (
-                    <div className="animate-fade-in">
-                        {/* XP Progress Bar */}
-                        <div className="p-8 rounded-3xl mb-8" style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)' }}>
-                            <div className="flex items-center justify-between mb-4">
-                                <h3 className="text-lg font-black" style={{ color: 'var(--color-text)' }}>Experiencia Total</h3>
-                                <span className="text-2xl font-black" style={{ color: 'var(--color-primary)' }}>{progress.xp || 0} XP</span>
+                                <div className="p-8 rounded-3xl" style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)' }}>
+                                    <h3 className="text-lg font-black mb-6" style={{ color: 'var(--color-text)' }}>🎨 Preferencias</h3>
+                                    <p className="text-sm font-medium mb-4" style={{ color: 'var(--color-text-muted)' }}>
+                                        Puedes cambiar el tema y el idioma desde los botones en la barra de navegación superior.
+                                    </p>
+                                </div>
+
+                                <div className="p-8 rounded-3xl" style={{ border: '1px solid rgba(239,68,68,0.3)', backgroundColor: 'rgba(239,68,68,0.05)' }}>
+                                    <h3 className="text-lg font-black mb-4 text-red-500">⚠️ Zona de peligro</h3>
+                                    <p className="text-sm font-medium mb-6" style={{ color: 'var(--color-text-muted)' }}>
+                                        Al cerrar sesión perderás el acceso temporal a tu dashboard.
+                                    </p>
+                                    <button
+                                        onClick={signOut}
+                                        className="px-8 py-3 rounded-2xl bg-red-500 text-white font-black text-xs uppercase tracking-widest hover:bg-red-600 transition-all active:scale-95"
+                                    >
+                                        Cerrar Sesión
+                                    </button>
+                                </div>
                             </div>
-                            <div className="h-4 w-full rounded-full overflow-hidden" style={{ backgroundColor: 'var(--color-badge-bg)' }}>
-                                <div className="h-full rounded-full transition-all duration-1000" style={{ width: `${Math.min(((progress.xp || 0) / getNextLevelTarget(progress.level || 1)) * 100, 100)}%`, background: 'var(--gradient-primary)' }}></div>
-                            </div>
-                            <p className="text-xs mt-3 font-bold" style={{ color: 'var(--color-text-muted)' }}>
-                                {progress.level >= 6 ? '¡Nivel máximo alcanzado!' : `${getNextLevelTarget(progress.level || 1) - (progress.xp || 0)} XP para el siguiente nivel`}
-                            </p>
-                        </div>
-
-                        {/* Stats Grid */}
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                            {statsCards.map(stat => (
-                                <StatCard key={stat.title} {...stat} />
-                            ))}
-                        </div>
-
-                        {/* Streak & Badges */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                            <div className="p-8 rounded-3xl text-center" style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)' }}>
-                                <p className="text-6xl font-black mb-2" style={{ color: 'var(--color-primary)' }}>🔥 {progress.streak}</p>
-                                <p className="text-sm font-bold uppercase tracking-widest" style={{ color: 'var(--color-text-muted)' }}>Días de racha activa</p>
-                            </div>
-                            <div className="p-8 rounded-3xl text-center" style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)' }}>
-                                <p className="text-6xl font-black mb-2" style={{ color: 'var(--color-primary)' }}>🏅 {progress.badges?.length || 0}</p>
-                                <p className="text-sm font-bold uppercase tracking-widest" style={{ color: 'var(--color-text-muted)' }}>Badges obtenidos</p>
-                            </div>
-                        </div>
-                    </div>
-                )}
-
-                {/* TAB: Configuración */}
-                {activeTab === 'config' && (
-                    <div className="animate-fade-in max-w-2xl mx-auto space-y-6">
-                        <div className="p-8 rounded-3xl" style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)' }}>
-                            <h3 className="text-lg font-black mb-6" style={{ color: 'var(--color-text)' }}>🔑 Seguridad de la Cuenta</h3>
-                            <div className="space-y-4">
-                                <InfoRow label="Email" value={user.email} />
-                                <InfoRow label="Proveedor" value="Supabase Auth" />
-                                <InfoRow label="Verificado" value="✅ Confirmado" />
-                            </div>
-                        </div>
-
-                        <div className="p-8 rounded-3xl" style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)' }}>
-                            <h3 className="text-lg font-black mb-6" style={{ color: 'var(--color-text)' }}>🎨 Preferencias</h3>
-                            <p className="text-sm font-medium mb-4" style={{ color: 'var(--color-text-muted)' }}>
-                                Puedes cambiar el tema y el idioma desde los botones en la barra de navegación superior.
-                            </p>
-                        </div>
-
-                        <div className="p-8 rounded-3xl" style={{ border: '1px solid rgba(239,68,68,0.3)', backgroundColor: 'rgba(239,68,68,0.05)' }}>
-                            <h3 className="text-lg font-black mb-4 text-red-500">⚠️ Zona de peligro</h3>
-                            <p className="text-sm font-medium mb-6" style={{ color: 'var(--color-text-muted)' }}>
-                                Al cerrar sesión perderás el acceso temporal a tu dashboard.
-                            </p>
-                            <button
-                                onClick={signOut}
-                                className="px-8 py-3 rounded-2xl bg-red-500 text-white font-black text-xs uppercase tracking-widest hover:bg-red-600 transition-all active:scale-95"
-                            >
-                                Cerrar Sesión
-                            </button>
-                        </div>
-                    </div>
-                )}
+                        )}
                     </div>
                 </div>
             </main>

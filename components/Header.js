@@ -44,16 +44,18 @@ export default function Header() {
         };
     }, []);
 
+    const isDashboard = router.pathname === '/dashboard';
+
     const navLinks = [
-        { name: t('header.nav.home') || 'Inicio', href: '#hero' },
+        !isDashboard && { name: t('header.nav.home') || 'Inicio', href: '#hero' },
         { name: 'Laboratorio', href: '/playground' },
         { name: t('header.nav.projects') || 'Proyectos', href: '/proyectos' },
-        { name: t('header.nav.cyber') || 'Ciberseguridad', href: '#cyber' },
-        { name: t('header.nav.prog') || 'Programación', href: '#prog' },
-        { name: t('header.nav.news') || 'Noticias', href: '#noticias' },
-        { name: t('header.nav.trust') || 'Confianza', href: '#confianza' },
-        { name: t('header.nav.community') || 'Comunidad', href: '#comunidad' },
-        user ? { name: 'Mi Perfil', href: '/dashboard' } : null
+        !isDashboard && { name: t('header.nav.cyber') || 'Ciberseguridad', href: '#cyber' },
+        !isDashboard && { name: t('header.nav.prog') || 'Programación', href: '#prog' },
+        !isDashboard && { name: t('header.nav.news') || 'Noticias', href: '#noticias' },
+        !isDashboard && { name: t('header.nav.trust') || 'Confianza', href: '#confianza' },
+        !isDashboard && { name: t('header.nav.community') || 'Comunidad', href: '#comunidad' },
+        user && !isDashboard ? { name: 'Mi Perfil', href: '/dashboard' } : null
     ].filter(Boolean);
 
     const handleNavClick = (e, href) => {
