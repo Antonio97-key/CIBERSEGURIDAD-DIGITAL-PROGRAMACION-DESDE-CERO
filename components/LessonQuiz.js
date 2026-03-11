@@ -1,17 +1,32 @@
 import { useState } from 'react';
 import { useLanguage } from '../lib/LanguageContext';
+import { useAuth } from '../lib/AuthContext';
+import AuthModal from './AuthModal';
 
 export default function LessonQuiz({ quiz }) {
     const { t } = useLanguage();
+    const { user, progress, updateProgress } = useAuth();
     const [selectedOption, setSelectedOption] = useState(null);
     const [showResult, setShowResult] = useState(false);
     const [isCorrect, setIsCorrect] = useState(false);
+    const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
 
     const handleSubmit = () => {
         if (selectedOption === null) return;
         const correct = selectedOption === quiz.correctAnswer;
         setIsCorrect(correct);
         setShowResult(true);
+
+        if (correct && user) {
+            const quizId = quiz.id || quiz.question.substring(0, 20);
+            const alreadyDone = progress.quizzes?.includes(quizId);
+            if (!alreadyDone) {
+                updateProgress({
+                    quizzes: [...(progress.quizzes || []), quizId],
+                    xp: (progress.xp || 0) + 50
+                });
+            }
+        }
     };
 
     const handleReset = () => {
@@ -87,15 +102,30 @@ export default function LessonQuiz({ quiz }) {
                             </div>
                             <p className="text-gray-300 font-medium">{quiz.explanation}</p>
                         </div>
+                        {!user && isCorrect && (
+                            <div className="mt-8 p-8 rounded-[30px] border-2 border-primary-500/50 bg-primary-500/10 text-center animate-bounce shadow-2xl">
+                                <h4 className="text-xl font-black text-white mb-2">🚀 ¡Nivel Legendario detectado!</h4>
+                                <p className="text-sm font-medium text-gray-300 mb-6">
+                                    Has demostrado gran destreza. Inicia sesión ahora para guardar tus +50 XP y desbloquear el contenido exclusivo de esta lección.
+                                </p>
+                                <button 
+                                    onClick={() => setIsAuthModalOpen(true)}
+                                    className="btn-3d btn-3d-primary px-10 py-3 text-[10px] uppercase font-black"
+                                >
+                                    🎯 Reclamar mi progreso
+                                </button>
+                            </div>
+                        )}
                         <button
                             onClick={handleReset}
-                            className="text-blue-500 font-bold hover:underline block mx-auto py-2"
+                            className="text-blue-500 font-bold hover:underline block mx-auto py-2 mt-4"
                         >
                             {t('curriculum_ui.quiz.retry') || 'Intentar de nuevo'}
                         </button>
                     </div>
                 )}
             </div>
+            <AuthModal isOpen={isAuthModalOpen} onClose={() => setIsAuthModalOpen(false)} />
         </div>
     );
 }

@@ -51,16 +51,16 @@ export default function Dashboard() {
 
     const statsCards = [
         { title: 'Lecciones Vistas', value: progress.lessons?.length || progress.completedLessons?.length || 0, total: 60, color: 'primary' },
+        { title: 'Tests de Conocimiento', value: progress.quizzes?.length || 0, total: 25, color: 'blue' },
         { title: 'Proyectos Labs', value: progress.projects?.length || progress.completedProjects?.length || 0, total: 20, color: 'purple' },
-        { title: 'Módulos Dominados', value: Math.floor((progress.xp || 0) / 500), total: 10, color: 'green' },
-        { title: 'Challenges CTF', value: Math.floor((progress.xp || 0) / 100), total: 50, color: 'red' },
+        { title: 'Challenges CTF', value: progress.challenges?.length || 0, total: 50, color: 'red' },
     ];
 
     const activityItems = [
-        { icon: '📖', text: 'Completaste "Modelo OSI"', time: 'Hace 2 horas' },
-        { icon: '💻', text: 'Iniciaste "ARP Spoofer"', time: 'Hace 5 horas' },
-        { icon: '🎯', text: 'Nuevo Badge: Cripto-Analista', time: 'Hace 1 día' },
-        { icon: '🚪', text: 'Acceso autorizado', time: 'Hace 2 días' },
+        { icon: '📖', text: `Completaste "${progress.lessons?.[progress.lessons.length - 1]?.split('/')?.pop() || 'tu primera lección'}"`, time: 'Reciente' },
+        { icon: '🎯', text: `Rango actual: Nivel ${progress.level}`, time: 'Ahora' },
+        { icon: '🧪', text: `Quizzes resueltos: ${progress.quizzes?.length || 0}`, time: 'Hoy' },
+        { icon: '🛡️', text: 'Terminal de seguridad activa', time: 'Estado: OK' },
     ];
 
     return (
@@ -131,12 +131,19 @@ export default function Dashboard() {
                         {/* TAB: Laboratorio CTF */}
                         {activeTab === 'laboratorio' && (
                             <div className="animate-fade-in">
-                                <div className="p-12 md:p-20 rounded-[40px] border-2 border-dashed flex flex-col items-center text-center gap-6" style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-surface)' }}>
-                                    <div className="w-24 h-24 rounded-3xl bg-blue-500/10 flex items-center justify-center text-5xl mb-4">🧪</div>
-                                    <h3 className="text-3xl font-black" style={{ color: 'var(--color-text)' }}>Laboratorio CTF Central</h3>
-                                    <p className="max-w-md text-lg font-medium" style={{ color: 'var(--color-text-muted)' }}>Esta sección está siendo preparada para recibir tus desafíos de Capturar la Bandera. Pronto podrás competir con otros hackers.</p>
-                                    <button onClick={() => router.push('/playground')} className="btn-3d btn-3d-primary px-10 py-4 text-xs">
-                                        🚀 Ir al Playground Mientras Tanto
+                                <div className="p-12 md:p-24 rounded-[48px] border-2 border-dashed flex flex-col items-center text-center gap-8 relative overflow-hidden group" 
+                                    style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-surface)', boxShadow: 'var(--shadow-elevation)' }}>
+                                    <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl pointer-events-none" />
+                                    <div className="w-32 h-32 rounded-[40px] bg-blue-500/10 flex items-center justify-center text-6xl shadow-2xl shadow-blue-500/20 group-hover:scale-110 transition-transform duration-500 rotate-3">🧪</div>
+                                    <div className="max-w-xl">
+                                        <h3 className="text-4xl font-black mb-4 tracking-tighter" style={{ color: 'var(--color-text)' }}>Laboratorio CTF Central</h3>
+                                        <p className="text-lg font-medium leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
+                                            Estamos calibrando las máquinas virtuales y los firewalls del coliseo. 
+                                            Pronto podrás participar en operaciones reales de Red Team y Blue Team.
+                                        </p>
+                                    </div>
+                                    <button onClick={() => router.push('/playground')} className="btn-3d btn-3d-primary px-12 py-5 text-sm uppercase tracking-widest font-black">
+                                        🚀 Abrir Terminal de Práctica
                                     </button>
                                 </div>
                             </div>
@@ -145,12 +152,19 @@ export default function Dashboard() {
                         {/* TAB: Certificados */}
                         {activeTab === 'certificados' && (
                             <div className="animate-fade-in">
-                                <div className="p-12 md:p-20 rounded-[40px] border-2 border-dashed flex flex-col items-center text-center gap-6" style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-surface)' }}>
-                                    <div className="w-24 h-24 rounded-3xl bg-yellow-500/10 flex items-center justify-center text-5xl mb-4">🎓</div>
-                                    <h3 className="text-3xl font-black" style={{ color: 'var(--color-text)' }}>Tus Logros Académicos</h3>
-                                    <p className="max-w-md text-lg font-medium" style={{ color: 'var(--color-text-muted)' }}>Aún no has generado certificados. Completa los desafíos finales de cada módulo para desbloquear tus credenciales oficiales.</p>
-                                    <button onClick={() => setActiveTab('progreso')} className="btn-3d btn-3d-outline px-10 py-4 text-xs">
-                                        📈 Revisar mi Progreso Actual
+                                <div className="p-12 md:p-24 rounded-[48px] border-2 border-dashed flex flex-col items-center text-center gap-8 relative overflow-hidden group" 
+                                    style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-surface)', boxShadow: 'var(--shadow-elevation)' }}>
+                                    <div className="absolute top-0 right-0 w-64 h-64 bg-yellow-500/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl pointer-events-none" />
+                                    <div className="w-32 h-32 rounded-[40px] bg-yellow-500/10 flex items-center justify-center text-6xl shadow-2xl shadow-yellow-500/20 group-hover:scale-110 transition-transform duration-500 -rotate-3">🎓</div>
+                                    <div className="max-w-xl">
+                                        <h3 className="text-4xl font-black mb-4 tracking-tighter" style={{ color: 'var(--color-text)' }}>Tus Logros Académicos</h3>
+                                        <p className="text-lg font-medium leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
+                                            Tus credenciales están siendo procesadas por la autoridad certificadora. 
+                                            Completa los exámenes finales para desbloquear tus diplomas en formato PDF y Blockchain.
+                                        </p>
+                                    </div>
+                                    <button onClick={() => setActiveTab('progreso')} className="btn-3d btn-3d-outline px-12 py-5 text-sm uppercase tracking-widest font-black">
+                                        📈 Ver Requisitos de Certificación
                                     </button>
                                 </div>
                             </div>
@@ -339,7 +353,8 @@ function StatCard({ title, value, total, color }) {
         primary: 'var(--color-primary)',
         purple: '#8b5cf6',
         green: '#22c55e',
-        red: '#ef4444'
+        red: '#ef4444',
+        blue: '#3b82f6'
     };
 
     return (

@@ -18,6 +18,12 @@ export default function AdminPanel() {
         maintenanceMode: false, registrationOpen: true, emailNotifications: true,
     });
     
+    // Policies state
+    const [policies, setPolicies] = useState({
+        terms: '', privacy: '', cookies: ''
+    });
+    const [savingPolicies, setSavingPolicies] = useState(false);
+    
     // Social Links state
     const [socialLinks, setSocialLinks] = useState({
         facebook: '#', instagram: '#', tiktok: '#', github: '#', telegram: '#', whatsapp: '#'
@@ -36,8 +42,32 @@ export default function AdminPanel() {
             fetchUsers();
             fetchPlatformSettings();
             fetchAdminLogs();
+            fetchPolicies();
         }
     }, [user, profile]);
+
+    const fetchPolicies = async () => {
+        try {
+            const { data } = await supabase.from('platform_settings').select('value').eq('id', 'site_policies').single();
+            if (data && data.value) setPolicies(data.value);
+        } catch (e) { console.error(e); }
+    };
+
+    const handleSavePolicies = async () => {
+        if (profile.role !== 'superadmin') { alert('Solo superadmin puede modificar políticas.'); return; }
+        setSavingPolicies(true);
+        try {
+            const { error } = await supabase.from('platform_settings').upsert({ id: 'site_policies', value: policies, updated_by: user.id });
+            if (error) throw error;
+            await logAdminAction('Políticas del sitio actualizadas', '📜');
+            alert("Políticas guardadas exitosamente.");
+        } catch (error) {
+            console.error(error);
+            alert("Error al guardar políticas.");
+        } finally {
+            setSavingPolicies(false);
+        }
+    };
 
     const logAdminAction = async (actionDesc, typeStr) => {
         try {
@@ -147,6 +177,7 @@ export default function AdminPanel() {
         { id: 'usuarios', label: 'Usuarios', icon: '👥' },
         { id: 'actividad', label: 'Actividad', icon: '📋' },
         { id: 'plataforma', label: 'Plataforma', icon: '🔧' },
+        { id: 'politicas', label: 'Políticas', icon: '📜' },
         { id: 'seguridad', label: 'Seguridad', icon: '🛡️' },
         { id: 'base-datos', label: 'Base de Datos', icon: '🗃️' },
     ];
@@ -525,6 +556,46 @@ export default function AdminPanel() {
                                         </div>
                                     ))}
                                 </div>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* ==================== POLÍTICAS ==================== */}
+                    {activeSection === 'politicas' && (
+                        <div className="space-y-6 max-w-4xl animate-fade-in">
+                            <div className="flex items-center justify-between mb-4">
+                                <div>
+                                    <h2 className="text-xl font-black" style={{ color: 'var(--color-text)' }}>📜 Políticas Legales</h2>
+                                    <p className="text-xs" style={{ color: 'var(--color-text-muted)' }}>Contenido de términos, privacidad y cookies</p>
+                                </div>
+                                <button 
+                                    className="btn-3d btn-3d-primary px-8 py-3 text-xs" 
+                                    onClick={() => handleSavePolicies()}
+                                    disabled={savingPolicies}
+                                >
+                                    {savingPolicies ? 'Guardando...' : 'Publicar Políticas'}
+                                </button>
+                            </div>
+
+                            <div className="grid grid-cols-1 gap-8">
+                                {[
+                                    { id: 'terms', label: 'Términos y Condiciones' },
+                                    { id: 'privacy', label: 'Política de Privacidad' },
+                                    { id: 'cookies', label: 'Política de Cookies' },
+                                ].map(p => (
+                                    <div key={p.id} className="p-8 rounded-[32px]" style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)' }}>
+                                        <label className="text-[10px] font-black uppercase tracking-widest mb-4 block" style={{ color: 'var(--color-text-muted)' }}>
+                                            {p.label}
+                                        </label>
+                                        <textarea
+                                            value={policies[p.id]}
+                                            onChange={(e) => setPolicies(prev => ({...prev, [p.id]: e.target.value}))}
+                                            placeholder={`Escribe aquí los ${p.label}...`}
+                                            className="w-full px-6 py-6 rounded-2xl text-sm outline-none transition-all focus:border-[var(--color-primary)] min-h-[250px] font-medium leading-relaxed"
+                                            style={{ backgroundColor: 'var(--color-background)', color: 'var(--color-text)', border: '1px solid var(--color-border)' }}
+                                        />
+                                    </div>
+                                ))}
                             </div>
                         </div>
                     )}
