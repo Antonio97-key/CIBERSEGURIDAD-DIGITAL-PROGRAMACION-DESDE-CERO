@@ -114,7 +114,7 @@ CREATE POLICY "Superadmins can update platform settings"
 
 -- Insertar configuración inicial
 INSERT INTO platform_settings (id, value) 
-VALUES ('social_links', '{"facebook": "#", "instagram": "#", "tiktok": "#", "github": "#", "discord": "#", "whatsapp": "#"}'::jsonb)
+VALUES ('social_links', '{"facebook": "#", "instagram": "#", "tiktok": "#", "github": "#", "telegram": "#", "whatsapp": "#"}'::jsonb)
 ON CONFLICT (id) DO NOTHING;
 
 -- ============================================

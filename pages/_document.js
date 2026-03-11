@@ -22,8 +22,11 @@ export default function Document() {
                                     var savedTheme = localStorage.getItem('sd-theme');
                                     if (savedTheme === 'light' || savedTheme === 'dark') {
                                         document.documentElement.setAttribute('data-theme', savedTheme);
+                                        if (savedTheme === 'dark') document.documentElement.classList.add('dark');
+                                        else document.documentElement.classList.remove('dark');
                                     } else {
                                         document.documentElement.setAttribute('data-theme', 'light');
+                                        document.documentElement.classList.remove('dark');
                                         localStorage.setItem('sd-theme', 'light');
                                     }
                                 } catch (e) {}

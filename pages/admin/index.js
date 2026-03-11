@@ -19,7 +19,7 @@ export default function AdminPanel() {
     
     // Social Links state
     const [socialLinks, setSocialLinks] = useState({
-        facebook: '#', instagram: '#', tiktok: '#', github: '#', discord: '#', whatsapp: '#'
+        facebook: '#', instagram: '#', tiktok: '#', github: '#', telegram: '#', whatsapp: '#'
     });
     const [savingLinks, setSavingLinks] = useState(false);
 
@@ -576,7 +576,7 @@ CREATE POLICY "Anyone can read platform settings" ON platform_settings FOR SELEC
 CREATE POLICY "Superadmins can update platform settings" ON platform_settings FOR ALL USING (EXISTS (SELECT 1 FROM profiles WHERE id = auth.uid() AND role = 'superadmin'));
 
 INSERT INTO platform_settings (id, value) 
-VALUES ('social_links', '{"facebook": "#", "instagram": "#", "tiktok": "#", "github": "#", "discord": "#", "whatsapp": "#"}'::jsonb)
+VALUES ('social_links', '{"facebook": "#", "instagram": "#", "tiktok": "#", "github": "#", "telegram": "#", "whatsapp": "#"}'::jsonb)
 ON CONFLICT (id) DO NOTHING;
 
 -- 4. Suscripciones de Usuarios (Planes)
