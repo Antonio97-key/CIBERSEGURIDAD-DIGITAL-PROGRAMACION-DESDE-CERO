@@ -4,7 +4,7 @@ export default function HeroSection() {
     const { t } = useLanguage();
 
     return (
-        <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-36">
+        <section id="hero" className="relative min-h-screen flex flex-col justify-center items-center overflow-hidden pt-[180px] sm:pt-[200px] pb-20">
             {/* Decorative Theme-Aware Orbs */}
             <div className="glow-orb w-96 h-96 top-10 -left-20 absolute animate-float" style={{ backgroundColor: 'var(--color-primary)', opacity: 0.5 }} />
             <div className="glow-orb w-80 h-80 bottom-10 -right-20 absolute animate-float" style={{ backgroundColor: 'var(--color-secondary)', opacity: 0.4, animationDelay: '3s' }} />
@@ -22,7 +22,7 @@ export default function HeroSection() {
             {/* Content */}
             <div className="relative z-10 text-center px-4 sm:px-6 max-w-4xl mx-auto">
                 {/* Title */}
-                <h1 className="text-4xl sm:text-5xl md:text-7xl font-extrabold mb-6 tracking-tight animate-slide-up" style={{ color: 'var(--color-text)' }}>
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 tracking-tight animate-slide-up leading-tight" style={{ color: 'var(--color-text)' }}>
                     {t('hero.title_1')}
                     <br />
                     <span 
@@ -32,7 +32,7 @@ export default function HeroSection() {
                         {t('hero.title_2')}
                     </span>
                     <br />
-                    <span className="text-2xl sm:text-3xl md:text-4xl font-light opacity-80" style={{ color: 'var(--color-text)' }}>
+                    <span className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-light opacity-80" style={{ color: 'var(--color-text)' }}>
                         {t('hero.title_3')}
                     </span>
                 </h1>
