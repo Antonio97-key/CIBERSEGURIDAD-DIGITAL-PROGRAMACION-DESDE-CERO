@@ -66,30 +66,30 @@ export default function LessonPage() {
                         if (!trimmed) return null;
                         
                         if (trimmed.startsWith('## ')) {
-                            return <h2 key={i} className="text-3xl font-black mt-16 mb-8 text-white border-b border-white/5 pb-4 tracking-tight">
+                            return <h2 key={i} className="text-3xl font-black mt-16 mb-8 border-b pb-4 tracking-tight" style={{ color: 'var(--color-text)', borderColor: 'var(--color-border)' }}>
                                 {trimmed.replace('## ', '')}
                             </h2>;
                         }
                         if (trimmed.startsWith('### ')) {
-                            return <h3 key={i} className="text-xl font-bold mt-10 mb-4 text-purple-400">
+                            return <h3 key={i} className="text-xl font-bold mt-10 mb-4" style={{ color: 'var(--color-primary)' }}>
                                 {trimmed.replace('### ', '')}
                             </h3>;
                         }
                         if (trimmed.startsWith('- ') || trimmed.startsWith('• ')) {
-                            return <li key={i} className="ml-6 text-gray-400 list-disc marker:text-purple-500 transition-colors hover:text-gray-300">{trimmed.substring(2)}</li>;
+                            return <li key={i} className="ml-6 list-disc transition-colors" style={{ color: 'var(--color-text-muted)' }}>{trimmed.substring(2)}</li>;
                         }
                         if (/^\d+\./.test(trimmed)) {
-                            return <li key={i} className="ml-6 text-gray-400 list-decimal marker:text-purple-500 marker:font-black">{trimmed.replace(/^\d+\.\s*/, '')}</li>;
+                            return <li key={i} className="ml-6 list-decimal" style={{ color: 'var(--color-text-muted)' }}>{trimmed.replace(/^\d+\.\s*/, '')}</li>;
                         }
                         
                         const bolded = trimmed.split(/(\*\*.*?\*\*)/).map((segment, j) => {
                             if (segment.startsWith('**') && segment.endsWith('**')) {
-                                return <strong key={j} className="text-white font-bold">{segment.slice(2, -2)}</strong>;
+                                return <strong key={j} className="font-bold" style={{ color: 'var(--color-text)' }}>{segment.slice(2, -2)}</strong>;
                             }
                             return segment;
                         });
 
-                        return <p key={i} className="text-lg leading-relaxed text-gray-400 font-medium">{bolded}</p>;
+                        return <p key={i} className="text-lg leading-relaxed font-medium" style={{ color: 'var(--color-text-muted)' }}>{bolded}</p>;
                     })}
                 </div>
             );
@@ -118,7 +118,7 @@ export default function LessonPage() {
                         </div>
                     </div>
                     
-                    <h1 className="text-6xl font-black mb-8 tracking-tighter leading-[1.1] text-white">
+                    <h1 className="text-6xl font-black mb-8 tracking-tighter leading-[1.1]" style={{ color: 'var(--color-text)' }}>
                         {lessonData.title}
                     </h1>
                     
@@ -148,8 +148,8 @@ export default function LessonPage() {
                 {lessonData.playground && (
                     <div className="mt-20">
                         <div className="mb-8">
-                            <h3 className="text-2xl font-black text-white mb-2">Laboratorio Interactivo</h3>
-                            <p className="text-gray-500 font-medium">Modifica el código y observa los resultados en tiempo real.</p>
+                            <h3 className="text-2xl font-black mb-2" style={{ color: 'var(--color-text)' }}>Laboratorio Interactivo</h3>
+                            <p className="font-medium" style={{ color: 'var(--color-text-muted)' }}>Modifica el código y observa los resultados en tiempo real.</p>
                         </div>
                         <CodePlayground 
                             language={lessonData.playground.language || 'javascript'} 

@@ -42,6 +42,27 @@ export default function DashboardSidebar({ activeTab, setActiveTab }) {
             <nav className="flex flex-col gap-2">
                 {menuItems.map((item) => {
                     const isActive = activeTab === item.id;
+                    
+                    if (item.id === 'laboratorio') {
+                        return (
+                            <Link
+                                key={item.id}
+                                href="/playground"
+                                className="flex items-center gap-4 px-5 py-4 rounded-2xl transition-all duration-300 group hover:scale-[1.02]"
+                                style={{
+                                    backgroundColor: 'transparent',
+                                    border: '1px solid transparent',
+                                    color: 'var(--color-text)'
+                                }}
+                            >
+                                <svg className="w-6 h-6 transition-colors opacity-60 group-hover:opacity-100 group-hover:text-[var(--color-primary)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                    <path strokeLinecap="round" strokeLinejoin="round" d={item.icon} />
+                                </svg>
+                                <span className="font-bold text-sm group-hover:text-[var(--color-text)]">{item.label}</span>
+                            </Link>
+                        );
+                    }
+
                     return (
                         <button
                             key={item.id}
