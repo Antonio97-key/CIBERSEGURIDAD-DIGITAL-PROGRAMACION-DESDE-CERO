@@ -4,7 +4,7 @@ export default function HeroSection() {
     const { t } = useLanguage();
 
     return (
-        <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-28">
             {/* Decorative Theme-Aware Orbs */}
             <div className="glow-orb w-96 h-96 top-10 -left-20 absolute animate-float" style={{ backgroundColor: 'var(--color-primary)', opacity: 0.5 }} />
             <div className="glow-orb w-80 h-80 bottom-10 -right-20 absolute animate-float" style={{ backgroundColor: 'var(--color-secondary)', opacity: 0.4, animationDelay: '3s' }} />
