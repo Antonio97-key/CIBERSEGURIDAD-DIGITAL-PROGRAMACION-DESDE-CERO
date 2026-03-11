@@ -225,24 +225,24 @@ console.log("✅ Correcto:   " + (mensaje === descifrado));`,
                                         {project.icon}
                                     </div>
                                     <div className="flex gap-2 flex-wrap justify-end">
-                                        <span className={`chip ${project.difficulty.includes(t('projects.level.beginner') || 'Principiante') ? 'chip-green' : project.difficulty.includes(t('projects.level.advanced') || 'Avanzado') ? 'chip-purple' : 'chip-orange'} text-[10px]`}>
+                                        <span className={`chip ${project.difficulty.includes(t('projects.level.beginner') || 'Principiante') ? 'chip-green' : project.difficulty.includes(t('projects.level.advanced') || 'Avanzado') ? 'chip-purple' : 'chip-orange'} text-xs font-bold`}>
                                             {project.difficulty}
                                         </span>
                                     </div>
                                 </div>
 
                                 {/* Content */}
-                                <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
+                                <h3 className="text-xl font-extrabold text-gray-900 dark:text-white mb-3">
                                     {project.title}
                                 </h3>
-                                <p className="text-sm text-gray-500 dark:text-gray-400 mb-4 leading-relaxed">
+                                <p className="text-base font-medium text-gray-600 dark:text-gray-300 mb-5 leading-relaxed">
                                     {project.description}
                                 </p>
 
                                 {/* Tech Tags */}
-                                <div className="flex flex-wrap gap-2 mb-5">
+                                <div className="flex flex-wrap gap-2 mb-6">
                                     {project.tech.map((t) => (
-                                        <span key={t} className="text-[10px] font-semibold px-2.5 py-1 rounded-lg bg-gray-100 dark:bg-graphite-700 text-gray-600 dark:text-gray-300">
+                                        <span key={t} className="text-xs font-bold px-3 py-1.5 rounded-lg bg-gray-100 dark:bg-graphite-700 text-gray-700 dark:text-gray-200 shadow-sm">
                                             {t}
                                         </span>
                                     ))}
@@ -251,10 +251,10 @@ console.log("✅ Correcto:   " + (mensaje === descifrado));`,
                                 {/* Toggle Code */}
                                 <button
                                     onClick={() => setActiveProject(activeProject === project.id ? null : project.id)}
-                                    className="btn-3d btn-3d-outline text-xs w-full"
+                                    className="btn-3d btn-3d-outline text-sm font-bold w-full py-3"
                                 >
                                     {activeProject === project.id ? t('projects.view_code') : t('projects.view_code')}
-                                    <svg className={`w-4 h-4 transition-transform duration-300 ${activeProject === project.id ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                    <svg className={`w-5 h-5 transition-transform duration-300 ${activeProject === project.id ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                                     </svg>
                                 </button>
@@ -269,7 +269,7 @@ console.log("✅ Correcto:   " + (mensaje === descifrado));`,
                                         language={project.tech.includes('Python') ? 'python' : 'javascript'}
                                     >
                                         {({ className, style, tokens, getLineProps, getTokenProps }) => (
-                                            <pre className={`text-xs p-5 overflow-x-auto font-mono leading-relaxed ${className}`} style={{ ...style, margin: 0 }}>
+                                            <pre className={`text-sm font-medium p-5 overflow-x-auto font-mono leading-relaxed ${className}`} style={{ ...style, margin: 0 }}>
                                                 {tokens.map((line, i) => (
                                                     <div key={i} {...getLineProps({ line })}>
                                                         {line.map((token, key) => (

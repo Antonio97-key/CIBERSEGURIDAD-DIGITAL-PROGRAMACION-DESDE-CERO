@@ -144,8 +144,8 @@ export default function SyntaxTable() {
                                             {idx + 1}
                                         </span>
                                         <div>
-                                            <h3 className="font-bold text-gray-900 dark:text-white">{item.elemento}</h3>
-                                            <p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5">{item.queEs}</p>
+                                            <h3 className="font-extrabold text-lg text-gray-900 dark:text-white">{item.elemento}</h3>
+                                            <p className="text-base font-medium text-gray-600 dark:text-gray-300 mt-1">{item.queEs}</p>
                                         </div>
                                     </div>
                                     <svg
@@ -167,7 +167,7 @@ export default function SyntaxTable() {
                                                 </div>
                                                 <Highlight theme={themes.nightOwl} code={item.python} language="python">
                                                     {({ style, tokens, getLineProps, getTokenProps }) => (
-                                                        <pre className="text-xs p-4 rounded-xl overflow-x-auto" style={{ ...style, borderRadius: '0.75rem' }}>
+                                                        <pre className="text-sm font-medium p-4 rounded-xl overflow-x-auto" style={{ ...style, borderRadius: '0.75rem' }}>
                                                             {tokens.map((line, i) => (
                                                                 <div key={i} {...getLineProps({ line })}>
                                                                     {line.map((token, key) => (
@@ -186,7 +186,7 @@ export default function SyntaxTable() {
                                                 </div>
                                                 <Highlight theme={themes.nightOwl} code={item.js} language="javascript">
                                                     {({ style, tokens, getLineProps, getTokenProps }) => (
-                                                        <pre className="text-xs p-4 rounded-xl overflow-x-auto" style={{ ...style, borderRadius: '0.75rem' }}>
+                                                        <pre className="text-sm font-medium p-4 rounded-xl overflow-x-auto" style={{ ...style, borderRadius: '0.75rem' }}>
                                                             {tokens.map((line, i) => (
                                                                 <div key={i} {...getLineProps({ line })}>
                                                                     {line.map((token, key) => (
@@ -199,10 +199,9 @@ export default function SyntaxTable() {
                                                 </Highlight>
                                             </div>
                                         </div>
-                                        {/* Errors */}
-                                        <div className="p-3 rounded-xl bg-amber-50 dark:bg-amber-900/10 border border-amber-200 dark:border-amber-800/30">
-                                            <p className="text-xs font-medium text-amber-700 dark:text-amber-400 flex items-start gap-2">
-                                                <svg className="w-4 h-4 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                        <div className="p-4 rounded-xl bg-amber-50 dark:bg-amber-900/10 border border-amber-200 dark:border-amber-800/30">
+                                            <p className="text-sm font-semibold text-amber-700 dark:text-amber-400 flex items-start gap-2">
+                                                <svg className="w-5 h-5 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z" />
                                                 </svg>
                                                 <span><strong>Errores comunes:</strong> {item.errores}</span>
@@ -283,7 +282,7 @@ export default function SyntaxTable() {
                                 </svg>
                                 <span className="text-sm font-medium text-gray-500 dark:text-gray-400">Salida</span>
                             </div>
-                            <pre className="text-sm p-4 rounded-xl bg-gray-900 text-green-400 min-h-[80px] font-mono overflow-x-auto">
+                            <pre className="text-base font-semibold p-4 rounded-xl bg-gray-900 text-green-400 min-h-[80px] font-mono overflow-x-auto">
                                 {output || '// Presiona "Ejecutar" para ver el resultado...'}
                             </pre>
                         </div>

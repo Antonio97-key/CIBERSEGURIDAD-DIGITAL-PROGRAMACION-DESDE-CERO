@@ -164,7 +164,7 @@ export default function CyberSection({ level }) {
                                     <div className="flex-1 min-w-0 w-full">
                                         <div className="flex items-center justify-between mb-3 flex-wrap gap-2">
                                             <div className="flex items-center gap-3">
-                                                <h3 className="text-lg font-bold text-gray-900 dark:text-white">
+                                                <h3 className="text-xl font-extrabold text-gray-900 dark:text-white">
                                                     {lvl.title}
                                                 </h3>
                                                 {isCompleted && (
@@ -180,14 +180,14 @@ export default function CyberSection({ level }) {
                                             )}
                                         </div>
 
-                                        <p className="text-sm text-gray-500 dark:text-gray-400 mb-4 italic">
+                                        <p className="text-base font-semibold text-gray-600 dark:text-gray-300 mb-5 italic">
                                             {lvl.description}
                                         </p>
 
                                         <ul className="space-y-2 mb-6">
                                             {lvl.content.map((item, idx) => (
-                                                <li key={idx} className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-300">
-                                                    <svg className="w-4 h-4 mt-0.5 flex-shrink-0 text-primary-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                                <li key={idx} className="flex items-start gap-2 text-base font-medium text-gray-700 dark:text-gray-200">
+                                                    <svg className="w-5 h-5 mt-0.5 flex-shrink-0 text-primary-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                                         <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4" />
                                                     </svg>
                                                     {item}

@@ -97,8 +97,8 @@ export default function Resources() {
                     <div className="space-y-10 animate-fade-in">
                         {resources.map((category) => (
                             <div key={category.category}>
-                                <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-5 flex items-center gap-2">
-                                    <span className="text-2xl">{category.icon}</span>
+                                <h3 className="text-xl font-extrabold mb-6 flex items-center gap-3" style={{ color: 'var(--color-text)' }}>
+                                    <span className="text-3xl">{category.icon}</span>
                                     {category.category}
                                 </h3>
                                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -111,15 +111,15 @@ export default function Resources() {
                                             className="glass-card p-5 group block"
                                         >
                                             <div className="flex items-start justify-between mb-3">
-                                                <h4 className="font-bold text-gray-900 dark:text-white text-sm group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+                                                <h4 className="font-extrabold text-base transition-colors" style={{ color: 'var(--color-text)' }}>
                                                     {item.name}
                                                 </h4>
                                                 <svg className="w-4 h-4 text-gray-400 group-hover:text-primary-500 transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                                     <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                                                 </svg>
                                             </div>
-                                            <p className="text-xs text-gray-500 dark:text-gray-400 mb-3 leading-relaxed">{item.desc}</p>
-                                            <span className="chip chip-blue text-[10px]">{item.tag}</span>
+                                            <p className="text-sm font-medium mb-4 leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>{item.desc}</p>
+                                            <span className="chip chip-blue text-xs font-bold">{item.tag}</span>
                                         </a>
                                     ))}
                                 </div>
@@ -149,10 +149,10 @@ export default function Resources() {
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                             {filteredGlossary.map((item) => (
                                 <div key={item.term} className="glass-card p-5">
-                                    <h4 className="font-bold text-primary-600 dark:text-primary-400 mb-2 text-sm">
+                                    <h4 className="font-extrabold text-base mb-3" style={{ color: 'var(--color-primary)' }}>
                                         {item.term}
                                     </h4>
-                                    <p className="text-xs text-gray-600 dark:text-gray-300 leading-relaxed">
+                                    <p className="text-sm font-medium leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
                                         {item.def}
                                     </p>
                                 </div>

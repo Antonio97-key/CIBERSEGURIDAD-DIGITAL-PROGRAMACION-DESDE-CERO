@@ -37,7 +37,7 @@ export default function CVEFeed() {
                             Monitor de <span className="gradient-text">Vulnerabilidades</span>
                         </h2>
                     </div>
-                    <p className="text-gray-500 font-medium max-w-md">
+                    <p className="font-semibold max-w-md" style={{ color: 'var(--color-text-muted)' }}>
                         Feed directo de la base de datos nacional de vulnerabilidades (NVD). Mantente actualizado con las últimas amenazas globales.
                     </p>
                 </div>
@@ -49,24 +49,37 @@ export default function CVEFeed() {
                         ))
                     ) : (
                         cves.map(cve => (
-                            <div key={cve.id} className="group p-8 rounded-[40px] bg-graphite-900 border border-white/5 hover:border-white/10 transition-all hover:-translate-y-2">
+                            <a 
+                                key={cve.id} 
+                                href={`https://nvd.nist.gov/vuln/detail/${cve.id}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="group p-8 rounded-[30px] shadow-lg border hover:-translate-y-2 transition-all"
+                                style={{ backgroundColor: 'var(--color-surface)', borderColor: 'var(--color-border)' }}
+                            >
                                 <span className={`inline-block px-3 py-1 rounded-lg text-[10px] font-black tracking-widest border mb-6 ${getSeverityColor(cve.severity)}`}>
                                     {cve.severity}
                                 </span>
-                                <h3 className="text-sm font-black text-white mb-4 leading-tight">{cve.title}</h3>
-                                <div className="flex items-center justify-between mt-auto pt-6 border-t border-white/5">
-                                    <span className="text-[10px] font-bold text-gray-600 uppercase tracking-widest">{cve.id}</span>
-                                    <span className="text-[10px] font-bold text-gray-500">{cve.date}</span>
+                                <h3 className="text-base font-black mb-4 leading-tight" style={{ color: 'var(--color-text)' }}>{cve.title}</h3>
+                                <div className="flex items-center justify-between mt-auto pt-6 border-t" style={{ borderColor: 'var(--color-border)' }}>
+                                    <span className="text-xs font-bold uppercase tracking-widest" style={{ color: 'var(--color-text-muted)' }}>{cve.id}</span>
+                                    <span className="text-xs font-bold" style={{ color: 'var(--color-text-muted)' }}>{cve.date}</span>
                                 </div>
-                            </div>
+                            </a>
                         ))
                     )}
                 </div>
 
                 <div className="mt-12 text-center">
-                    <button className="px-8 py-3 rounded-xl bg-white/5 border border-white/5 text-[10px] font-black uppercase tracking-widest text-gray-400 hover:text-white hover:bg-white/10 transition-all">
+                    <a 
+                        href="https://nvd.nist.gov/vuln/search"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-block px-8 py-4 rounded-xl shadow-md text-xs font-black uppercase tracking-widest transition-all hover:-translate-y-1"
+                        style={{ backgroundColor: 'var(--color-surface)', color: 'var(--color-text)', border: '1px solid var(--color-border)' }}
+                    >
                         Ver Archivo Completo
-                    </button>
+                    </a>
                 </div>
             </div>
         </section>
