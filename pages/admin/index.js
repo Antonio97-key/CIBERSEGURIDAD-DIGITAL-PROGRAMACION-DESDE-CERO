@@ -127,7 +127,7 @@ export default function AdminPanel() {
             if (data && data.length > 0) {
                 setUsers(data);
                 const totalXP = data.reduce((a, u) => a + (u.xp || 0), 0);
-                const subscribers = data.filter(u => u.plan_id === 'pro' || u.role === 'superadmin' || u.role === 'admin').length;
+                const subscribers = data.filter(u => ['premium', 'pro', 'vip'].includes(u.plan_id) || u.role === 'superadmin' || u.role === 'admin').length;
                 setStats({ 
                     totalUsers: data.length, 
                     activeToday: Math.ceil(data.length * 0.4), 
@@ -148,7 +148,7 @@ export default function AdminPanel() {
             ];
             setUsers(mock);
             const totalXP = mock.reduce((a, u) => a + (u.xp || 0), 0);
-            const subscribers = mock.filter(u => u.plan_id === 'pro' || u.role === 'superadmin' || u.role === 'admin').length;
+            const subscribers = mock.filter(u => ['premium', 'pro', 'vip'].includes(u.plan_id) || u.role === 'superadmin' || u.role === 'admin').length;
             setStats({ totalUsers: mock.length, activeToday: 3, totalXP, coursesCompleted: 12, onlineUsers: 4, subscribers });
         } finally { setLoadingUsers(false); }
     };
@@ -221,7 +221,15 @@ export default function AdminPanel() {
 
             <div className="flex pt-36">
                 {/* ===== SIDEBAR ===== */}
-                <button className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-2xl gradient-bg text-white shadow-2xl flex items-center justify-center text-xl lg:hidden" onClick={() => setSidebarOpen(!sidebarOpen)}>
+                <button 
+                    className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-2xl shadow-2xl flex items-center justify-center text-xl lg:hidden transition-all active:scale-95" 
+                    onClick={() => setSidebarOpen(!sidebarOpen)}
+                    style={{ 
+                        backgroundColor: 'var(--color-primary)', 
+                        color: 'var(--color-button-text)',
+                        border: '2px solid rgba(255,255,255,0.1)'
+                    }}
+                >
                     {sidebarOpen ? '✕' : '☰'}
                 </button>
 
@@ -475,7 +483,12 @@ export default function AdminPanel() {
                                                     <td className="px-5 py-4"><div className="flex items-center gap-3"><div className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-black shrink-0" style={{ background: 'var(--gradient-primary)', color: 'white' }}>{(u.display_name || 'U')[0].toUpperCase()}</div><span className="text-sm font-bold truncate" style={{ color: 'var(--color-text)' }}>{u.display_name || '—'}</span></div></td>
                                                     <td className="px-5 py-4 hidden md:table-cell"><span className="text-xs" style={{ color: 'var(--color-text-muted)' }}>{u.email || '—'}</span></td>
                                                     <td className="px-5 py-4"><span className="px-3 py-1 rounded-full text-[10px] font-black" style={{ backgroundColor: b.bg, color: b.color }}>{b.label}</span></td>
-                                                    <td className="px-5 py-4 hidden lg:table-cell">{u.plan_id === 'pro' ? <span className="text-[10px] font-black uppercase text-purple-500 whitespace-nowrap">✨ PRO</span> : <span className="text-[10px] font-black uppercase text-gray-400">Gratis</span>}</td>
+                                                    <td className="px-5 py-4 hidden lg:table-cell">
+                                                        {['premium', 'pro', 'vip'].includes(u.plan_id) 
+                                                            ? <span className={`text-[10px] font-black uppercase whitespace-nowrap px-2 py-0.5 rounded-full ${u.plan_id === 'vip' ? 'text-yellow-500 bg-yellow-500/10' : 'text-purple-500 bg-purple-500/10'}`}>✨ {u.plan_id?.toUpperCase()}</span> 
+                                                            : <span className="text-[10px] font-black uppercase text-gray-400">Gratis</span>
+                                                        }
+                                                    </td>
                                                     <td className="px-5 py-4 hidden lg:table-cell">
                                                         <div className="flex flex-col gap-1 w-24">
                                                             <div className="flex items-center justify-between text-[10px] font-bold">
@@ -612,6 +625,9 @@ CREATE TABLE IF NOT EXISTS profiles (
   display_name TEXT, role TEXT DEFAULT 'user', email TEXT, xp INTEGER DEFAULT 0
 );
 -- ... rest of schema
+INSERT INTO public.platform_settings (id, value) 
+VALUES ('social_links', '{"telegram": "https://t.me/+mjkMgsxIhAJlMTVh", "whatsapp": "https://chat.whatsapp.com/F76SLVgtcEZCzNJs3oTkhE?mode=gi_t"}'::jsonb)
+ON CONFLICT (id) DO NOTHING;
 `}
                                 </pre>
                             </div>

@@ -35,6 +35,7 @@ export default function Footer() {
                 { label: t('header.nav.cyber') || 'Ciberseguridad', href: '#cyber' },
                 { label: t('header.nav.prog') || 'Programación', href: '#prog' },
                 { label: t('header.nav.projects') || 'Proyectos', href: '#integracion' },
+                { label: t('header.nav.pricing') || 'Planes VIP', href: '/dashboard?tab=planes' },
                 { label: t('header.nav.resources') || 'Recursos', href: '#recursos' },
             ],
         },

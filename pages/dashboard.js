@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import { useLanguage } from '../lib/LanguageContext';
 import DashboardSidebar from '../components/DashboardSidebar';
 import { getNextLevelTarget, LEVEL_THRESHOLDS } from '../lib/gamification';
+import { PayPalButtons } from "@paypal/react-paypal-js";
 
 export default function Dashboard() {
     const { user, loading, progress, updateProgress, profile, updateProfile, signOut } = useAuth();
@@ -21,7 +22,12 @@ export default function Dashboard() {
         if (!loading && !user) {
             router.push('/');
         }
-    }, [user, loading]);
+        
+        // Handle tab query parameter
+        if (router.query.tab) {
+            setActiveTab(router.query.tab);
+        }
+    }, [user, loading, router.query.tab]);
 
     useEffect(() => {
         if (profile) {
@@ -49,6 +55,16 @@ export default function Dashboard() {
         setTimeout(() => setSaveSuccess(false), 3000);
     };
 
+    const handlePaymentSuccess = async (planId) => {
+        if (!user) return;
+        await updateProgress({ 
+            subscription: planId,
+            plan_expiry: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString()
+        });
+        alert(`¡Felicidades! Has actualizado satisfactoriamente al Plan ${planId.toUpperCase()}.`);
+        setActiveTab('panel');
+    };
+
     const statsCards = [
         { title: 'Lecciones Vistas', value: progress.lessons?.length || progress.completedLessons?.length || 0, total: 60, color: 'primary' },
         { title: 'Tests de Conocimiento', value: progress.quizzes?.length || 0, total: 25, color: 'blue' },
@@ -60,7 +76,7 @@ export default function Dashboard() {
         { icon: '📖', text: `Completaste "${progress.lessons?.[progress.lessons.length - 1]?.split('/')?.pop() || 'tu primera lección'}"`, time: 'Reciente' },
         { icon: '🎯', text: `Rango actual: Nivel ${progress.level}`, time: 'Ahora' },
         { icon: '🧪', text: `Quizzes resueltos: ${progress.quizzes?.length || 0}`, time: 'Hoy' },
-        { icon: '🛡️', text: 'Terminal de seguridad activa', time: 'Estado: OK' },
+        { icon: '💎', text: `Membresía: ${progress.subscription?.toUpperCase() || 'BÁSICA'}`, time: 'Estado' },
     ];
 
     return (
@@ -82,11 +98,57 @@ export default function Dashboard() {
                         {activeTab === 'panel' && (
                             <div className="animate-fade-in">
                                 {/* Stats Grid */}
-                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                                     {statsCards.map(stat => (
                                         <StatCard key={stat.title} {...stat} />
                                     ))}
                                 </div>
+
+                                {/* Upgrade CTA - Premium 2026 Style */}
+                                {(!progress.subscription || progress.subscription === 'free') && (
+                                    <div className="mb-12 p-1 rounded-[32px] bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 animate-gradient-x shadow-2xl shadow-purple-500/20">
+                                        <div className="bg-black/90 rounded-[30px] p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden group">
+                                            {/* Decorative background effects */}
+                                            <div className="absolute top-0 right-0 w-64 h-64 bg-primary-500/10 rounded-full blur-[100px] pointer-events-none group-hover:bg-primary-500/20 transition-all duration-700"></div>
+                                            <div className="absolute bottom-0 left-0 w-64 h-64 bg-purple-500/10 rounded-full blur-[100px] pointer-events-none group-hover:bg-purple-500/20 transition-all duration-700"></div>
+
+                                            <div className="flex-1 text-center md:text-left relative z-10">
+                                                <div className="flex flex-col md:flex-row items-center gap-4 mb-4">
+                                                    <span className="px-5 py-1.5 rounded-full bg-primary-500/10 border border-primary-500/20 text-primary-400 text-[10px] font-black uppercase tracking-[0.2em]">Oportunidad VIP</span>
+                                                    <div className="flex -space-x-2">
+                                                        {[1,2,3].map(i => (
+                                                            <div key={i} className="w-8 h-8 rounded-full border-2 border-black bg-gray-800 flex items-center justify-center text-[10px] font-bold">👤</div>
+                                                        ))}
+                                                        <div className="w-8 h-8 rounded-full border-2 border-black bg-primary-500 flex items-center justify-center text-[10px] font-bold text-white">+500</div>
+                                                    </div>
+                                                </div>
+                                                <h3 className="text-3xl md:text-4xl font-black text-white mb-4 tracking-tighter leading-none">
+                                                    Desbloquea el <span className="bg-gradient-to-r from-primary-400 to-secondary-400 bg-clip-text text-transparent">Poder Total</span> de Ciberseguridad
+                                                </h3>
+                                                <p className="text-gray-400 font-medium max-w-xl text-sm md:text-base mb-6">
+                                                    Accede a laboratorios de hacking real, simulaciones de ataques bancarios y certificaciones verificadas en la blockchain.
+                                                </p>
+                                                <div className="flex flex-wrap justify-center md:justify-start gap-4">
+                                                    {['Laboratorios Avanzados', 'Soporte 24/7', 'Certificados VIP'].map(feat => (
+                                                        <div key={feat} className="flex items-center gap-2 text-[10px] font-bold text-white/70 uppercase">
+                                                            <svg className="w-3.5 h-3.5 text-primary-400" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" /></svg>
+                                                            {feat}
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </div>
+
+                                            <div className="flex-shrink-0 w-full md:w-auto relative z-10">
+                                                <button 
+                                                    onClick={() => setActiveTab('planes')}
+                                                    className="w-full md:w-auto px-10 py-5 rounded-2xl bg-white text-black font-black text-sm uppercase tracking-widest hover:bg-primary-500 hover:text-white transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-xl shadow-white/5 active:shadow-none"
+                                                >
+                                                    Ver Planes VIP
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
 
                                 {/* Badges & Activity */}
                                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -270,7 +332,10 @@ export default function Dashboard() {
                                             <div key={tag} className="py-4 rounded-2xl font-black text-xs uppercase bg-white/5 border border-white/10" style={{ backgroundColor: 'var(--color-badge-bg)', color: 'var(--color-text)' }}>{tag}</div>
                                         ))}
                                     </div>
-                                    <button onClick={() => router.push('/course/cybersecurity')} className="btn-3d btn-3d-primary px-12 py-5 text-sm uppercase tracking-widest font-black">
+                                    <button onClick={() => {
+                                        setActiveTab('planes');
+                                        alert('Pronto: Contenido de Ciberseguridad Avanzada. Por ahora, mejora tu plan para estar listo.');
+                                    }} className="btn-3d btn-3d-primary px-12 py-5 text-sm uppercase tracking-widest font-black">
                                         🔑 Desbloquear Contenido Experto
                                     </button>
                                 </div>
@@ -296,7 +361,10 @@ export default function Dashboard() {
                                             <div key={tag} className="py-4 rounded-2xl font-black text-xs uppercase bg-white/5 border border-white/10" style={{ backgroundColor: 'var(--color-badge-bg)', color: 'var(--color-text)' }}>{tag}</div>
                                         ))}
                                     </div>
-                                    <button onClick={() => router.push('/course/programming')} className="btn-3d btn-3d-primary px-12 py-5 text-sm uppercase tracking-widest font-black">
+                                    <button onClick={() => {
+                                        setActiveTab('planes');
+                                        alert('Pronto: Academia de Programación Avanzada. Mejora tu plan para acceder a los laboratorios exclusivos.');
+                                    }} className="btn-3d btn-3d-primary px-12 py-5 text-sm uppercase tracking-widest font-black">
                                         🚀 Comenzar a Construir
                                     </button>
                                 </div>
@@ -402,87 +470,149 @@ export default function Dashboard() {
 
                         {/* TAB: Planes & VIP */}
                         {activeTab === 'planes' && (
-                            <div className="space-y-8 animate-fade-in pb-10">
-                                <div className="flex flex-col gap-2">
-                                    <h2 className="text-2xl md:text-3xl font-black gradient-text">💎 Planes & Suscripciones VIP</h2>
-                                    <p className="text-sm font-medium opacity-70" style={{ color: 'var(--color-text-muted)' }}>Desbloquea el máximo potencial de tu carrera en ciberseguridad</p>
-                                </div>
-
-                                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-                                    {/* Basic Plan */}
-                                    <div className="p-8 rounded-[32px] glass flex flex-col items-center text-center transition-all duration-500 hover:scale-[1.02] border border-white/5 relative group" style={{ backgroundColor: 'var(--color-surface)', height: '100%' }}>
-                                        <div className="w-16 h-16 rounded-2xl gradient-bg flex items-center justify-center mb-6 shadow-xl">
-                                            <span className="text-3xl text-white">👤</span>
-                                        </div>
-                                        <h3 className="text-xl font-black mb-2" style={{ color: 'var(--color-text)' }}>{t('pricing.free.name')}</h3>
-                                        <p className="text-3xl font-black mb-6" style={{ color: 'var(--color-text)' }}>$0 <span className="text-xs opacity-50 uppercase tracking-widest">{t('pricing.period.forever')}</span></p>
-                                        
-                                        <ul className="w-full space-y-4 mb-10 text-sm font-medium text-left" style={{ color: 'var(--color-text)' }}>
-                                            <li className="flex items-center gap-3"><span className="text-green-500">✓</span> {t('pricing.free.feat1')}</li>
-                                            <li className="flex items-center gap-3"><span className="text-green-500">✓</span> {t('pricing.free.feat2')}</li>
-                                            <li className="flex items-center gap-3 opacity-30"><span className="text-gray-400">✕</span> {t('pricing.premium.feat1')}</li>
-                                            <li className="flex items-center gap-3 opacity-30"><span className="text-gray-400">✕</span> {t('pricing.vip.feat2')}</li>
-                                        </ul>
-
-                                        <button className="w-full py-4 mt-auto rounded-2xl font-black text-[10px] uppercase tracking-widest border border-primary-500/30 text-primary-500 opacity-70 cursor-default">
-                                            {t('pricing.free.btn')}
-                                        </button>
+                            <div className="space-y-8 animate-fade-in pb-20">
+                                <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+                                    <div className="space-y-2">
+                                        <span className="text-[10px] font-black uppercase tracking-[.3em] text-primary-500">Membresía Premium</span>
+                                        <h2 className="text-4xl md:text-5xl font-black text-white tracking-tighter" style={{ color: 'var(--color-text)' }}>
+                                            Escala tu <span className="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">Carrera</span>
+                                        </h2>
+                                        <p className="text-sm font-medium opacity-60 max-w-md" style={{ color: 'var(--color-text-muted)' }}>
+                                            Formación de élite diseñada por expertos de la industria. Elige el plan que mejor se adapte a tus objetivos técnicos.
+                                        </p>
                                     </div>
-
-                                    {/* Premium Plan */}
-                                    <div className="p-8 rounded-[32px] flex flex-col items-center text-center transition-all duration-500 hover:scale-[1.05] border-2 border-primary-500/30 relative group shadow-2xl shadow-primary-500/10" style={{ backgroundColor: '#000000', color: '#ffffff', height: '100%' }}>
-                                        <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full gradient-bg text-[10px] font-black uppercase tracking-widest text-white shadow-lg">
-                                            {t('pricing.badge_recommended')}
-                                        </div>
-                                        <div className="w-20 h-20 rounded-3xl gradient-bg flex items-center justify-center mb-6 shadow-2xl group-hover:rotate-6 transition-transform">
-                                            <span className="text-4xl text-white">✨</span>
-                                        </div>
-                                        <h3 className="text-2xl font-black mb-2 text-white">{t('pricing.premium.name')}</h3>
-                                        <p className="text-4xl font-black mb-6 text-white">$29 <span className="text-xs opacity-50 uppercase tracking-widest">USD {t('pricing.period.monthly')}</span></p>
-                                        
-                                        <ul className="w-full space-y-4 mb-10 text-sm font-medium text-left text-white/80">
-                                            <li className="flex items-center gap-3"><span className="text-primary-500 font-bold">✓</span> {t('pricing.premium.feat1')}</li>
-                                            <li className="flex items-center gap-3"><span className="text-primary-500 font-bold">✓</span> {t('pricing.premium.feat2')}</li>
-                                            <li className="flex items-center gap-3"><span className="text-primary-500 font-bold">✓</span> {t('pricing.premium.feat3')}</li>
-                                            <li className="flex items-center gap-3"><span className="text-primary-500 font-bold">✓</span> {t('pricing.premium.feat4')}</li>
-                                        </ul>
-
-                                        <button className="w-full py-4 mt-auto rounded-2xl font-black text-[10px] uppercase tracking-widest gradient-bg text-white shadow-xl hover:shadow-primary-500/30 transition-all hover:scale-105 active:scale-95">
-                                            {t('pricing.premium.btn')}
-                                        </button>
-                                    </div>
-
-                                    {/* VIP Plan */}
-                                    <div className="p-8 rounded-[32px] glass flex flex-col items-center text-center transition-all duration-500 hover:scale-[1.02] border border-white/5 relative group" style={{ backgroundColor: 'var(--color-surface)', height: '100%' }}>
-                                        <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-yellow-400 to-orange-600 flex items-center justify-center mb-6 shadow-xl">
-                                            <span className="text-3xl text-white">👑</span>
-                                        </div>
-                                        <h3 className="text-xl font-black mb-2" style={{ color: 'var(--color-text)' }}>{t('pricing.vip.name')}</h3>
-                                        <p className="text-3xl font-black mb-6" style={{ color: 'var(--color-text)' }}>$99 <span className="text-xs opacity-50 uppercase tracking-widest">USD {t('pricing.period.forever')}</span></p>
-                                        
-                                        <ul className="w-full space-y-4 mb-10 text-sm font-medium text-left" style={{ color: 'var(--color-text)' }}>
-                                            <li className="flex items-center gap-3"><span className="text-yellow-500">✓</span> {t('pricing.vip.feat1')}</li>
-                                            <li className="flex items-center gap-3"><span className="text-yellow-500">✓</span> {t('pricing.vip.feat2')}</li>
-                                            <li className="flex items-center gap-3"><span className="text-yellow-500">✓</span> {t('pricing.vip.feat3')}</li>
-                                            <li className="flex items-center gap-3"><span className="text-yellow-500">✓</span> {t('pricing.vip.feat4')}</li>
-                                        </ul>
-
-                                        <button className="w-full py-4 mt-auto rounded-2xl font-black text-[10px] uppercase tracking-widest border border-yellow-500/50 text-yellow-500 hover:bg-yellow-500 hover:text-white transition-all shadow-lg shadow-yellow-500/10 active:scale-95">
-                                            {t('pricing.vip.btn')}
-                                        </button>
+                                    <div className="flex gap-2 p-1 rounded-2xl bg-black/20 backdrop-blur-xl border border-white/5 h-fit">
+                                        <button className="px-6 py-2.5 rounded-xl bg-primary-600 text-white text-[10px] font-black uppercase tracking-widest shadow-lg">Mensual</button>
+                                        <button className="px-6 py-2.5 rounded-xl text-white/40 text-[10px] font-black uppercase tracking-widest hover:text-white/70 transition-colors">Anual ( -20% )</button>
                                     </div>
                                 </div>
 
-                                {/* Secure Payment Proof */}
-                                <div className="p-8 rounded-3xl glass flex items-center justify-center gap-8 opacity-60 flex-wrap" style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)' }}>
-                                    <div className="flex items-center gap-2" style={{ color: 'var(--color-text)' }}>
-                                        <svg className="w-5 h-5 opacity-40" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9v-2h2v2zm0-4H9V7h2v5z"/></svg>
-                                        <span className="text-[10px] font-black uppercase tracking-widest">Pago Seguro SSL</span>
-                                    </div>
-                                    <div className="flex items-center gap-2" style={{ color: 'var(--color-text)' }}>
-                                        <svg className="w-5 h-5 opacity-40" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
-                                        <span className="text-[10px] font-black uppercase tracking-widest">Garantía de Satisfacción</span>
-                                    </div>
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                                    {/* Simulated Purchase Handler */}
+                                    {[
+                                        { 
+                                            id: 'free', 
+                                            name: t('pricing.free.name'), 
+                                            price: '0', 
+                                            icon: '👤', 
+                                            color: 'gray',
+                                            features: [t('pricing.free.feat1'), t('pricing.free.feat2'), t('pricing.free.feat3'), t('pricing.free.feat4')],
+                                            btn: progress.subscription === 'free' || !progress.subscription ? 'Plan Actual' : 'Bajar de Plan'
+                                        },
+                                        { 
+                                            id: 'premium', 
+                                            name: t('pricing.premium.name'), 
+                                            price: '12', 
+                                            icon: '✨', 
+                                            color: 'primary', 
+                                            hot: true,
+                                            features: [t('pricing.premium.feat1'), t('pricing.premium.feat2'), t('pricing.premium.feat3'), t('pricing.premium.feat4')],
+                                            btn: progress.subscription === 'premium' ? 'Plan Actual' : 'Actualizar Ahora'
+                                        },
+                                        { 
+                                            id: 'vip', 
+                                            name: t('pricing.vip.name'), 
+                                            price: '29', 
+                                            icon: '👑', 
+                                            color: 'yellow',
+                                            features: [t('pricing.vip.feat1'), t('pricing.vip.feat2'), t('pricing.vip.feat3'), t('pricing.vip.feat4')],
+                                            btn: progress.subscription === 'vip' ? 'Plan Actual' : 'Comprar VIP'
+                                        }
+                                    ].map((plan) => {
+                                        const isCurrent = (progress.subscription === plan.id) || (plan.id === 'free' && !progress.subscription);
+                                        
+                                        return (
+                                            <div 
+                                                key={plan.id} 
+                                                className={`p-1 rounded-[40px] transition-all duration-500 hover:scale-[1.03] ${plan.hot ? 'bg-gradient-to-b from-primary-500 to-purple-600' : 'bg-white/5'}`}
+                                                style={{ height: 'fit-content' }}
+                                            >
+                                                <div className={`rounded-[38px] p-8 md:p-10 flex flex-col h-full bg-black/90 backdrop-blur-3xl overflow-hidden relative group`}>
+                                                    {plan.hot && (
+                                                        <div className="absolute top-0 right-0 p-8 opacity-10 -mr-4 -mt-4 group-hover:scale-110 transition-transform duration-700">
+                                                            <div className="w-32 h-32 rounded-full bg-primary-500 blur-3xl"></div>
+                                                        </div>
+                                                    )}
+
+                                                    <div className="mb-8">
+                                                        <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl mb-6 shadow-xl" style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)' }}>
+                                                            {plan.icon}
+                                                        </div>
+                                                        <h3 className="text-xl font-black text-white mb-2">{plan.name}</h3>
+                                                        <div className="flex items-baseline gap-1">
+                                                            <span className="text-4xl font-black text-white">${plan.price}</span>
+                                                            <span className="text-xs font-bold text-gray-500 uppercase tracking-widest">{plan.id === 'vip' ? '/ Único' : '/ Mes'}</span>
+                                                        </div>
+                                                    </div>
+
+                                                    <ul className="space-y-4 mb-10 flex-1">
+                                                        {plan.features.map((feat, i) => (
+                                                            <li key={i} className="flex items-center gap-3 text-sm font-medium text-gray-400">
+                                                                <svg className="w-4 h-4 text-primary-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                                                                </svg>
+                                                                {feat}
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+
+                                                    {plan.id === 'free' ? (
+                                                        <button 
+                                                            disabled={true}
+                                                            className="w-full py-4 rounded-2xl font-black text-[10px] uppercase tracking-[.2em] bg-white/5 text-gray-500 border border-white/5 cursor-default"
+                                                        >
+                                                            Plan Actual
+                                                        </button>
+                                                    ) : isCurrent ? (
+                                                        <button 
+                                                            disabled={true}
+                                                            className="w-full py-4 rounded-2xl font-black text-[10px] uppercase tracking-[.2em] bg-white/5 text-gray-500 border border-white/5 cursor-default"
+                                                        >
+                                                            Plan Actual
+                                                        </button>
+                                                    ) : (
+                                                        <div className="mt-2">
+                                                            <PayPalButtons
+                                                                fundingSource={"paypal"}
+                                                                style={{ layout: "vertical", shape: "pill", label: "pay" }}
+                                                                createOrder={(data, actions) => {
+                                                                    return actions.order.create({
+                                                                        purchase_units: [
+                                                                            {
+                                                                                amount: {
+                                                                                    value: plan.price,
+                                                                                },
+                                                                            },
+                                                                        ],
+                                                                    });
+                                                                }}
+                                                                onApprove={(data, actions) => {
+                                                                    return actions.order.capture().then((details) => {
+                                                                        handlePaymentSuccess(plan.id);
+                                                                    });
+                                                                }}
+                                                            />
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+
+                                {/* Trust Badges Mobile Friendly */}
+                                <div className="p-8 rounded-[32px] bg-white/5 border border-white/5 grid grid-cols-2 md:grid-cols-4 gap-6">
+                                    {[
+                                        { label: 'Pago Seguro SSL', icon: '🔒' },
+                                        { label: 'Garantía 7 Días', icon: '🛡️' },
+                                        { label: 'Blockchain ID', icon: '⛓️' },
+                                        { label: 'Soporte 24/7', icon: '💬' }
+                                    ].map((badge, i) => (
+                                        <div key={i} className="flex items-center gap-3 text-[10px] font-black uppercase tracking-widest text-white/40">
+                                            <span className="text-lg opacity-100">{badge.icon}</span>
+                                            <span className="leading-tight">{badge.label}</span>
+                                        </div>
+                                    ))}
                                 </div>
                             </div>
                         )}

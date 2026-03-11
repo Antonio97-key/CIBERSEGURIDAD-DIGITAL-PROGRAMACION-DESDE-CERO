@@ -119,8 +119,14 @@ export default function Pricing() {
                             </ul>
 
                             {plan.id === 'free' ? (
-                                <button className={`btn-3d w-full ${plan.buttonClass}`} style={{ cursor: 'pointer' }}>
-                                    {plan.buttonText}
+                                <button className={`btn-3d w-full py-4 text-xs font-black uppercase tracking-widest ${plan.buttonClass}`} 
+                                    style={{ 
+                                        backgroundColor: 'var(--color-surface-hover)', 
+                                        color: 'var(--color-text-muted)',
+                                        border: '1px solid var(--color-border)',
+                                        opacity: 0.8
+                                    }}>
+                                    Plan Actual
                                 </button>
                             ) : (
                                 <div className="mt-4">

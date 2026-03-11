@@ -48,13 +48,18 @@ export default function Header() {
 
     const navLinks = [
         !isSpecialPage && { name: t('header.nav.home') || 'Inicio', href: '#hero' },
-        { name: 'Laboratorio', href: '/playground' },
-        { name: t('header.nav.projects') || 'Proyectos', href: '/proyectos' },
+        !isSpecialPage && { name: 'Laboratorio', href: '/playground' },
+        !isSpecialPage && { name: t('header.nav.projects') || 'Proyectos', href: '/proyectos' },
         !isSpecialPage && { name: t('header.nav.cyber') || 'Ciberseguridad', href: '#cyber' },
         !isSpecialPage && { name: t('header.nav.prog') || 'Programación', href: '#prog' },
         !isSpecialPage && { name: t('header.nav.news') || 'Noticias', href: '#noticias' },
         !isSpecialPage && { name: t('header.nav.trust') || 'Confianza', href: '#confianza' },
         !isSpecialPage && { name: t('header.nav.community') || 'Comunidad', href: '#comunidad' },
+        // Always show Planes/Pricing if not on Admin
+        !router.pathname.startsWith('/admin') && { 
+            name: t('header.nav.pricing') || 'Planes', 
+            href: user ? '/dashboard?tab=planes' : '#planes' 
+        },
         user && !isSpecialPage ? { name: 'Mi Perfil', href: '/dashboard' } : null
     ].filter(Boolean);
 

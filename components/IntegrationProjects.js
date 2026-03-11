@@ -11,6 +11,7 @@ const difficultyColors = {
 export default function IntegrationProjects({ level }) {
     const { t } = useLanguage();
     const [activeProject, setActiveProject] = useState(null);
+    const [selectedProjectIndex, setSelectedProjectIndex] = useState(0);
 
     const projects = [
         {
@@ -209,69 +210,83 @@ console.log("✅ Correcto:   " + (mensaje === descifrado));`,
                 <div className="text-center mb-16">
                     <span className="chip chip-green mb-4 inline-flex">🚀 {t('projects.badge')}</span>
                     <h2 className="section-title gradient-text">{t('projects.title')}</h2>
-                    <p className="section-subtitle mx-auto">
+                    <p className="section-subtitle mx-auto text-balance">
                         {t('projects.subtitle')}
                     </p>
                 </div>
 
-                {/* Project Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {projects.map((project) => (
-                        <div key={project.id} className="glass-card overflow-hidden group">
-                            <div className="p-6">
+                {/* Project Selector (Mobile Friendly) */}
+                <div className="flex flex-wrap justify-center gap-3 mb-10 overflow-x-auto pb-4 hide-scrollbar">
+                    {projects.map((p, idx) => (
+                        <button
+                            key={p.id}
+                            onClick={() => setSelectedProjectIndex(idx)}
+                            className={`px-6 py-3 rounded-2xl text-[10px] uppercase font-black tracking-widest transition-all duration-300 whitespace-nowrap ${selectedProjectIndex === idx ? 'gradient-bg text-white shadow-lg scale-105' : 'bg-[var(--color-surface)] text-[var(--color-text-muted)] border border-[var(--color-border)] opacity-60 hover:opacity-100'}`}
+                        >
+                            {p.icon} {p.title.split(' ').slice(0, 2).join(' ')}
+                        </button>
+                    ))}
+                </div>
+
+                {/* Project Focus (Unified View) */}
+                <div className="max-w-4xl mx-auto px-4">
+                    {projects[selectedProjectIndex] && (
+                        <div key={projects[selectedProjectIndex].id} className="glass-card overflow-hidden group animate-fade-in">
+                            <div className="p-8 md:p-10">
                                 {/* Header */}
-                                <div className="flex items-start justify-between mb-4">
-                                    <div className="w-12 h-12 rounded-2xl bg-primary-50 dark:bg-primary-900/20 flex items-center justify-center text-2xl">
-                                        {project.icon}
+                                <div className="flex items-start justify-between mb-8">
+                                    <div className="w-16 h-16 rounded-3xl bg-primary-50 dark:bg-primary-900/20 flex items-center justify-center text-4xl shadow-inner">
+                                        {projects[selectedProjectIndex].icon}
                                     </div>
-                                    <div className="flex gap-2 flex-wrap justify-end">
-                                        <span className={`chip ${project.difficulty.includes(t('projects.level.beginner') || 'Principiante') ? 'chip-green' : project.difficulty.includes(t('projects.level.advanced') || 'Avanzado') ? 'chip-purple' : 'chip-orange'} text-xs font-bold`}>
-                                            {project.difficulty}
+                                    <div className="flex gap-2">
+                                        <span className={`chip ${projects[selectedProjectIndex].difficulty.includes(t('projects.level.beginner') || 'Principiante') ? 'chip-green' : projects[selectedProjectIndex].difficulty.includes(t('projects.level.advanced') || 'Avanzado') ? 'chip-purple' : 'chip-orange'} text-[10px] font-black uppercase tracking-wider`}>
+                                            {projects[selectedProjectIndex].difficulty}
                                         </span>
                                     </div>
                                 </div>
 
                                 {/* Content */}
-                                <h3 className="text-xl font-extrabold text-gray-900 dark:text-white mb-3">
-                                    {project.title}
+                                <h3 className="text-2xl md:text-3xl font-black text-gray-900 dark:text-white mb-4 leading-tight text-balance">
+                                    {projects[selectedProjectIndex].title}
                                 </h3>
-                                <p className="text-base font-medium text-gray-600 dark:text-gray-300 mb-5 leading-relaxed">
-                                    {project.description}
+                                <p className="text-sm md:text-base font-medium text-gray-600 dark:text-gray-300 mb-8 leading-relaxed opacity-80">
+                                    {projects[selectedProjectIndex].description}
                                 </p>
 
                                 {/* Tech Tags */}
-                                <div className="flex flex-wrap gap-2 mb-6">
-                                    {project.tech.map((t) => (
-                                        <span key={t} className="text-xs font-bold px-3 py-1.5 rounded-lg transition-colors shadow-sm" style={{ backgroundColor: 'var(--color-surface-hover)', color: 'var(--color-text)', border: '1px solid var(--color-border)' }}>
-                                            {t}
+                                <div className="flex flex-wrap gap-2 mb-8">
+                                    {projects[selectedProjectIndex].tech.map((tag) => (
+                                        <span key={tag} className="text-[10px] font-black uppercase tracking-widest px-4 py-2 rounded-xl transition-all shadow-sm" style={{ backgroundColor: 'var(--color-badge-bg)', color: 'var(--color-primary)', border: '1px solid var(--color-border)' }}>
+                                            {tag}
                                         </span>
                                     ))}
                                 </div>
 
                                 {/* Toggle Code */}
                                 <button
-                                    onClick={() => setActiveProject(activeProject === project.id ? null : project.id)}
-                                    className="btn-3d btn-3d-outline text-sm font-bold w-full py-3"
+                                    onClick={() => setActiveProject(activeProject === projects[selectedProjectIndex].id ? null : projects[selectedProjectIndex].id)}
+                                    className="btn-3d btn-3d-primary text-xs font-black uppercase tracking-widest w-full py-4 flex items-center justify-center gap-3 active:scale-95 transition-transform"
                                 >
-                                    {activeProject === project.id ? t('projects.view_code') : t('projects.view_code')}
-                                    <svg className={`w-5 h-5 transition-transform duration-300 ${activeProject === project.id ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                    {activeProject === projects[selectedProjectIndex].id ? 'Ocultar Código' : 'Analizar Implementación'}
+                                    <svg className={`w-5 h-5 transition-transform duration-300 ${activeProject === projects[selectedProjectIndex].id ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                                     </svg>
                                 </button>
                             </div>
 
                             {/* Code Block */}
-                            <div className={`transition-all duration-500 overflow-hidden ${activeProject === project.id ? 'max-h-[800px] opacity-100' : 'max-h-0 opacity-0'}`}>
-                                <div className="border-t border-gray-100 dark:border-gray-700/50">
+                            <div className={`transition-all duration-700 overflow-hidden ${activeProject === projects[selectedProjectIndex].id ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'}`}>
+                                <div className="border-t border-[var(--color-border)]">
                                     <Highlight 
                                         theme={themes.nightOwl} 
-                                        code={project.code} 
-                                        language={project.tech.includes('Python') ? 'python' : 'javascript'}
+                                        code={projects[selectedProjectIndex].code} 
+                                        language={projects[selectedProjectIndex].tech.includes('Python') ? 'python' : 'javascript'}
                                     >
                                         {({ className, style, tokens, getLineProps, getTokenProps }) => (
-                                            <pre className={`text-sm font-medium p-5 overflow-x-auto font-mono leading-relaxed ${className}`} style={{ ...style, margin: 0 }}>
+                                            <pre className={`text-[13px] font-medium p-6 md:p-8 overflow-x-auto font-mono leading-relaxed ${className}`} style={{ ...style, margin: 0 }}>
                                                 {tokens.map((line, i) => (
                                                     <div key={i} {...getLineProps({ line })}>
+                                                        <span className="opacity-30 mr-4 select-none inline-block w-4">{i + 1}</span>
                                                         {line.map((token, key) => (
                                                             <span key={key} {...getTokenProps({ token })} />
                                                         ))}
@@ -283,7 +298,7 @@ console.log("✅ Correcto:   " + (mensaje === descifrado));`,
                                 </div>
                             </div>
                         </div>
-                    ))}
+                    )}
                 </div>
             </div>
         </section>

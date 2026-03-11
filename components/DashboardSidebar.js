@@ -42,6 +42,16 @@ export default function DashboardSidebar({ activeTab, setActiveTab }) {
                         🛡️ Ir al Panel Admin
                     </button>
                 )}
+
+                {(!progress?.subscription || progress?.subscription === 'free') && (
+                    <button 
+                        onClick={() => setActiveTab('planes')} 
+                        className="w-full py-2.5 rounded-xl text-xs font-black uppercase tracking-widest transition-all hover:brightness-110 mb-2 shadow-lg shadow-primary-500/20" 
+                        style={{ backgroundColor: 'var(--color-primary)', color: 'var(--color-button-text)' }}
+                    >
+                        💎 Mejorar Plan
+                    </button>
+                )}
             </div>
 
             {/* Navigation Menu */}
