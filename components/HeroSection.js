@@ -38,9 +38,9 @@ export default function HeroSection() {
                 </h1>
 
                 {/* Subtitle */}
-                <p className="text-lg sm:text-xl opacity-80 mb-10 max-w-2xl mx-auto leading-relaxed animate-slide-up" style={{ animationDelay: '0.2s', color: 'var(--color-text-muted)' }}>
+                <p className="text-lg sm:text-xl font-medium mb-10 max-w-2xl mx-auto leading-relaxed animate-slide-up" style={{ animationDelay: '0.2s', color: 'var(--color-text)' }}>
                     {t('hero.subtitle')}
-                    <span className="block mt-2 text-base opacity-70">
+                    <span className="block mt-2 text-base font-semibold" style={{ color: 'var(--color-text)' }}>
                         {t('hero.subtitle_sub')}
                     </span>
                 </p>
