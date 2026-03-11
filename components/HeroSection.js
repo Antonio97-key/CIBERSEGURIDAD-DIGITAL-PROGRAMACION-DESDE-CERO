@@ -66,8 +66,8 @@ export default function HeroSection() {
                             e.preventDefault();
                             document.querySelector('#prog')?.scrollIntoView({ behavior: 'smooth' });
                         }}
-                        className="btn-3d w-full sm:w-auto px-8 py-4 border-[2px] backdrop-blur-sm text-center"
-                        style={{ color: 'var(--color-text)', borderColor: 'var(--color-border)' }}
+                        className="btn-3d w-full sm:w-auto px-8 py-4 border-[2px] text-center shadow-lg transition-colors hover:scale-105"
+                        style={{ backgroundColor: 'var(--color-surface-hover)', color: 'var(--color-text)', borderColor: 'var(--color-border)' }}
                     >
                         <svg className="w-5 h-5 inline-block mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                             <path strokeLinecap="round" strokeLinejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />

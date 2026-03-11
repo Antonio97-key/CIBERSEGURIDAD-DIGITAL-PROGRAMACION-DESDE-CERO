@@ -154,7 +154,7 @@ export default function Forum() {
                                         </p>
                                     </div>
                                 </div>
-                                <div className="bg-gray-50 dark:bg-black/20 p-5 rounded-2xl border border-gray-100 dark:border-gray-800">
+                                <div className="p-5 rounded-2xl transition-colors" style={{ backgroundColor: 'var(--color-surface-hover)', border: '1px solid var(--color-border)' }}>
                                     <p className="text-center text-base leading-relaxed font-medium" style={{ color: 'var(--color-text)' }}>
                                         {post.content}
                                     </p>

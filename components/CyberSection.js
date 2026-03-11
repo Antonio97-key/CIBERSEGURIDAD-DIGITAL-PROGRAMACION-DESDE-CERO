@@ -128,14 +128,16 @@ export default function CyberSection({ level }) {
                 {/* Progress Bar */}
                 <div className="max-w-2xl mx-auto mb-12">
                     <div className="flex items-center justify-between mb-4">
-                        <span className="text-lg font-bold uppercase tracking-widest text-gray-900 dark:text-white bg-gray-100 dark:bg-gray-800 px-4 py-1.5 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm">
+                        <span className="text-lg font-bold uppercase tracking-widest px-4 py-1.5 rounded-xl transition-colors shadow-sm"
+                              style={{ backgroundColor: 'var(--color-surface-hover)', color: 'var(--color-text)', border: '1px solid var(--color-border)' }}>
                             Tu progreso
                         </span>
-                        <span className="text-xl font-black gradient-text bg-primary-50 dark:bg-primary-900/20 px-4 py-1.5 rounded-xl border border-primary-100 dark:border-primary-800/30">
+                        <span className="text-xl font-black gradient-text px-4 py-1.5 rounded-xl transition-colors"
+                              style={{ backgroundColor: 'var(--color-badge-bg)', border: '1px solid var(--color-border)' }}>
                             {completedLevels.length} / {levels.length} niveles
                         </span>
                     </div>
-                    <div className="w-full h-4 rounded-full bg-gray-200 dark:bg-graphite-700 overflow-hidden shadow-inner border border-gray-300 dark:border-gray-600">
+                    <div className="w-full h-4 rounded-full overflow-hidden shadow-inner" style={{ backgroundColor: 'var(--color-surface-hover)', border: '1px solid var(--color-border)' }}>
                         <div
                             className="h-full rounded-full gradient-bg transition-all duration-1000 ease-out relative"
                             style={{ width: `${(completedLevels.length / levels.length) * 100}%` }}

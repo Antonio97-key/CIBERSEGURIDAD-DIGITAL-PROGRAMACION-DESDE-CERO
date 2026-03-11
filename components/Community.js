@@ -1,14 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useLanguage } from '../lib/LanguageContext';
+import { useAuth } from '../lib/AuthContext';
 import { supabase } from '../lib/supabase';
 
 export default function Community() {
     const { t } = useLanguage();
-    const [comments, setComments] = useState([
-        { id: 1, text: '¡Excelente plataforma! Me ayudó mucho a entender la ciberseguridad.', author: 'Carlos M.', time: 'Hace 2 horas' },
-        { id: 2, text: 'El editor interactivo es genial para practicar sin instalar nada.', author: 'María P.', time: 'Hace 5 horas' },
-        { id: 3, text: 'Los proyectos de integración son muy prácticos. ¡Más por favor!', author: 'José R.', time: 'Hace 1 día' },
-    ]);
+    const { user, profile } = useAuth();
+    const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [dynamicLinks, setDynamicLinks] = useState({ telegram: '#', whatsapp: '#' });
@@ -23,30 +21,54 @@ export default function Community() {
                         whatsapp: data.value.whatsapp || '#'
                     });
                 }
-            } catch (e) {
-                console.error("Error fetching community links:", e);
-            }
+            } catch (e) { console.error("Error fetching community links:", e); }
+        };
+        const fetchComments = async () => {
+            try {
+                const { data, error } = await supabase.from('forum_posts').select('*').order('created_at', { ascending: false }).limit(20);
+                if (data && data.length > 0) {
+                    setComments(data);
+                } else {
+                    // Fallback to sample data if table is empty or missing
+                    setComments([
+                        { id: 1, text: '¡Excelente plataforma! Me ayudó mucho a entender la ciberseguridad.', author: 'Comunidad', created_at: new Date().toISOString() },
+                    ]);
+                }
+            } catch (e) { console.error(e); }
         };
         fetchLinks();
+        fetchComments();
     }, []);
 
     const addComment = async () => {
         if (!newComment.trim()) return;
+        if (!user) {
+            alert('Debes iniciar sesión para comentar.');
+            return;
+        }
 
         setIsSubmitting(true);
 
-        // Simulate adding to Supabase (use real Supabase when configured)
-        const comment = {
-            id: Date.now(),
+        const newPost = {
             text: newComment.trim(),
-            author: 'Anónimo',
-            time: 'Ahora mismo',
+            author: profile?.display_name || user.email.split('@')[0],
+            created_at: new Date().toISOString(),
+            user_id: user.id
         };
 
-        setComments([comment, ...comments]);
-        setNewComment('');
+        try {
+            const { data, error } = await supabase.from('forum_posts').insert([newPost]).select();
+            if (data && data[0]) {
+                setComments([data[0], ...comments]);
+            } else {
+                setComments([{ ...newPost, id: Date.now() }, ...comments]);
+            }
+        } catch (e) {
+            setComments([{ ...newPost, id: Date.now() }, ...comments]);
+        }
 
-        setTimeout(() => setIsSubmitting(false), 500);
+        setNewComment('');
+        setIsSubmitting(false);
     };
 
     const handleKeyDown = (e) => {
@@ -118,14 +140,16 @@ export default function Community() {
                             <div key={comment.id} className="glass-card p-5 animate-slide-up">
                                 <div className="flex items-start gap-4">
                                     <div className="w-9 h-9 rounded-full bg-primary-100 dark:bg-primary-900/30 flex items-center justify-center text-primary-600 dark:text-primary-400 text-sm font-bold flex-shrink-0">
-                                        {comment.author[0]}
+                                        {(comment.author || 'A')[0].toUpperCase()}
                                     </div>
                                     <div className="flex-1 min-w-0">
                                         <div className="flex items-center gap-2 mb-1">
                                             <span className="text-sm font-semibold text-gray-900 dark:text-white">
-                                                {comment.author}
+                                                {comment.author || 'Usuario'}
                                             </span>
-                                            <span className="text-xs text-gray-500 dark:text-gray-300">{comment.time}</span>
+                                            <span className="text-xs text-gray-500 dark:text-gray-300">
+                                                {new Date(comment.created_at).toLocaleDateString()}
+                                            </span>
                                         </div>
                                         <p className="text-sm text-gray-700 dark:text-gray-200 leading-relaxed">
                                             {comment.text}

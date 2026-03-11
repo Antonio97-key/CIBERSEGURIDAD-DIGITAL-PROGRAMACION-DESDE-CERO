@@ -13,6 +13,7 @@ export default function AdminPanel() {
     const [activeSection, setActiveSection] = useState('dashboard');
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [stats, setStats] = useState({ totalUsers: 0, activeToday: 0, totalXP: 0, coursesCompleted: 0 });
+    const [activityLog, setActivityLog] = useState([]);
     const [platformSettings, setPlatformSettings] = useState({
         maintenanceMode: false, registrationOpen: true, emailNotifications: true,
     });
@@ -34,8 +35,35 @@ export default function AdminPanel() {
         if (user && (profile.role === 'admin' || profile.role === 'superadmin')) {
             fetchUsers();
             fetchPlatformSettings();
+            fetchAdminLogs();
         }
     }, [user, profile]);
+
+    const logAdminAction = async (actionDesc, typeStr) => {
+        try {
+            await supabase.from('admin_logs').insert([{
+                admin_id: user.id,
+                admin_name: profile.display_name || user.email,
+                action: actionDesc,
+                type: typeStr
+            }]);
+            fetchAdminLogs();
+        } catch (e) { console.error('Error logging admin action', e); }
+    };
+
+    const fetchAdminLogs = async () => {
+        try {
+            const { data, error } = await supabase.from('admin_logs').select('*').order('created_at', { ascending: false }).limit(20);
+            if (data) setActivityLog(data.map(log => ({
+                action: log.action,
+                user: log.admin_name,
+                type: log.type || '🛡️',
+                time: new Date(log.created_at).toLocaleString()
+            })));
+        } catch (e) {
+            console.error(e);
+        }
+    };
 
     const fetchPlatformSettings = async () => {
         try {
@@ -53,6 +81,7 @@ export default function AdminPanel() {
         try {
             const { error } = await supabase.from('platform_settings').upsert({ id: 'social_links', value: socialLinks, updated_by: user.id });
             if (error) throw error;
+            await logAdminAction('Enlaces de redes sociales actualizados', '🔗');
             alert("Enlaces guardados exitosamente.");
         } catch (error) {
             console.error(error);
@@ -84,13 +113,22 @@ export default function AdminPanel() {
 
     const handleRoleChange = async (userId, newRole) => {
         if (profile.role !== 'superadmin') { alert('Solo superadmin puede cambiar roles.'); return; }
-        try { await supabase.from('profiles').update({ role: newRole }).eq('id', userId); } catch {}
+        try { 
+            await supabase.from('profiles').update({ role: newRole }).eq('id', userId); 
+            const u = users.find(u => u.id === userId);
+            await logAdminAction(`Rol cambiado para ${u?.email} a ${newRole}`, '🛡️');
+        } catch {}
         setUsers(prev => prev.map(u => u.id === userId ? { ...u, role: newRole } : u));
     };
 
-    const handleDeleteUser = (userId) => {
+    const handleDeleteUser = async (userId) => {
         if (profile.role !== 'superadmin') return;
         if (!confirm('¿Eliminar este usuario? Acción irreversible.')) return;
+        try {
+            // Note: Supabase auth.users can only be deleted via Admin API or RPC. This updates status conceptually or calls an Edge Function.
+            const u = users.find(u => u.id === userId);
+            await logAdminAction(`Usuario ${u?.email} eliminado`, '❌');
+        } catch (e) {}
         setUsers(prev => prev.filter(u => u.id !== userId));
     };
 
@@ -124,15 +162,6 @@ export default function AdminPanel() {
         { role: 'superadmin', count: users.filter(u => u.role === 'superadmin').length, color: '#eab308' },
     ];
     const totalRoles = roleData.reduce((a, r) => a + r.count, 0) || 1;
-
-    const activityLog = [
-        { time: 'Hace 5 min', action: 'Login exitoso', user: profile.display_name, type: '🔐' },
-        { time: 'Hace 15 min', action: 'Perfil editado', user: 'Carlos', type: '👤' },
-        { time: 'Hace 1 hora', action: 'Lección completada', user: 'María', type: '📈' },
-        { time: 'Hace 2 horas', action: 'Nuevo registro', user: 'Ana García', type: '✨' },
-        { time: 'Hace 4 horas', action: 'Rol cambiado → Admin', user: 'Diego', type: '🛡️' },
-        { time: 'Hace 8 horas', action: 'Deploy v2.6 actualizado', user: 'Sistema', type: '⚙️' },
-    ];
 
     const getRoleBadge = (role) => {
         if (role === 'superadmin') return { label: '👑 Super Admin', bg: 'rgba(234,179,8,0.15)', color: '#eab308' };

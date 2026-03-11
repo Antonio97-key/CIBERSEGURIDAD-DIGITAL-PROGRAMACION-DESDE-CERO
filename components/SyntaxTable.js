@@ -103,7 +103,7 @@ export default function SyntaxTable() {
 
                 {/* Tab Navigation */}
                 <div className="flex flex-col items-center mb-10 gap-6">
-                    <div className="inline-flex bg-gray-100 dark:bg-graphite-700 rounded-2xl p-1.5">
+                    <div className="inline-flex rounded-2xl p-1.5" style={{ backgroundColor: 'var(--color-surface-hover)', border: '1px solid var(--color-border)' }}>
                         {[
                             { id: 'tabla', label: '📊 Tabla Comparativa', icon: null },
                             { id: 'editor', label: '✏️ Editor Interactivo', icon: null },
@@ -112,9 +112,13 @@ export default function SyntaxTable() {
                                 key={tab.id}
                                 onClick={() => setActiveTab(tab.id)}
                                 className={`px-5 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 ${activeTab === tab.id
-                                    ? 'bg-white dark:bg-graphite-600 shadow-md text-primary-600 dark:text-primary-400'
-                                    : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'
+                                    ? 'shadow-md shadow-[var(--shadow-elevation)]'
+                                    : 'opacity-70 hover:opacity-100'
                                     }`}
+                                style={{ 
+                                    backgroundColor: activeTab === tab.id ? 'var(--color-surface)' : 'transparent',
+                                    color: activeTab === tab.id ? 'var(--color-primary)' : 'var(--color-text)'
+                                }}
                             >
                                 {tab.label}
                             </button>
@@ -239,7 +243,8 @@ export default function SyntaxTable() {
                                         );
                                         setOutput('');
                                     }}
-                                    className="text-sm bg-gray-100 dark:bg-graphite-700 border-0 rounded-lg px-3 py-1.5 text-gray-700 dark:text-gray-200 focus:ring-2 focus:ring-primary-500 cursor-pointer"
+                                    className="text-sm border-0 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-primary-500 cursor-pointer"
+                                    style={{ backgroundColor: 'var(--color-surface-hover)', color: 'var(--color-text)' }}
                                 >
                                     <option value="python">Python</option>
                                     <option value="javascript">JavaScript</option>

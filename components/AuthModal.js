@@ -90,8 +90,8 @@ export default function AuthModal({ isOpen, onClose }) {
             <div className="relative w-full max-w-md rounded-3xl shadow-2xl overflow-hidden p-8 md:p-10" style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)' }}>
                 {/* Header */}
                 <div className="text-center mb-8">
-                    <div className="w-14 h-14 rounded-2xl gradient-bg flex items-center justify-center mx-auto mb-5 shadow-lg">
-                        <svg className="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                    <div className="w-16 h-16 rounded-2xl bg-blue-500/10 dark:bg-primary-500/10 flex items-center justify-center mx-auto mb-5 shadow-[0_0_20px_rgba(59,130,246,0.2)] border border-blue-500/20">
+                        <svg className="w-8 h-8 text-blue-500 dark:text-primary-400 drop-shadow-[0_0_8px_rgba(59,130,246,0.6)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                             <path strokeLinecap="round" strokeLinejoin="round" d={isForgotPassword 
                                 ? "M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
                                 : "M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"

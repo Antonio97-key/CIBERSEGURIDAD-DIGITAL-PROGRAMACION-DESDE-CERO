@@ -242,7 +242,7 @@ console.log("✅ Correcto:   " + (mensaje === descifrado));`,
                                 {/* Tech Tags */}
                                 <div className="flex flex-wrap gap-2 mb-6">
                                     {project.tech.map((t) => (
-                                        <span key={t} className="text-xs font-bold px-3 py-1.5 rounded-lg bg-gray-100 dark:bg-graphite-700 text-gray-700 dark:text-gray-200 shadow-sm">
+                                        <span key={t} className="text-xs font-bold px-3 py-1.5 rounded-lg transition-colors shadow-sm" style={{ backgroundColor: 'var(--color-surface-hover)', color: 'var(--color-text)', border: '1px solid var(--color-border)' }}>
                                             {t}
                                         </span>
                                     ))}

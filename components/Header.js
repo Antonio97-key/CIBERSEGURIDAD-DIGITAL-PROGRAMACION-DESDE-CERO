@@ -96,34 +96,34 @@ export default function Header() {
                 
                 {/* 1. TOP ROW: LOGO, ACTIONS (Desktop & Mobile) */}
                 <div className="flex items-center justify-between w-full">
-                    <Link href="/" onClick={(e) => handleNavClick(e, '#hero')} className="flex items-center gap-3 md:gap-3 group shrink-0">
-                        <div className="w-10 h-10 rounded-xl gradient-bg flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300 shrink-0">
-                            <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <Link href="/" onClick={(e) => handleNavClick(e, '#hero')} className="flex items-center gap-2 md:gap-3 group shrink-0">
+                        <div className="w-9 h-9 md:w-10 md:h-10 rounded-xl gradient-bg flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300 shrink-0">
+                            <svg className="w-5 h-5 md:w-6 md:h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                             </svg>
                         </div>
-                        <div className="hidden sm:block">
-                            <span className="text-sm font-bold tracking-tight gradient-text">Ciberseguridad Digital</span>
-                            <span className="block text-[10px] font-medium tracking-widest uppercase" style={{ color: 'var(--color-text-muted)' }}>
-                                {t('header.subtitle')}
+                        <div className="flex flex-col">
+                            <span className="text-sm md:text-xl font-black tracking-tight gradient-text leading-tight md:leading-normal uppercase" style={{ textShadow: '0 2px 10px rgba(0,0,0,0.1)' }}>CIBERSEGURIDAD<br className="sm:hidden" /> DIGITAL</span>
+                            <span className="hidden sm:block text-[11px] font-bold tracking-widest uppercase mt-0.5" style={{ color: 'var(--color-primary)' }}>
+                                + PROGRAMACIÓN DESDE CERO
                             </span>
                         </div>
                     </Link>
 
                     {/* ACTIONS CENTRALIZED (Visible Everywhere) */}
-                    <div className="flex items-center gap-2 sm:gap-4 shrink-0">
+                    <div className="flex items-center gap-1.5 sm:gap-4 shrink-0">
                         <GlobalSearch />
                         
                         {/* Language Switcher */}
                         <div className="relative" ref={langMenuRef}>
                             <button
                                 onClick={() => setLangMenuOpen(!langMenuOpen)}
-                                className="relative w-10 h-10 rounded-xl flex items-center justify-center hover:scale-110 transition-all duration-300 group shadow-md"
+                                className="relative w-9 h-9 md:w-10 md:h-10 rounded-xl flex items-center justify-center hover:scale-110 transition-all duration-300 group shadow-md"
                                 style={{ backgroundColor: langMenuOpen ? 'var(--color-primary)' : 'var(--color-surface-hover)', color: langMenuOpen ? 'var(--color-button-text)' : 'var(--color-text)', border: '1px solid var(--color-border)' }}
                                 aria-label={t('header.language')}
                                 title={t('header.language')}
                             >
-                                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
                             </button>
@@ -151,17 +151,17 @@ export default function Header() {
                         {mounted && (
                             <button
                                 onClick={handleThemeClick}
-                                className={`relative w-10 h-10 rounded-xl flex items-center justify-center hover:scale-110 transition-all duration-300 group shadow-md ${moonAnimating ? 'animate-moon-spin' : ''}`}
+                                className={`relative w-9 h-9 md:w-10 md:h-10 rounded-xl flex items-center justify-center hover:scale-110 transition-all duration-300 group shadow-md ${moonAnimating ? 'animate-moon-spin' : ''}`}
                                 style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)' }}
                                 aria-label={`${t('header.theme')} ${themeName}`}
                                 title={`${t('header.theme')} ${themeName}`}
                             >
                                 {theme === 'dark' ? (
-                                    <svg className="w-5 h-5 transition-colors duration-300 text-yellow-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                    <svg className="w-4 h-4 md:w-5 md:h-5 transition-colors duration-300 text-yellow-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
                                     </svg>
                                 ) : (
-                                    <svg className="w-5 h-5 transition-colors duration-300" style={{ color: displayThemeColor }} fill="currentColor" viewBox="0 0 20 20">
+                                    <svg className="w-4 h-4 md:w-5 md:h-5 transition-colors duration-300" style={{ color: displayThemeColor }} fill="currentColor" viewBox="0 0 20 20">
                                         <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
                                     </svg>
                                 )}
@@ -171,30 +171,50 @@ export default function Header() {
 
                         {/* Auth Button */}
                         <button 
-                            onClick={() => user ? signOut() : setAuthModalOpen(true)}
-                            className="flex items-center justify-center w-10 h-10 lg:w-auto lg:px-5 lg:h-10 rounded-xl lg:text-[10px] lg:font-black lg:uppercase lg:tracking-widest hover:brightness-110 transition-all duration-300 shadow-md active:scale-95 shrink-0"
+                            onClick={() => user ? router.push('/dashboard') : setAuthModalOpen(true)}
+                            className="flex items-center justify-center w-9 h-9 md:w-auto md:px-5 md:h-10 rounded-xl lg:text-[10px] lg:font-black lg:uppercase lg:tracking-widest hover:brightness-110 transition-all duration-300 shadow-md active:scale-95 shrink-0"
                             style={{ backgroundColor: 'var(--color-surface)', color: 'var(--color-text)', border: '1px solid var(--color-border)' }}
+                            aria-label={user ? 'Mi Perfil' : 'Entrar'}
                         >
-                            <svg className="w-5 h-5 lg:w-4 lg:h-4 lg:mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} style={{ color: 'var(--color-primary)' }}>
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                            </svg>
-                            <span className="hidden lg:block">{user ? 'Salir' : 'Entrar'}</span>
+                            {user && user.user_metadata?.avatar_url ? (
+                                // eslint-disable-next-line @next/next/no-img-element
+                                <img src={user.user_metadata.avatar_url} alt="Profile" className="w-full h-full object-cover rounded-xl" />
+                            ) : (
+                                <svg className="w-4 h-4 md:w-5 md:h-5 lg:w-4 lg:h-4 lg:mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} style={{ color: 'var(--color-primary)' }}>
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                </svg>
+                            )}
+                            <span className="hidden md:block">{user ? 'Perfil' : 'Entrar'}</span>
                         </button>
                     </div>
                 </div>
 
                 {/* 2. BOTTOM ROW: CATEGORIES (Horizontal Scroll Everywhere) */}
                 <div className="flex justify-start md:justify-center w-full mt-2 overflow-x-auto hide-scrollbar pb-1">
-                    <nav className="flex items-center gap-2 px-1">
+                    <nav className="flex items-center gap-2 px-2 py-1.5 rounded-2xl shadow-sm" style={{ backgroundColor: 'var(--color-surface)' }}>
                         {navLinks.map((link) => (
                             <a
                                 key={link.href}
                                 href={link.href}
                                 onClick={(e) => handleNavClick(e, link.href)}
-                                className="px-4 py-2 text-sm font-bold rounded-lg transition-all duration-200 hover:scale-105 whitespace-nowrap"
-                                style={{ color: 'var(--color-text)' }}
-                                onMouseEnter={(e) => { e.target.style.color = 'var(--color-primary)'; e.target.style.backgroundColor = 'var(--color-badge-bg)'; }}
-                                onMouseLeave={(e) => { e.target.style.color = 'var(--color-text)'; e.target.style.backgroundColor = 'transparent'; }}
+                                className="px-4 py-2 text-[11px] md:text-xs font-bold uppercase tracking-wider rounded-xl transition-all duration-300 whitespace-nowrap btn-3d"
+                                style={{ 
+                                    backgroundColor: 'rgba(59, 130, 246, 0.1)', 
+                                    color: 'var(--color-primary)', 
+                                    boxShadow: '0 4px 0 rgba(59, 130, 246, 0.2)'
+                                }}
+                                onMouseDown={(e) => {
+                                    e.currentTarget.style.transform = 'translateY(4px)';
+                                    e.currentTarget.style.boxShadow = '0 0 0 rgba(59, 130, 246, 0.2)';
+                                }}
+                                onMouseUp={(e) => {
+                                    e.currentTarget.style.transform = 'translateY(0)';
+                                    e.currentTarget.style.boxShadow = '0 4px 0 rgba(59, 130, 246, 0.2)';
+                                }}
+                                onMouseLeave={(e) => {
+                                    e.currentTarget.style.transform = 'translateY(0)';
+                                    e.currentTarget.style.boxShadow = '0 4px 0 rgba(59, 130, 246, 0.2)';
+                                }}
                             >
                                 {link.name}
                             </a>

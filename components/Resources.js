@@ -73,7 +73,7 @@ export default function Resources() {
 
                 {/* Tab Navigation */}
                 <div className="flex justify-center mb-10">
-                    <div className="inline-flex bg-gray-100 dark:bg-graphite-700 rounded-2xl p-1.5">
+                    <div className="inline-flex rounded-2xl p-1.5" style={{ backgroundColor: 'var(--color-surface-hover)', border: '1px solid var(--color-border)' }}>
                         {[
                             { id: 'recursos', label: '🛠️ Recursos' },
                             { id: 'glosario', label: '📖 Glosario' },
@@ -82,9 +82,13 @@ export default function Resources() {
                                 key={tab.id}
                                 onClick={() => setActiveTab(tab.id)}
                                 className={`px-5 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 ${activeTab === tab.id
-                                    ? 'bg-white dark:bg-graphite-600 shadow-md text-primary-600 dark:text-primary-400'
-                                    : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'
+                                    ? 'shadow-md shadow-[var(--shadow-elevation)]'
+                                    : 'opacity-70 hover:opacity-100'
                                     }`}
+                                style={{ 
+                                    backgroundColor: activeTab === tab.id ? 'var(--color-surface)' : 'transparent',
+                                    color: activeTab === tab.id ? 'var(--color-primary)' : 'var(--color-text)'
+                                }}
                             >
                                 {tab.label}
                             </button>

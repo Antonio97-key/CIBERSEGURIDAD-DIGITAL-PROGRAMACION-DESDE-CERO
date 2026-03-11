@@ -5,6 +5,8 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useLanguage } from '../lib/LanguageContext';
+import DashboardSidebar from '../components/DashboardSidebar';
+import { getNextLevelTarget, LEVEL_THRESHOLDS } from '../lib/gamification';
 
 export default function Dashboard() {
     const { user, loading, progress, updateProgress, profile, updateProfile, signOut } = useAuth();
@@ -76,75 +78,14 @@ export default function Dashboard() {
             <Header />
 
             <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20">
-                {/* Profile Header */}
-                <header className="flex flex-col md:flex-row items-center gap-8 mb-12 p-8 md:p-12 rounded-3xl relative overflow-hidden" style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)', boxShadow: 'var(--shadow-card)' }}>
-                    <div className="absolute top-0 right-0 p-8 opacity-5 pointer-events-none">
-                        <svg className="w-48 h-48" style={{ color: 'var(--color-primary)' }} fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08s5.97 1.09 6 3.08c-1.29 1.94-3.5 3.22-6 3.22z"/>
-                        </svg>
-                    </div>
+                <div className="flex flex-col lg:flex-row gap-8 items-start">
+                    
+                    {/* Sidebar left */}
+                    <DashboardSidebar activeTab={activeTab} setActiveTab={setActiveTab} />
 
-                    <div className="relative group">
-                        <div className="w-28 h-28 md:w-36 md:h-36 rounded-full p-1 transition-transform duration-500 group-hover:rotate-6" style={{ background: 'var(--gradient-primary)' }}>
-                            <div className="w-full h-full rounded-full flex items-center justify-center overflow-hidden" style={{ backgroundColor: 'var(--color-background)', border: '4px solid var(--color-border)' }}>
-                                <span className="text-4xl md:text-5xl font-black" style={{ color: 'var(--color-primary)' }}>{(profile.display_name || user.email)[0].toUpperCase()}</span>
-                            </div>
-                        </div>
-                        <div className="absolute -bottom-2 -right-2 px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest" style={{ background: 'var(--gradient-primary)', color: 'var(--color-button-text)', border: '4px solid var(--color-background)' }}>
-                            LVL {progress.level}
-                        </div>
-                    </div>
-
-                    <div className="flex-grow text-center md:text-left">
-                        <h1 className="text-2xl md:text-3xl font-black tracking-tight mb-3" style={{ color: 'var(--color-text)' }}>
-                            {profile.display_name || user.email}
-                        </h1>
-                        <p className="text-sm mb-4" style={{ color: 'var(--color-text-muted)' }}>{user.email}</p>
-                        <div className="flex flex-wrap items-center justify-center md:justify-start gap-3">
-                            <div className="px-4 py-2 rounded-xl flex items-center gap-2" style={{ backgroundColor: 'var(--color-badge-bg)', border: '1px solid var(--color-border)' }}>
-                                <div className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: 'var(--color-primary)' }}></div>
-                                <span className="text-[10px] font-black uppercase tracking-widest" style={{ color: 'var(--color-text-muted)' }}>Activo</span>
-                            </div>
-                            <div className="px-4 py-2 rounded-xl flex items-center gap-2" style={{ backgroundColor: 'var(--color-badge-bg)', border: '1px solid var(--color-border)' }}>
-                                <span className="text-[10px] font-black uppercase tracking-widest" style={{ color: 'var(--color-primary)' }}>{progress.xp} XP</span>
-                            </div>
-                            <div className="px-4 py-2 rounded-xl flex items-center gap-2" style={{ backgroundColor: 'var(--color-badge-bg)', border: '1px solid var(--color-border)' }}>
-                                <span className="text-[10px] font-black uppercase tracking-widest" style={{ color: 'var(--color-text-muted)' }}>🔥 {progress.streak} días racha</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    {profile.role === 'admin' || profile.role === 'superadmin' ? (
-                        <button
-                            onClick={() => router.push('/admin')}
-                            className="btn-3d btn-3d-secondary px-6 py-3 text-xs shrink-0"
-                        >
-                            🛡️ Panel Admin
-                        </button>
-                    ) : null}
-                </header>
-
-                {/* Tab Navigation */}
-                <div className="flex overflow-x-auto hide-scrollbar gap-2 mb-10 pb-2">
-                    {tabs.map(tab => (
-                        <button
-                            key={tab.id}
-                            onClick={() => setActiveTab(tab.id)}
-                            className="px-6 py-3 rounded-2xl text-sm font-bold whitespace-nowrap transition-all duration-300 shrink-0"
-                            style={{
-                                backgroundColor: activeTab === tab.id ? 'var(--color-primary)' : 'var(--color-surface)',
-                                color: activeTab === tab.id ? 'var(--color-button-text)' : 'var(--color-text)',
-                                border: '1px solid var(--color-border)',
-                                boxShadow: activeTab === tab.id ? 'var(--shadow-elevation)' : 'none',
-                                transform: activeTab === tab.id ? 'translateY(-2px)' : 'none'
-                            }}
-                        >
-                            {tab.label}
-                        </button>
-                    ))}
-                </div>
-
-                {/* TAB: Panel Principal */}
+                    {/* Main Content Area */}
+                    <div className="flex-1 min-w-0 w-full animate-fade-in">
+                        {/* TAB: Panel Principal */}
                 {activeTab === 'panel' && (
                     <div className="animate-fade-in">
                         {/* Stats Grid */}
@@ -266,13 +207,13 @@ export default function Dashboard() {
                         <div className="p-8 rounded-3xl mb-8" style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)' }}>
                             <div className="flex items-center justify-between mb-4">
                                 <h3 className="text-lg font-black" style={{ color: 'var(--color-text)' }}>Experiencia Total</h3>
-                                <span className="text-2xl font-black" style={{ color: 'var(--color-primary)' }}>{progress.xp} XP</span>
+                                <span className="text-2xl font-black" style={{ color: 'var(--color-primary)' }}>{progress.xp || 0} XP</span>
                             </div>
                             <div className="h-4 w-full rounded-full overflow-hidden" style={{ backgroundColor: 'var(--color-badge-bg)' }}>
-                                <div className="h-full rounded-full transition-all duration-1000" style={{ width: `${Math.min((progress.xp / 5000) * 100, 100)}%`, background: 'var(--gradient-primary)' }}></div>
+                                <div className="h-full rounded-full transition-all duration-1000" style={{ width: `${Math.min(((progress.xp || 0) / getNextLevelTarget(progress.level || 1)) * 100, 100)}%`, background: 'var(--gradient-primary)' }}></div>
                             </div>
                             <p className="text-xs mt-3 font-bold" style={{ color: 'var(--color-text-muted)' }}>
-                                {5000 - progress.xp > 0 ? `${5000 - progress.xp} XP para el siguiente nivel` : '¡Nivel máximo alcanzado!'}
+                                {progress.level >= 6 ? '¡Nivel máximo alcanzado!' : `${getNextLevelTarget(progress.level || 1) - (progress.xp || 0)} XP para el siguiente nivel`}
                             </p>
                         </div>
 
@@ -330,6 +271,8 @@ export default function Dashboard() {
                         </div>
                     </div>
                 )}
+                    </div>
+                </div>
             </main>
 
             <Footer />
