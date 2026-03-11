@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { useAuth } from '../lib/AuthContext';
 import { useTheme, THEME_COLORS } from '../lib/ThemeContext';
 import { useLanguage, LANGUAGES } from '../lib/LanguageContext';
+import Link from 'next/link';
 import GlobalSearch from './GlobalSearch';
 import AuthModal from './AuthModal';
 

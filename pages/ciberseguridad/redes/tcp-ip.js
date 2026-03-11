@@ -48,7 +48,7 @@ export default function TCPIP() {
                         Nota de Seguridad (Ataque SYN Flood)
                     </h3>
                     <p className="m-0 text-sky-200">
-                        Si un atacante envía miles de paquetes SYN pero nunca responde con el ACK final, el servidor mantiene los recursos bloqueados esperando. Esto es un ataque de Denegación de Servicio (DoS) conocido como SYN Flood. Las defensas modernas utilizan "SYN cookies" para mitigarlo.
+                        Si un atacante envía miles de paquetes SYN pero nunca responde con el ACK final, el servidor mantiene los recursos bloqueados esperando. Esto es un ataque de Denegación de Servicio (DoS) conocido como SYN Flood. Las defensas modernas utilizan &quot;SYN cookies&quot; para mitigarlo.
                     </p>
                 </div>
 
