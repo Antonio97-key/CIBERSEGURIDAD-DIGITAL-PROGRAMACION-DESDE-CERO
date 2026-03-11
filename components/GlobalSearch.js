@@ -151,7 +151,7 @@ export default function GlobalSearch() {
 
                         {query.length > 1 && results.length === 0 && (
                             <div className="p-8 text-center">
-                                <p style={{ color: 'var(--color-text-muted)' }}>No se encontraron resultados para "{query}"</p>
+                                <p style={{ color: 'var(--color-text-muted)' }}>No se encontraron resultados para &quot;{query}&quot;</p>
                             </div>
                         )}
                         

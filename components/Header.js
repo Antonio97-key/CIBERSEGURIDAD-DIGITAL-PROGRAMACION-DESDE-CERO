@@ -87,7 +87,7 @@ export default function Header() {
                 
                 {/* 1. TOP ROW: LOGO & MOBILE TOGGLE */}
                 <div className="flex items-center justify-between">
-                    <a href="/" onClick={(e) => handleNavClick(e, '#hero')} className="flex items-center gap-3 group">
+                    <Link href="/" onClick={(e) => handleNavClick(e, '#hero')} className="flex items-center gap-3 group">
                         <div
                             className="w-10 h-10 rounded-xl gradient-bg flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300"
                         >
@@ -101,7 +101,7 @@ export default function Header() {
                                 {t('header.subtitle')}
                             </span>
                         </div>
-                    </a>
+                    </Link>
 
                     {/* Mobile Only: Menu Button */}
                     <button
@@ -277,14 +277,14 @@ export default function Header() {
                         </a>
                     ))}
                     
-                    <a
+                    <Link
                         href="/dashboard"
                         onClick={(e) => handleNavClick(e, '/dashboard')}
                         className="block px-4 py-2 text-sm font-bold rounded-xl transition-all duration-200 border-t mt-2 pt-3"
                         style={{ color: 'var(--color-primary)', borderColor: 'var(--color-border)' }}
                     >
                         Mi Perfil
-                    </a>
+                    </Link>
 
                     {/* Actions inside Mobile Menu */}
                     <div className="flex flex-col gap-3 mt-4 px-4">
