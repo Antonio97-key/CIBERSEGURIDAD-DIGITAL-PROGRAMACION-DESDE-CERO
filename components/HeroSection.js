@@ -20,9 +20,27 @@ export default function HeroSection() {
             />
 
             {/* Content */}
-            <div className="relative z-10 text-center px-4 sm:px-6 max-w-4xl mx-auto">
+            <div className="relative z-10 text-center px-4 sm:px-6 max-w-7xl mx-auto">
+                {/* Scrolling Notice */}
+                <div className="mb-12 news-marquee-container overflow-hidden py-2 cursor-default select-none pointer-events-none sm:pointer-events-auto">
+                    <div className="news-track flex gap-12 animate-marquee whitespace-nowrap">
+                        {[1, 2].map((i) => (
+                            <div key={i} className="flex items-center gap-12">
+                                <span className="flex items-center gap-2 text-xs sm:text-sm font-bold tracking-widest uppercase opacity-70" style={{ color: 'var(--color-primary)' }}>
+                                    <span className="w-2 h-2 rounded-full bg-primary-500 animate-pulse" />
+                                    {t('hero.notice')}
+                                </span>
+                                <span className="flex items-center gap-2 text-xs sm:text-sm font-bold tracking-widest uppercase opacity-70" style={{ color: 'var(--color-secondary)' }}>
+                                    <span className="w-2 h-2 rounded-full bg-secondary-500 animate-pulse" />
+                                    {t('hero.notice')}
+                                </span>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
                 {/* Title */}
-                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 tracking-tight animate-slide-up leading-tight" style={{ color: 'var(--color-text)' }}>
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-extrabold mb-8 tracking-tight animate-slide-up leading-[1.1]" style={{ color: 'var(--color-text)' }}>
                     {t('hero.title_1')}
                     <br />
                     <span 
@@ -32,7 +50,7 @@ export default function HeroSection() {
                         {t('hero.title_2')}
                     </span>
                     <br />
-                    <span className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-light opacity-80" style={{ color: 'var(--color-text)' }}>
+                    <span className="text-xl sm:text-2xl md:text-3xl lg:text-5xl font-light opacity-80" style={{ color: 'var(--color-text)' }}>
                         {t('hero.title_3')}
                     </span>
                 </h1>
