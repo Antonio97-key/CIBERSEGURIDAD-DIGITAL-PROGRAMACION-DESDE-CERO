@@ -20,10 +20,11 @@ export default function Document() {
                             (function() {
                                 try {
                                     var savedTheme = localStorage.getItem('sd-theme');
-                                    if (savedTheme) {
+                                    if (savedTheme === 'light' || savedTheme === 'dark') {
                                         document.documentElement.setAttribute('data-theme', savedTheme);
                                     } else {
-                                        document.documentElement.setAttribute('data-theme', 'white');
+                                        document.documentElement.setAttribute('data-theme', 'light');
+                                        localStorage.setItem('sd-theme', 'light');
                                     }
                                 } catch (e) {}
                             })();

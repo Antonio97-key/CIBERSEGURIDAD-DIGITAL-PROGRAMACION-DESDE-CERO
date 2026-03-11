@@ -10,7 +10,7 @@
    ============================== */
 
 :root,
-[data-theme="white"] {
+[data-theme="light"] {
   /* LIGHT / WHITE THEME */
   --color-background: #F8FAFC; 
   --color-surface: #FFFFFF;
@@ -36,56 +36,30 @@
   --color-button-shadow: #0f1a3a;
 }
 
-[data-theme="blue"] {
-  /* PALETA AZUL MODERNA PROFESIONAL */
-  --color-background: #ffffff;
-  --color-surface: #F5F8FF;
-  --color-primary: #2563EB; /* Azul tecnológico moderno */
-  --color-secondary: #60A5FA; /* Azul cielo profesional */
-  --color-text: #111111; /* Negro profesional */
-  --color-text-muted: #444444; /* Gris oscuro para descripciones */
-  --color-border: #e2e8f0;
-  --color-shadow: rgba(0, 0, 0, 0.05);
-  --color-button: #2563EB;
-  --color-button-text: #ffffff;
-  --color-surface-hover: #1E40AF; /* Azul profundo (hover) */
-  --color-glass: rgba(255, 255, 255, 0.98);
-  --color-glass-border: rgba(37, 99, 235, 0.15);
-  --color-input-bg: rgba(255, 255, 255, 0.9);
-  --color-badge-bg: rgba(96, 165, 250, 0.15);
-  --color-badge-text: #1E40AF;
-  --gradient-primary: linear-gradient(135deg, #2563EB, #60A5FA);
-  --gradient-hero: linear-gradient(135deg, #ffffff, #F5F8FF);
-  --shadow-elevation: 0 4px 14px 0 rgba(0, 0, 0, 0.08);
-  --shadow-card: 0 10px 40px rgba(0, 0, 0, 0.06);
+[data-theme="dark"] {
+  /* DARK THEME (Negro Carbón & Gris Grafito) */
+  --color-background: #0B0F19; /* Negro carbón profundo */
+  --color-surface: #131B2A; /* Gris grafito oscuro para tarjetas */
+  --color-primary: #3B82F6; /* Azul brillante tecnológico */
+  --color-secondary: #10B981; /* Verde éxito */
+  --color-text: #F8FAFC; /* Blanco suave no saturado */
+  --color-text-muted: #94A3B8; /* Gris claro */
+  --color-border: #1E293B; /* Borde oscuro sutil */
+  --color-shadow: rgba(0, 0, 0, 0.5);
+  --color-button: #3B82F6;
+  --color-button-text: #FFFFFF;
+  --color-surface-hover: #1E293B;
+  --color-glass: rgba(19, 27, 42, 0.85);
+  --color-glass-border: rgba(255, 255, 255, 0.08);
+  --color-input-bg: rgba(11, 15, 25, 0.8);
+  --color-badge-bg: rgba(59, 130, 246, 0.15);
+  --color-badge-text: #60A5FA;
+  --gradient-primary: linear-gradient(135deg, #3B82F6, #8B5CF6); /* Azul a violeta */
+  --gradient-hero: linear-gradient(135deg, #0B0F19, #131B2A);
+  --shadow-elevation: 0 4px 20px 0 rgba(0, 0, 0, 0.6);
+  --shadow-card: 0 10px 40px rgba(0, 0, 0, 0.5);
   --shadow-button: 0 6px 0;
-  --color-button-shadow: #1E40AF;
-}
-
-[data-theme="green"] {
-  /* PALETA VERDE MODERNA PROFESIONAL */
-  --color-background: #ffffff;
-  --color-surface: #F3F8F6; /* Fondo claro */
-  --color-primary: #2E7D65; /* Verde esmeralda moderno */
-  --color-secondary: #6FCF97; /* Verde menta suave */
-  --color-text: #111111; /* Negro profesional */
-  --color-text-muted: #444444; /* Gris oscuro para descripciones */
-  --color-border: #e2e8f0;
-  --color-shadow: rgba(0, 0, 0, 0.05);
-  --color-button: #2E7D65;
-  --color-button-text: #ffffff;
-  --color-surface-hover: #1B5E4B; /* Verde oscuro profundo (hover) */
-  --color-glass: rgba(255, 255, 255, 0.98);
-  --color-glass-border: rgba(46, 125, 101, 0.15);
-  --color-input-bg: rgba(255, 255, 255, 0.9);
-  --color-badge-bg: rgba(111, 207, 151, 0.15);
-  --color-badge-text: #1B5E4B;
-  --gradient-primary: linear-gradient(135deg, #2E7D65, #6FCF97);
-  --gradient-hero: linear-gradient(135deg, #ffffff, #F3F8F6);
-  --shadow-elevation: 0 4px 14px 0 rgba(0, 0, 0, 0.08);
-  --shadow-card: 0 10px 40px rgba(0, 0, 0, 0.06);
-  --shadow-button: 0 6px 0;
-  --color-button-shadow: #1B5E4B;
+  --color-button-shadow: #1E3A8A;
 }
 
 /* ==============================
