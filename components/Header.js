@@ -60,11 +60,20 @@ export default function Header() {
             name: t('header.nav.pricing') || 'Planes', 
             href: user ? '/dashboard?tab=planes' : '#planes' 
         },
-        user && !isSpecialPage ? { name: 'Mi Perfil', href: '/dashboard' } : null
+        !isSpecialPage && { name: user ? 'Mi Perfil' : 'Perfil', href: user ? '/dashboard' : 'openAuthModal' }
     ].filter(Boolean);
 
     const handleNavClick = (e, href) => {
+        if (href === 'openAuthModal') {
+            e.preventDefault();
+            setAuthModalOpen(true);
+            setIsOpen(false);
+            return;
+        }
+
         if (href.startsWith('/')) {
+            e.preventDefault();
+            router.push(href);
             setIsOpen(false);
             return;
         }
@@ -84,12 +93,12 @@ export default function Header() {
 
     const handleThemeClick = () => {
         setMoonAnimating(true);
-        toggleTheme();
+        cycleTheme();
         setTimeout(() => setMoonAnimating(false), 400);
     };
 
     // Color del icono de tema, asegurando contraste en tema claro
-    const displayThemeColor = themeName === 'Claro' || theme === 'light' ? '#64748b' : themeColor;
+    const displayThemeColor = theme === 'light' ? '#64748b' : themeColor;
 
     return (
         <header

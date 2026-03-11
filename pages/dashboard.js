@@ -73,8 +73,8 @@ export default function Dashboard() {
     ];
 
     const activityItems = [
-        { icon: '📖', text: `Completaste "${progress.lessons?.[progress.lessons.length - 1]?.split('/')?.pop() || 'tu primera lección'}"`, time: 'Reciente' },
-        { icon: '🎯', text: `Rango actual: Nivel ${progress.level}`, time: 'Ahora' },
+        { icon: '📖', text: `Completaste "${progress.lessons?.[(progress.lessons?.length || 0) - 1]?.split('/')?.pop() || 'tu primera lección'}"`, time: 'Reciente' },
+        { icon: '🎯', text: `Rango actual: Nivel ${progress.level || 1}`, time: 'Ahora' },
         { icon: '🧪', text: `Quizzes resueltos: ${progress.quizzes?.length || 0}`, time: 'Hoy' },
         { icon: '💎', text: `Membresía: ${progress.subscription?.toUpperCase() || 'BÁSICA'}`, time: 'Estado' },
     ];
