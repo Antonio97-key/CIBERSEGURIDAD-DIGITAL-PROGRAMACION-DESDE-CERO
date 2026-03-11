@@ -44,18 +44,18 @@ export default function Header() {
         };
     }, []);
 
-    const isDashboard = router.pathname === '/dashboard';
+    const isSpecialPage = router.pathname === '/dashboard' || router.pathname.startsWith('/admin');
 
     const navLinks = [
-        !isDashboard && { name: t('header.nav.home') || 'Inicio', href: '#hero' },
+        !isSpecialPage && { name: t('header.nav.home') || 'Inicio', href: '#hero' },
         { name: 'Laboratorio', href: '/playground' },
         { name: t('header.nav.projects') || 'Proyectos', href: '/proyectos' },
-        !isDashboard && { name: t('header.nav.cyber') || 'Ciberseguridad', href: '#cyber' },
-        !isDashboard && { name: t('header.nav.prog') || 'Programación', href: '#prog' },
-        !isDashboard && { name: t('header.nav.news') || 'Noticias', href: '#noticias' },
-        !isDashboard && { name: t('header.nav.trust') || 'Confianza', href: '#confianza' },
-        !isDashboard && { name: t('header.nav.community') || 'Comunidad', href: '#comunidad' },
-        user && !isDashboard ? { name: 'Mi Perfil', href: '/dashboard' } : null
+        !isSpecialPage && { name: t('header.nav.cyber') || 'Ciberseguridad', href: '#cyber' },
+        !isSpecialPage && { name: t('header.nav.prog') || 'Programación', href: '#prog' },
+        !isSpecialPage && { name: t('header.nav.news') || 'Noticias', href: '#noticias' },
+        !isSpecialPage && { name: t('header.nav.trust') || 'Confianza', href: '#confianza' },
+        !isSpecialPage && { name: t('header.nav.community') || 'Comunidad', href: '#comunidad' },
+        user && !isSpecialPage ? { name: 'Mi Perfil', href: '/dashboard' } : null
     ].filter(Boolean);
 
     const handleNavClick = (e, href) => {
@@ -100,8 +100,12 @@ export default function Header() {
                 <div className="flex items-center justify-between w-full">
                     <Link href="/" onClick={(e) => handleNavClick(e, '#hero')} className="flex items-center gap-2 md:gap-3 group shrink-0">
                         <div className="w-9 h-9 md:w-10 md:h-10 rounded-xl gradient-bg flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300 shrink-0">
-                            <svg className="w-5 h-5 md:w-6 md:h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                            {/* Premium Lock Icon */}
+                            <svg className="w-5 h-5 md:w-6 md:h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M7 11V7C7 4.23858 9.23858 2 12 2C14.7614 2 17 4.23858 17 7V11" stroke="#FFD700" strokeWidth="2.5" strokeLinecap="round" />
+                                <rect x="5" y="10" width="14" height="11" rx="3" fill="#FFD700" fillOpacity="0.9" />
+                                <circle cx="12" cy="15" r="1.5" fill="white" />
+                                <path d="M12 16.5V18.5" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
                             </svg>
                         </div>
                         <div className="flex flex-col">

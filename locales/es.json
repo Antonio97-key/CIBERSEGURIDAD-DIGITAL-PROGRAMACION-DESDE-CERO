@@ -453,5 +453,20 @@
             "t4": "Autenticación rota",
             "q": "¿Qué ataque consiste en inyectar scripts maliciosos en páginas web vistas por otros?"
         }
+    },
+    "dashboard": {
+        "menu": {
+            "panel": "Centro de Comando",
+            "notificaciones": "Notificaciones",
+            "progreso": "Mi Progreso",
+            "laboratorio": "Laboratorio CTF",
+            "proyectos": "Proyectos & Tools",
+            "noticias": "Noticias & Updates",
+            "ciberseguridad": "Ciberseguridad",
+            "programacion": "Programación",
+            "certificados": "Certificados",
+            "planes": "Planes & VIP",
+            "perfil": "Mi Perfil"
+        }
     }
 }

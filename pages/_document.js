@@ -11,7 +11,7 @@ export default function Document() {
                     rel="stylesheet"
                 />
                 <meta name="theme-color" content="#3A7AFE" />
-                <link rel="icon" href="/favicon.ico" />
+                <link rel="icon" href="/lock-favicon.png" />
             </Head>
             <body className="antialiased">
                 <script
