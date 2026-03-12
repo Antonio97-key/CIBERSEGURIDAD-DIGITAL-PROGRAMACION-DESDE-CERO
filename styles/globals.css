@@ -621,6 +621,13 @@
     -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
   }
 
+  @media (max-width: 640px) {
+    .news-marquee-container {
+      mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+    }
+  }
+
   .news-track {
     width: max-content;
   }
@@ -636,7 +643,7 @@
   }
 
   .animate-marquee {
-    animation: marquee 80s linear infinite;
+    animation: marquee 100s linear infinite;
   }
 
   .animate-marquee:hover {
@@ -645,7 +652,7 @@
 
   @media (max-width: 640px) {
     .animate-marquee {
-      animation-duration: 50s;
+      animation-duration: 45s;
     }
   }
 
