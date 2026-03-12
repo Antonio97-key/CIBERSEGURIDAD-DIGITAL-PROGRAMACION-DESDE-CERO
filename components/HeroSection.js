@@ -4,11 +4,11 @@ export default function HeroSection() {
     const { t } = useLanguage();
 
     return (
-        <section id="hero" className="relative min-h-[90vh] flex flex-col justify-center items-center overflow-hidden pt-24 sm:pt-[180px] pb-16">
-            {/* Decorative Theme-Aware Orbs */}
-            <div className="glow-orb w-64 h-64 sm:w-96 sm:h-96 top-5 -left-10 sm:top-10 sm:-left-20 absolute animate-float" style={{ backgroundColor: 'var(--color-primary)', opacity: 0.5 }} />
-            <div className="glow-orb w-56 h-56 sm:w-80 sm:h-80 bottom-5 -right-10 sm:bottom-10 sm:-right-20 absolute animate-float" style={{ backgroundColor: 'var(--color-secondary)', opacity: 0.4, animationDelay: '3s' }} />
-            <div className="glow-orb w-48 h-48 sm:w-64 sm:h-64 top-1/2 left-1/2 absolute -translate-x-1/2 -translate-y-1/2 animate-pulse-slow" style={{ backgroundColor: 'var(--color-primary)', opacity: 0.3 }} />
+        <section id="hero" className="relative min-h-[85vh] sm:min-h-screen flex flex-col justify-center items-center overflow-hidden pt-20 xs:pt-24 sm:pt-[180px] pb-12 sm:pb-20">
+            {/* Decorative Theme-Aware Orbs - Pointer events none to prevent layout issues */}
+            <div className="glow-orb w-64 h-64 sm:w-96 sm:h-96 top-5 -left-10 sm:top-10 sm:-left-20 absolute animate-float pointer-events-none" style={{ backgroundColor: 'var(--color-primary)', opacity: 0.4 }} />
+            <div className="glow-orb w-56 h-56 sm:w-80 sm:h-80 bottom-5 -right-10 sm:bottom-10 sm:-right-20 absolute animate-float pointer-events-none" style={{ backgroundColor: 'var(--color-secondary)', opacity: 0.3, animationDelay: '3s' }} />
+            <div className="glow-orb w-48 h-48 sm:w-64 sm:h-64 top-1/2 left-1/2 absolute -translate-x-1/2 -translate-y-1/2 animate-pulse-slow pointer-events-none" style={{ backgroundColor: 'var(--color-primary)', opacity: 0.2 }} />
 
             {/* Grid Pattern Overlay */}
             <div
@@ -21,17 +21,17 @@ export default function HeroSection() {
 
             {/* Content */}
             <div className="relative z-10 text-center px-4 sm:px-6 max-w-7xl mx-auto">
-                {/* Scrolling Notice */}
-                <div className="mb-12 news-marquee-container overflow-hidden py-2 cursor-default select-none pointer-events-none sm:pointer-events-auto">
-                    <div className="news-track flex gap-12 animate-marquee whitespace-nowrap">
-                        {[1, 2].map((i) => (
-                            <div key={i} className="flex items-center gap-12">
-                                <span className="flex items-center gap-2 text-xs sm:text-sm font-bold tracking-widest uppercase opacity-70" style={{ color: 'var(--color-primary)' }}>
-                                    <span className="w-2 h-2 rounded-full bg-primary-500 animate-pulse" />
+                {/* Scrolling Notice - Standardized width and centered */}
+                <div className="mb-8 sm:mb-12 news-marquee-container w-full max-w-[100vw] overflow-hidden py-2 cursor-default select-none pointer-events-none">
+                    <div className="news-track flex gap-8 sm:gap-12 animate-marquee whitespace-nowrap">
+                        {[1, 2, 3].map((i) => (
+                            <div key={i} className="flex items-center gap-8 sm:gap-12 shrink-0">
+                                <span className="flex items-center gap-2 text-[10px] sm:text-xs md:text-sm font-bold tracking-[0.2em] uppercase opacity-70" style={{ color: 'var(--color-primary)' }}>
+                                    <span className="w-1.5 h-1.5 rounded-full bg-primary-500 animate-pulse" />
                                     {t('hero.notice')}
                                 </span>
-                                <span className="flex items-center gap-2 text-xs sm:text-sm font-bold tracking-widest uppercase opacity-70" style={{ color: 'var(--color-secondary)' }}>
-                                    <span className="w-2 h-2 rounded-full bg-secondary-500 animate-pulse" />
+                                <span className="flex items-center gap-2 text-[10px] sm:text-xs md:text-sm font-bold tracking-[0.2em] uppercase opacity-70" style={{ color: 'var(--color-secondary)' }}>
+                                    <span className="w-1.5 h-1.5 rounded-full bg-secondary-500 animate-pulse" />
                                     {t('hero.notice')}
                                 </span>
                             </div>

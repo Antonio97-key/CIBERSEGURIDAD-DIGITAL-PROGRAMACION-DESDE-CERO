@@ -30,10 +30,10 @@ export default function Home() {
     };
 
     return (
-        <>
+        <div className="min-h-screen w-full overflow-x-hidden flex flex-col">
             <Header />
 
-            <main>
+            <main className="flex-1 w-full">
                 <HeroSection />
 
                 {/* Level Selector */}
@@ -84,6 +84,6 @@ export default function Home() {
             </main>
 
             <Footer />
-        </>
+        </div>
     );
 }

@@ -17,12 +17,12 @@ export default function Layout({ children }) {
     if (!isDocPage) {
         // Para la index.js y otras páginas sueltas
         return (
-            <>
+            <div className="min-h-screen w-full overflow-x-hidden flex flex-col">
                 <Head>
                     <title>Ciberseguridad Digital</title>
                 </Head>
                 {children}
-            </>
+            </div>
         );
     }
 
