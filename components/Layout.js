@@ -27,13 +27,13 @@ export default function Layout({ children }) {
     }
 
     return (
-        <div className="min-h-screen flex flex-col" style={{ backgroundColor: 'var(--color-bg)' }}>
+        <div className="min-h-screen flex flex-col" style={{ backgroundColor: 'var(--color-background)' }}>
             <Header />
             
             <div className="flex-1 flex w-full max-w-8xl mx-auto pt-[80px]"> {/* padding-top para el fixed header */}
                 <Sidebar />
                 
-                <main className="flex-1 flex flex-col min-w-0" style={{ backgroundColor: 'var(--color-bg)' }}>
+                <main className="flex-1 flex flex-col min-w-0" style={{ backgroundColor: 'var(--color-background)' }}>
                     <div className="flex-1 px-4 py-8 sm:px-6 lg:px-8 max-w-4xl mx-auto w-full">
                         <Breadcrumbs />
                         <div className="mt-8">

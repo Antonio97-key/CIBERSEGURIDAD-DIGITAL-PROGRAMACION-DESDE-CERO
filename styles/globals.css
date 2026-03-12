@@ -37,27 +37,27 @@
 }
 
 [data-theme="dark"] {
-  /* DARK THEME (Negro Carbón & Gris Grafito) */
-  --color-background: #0B0F19; /* Negro carbón profundo */
-  --color-surface: #131B2A; /* Gris grafito oscuro para tarjetas */
+  /* DARK THEME (Negro Puro & Gris Carbón) */
+  --color-background: #000000; /* Negro absoluto */
+  --color-surface: #0A0A0A; /* Gris casi negro para tarjetas */
   --color-primary: #3B82F6; /* Azul brillante tecnológico */
   --color-secondary: #10B981; /* Verde éxito */
   --color-text: #F8FAFC; /* Blanco suave no saturado */
   --color-text-muted: #94A3B8; /* Gris claro */
-  --color-border: #1E293B; /* Borde oscuro sutil */
-  --color-shadow: rgba(0, 0, 0, 0.5);
+  --color-border: #1A1A1A; /* Borde muy oscuro */
+  --color-shadow: rgba(0, 0, 0, 0.8);
   --color-button: #3B82F6;
   --color-button-text: #FFFFFF;
-  --color-surface-hover: #1E293B;
-  --color-glass: rgba(19, 27, 42, 0.85);
-  --color-glass-border: rgba(255, 255, 255, 0.08);
-  --color-input-bg: rgba(11, 15, 25, 0.8);
+  --color-surface-hover: #151515;
+  --color-glass: rgba(0, 0, 0, 0.85);
+  --color-glass-border: rgba(255, 255, 255, 0.05);
+  --color-input-bg: rgba(5, 5, 5, 0.9);
   --color-badge-bg: rgba(59, 130, 246, 0.15);
   --color-badge-text: #60A5FA;
   --gradient-primary: linear-gradient(135deg, #3B82F6, #8B5CF6); /* Azul a violeta */
-  --gradient-hero: linear-gradient(135deg, #0B0F19, #131B2A);
-  --shadow-elevation: 0 4px 20px 0 rgba(0, 0, 0, 0.6);
-  --shadow-card: 0 10px 40px rgba(0, 0, 0, 0.5);
+  --gradient-hero: linear-gradient(135deg, #000000, #0A0A0A);
+  --shadow-elevation: 0 4px 20px 0 rgba(0, 0, 0, 0.8);
+  --shadow-card: 0 10px 40px rgba(0, 0, 0, 0.7);
   --shadow-button: 0 6px 0;
   --color-button-shadow: #1E3A8A;
 }

@@ -93,7 +93,7 @@ export default function GlobalSearch() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
                 <span className="hidden lg:block flex-1 text-left">Buscar...</span>
-                <span className="hidden lg:flex items-center gap-0.5 text-xs font-semibold px-1.5 rounded" style={{ backgroundColor: 'var(--color-bg)', border: '1px solid var(--color-border)' }}>
+                <span className="hidden lg:flex items-center gap-0.5 text-xs font-semibold px-1.5 rounded" style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)' }}>
                     <kbd className="font-sans">Ctrl</kbd> <kbd className="font-sans">K</kbd>
                 </span>
             </button>
@@ -104,7 +104,7 @@ export default function GlobalSearch() {
                     <div className="absolute inset-0" onClick={() => setIsOpen(false)}></div>
                     
                     <div className="relative w-full max-w-2xl rounded-2xl shadow-2xl overflow-hidden flex flex-col border animate-in fade-in zoom-in-95 duration-200"
-                         style={{ backgroundColor: 'var(--color-bg)', borderColor: 'var(--color-border)' }}>
+                         style={{ backgroundColor: 'var(--color-surface)', borderColor: 'var(--color-border)' }}>
                         <div className="flex items-center px-4 border-b" style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-surface)' }}>
                             <svg className="w-5 h-5 mx-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" style={{ color: 'var(--color-primary)' }}>
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
