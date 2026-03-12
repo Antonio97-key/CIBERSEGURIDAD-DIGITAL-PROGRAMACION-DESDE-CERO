@@ -108,7 +108,7 @@ export default function Header() {
                 }`}
             style={{ backgroundColor: 'var(--color-background)', borderBottom: scrolled ? '1px solid var(--color-border)' : '1px solid transparent' }}
         >
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col gap-3 overflow-hidden">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col gap-3">
                 
                 {/* 1. TOP ROW: LOGO, ACTIONS (Desktop & Mobile) */}
                 <div className="flex items-center justify-between w-full">
@@ -217,7 +217,7 @@ export default function Header() {
                 </div>
 
                 {/* 2. BOTTOM ROW: CATEGORIES (Horizontal Scroll Everywhere) */}
-                <div className="flex justify-start md:justify-center w-full mt-2 overflow-x-auto hide-scrollbar pb-1">
+                <div className="flex justify-start md:justify-center w-full mt-2 overflow-x-auto hide-scrollbar pb-1 max-w-full">
                     <nav className="flex items-center gap-2 px-2 py-1.5 rounded-2xl shadow-sm" style={{ backgroundColor: 'var(--color-surface)' }}>
                         {navLinks.map((link) => (
                             <a
