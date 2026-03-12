@@ -4,7 +4,7 @@ import { useAuth } from '../lib/AuthContext';
 import { useLanguage } from '../lib/LanguageContext';
 
 export default function DashboardSidebar({ activeTab, setActiveTab }) {
-    const { user, profile, signOut } = useAuth();
+    const { user, profile, progress, signOut } = useAuth();
     const router = useRouter();
     const { t } = useLanguage();
 
