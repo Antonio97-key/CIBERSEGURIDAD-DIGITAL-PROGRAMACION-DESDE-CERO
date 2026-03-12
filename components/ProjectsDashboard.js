@@ -16,12 +16,12 @@ export default function ProjectsDashboard() {
                         {/* Status/Badge */}
                         <div className="flex justify-between items-start mb-6">
                             <span className="px-3 py-1 rounded-full bg-white/5 text-[10px] font-black uppercase tracking-widest text-primary-400 border border-white/5">
-                                {t(`projects.level.${project.difficulty.toLowerCase()}`) || project.category}
+                                {t(`projects.level.${project.difficulty === 'Principiante' ? 'beginner' : project.difficulty === 'Intermedio' ? 'intermediate' : 'advanced'}`) || project.category}
                             </span>
                             <div className="flex items-center gap-2">
                                 <span className={`w-2 h-2 rounded-full ${project.difficulty === 'Principiante' ? 'bg-green-500' : 'bg-orange-500'}`}></span>
                                 <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">
-                                    {t(`projects.level.${project.difficulty.toLowerCase()}`) || project.difficulty}
+                                    {t(`projects.level.${project.difficulty === 'Principiante' ? 'beginner' : project.difficulty === 'Intermedio' ? 'intermediate' : 'advanced'}`) || project.difficulty}
                                 </span>
                             </div>
                         </div>

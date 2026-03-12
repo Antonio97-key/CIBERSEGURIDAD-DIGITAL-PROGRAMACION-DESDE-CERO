@@ -78,6 +78,7 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-size: 17px;
+    overflow-x: hidden !important;
   }
 
   body {
@@ -87,6 +88,9 @@
     color: var(--color-text);
     transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
     min-height: 100vh;
+    overflow-x: hidden !important;
+    width: 100vw;
+    position: relative;
   }
 
   /* Smooth transition for ALL theme-dependent elements */
@@ -365,7 +369,7 @@
   /* ==============================
      GRADIENT UTILITIES (Theme-aware)
      ============================== */
-  .gradient-bg {
+  .gradient-bg-hero {
     background: var(--gradient-hero);
     background-size: 400% 400%;
     animation: gradient 8s ease infinite;

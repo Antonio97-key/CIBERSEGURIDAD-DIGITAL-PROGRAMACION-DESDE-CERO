@@ -9,7 +9,7 @@ export default function ProyectosPage() {
     return (
         <div className="min-h-screen bg-black text-white selection:bg-primary-500/30">
             <Head>
-                <title>Laboratorio de Proyectos | Ciberseguridad Digital</title>
+                <title>{t('projects.title_prefix') || 'Construye el'} {t('projects.title_accent') || 'Futuro Seguro'} | Ciberseguridad Digital</title>
             </Head>
             <Header />
 

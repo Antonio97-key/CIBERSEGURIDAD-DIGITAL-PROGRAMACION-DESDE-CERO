@@ -55,8 +55,8 @@ export default function Header() {
         !isSpecialPage && { name: t('header.nav.news') || 'Noticias', href: '#noticias' },
         !isSpecialPage && { name: t('header.nav.trust') || 'Confianza', href: '#confianza' },
         !isSpecialPage && { name: t('header.nav.community') || 'Comunidad', href: '#comunidad' },
-        // Always show Planes/Pricing if not on Admin
-        !router.pathname.startsWith('/admin') && { 
+        // Always show Planes/Pricing if not on Admin or Dashboard (where it's in the sidebar)
+        !router.pathname.startsWith('/admin') && router.pathname !== '/dashboard' && { 
             name: t('header.nav.pricing') || 'Planes', 
             href: user ? '/dashboard?tab=planes' : '#planes' 
         },
@@ -108,7 +108,7 @@ export default function Header() {
                 }`}
             style={{ backgroundColor: 'var(--color-background)', borderBottom: scrolled ? '1px solid var(--color-border)' : '1px solid transparent' }}
         >
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col gap-3">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col gap-3 overflow-hidden">
                 
                 {/* 1. TOP ROW: LOGO, ACTIONS (Desktop & Mobile) */}
                 <div className="flex items-center justify-between w-full">
@@ -122,8 +122,8 @@ export default function Header() {
                                 <path d="M12 16.5V18.5" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
                             </svg>
                         </div>
-                        <div className="flex flex-col">
-                            <span className="text-sm md:text-xl font-black tracking-tight gradient-text leading-tight md:leading-normal uppercase" style={{ textShadow: '0 2px 10px rgba(0,0,0,0.1)' }}>CIBERSEGURIDAD<br className="sm:hidden" /> DIGITAL</span>
+                        <div className="flex flex-col min-w-0">
+                            <span className="text-xs sm:text-lg md:text-xl font-black tracking-tight gradient-text leading-tight uppercase truncate sm:whitespace-normal" style={{ textShadow: '0 2px 10px rgba(0,0,0,0.1)' }}>CIBERSEGURIDAD DIGITAL</span>
                             <span className="hidden sm:block text-[11px] font-bold tracking-widest uppercase mt-0.5" style={{ color: 'var(--color-primary)' }}>
                                 + PROGRAMACIÓN DESDE CERO
                             </span>
@@ -131,7 +131,7 @@ export default function Header() {
                     </Link>
 
                     {/* ACTIONS CENTRALIZED (Visible Everywhere) */}
-                    <div className="flex items-center gap-1.5 sm:gap-4 shrink-0">
+                    <div className="flex items-center gap-1 sm:gap-4 shrink-0">
                         <GlobalSearch />
                         
                         {/* Language Switcher */}
@@ -171,21 +171,25 @@ export default function Header() {
                         {mounted && (
                             <button
                                 onClick={handleThemeClick}
-                                className={`relative w-9 h-9 md:w-10 md:h-10 rounded-xl flex items-center justify-center hover:scale-110 transition-all duration-300 group shadow-md ${moonAnimating ? 'animate-moon-spin' : ''}`}
-                                style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)' }}
-                                aria-label={`${t('header.theme')} ${themeName}`}
-                                title={`${t('header.theme')} ${themeName}`}
+                                className={`relative w-9 h-9 md:w-10 md:h-10 rounded-xl flex items-center justify-center hover:scale-110 transition-all duration-300 group shadow-lg ${moonAnimating ? 'animate-moon-spin' : ''}`}
+                                style={{ 
+                                    backgroundColor: theme === 'light' ? '#FFFFFF' : 'var(--color-surface)', 
+                                    border: theme === 'light' ? '2px solid #E2E8F0' : '1px solid var(--color-border)',
+                                    boxShadow: theme === 'light' ? '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)' : 'var(--shadow-elevation)'
+                                }}
+                                aria-label={theme === 'dark' ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
+                                title={theme === 'dark' ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
                             >
                                 {theme === 'dark' ? (
-                                    <svg className="w-4 h-4 md:w-5 md:h-5 transition-colors duration-300 text-yellow-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                    <svg className="w-4 h-4 md:w-5 md:h-5 transition-colors duration-300 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
                                     </svg>
                                 ) : (
-                                    <svg className="w-4 h-4 md:w-5 md:h-5 transition-colors duration-300" style={{ color: displayThemeColor }} fill="currentColor" viewBox="0 0 20 20">
+                                    <svg className="w-4 h-4 md:w-5 md:h-5 transition-colors duration-300" style={{ color: '#1E293B' }} fill="currentColor" viewBox="0 0 20 20">
                                         <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
                                     </svg>
                                 )}
-                                <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full border-2 transition-colors duration-300" style={{ backgroundColor: displayThemeColor, borderColor: 'var(--color-surface)' }} />
+                                <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full border-2 transition-colors duration-300" style={{ backgroundColor: theme === 'light' ? '#64748B' : themeColor, borderColor: theme === 'light' ? '#FFFFFF' : 'var(--color-surface)' }} />
                             </button>
                         )}
 

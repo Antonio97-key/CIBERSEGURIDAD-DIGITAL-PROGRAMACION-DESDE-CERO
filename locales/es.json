@@ -58,6 +58,8 @@
     "projects": {
         "badge": "De la Teoría a la Práctica",
         "title": "Proyectos de Integración",
+        "title_prefix": "Construye el",
+        "title_accent": "Futuro Seguro",
         "subtitle": "Proyectos prácticos que combinan conceptos de ciberseguridad y programación.",
         "view_code": "Ver Código",
         "level": {

@@ -104,6 +104,45 @@ export default function Dashboard() {
                                     ))}
                                 </div>
 
+                                {/* Continue Learning Widget */}
+                                <div className="mb-8 p-8 rounded-[32px] overflow-hidden relative group shadow-xl" style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)' }}>
+                                    <div className="absolute top-0 right-0 p-8 opacity-10 -mr-6 -mt-6 group-hover:scale-110 transition-transform duration-700">
+                                        <div className="w-48 h-48 rounded-full bg-primary-500 blur-3xl"></div>
+                                    </div>
+                                    <div className="relative z-10 flex flex-col md:flex-row items-center gap-8">
+                                        <div className="w-20 h-20 rounded-3xl bg-primary-500/10 flex items-center justify-center text-4xl shadow-inner border border-primary-500/20">
+                                            🚀
+                                        </div>
+                                        <div className="flex-1 text-center md:text-left">
+                                            <h3 className="text-2xl font-black mb-2" style={{ color: 'var(--color-text)' }}>Continuar donde lo dejaste</h3>
+                                            <p className="text-sm font-medium opacity-60 max-w-lg mb-4" style={{ color: 'var(--color-text-muted)' }}>
+                                                {progress.completedQuizzes?.length > 0 
+                                                    ? `Has completado ${progress.completedQuizzes.length} retos. El siguiente nivel te espera.` 
+                                                    : 'Aún no has comenzado tu camino. Inicia tu primera lección de Ciberseguridad hoy mismo.'}
+                                            </p>
+                                            <div className="flex items-center gap-2 mb-6 justify-center md:justify-start">
+                                                <span className="text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-lg bg-primary-500/10 text-primary-500 border border-primary-500/20">
+                                                    Siguiente: {
+                                                        (() => {
+                                                            const cyberLevels = (progress.completedQuizzes || [])
+                                                                .filter(q => q.startsWith('cyber_lvl_'))
+                                                                .map(q => parseInt(q.replace('cyber_lvl_', '')));
+                                                            const lastLvl = cyberLevels.length > 0 ? Math.max(...cyberLevels) : 0;
+                                                            return lastLvl < 5 ? `Nivel ${lastLvl + 1}` : '¡Módulo Completado!';
+                                                        })()
+                                                    }
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <button 
+                                            onClick={() => router.push('/#cyber')}
+                                            className="btn-3d btn-3d-primary px-8 py-4 text-[10px] font-black uppercase tracking-widest whitespace-nowrap"
+                                        >
+                                            Continuar Aprendiendo →
+                                        </button>
+                                    </div>
+                                </div>
+
                                 {/* Upgrade CTA - Premium 2026 Style */}
                                 {(!progress.subscription || progress.subscription === 'free') && (
                                     <div className="mb-12 p-1 rounded-[32px] bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 animate-gradient-x shadow-2xl shadow-purple-500/20">
@@ -244,7 +283,7 @@ export default function Dashboard() {
                                         { 
                                             icon: '👋', 
                                             title: `¡Hola, ${profile?.display_name || (user?.email?.split('@')[0]) || 'Hacker'}!`, 
-                                            desc: 'Gracias por iniciar sesión con nosotros. Te va a ir muy bien, vas a aprender mucho en esta comunidad muy interactiva y profesional. ¡Prepárate para dominar la ciberseguridad!', 
+                                            desc: `Gracias por iniciar sesión con nosotros ${profile?.display_name || (user?.email?.split('@')[0]) || 'Hacker'}, te va a ir muy bien, vas a aprender mucho en esta comunidad muy interactiva.`, 
                                             time: 'Recién llegado', 
                                             color: '#10b981' 
                                         },

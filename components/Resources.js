@@ -101,7 +101,7 @@ export default function Resources() {
                     <div className="space-y-10 animate-fade-in">
                         {resources.map((category) => (
                             <div key={category.category}>
-                                <h3 className="text-3xl font-black mb-8 flex items-center gap-4" style={{ color: 'var(--color-text)' }}>
+                                <h3 className="text-2xl md:text-3xl font-black mb-8 flex items-center gap-4" style={{ color: 'var(--color-text)' }}>
                                     <span className="text-4xl">{category.icon}</span>
                                     {category.category}
                                 </h3>

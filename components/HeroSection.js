@@ -4,7 +4,7 @@ export default function HeroSection() {
     const { t } = useLanguage();
 
     return (
-        <section id="hero" className="relative min-h-screen flex flex-col justify-center items-center overflow-hidden pt-[180px] sm:pt-[200px] pb-20">
+        <section id="hero" className="relative min-h-screen flex flex-col justify-center items-center overflow-hidden pt-32 sm:pt-[200px] pb-20">
             {/* Decorative Theme-Aware Orbs */}
             <div className="glow-orb w-96 h-96 top-10 -left-20 absolute animate-float" style={{ backgroundColor: 'var(--color-primary)', opacity: 0.5 }} />
             <div className="glow-orb w-80 h-80 bottom-10 -right-20 absolute animate-float" style={{ backgroundColor: 'var(--color-secondary)', opacity: 0.4, animationDelay: '3s' }} />
@@ -94,7 +94,7 @@ export default function HeroSection() {
                     </a>
                 </div>
 
-                <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-2xl mx-auto animate-fade-in" style={{ animationDelay: '0.8s' }}>
+                <div className="mt-16 grid grid-cols-1 xs:grid-cols-2 md:grid-cols-4 gap-6 max-w-2xl mx-auto animate-fade-in" style={{ animationDelay: '0.8s' }}>
                     {[
                         { value: '5+', label: t('hero.stats.idioms') || 'Idiomas' },
                         { value: '💎', label: t('hero.stats.certification') || 'Certificación VIP' },

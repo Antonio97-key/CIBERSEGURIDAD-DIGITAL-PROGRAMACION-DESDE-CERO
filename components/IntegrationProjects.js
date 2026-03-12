@@ -16,8 +16,8 @@ export default function IntegrationProjects({ level }) {
     const projects = [
         {
             id: 1,
-            title: t('projects.p1.title') || 'Detector de URLs Sospechosas',
-            description: t('projects.p1.desc') || 'Crea un script que analiza URLs para detectar posibles intentos de phishing verificando patrones comunes.',
+            title: t('projects_data.port_scanner.title') || 'Detector de URLs Sospechosas',
+            description: t('projects_data.port_scanner.desc') || 'Crea un script que analiza URLs para detectar posibles intentos de phishing verificando patrones comunes.',
             difficulty: t('projects.level.beginner') || 'Principiante',
             tech: ['Python', 'Regex'],
             icon: '🔍',
@@ -59,8 +59,8 @@ analizar_url("http://192.168.1.1/verify@user")`,
         },
         {
             id: 2,
-            title: t('projects.p2.title') || 'Generador de Contraseñas Seguras',
-            description: t('projects.p2.desc') || 'Genera contraseñas fuertes con criterios de seguridad personalizables.',
+            title: t('projects_data.pass_validator.title') || 'Generador de Contraseñas Seguras',
+            description: t('projects_data.pass_validator.desc') || 'Genera contraseñas fuertes con criterios de seguridad personalizables.',
             difficulty: t('projects.level.beginner') || 'Principiante',
             tech: ['JavaScript'],
             icon: '🔑',
@@ -104,8 +104,8 @@ generarPassword(20);`,
         },
         {
             id: 3,
-            title: t('projects.p3.title') || 'Analizador de Encabezados HTTP',
-            description: t('projects.p3.desc') || 'Verifica la seguridad de un sitio web analizando sus encabezados de respuesta HTTP.',
+            title: t('projects_data.ip_calculator.title') || 'Analizador de Encabezados HTTP',
+            description: t('projects_data.ip_calculator.desc') || 'Verifica la seguridad de un sitio web analizando sus encabezados de respuesta HTTP.',
             difficulty: t('projects.level.intermediate') || 'Intermedio',
             tech: ['Python', 'HTTP'],
             icon: '🌐',
@@ -159,8 +159,8 @@ analizar_headers(headers_ejemplo)`,
         },
         {
             id: 4,
-            title: t('projects.p4.title') || 'Cifrador de Mensajes',
-            description: t('projects.p4.desc') || 'Implementa un cifrado César para entender los fundamentos de la criptografía de forma práctica.',
+            title: t('projects_data.log_analyzer.title') || 'Cifrador de Mensajes',
+            description: t('projects_data.log_analyzer.desc') || 'Implementa un cifrado César para entender los fundamentos de la criptografía de forma práctica.',
             difficulty: t('projects.level.intermediate') || 'Intermedio',
             tech: ['JavaScript', 'Criptografía'],
             icon: '🔐',
@@ -215,91 +215,96 @@ console.log("✅ Correcto:   " + (mensaje === descifrado));`,
                     </p>
                 </div>
 
-                {/* Project Selector (Mobile Friendly) */}
-                <div className="flex flex-wrap justify-center gap-3 mb-10 overflow-x-auto pb-4 hide-scrollbar">
-                    {projects.map((p, idx) => (
-                        <button
-                            key={p.id}
-                            onClick={() => setSelectedProjectIndex(idx)}
-                            className={`px-6 py-3 rounded-2xl text-[10px] uppercase font-black tracking-widest transition-all duration-300 whitespace-nowrap ${selectedProjectIndex === idx ? 'gradient-bg text-white shadow-lg scale-105' : 'bg-[var(--color-surface)] text-[var(--color-text-muted)] border border-[var(--color-border)] opacity-60 hover:opacity-100'}`}
-                        >
-                            {p.icon} {p.title.split(' ').slice(0, 2).join(' ')}
-                        </button>
-                    ))}
-                </div>
+                {/* Project Selector (Mobile Friendly & Desktop Sidebar) */}
+                <div className="flex flex-col lg:flex-row gap-8 items-start">
+                    <div className="flex flex-row lg:flex-col overflow-x-auto lg:overflow-visible pb-4 lg:pb-0 hide-scrollbar gap-3 w-full lg:w-64 shrink-0">
+                        {projects.map((p, idx) => (
+                            <button
+                                key={p.id}
+                                onClick={() => setSelectedProjectIndex(idx)}
+                                className={`px-6 py-4 rounded-2xl text-[10px] uppercase font-black tracking-widest transition-all duration-300 whitespace-nowrap lg:text-left flex items-center justify-center lg:justify-start gap-4 ${selectedProjectIndex === idx ? 'gradient-bg text-white shadow-xl scale-105 lg:scale-100 lg:translate-x-2' : 'bg-[var(--color-surface)] text-[var(--color-text-muted)] border border-[var(--color-border)] opacity-70 hover:opacity-100 shadow-sm'}`}
+                            >
+                                <span className="text-xl">{p.icon}</span>
+                                <span className="hidden lg:inline truncate">{p.title}</span>
+                                <span className="lg:hidden">{p.title.split(' ').slice(0, 2).join(' ')}</span>
+                            </button>
+                        ))}
+                    </div>
 
-                {/* Project Focus (Unified View) */}
-                <div className="max-w-4xl mx-auto px-4">
-                    {projects[selectedProjectIndex] && (
-                        <div key={projects[selectedProjectIndex].id} className="glass-card overflow-hidden group animate-fade-in">
-                            <div className="p-8 md:p-10">
-                                {/* Header */}
-                                <div className="flex items-start justify-between mb-8">
-                                    <div className="w-16 h-16 rounded-3xl bg-primary-50 dark:bg-primary-900/20 flex items-center justify-center text-4xl shadow-inner">
-                                        {projects[selectedProjectIndex].icon}
+                    {/* Project Focus (Unified View) */}
+                    <div className="flex-1 min-w-0 w-full px-0 lg:px-4">
+                        {projects[selectedProjectIndex] && (
+                            <div key={projects[selectedProjectIndex].id} className="glass-card overflow-hidden group animate-fade-in border-primary-500/10 h-full">
+                                <div className="p-6 md:p-12">
+                                    {/* Header */}
+                                    <div className="flex items-start justify-between mb-10">
+                                        <div className="w-20 h-20 rounded-3xl bg-primary-500/5 dark:bg-primary-900/20 flex items-center justify-center text-5xl shadow-inner border border-primary-500/10">
+                                            {projects[selectedProjectIndex].icon}
+                                        </div>
+                                        <div className="flex gap-2">
+                                            <span className={`chip ${projects[selectedProjectIndex].difficulty.includes(t('projects.level.beginner') || 'Principiante') ? 'chip-green' : projects[selectedProjectIndex].difficulty.includes(t('projects.level.advanced') || 'Avanzado') ? 'chip-purple' : 'chip-orange'} text-[11px] font-black uppercase tracking-[0.2em] px-5 py-2`}>
+                                                {projects[selectedProjectIndex].difficulty}
+                                            </span>
+                                        </div>
                                     </div>
-                                    <div className="flex gap-2">
-                                        <span className={`chip ${projects[selectedProjectIndex].difficulty.includes(t('projects.level.beginner') || 'Principiante') ? 'chip-green' : projects[selectedProjectIndex].difficulty.includes(t('projects.level.advanced') || 'Avanzado') ? 'chip-purple' : 'chip-orange'} text-[10px] font-black uppercase tracking-wider`}>
-                                            {projects[selectedProjectIndex].difficulty}
-                                        </span>
+
+                                    {/* Content */}
+                                    <h3 className="text-2xl md:text-3xl lg:text-4xl font-black text-gray-900 dark:text-white mb-6 tracking-tight text-balance leading-[1.1]">
+                                        {projects[selectedProjectIndex].title}
+                                    </h3>
+                                    <p className="text-lg md:text-xl font-medium text-gray-600 dark:text-gray-300 mb-10 leading-relaxed opacity-90 max-w-3xl">
+                                        {projects[selectedProjectIndex].description}
+                                    </p>
+
+                                    {/* Tech Tags */}
+                                    <div className="flex flex-wrap gap-3 mb-12">
+                                        {projects[selectedProjectIndex].tech.map((tag) => (
+                                            <span key={tag} className="text-[11px] font-black uppercase tracking-widest px-6 py-2.5 rounded-2xl transition-all shadow-md" style={{ backgroundColor: 'var(--color-badge-bg)', color: 'var(--color-primary)', border: '1px solid var(--color-border)' }}>
+                                                {tag}
+                                            </span>
+                                        ))}
                                     </div>
-                                </div>
 
-                                {/* Content */}
-                                <h3 className="text-2xl md:text-3xl font-black text-gray-900 dark:text-white mb-4 leading-tight text-balance">
-                                    {projects[selectedProjectIndex].title}
-                                </h3>
-                                <p className="text-sm md:text-base font-medium text-gray-600 dark:text-gray-300 mb-8 leading-relaxed opacity-80">
-                                    {projects[selectedProjectIndex].description}
-                                </p>
-
-                                {/* Tech Tags */}
-                                <div className="flex flex-wrap gap-2 mb-8">
-                                    {projects[selectedProjectIndex].tech.map((tag) => (
-                                        <span key={tag} className="text-[10px] font-black uppercase tracking-widest px-4 py-2 rounded-xl transition-all shadow-sm" style={{ backgroundColor: 'var(--color-badge-bg)', color: 'var(--color-primary)', border: '1px solid var(--color-border)' }}>
-                                            {tag}
-                                        </span>
-                                    ))}
-                                </div>
-
-                                {/* Toggle Code */}
-                                <button
-                                    onClick={() => setActiveProject(activeProject === projects[selectedProjectIndex].id ? null : projects[selectedProjectIndex].id)}
-                                    className="btn-3d btn-3d-primary text-xs font-black uppercase tracking-widest w-full py-4 flex items-center justify-center gap-3 active:scale-95 transition-transform"
-                                >
-                                    {activeProject === projects[selectedProjectIndex].id ? 'Ocultar Código' : 'Analizar Implementación'}
-                                    <svg className={`w-5 h-5 transition-transform duration-300 ${activeProject === projects[selectedProjectIndex].id ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                                    </svg>
-                                </button>
-                            </div>
-
-                            {/* Code Block */}
-                            <div className={`transition-all duration-700 overflow-hidden ${activeProject === projects[selectedProjectIndex].id ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'}`}>
-                                <div className="border-t border-[var(--color-border)]">
-                                    <Highlight 
-                                        theme={themes.nightOwl} 
-                                        code={projects[selectedProjectIndex].code} 
-                                        language={projects[selectedProjectIndex].tech.includes('Python') ? 'python' : 'javascript'}
+                                    {/* Toggle Code */}
+                                    <button
+                                        onClick={() => setActiveProject(activeProject === projects[selectedProjectIndex].id ? null : projects[selectedProjectIndex].id)}
+                                        className="btn-3d btn-3d-primary text-[10px] font-black uppercase tracking-[0.3em] w-full py-6 flex items-center justify-center gap-4 active:scale-95 transition-all shadow-2xl"
                                     >
-                                        {({ className, style, tokens, getLineProps, getTokenProps }) => (
-                                            <pre className={`text-[13px] font-medium p-6 md:p-8 overflow-x-auto font-mono leading-relaxed ${className}`} style={{ ...style, margin: 0 }}>
-                                                {tokens.map((line, i) => (
-                                                    <div key={i} {...getLineProps({ line })}>
-                                                        <span className="opacity-30 mr-4 select-none inline-block w-4">{i + 1}</span>
-                                                        {line.map((token, key) => (
-                                                            <span key={key} {...getTokenProps({ token })} />
-                                                        ))}
-                                                    </div>
-                                                ))}
-                                            </pre>
-                                        )}
-                                    </Highlight>
+                                        {activeProject === projects[selectedProjectIndex].id ? 'Ocultar Código' : 'Analizar Implementación'}
+                                        <svg className={`w-5 h-5 transition-transform duration-500 ${activeProject === projects[selectedProjectIndex].id ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={4}>
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                                        </svg>
+                                    </button>
+                                </div>
+
+                                {/* Code Block */}
+                                <div className={`transition-all duration-700 ease-in-out overflow-hidden ${activeProject === projects[selectedProjectIndex].id ? 'max-h-[1500px] opacity-100' : 'max-h-0 opacity-0'}`}>
+                                    <div className="border-t border-[var(--color-border)] shadow-inner">
+                                        <Highlight 
+                                            theme={themes.nightOwl} 
+                                            code={projects[selectedProjectIndex].code} 
+                                            language={projects[selectedProjectIndex].tech.includes('Python') ? 'python' : 'javascript'}
+                                        >
+                                            {({ className, style, tokens, getLineProps, getTokenProps }) => (
+                                                <pre className={`text-[14px] font-medium p-8 md:p-12 overflow-x-auto font-mono leading-loose ${className}`} style={{ ...style, margin: 0 }}>
+                                                    {tokens.map((line, i) => (
+                                                        <div key={i} {...getLineProps({ line })}>
+                                                            <span className="opacity-20 mr-6 select-none inline-block w-6 text-right">{i + 1}</span>
+                                                            {line.map((token, key) => (
+                                                                <span key={key} {...getTokenProps({ token })} />
+                                                            ))}
+                                                        </div>
+                                                    ))}
+                                                </pre>
+                                            )}
+                                        </Highlight>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    )}
+                        )}
+                    </div>
                 </div>
+
             </div>
         </section>
     );

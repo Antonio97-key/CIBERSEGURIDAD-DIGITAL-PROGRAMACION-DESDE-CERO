@@ -17,8 +17,13 @@ export default function Footer() {
                 if (data && data.value) {
                     // Filter out empty or '#' links
                     const activeLinks = Object.entries(data.value)
-                        .filter(([_, url]) => url && url !== '#' && url.length > 5)
-                        .map(([id, url]) => ({ id, name: id.charAt(0).toUpperCase() + id.slice(1), url }));
+                        .filter(([id, url]) => url && url !== '#' && url.length > 5 && !url.toLowerCase().includes('tugrupo'))
+                        .map(([id, url]) => {
+                            let linkUrl = url;
+                            if (id === 'telegram') linkUrl = (url && url !== '#' && url.length > 5 && !url.toLowerCase().includes('tugrupo')) ? url : siteConfig.communityLinks.telegram;
+                            if (id === 'whatsapp') linkUrl = (url && url !== '#' && url.length > 5 && !url.toLowerCase().includes('tugrupo')) ? url : siteConfig.communityLinks.whatsapp;
+                            return { id, name: id.charAt(0).toUpperCase() + id.slice(1), url: linkUrl };
+                        });
                     setDynamicLinks(activeLinks);
                 }
             } catch (e) {
@@ -102,7 +107,7 @@ export default function Footer() {
         }
     };
 
-    const displayLinks = dynamicLinks || siteConfig.socialLinks;
+    const displayLinks = (dynamicLinks && dynamicLinks.length > 0) ? dynamicLinks : siteConfig.socialLinks;
 
     return (
         <footer className="relative overflow-hidden" style={{ backgroundColor: 'var(--color-surface)', borderTop: '1px solid var(--color-border)' }}>

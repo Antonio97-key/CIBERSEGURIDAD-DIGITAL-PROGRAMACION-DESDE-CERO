@@ -7,6 +7,9 @@ module.exports = {
     darkMode: 'class',
     theme: {
         extend: {
+            screens: {
+                'xs': '480px',
+            },
             colors: {
                 // Light mode palette
                 pearl: {

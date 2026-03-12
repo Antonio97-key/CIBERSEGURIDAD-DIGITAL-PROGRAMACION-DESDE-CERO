@@ -3,8 +3,14 @@ export const siteConfig = {
         { id: 'instagram', name: 'Instagram', url: 'https://instagram.com/seguridaddigital', icon: 'IG' },
         { id: 'tiktok', name: 'TikTok', url: 'https://tiktok.com/@seguridaddigital', icon: 'TT' },
         { id: 'facebook', name: 'Facebook', url: 'https://facebook.com/seguridaddigital', icon: 'FB' },
-        { id: 'github', name: 'GitHub', url: 'https://github.com/seguridaddigital', icon: 'GH' }
+        { id: 'github', name: 'GitHub', url: 'https://github.com/seguridaddigital', icon: 'GH' },
+        { id: 'telegram', name: 'Telegram', url: 'https://t.me/+035EfCuB4lg3NDNh', icon: 'TG' },
+        { id: 'whatsapp', name: 'WhatsApp', url: 'https://chat.whatsapp.com/F76SLVgtcEZCzNJs3oTkhE?mode=gi_t', icon: 'WA' }
     ],
+    communityLinks: {
+        telegram: 'https://t.me/+035EfCuB4lg3NDNh',
+        whatsapp: 'https://chat.whatsapp.com/F76SLVgtcEZCzNJs3oTkhE?mode=gi_t'
+    },
     policies: {
         privacy: {
             title: 'Política de Privacidad',

@@ -109,7 +109,7 @@ export default function NewsSection() {
                             [...news, ...news].map((article, idx) => (
                                 <div
                                     key={`${article.id}-${idx}`}
-                                    className="glass-card flex flex-col p-6 min-w-[350px] max-w-[350px] group transition-all"
+                                    className="glass-card flex flex-col p-6 min-w-[280px] sm:min-w-[350px] max-w-[280px] sm:max-w-[350px] group transition-all"
                                 >
                                     <div className="flex items-center justify-between mb-4">
                                         <span className="text-[10px] uppercase font-bold tracking-wider" style={{ color: 'var(--color-primary)' }}>

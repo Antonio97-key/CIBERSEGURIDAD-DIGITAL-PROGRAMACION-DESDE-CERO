@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useLanguage } from '../lib/LanguageContext';
 import { useAuth } from '../lib/AuthContext';
 import { supabase } from '../lib/supabase';
+import { siteConfig } from '../data/siteConfig';
 
 export default function Community() {
     const { t } = useLanguage();
@@ -10,8 +11,8 @@ export default function Community() {
     const [newComment, setNewComment] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [dynamicLinks, setDynamicLinks] = useState({ 
-        telegram: 'https://t.me/+mjkMgsxIhAJlMTVh', 
-        whatsapp: 'https://chat.whatsapp.com/F76SLVgtcEZCzNJs3oTkhE?mode=gi_t' 
+        telegram: siteConfig.communityLinks.telegram, 
+        whatsapp: siteConfig.communityLinks.whatsapp 
     });
 
     useEffect(() => {
@@ -20,8 +21,8 @@ export default function Community() {
                 const { data } = await supabase.from('platform_settings').select('value').eq('id', 'social_links').single();
                 if (data && data.value) {
                     setDynamicLinks(prev => ({
-                        telegram: data.value.telegram && data.value.telegram !== '#' ? data.value.telegram : prev.telegram,
-                        whatsapp: data.value.whatsapp && data.value.whatsapp !== '#' ? data.value.whatsapp : prev.whatsapp
+                        telegram: (data.value.telegram && data.value.telegram !== '#' && data.value.telegram.length > 5 && !data.value.telegram.toLowerCase().includes('tugrupo')) ? data.value.telegram : siteConfig.communityLinks.telegram,
+                        whatsapp: (data.value.whatsapp && data.value.whatsapp !== '#' && data.value.whatsapp.length > 5 && !data.value.whatsapp.toLowerCase().includes('tugrupo')) ? data.value.whatsapp : siteConfig.communityLinks.whatsapp
                     }));
                 }
             } catch (e) { console.error("Error fetching community links:", e); }
@@ -44,11 +45,12 @@ export default function Community() {
     }, []);
 
     const addComment = async () => {
-        if (!newComment.trim()) return;
+        console.log("Community.js: addComment triggered");
         if (!user) {
-            alert('Debes iniciar sesión para comentar.');
+            window.dispatchEvent(new CustomEvent('openAuthModal'));
             return;
         }
+        if (!newComment.trim()) return;
 
         setIsSubmitting(true);
 
@@ -62,12 +64,12 @@ export default function Community() {
         try {
             const { data, error } = await supabase.from('forum_posts').insert([newPost]).select();
             if (data && data[0]) {
-                setComments([data[0], ...comments]);
+                setComments(prev => [data[0], ...prev]);
             } else {
-                setComments([{ ...newPost, id: Date.now() }, ...comments]);
+                setComments(prev => [{ ...newPost, id: Date.now() }, ...prev]);
             }
         } catch (e) {
-            setComments([{ ...newPost, id: Date.now() }, ...comments]);
+            setComments(prev => [{ ...newPost, id: Date.now() }, ...prev]);
         }
 
         setNewComment('');
@@ -87,7 +89,7 @@ export default function Community() {
                 {/* Section Header */}
                 <div className="text-center mb-16">
                     <span className="chip chip-green mb-4 inline-flex">💬 {t('community.badge')}</span>
-                    <h2 className="section-title gradient-text">{t('community.title')}</h2>
+                    <h2 className="section-title gradient-text">COMUNIDAD VERIFICADA 2026</h2>
                     <p className="section-subtitle mx-auto">
                         {t('community.subtitle')}
                     </p>
@@ -95,7 +97,7 @@ export default function Community() {
 
                 <div className="max-w-2xl mx-auto">
                     {/* New Comment Form */}
-                    <div className="glass-card p-8 mb-10 shadow-xl border-white/10" style={{ backgroundColor: 'var(--color-surface)' }}>
+                    <div className="glass-card p-6 md:p-8 mb-10 shadow-xl border-white/10" style={{ backgroundColor: 'var(--color-surface)' }}>
                         <div className="flex items-start gap-6">
                             <div className="w-12 h-12 rounded-2xl bg-primary-500/10 flex items-center justify-center text-primary-500 text-lg font-black shrink-0 border border-primary-500/20">
                                 {user ? (profile?.display_name?.[0] || user.email[0]).toUpperCase() : '?'}
@@ -106,7 +108,8 @@ export default function Community() {
                                     onChange={(e) => setNewComment(e.target.value)}
                                     onKeyDown={handleKeyDown}
                                     placeholder={user ? `${profile?.display_name || user.email.split('@')[0]}, deja tu comentario...` : "Inicia sesión para comentar..."}
-                                    className="w-full bg-black/5 dark:bg-white/5 border border-white/10 rounded-2xl p-6 text-sm outline-none focus:border-primary-500 transition-all font-medium min-h-[100px] text-center placeholder:text-gray-400 dark:placeholder:text-gray-500"
+                                    className="w-full bg-white/5 dark:bg-black/5 border border-black/10 dark:border-white/10 rounded-2xl p-6 text-sm outline-none focus:border-primary-500 transition-all font-medium min-h-[100px] text-center placeholder:text-gray-400 dark:placeholder:text-gray-500"
+                                    style={{ backgroundColor: 'var(--color-input-bg)', color: 'var(--color-text)' }}
                                     rows={3}
                                 />
                                 <div className="flex items-center justify-between mt-4">
@@ -115,8 +118,9 @@ export default function Community() {
                                     </p>
                                     <button
                                         onClick={addComment}
-                                        disabled={!newComment.trim() || isSubmitting}
-                                        className={`btn-3d px-8 py-3 text-[10px] font-black uppercase tracking-widest flex items-center gap-2 ${!newComment.trim() || isSubmitting ? 'bg-gray-500/20 text-gray-500 opacity-50 cursor-not-allowed' : 'btn-3d-primary'}`}
+                                        disabled={isSubmitting}
+                                        className={`btn-3d px-8 py-3 text-[10px] font-black uppercase tracking-widest flex items-center gap-2 ${isSubmitting ? 'bg-gray-500/20 text-gray-500 opacity-50 cursor-not-allowed' : 'btn-3d-primary shadow-lg'}`}
+                                        style={{ opacity: 1, pointerEvents: 'auto' }}
                                     >
                                         {isSubmitting ? (
                                             <div className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin"></div>
@@ -180,7 +184,7 @@ export default function Community() {
                                         href={dynamicLinks.telegram}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="inline-flex items-center justify-center gap-2 bg-[#0088cc] hover:bg-[#0077b3] text-white font-semibold py-2 px-6 rounded-full transition-colors w-full"
+                                        className="inline-flex items-center justify-center gap-2 bg-[#0088cc] hover:bg-[#0077b3] text-white font-semibold py-2 px-6 rounded-full transition-colors w-full shadow-lg"
                                     >
                                         Unirse al Grupo
                                         <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -209,7 +213,7 @@ export default function Community() {
                                         href={dynamicLinks.whatsapp}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#128C7E] text-white font-semibold py-2 px-6 rounded-full transition-colors w-full"
+                                        className="inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#128C7E] text-white font-semibold py-2 px-6 rounded-full transition-colors w-full shadow-lg"
                                     >
                                         Unirse al Grupo
                                         <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>

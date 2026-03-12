@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useLanguage } from '../lib/LanguageContext';
+import { useAuth } from '../lib/AuthContext';
 import QuizForm from './QuizForm';
 
 const colorMap = {
@@ -13,10 +14,28 @@ const colorMap = {
 
 export default function CyberSection({ level }) {
     const { t } = useLanguage();
+    const { user, progress, updateProgress } = useAuth();
     const [currentLevel, setCurrentLevel] = useState(1);
     const [completedLevels, setCompletedLevels] = useState([]);
     const [activeLevel, setActiveLevel] = useState(1);
     const [quizState, setQuizState] = useState(null); // null, 'correct', 'incorrect'
+
+    // Load progress from AuthContext
+    useEffect(() => {
+        if (user && progress?.completedQuizzes) {
+            // Filter quizzes belonging to this module if needed, 
+            // but for now, assuming completedQuizzes contains level IDs for this section
+            const cyberQuizzes = progress.completedQuizzes
+                .filter(q => q.startsWith('cyber_lvl_'))
+                .map(q => parseInt(q.replace('cyber_lvl_', '')));
+            
+            if (cyberQuizzes.length > 0) {
+                setCompletedLevels(cyberQuizzes);
+                const maxCompleted = Math.max(...cyberQuizzes);
+                setCurrentLevel(Math.min(maxCompleted + 1, 5));
+            }
+        }
+    }, [user, progress]);
 
     const levels = [
         {
@@ -108,13 +127,29 @@ export default function CyberSection({ level }) {
 
     const completeLevel = (levelId) => {
         if (!completedLevels.includes(levelId)) {
-            setCompletedLevels([...completedLevels, levelId]);
+            const newCompletedLevels = [...completedLevels, levelId];
+            setCompletedLevels(newCompletedLevels);
+            
+            // If logged in, persist progress and reward XP
+            if (user && updateProgress) {
+                updateProgress({
+                    xp: (progress.xp || 0) + 100,
+                    completedQuizzes: [...(progress.completedQuizzes || []), `cyber_lvl_${levelId}`]
+                });
+            }
+
+            // If the user completes the 5th level and is not authenticated, prompt for login
+            if (levelId === 5 && !user) {
+                const event = new CustomEvent('openAuthModal');
+                window.dispatchEvent(event);
+                return; // Stop further progression for unauthenticated users
+            }
         }
         setCurrentLevel(Math.min(levelId + 1, levels.length));
     };
 
     return (
-        <section id="cyber" className="relative py-20 section-alt" >
+        <section id="cyber" className="relative py-12 md:py-20 section-alt" >
             <div className="section-container">
                 {/* Section Header */}
                 <div className="text-center mb-16">

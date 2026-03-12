@@ -96,7 +96,7 @@ export default function SyntaxTable() {
                 <div className="text-center mb-16">
                     <span className="chip chip-purple mb-4 inline-flex">💻 {t('syntax.badge')}</span>
                     <h2 className="section-title gradient-text">{t('syntax.title')}</h2>
-                    <p className="text-2xl font-bold mx-auto text-gray-800 dark:text-gray-200" style={{ maxWidth: '800px' }}>
+                    <p className="text-xl md:text-2xl font-bold mx-auto text-gray-800 dark:text-gray-200" style={{ maxWidth: '800px' }}>
                         {t('syntax.subtitle')}
                     </p>
                 </div>
@@ -142,7 +142,7 @@ export default function SyntaxTable() {
                                 onClick={() => setExpandedRow(expandedRow === idx ? null : idx)}
                             >
                                 {/* Header Row */}
-                                <div className="p-6 md:p-8 flex items-center justify-between group">
+                                <div className="p-5 md:p-8 flex items-center justify-between group">
                                     <div className="flex items-center gap-5">
                                         <span className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-primary-100 dark:bg-primary-900/50 flex items-center justify-center text-lg md:text-xl font-black text-primary-600 dark:text-primary-400 shadow-sm group-hover:scale-110 transition-transform">
                                             {idx + 1}
