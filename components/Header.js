@@ -114,12 +114,15 @@ export default function Header() {
                 <div className="flex items-center justify-between w-full">
                     <Link href="/" onClick={(e) => handleNavClick(e, '#hero')} className="flex items-center gap-2 md:gap-3 group shrink-0">
                         <div className="w-9 h-9 md:w-10 md:h-10 rounded-xl gradient-bg flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300 shrink-0">
-                            {/* Premium Lock Icon */}
+                            {/* Standardized Professional Lock Icon */}
                             <svg className="w-5 h-5 md:w-6 md:h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M7 11V7C7 4.23858 9.23858 2 12 2C14.7614 2 17 4.23858 17 7V11" stroke="#FFD700" strokeWidth="2.5" strokeLinecap="round" />
-                                <rect x="5" y="10" width="14" height="11" rx="3" fill="#FFD700" fillOpacity="0.9" />
-                                <circle cx="12" cy="15" r="1.5" fill="white" />
-                                <path d="M12 16.5V18.5" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
+                                <path 
+                                    d="M12 15V17M6 21H18C19.1046 21 20 20.1046 20 19V13C20 11.8954 19.1046 11 18 11H6C4.89543 11 4 11.8954 4 13V19C4 20.1046 4.89543 21 6 21ZM16 11V7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7V11H16Z" 
+                                    stroke="white" 
+                                    strokeWidth="2.5" 
+                                    strokeLinecap="round" 
+                                    strokeLinejoin="round" 
+                                />
                             </svg>
                         </div>
                         <div className="flex flex-col min-w-0">

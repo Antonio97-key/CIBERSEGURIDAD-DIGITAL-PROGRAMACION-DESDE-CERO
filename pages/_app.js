@@ -39,7 +39,8 @@ export default function App({ Component, pageProps }) {
                         ]}
                         additionalLinkTags={[
                             { rel: 'manifest', href: '/manifest.json' },
-                            { rel: 'icon', href: '/favicon.ico' }
+                            { rel: 'icon', href: '/favicon.svg', type: 'image/svg+xml' },
+                            { rel: 'shortcut icon', href: '/favicon.svg' }
                         ]}
                     />
                     <PayPalScriptProvider options={{ "client-id": process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID || "test", currency: "USD" }}>

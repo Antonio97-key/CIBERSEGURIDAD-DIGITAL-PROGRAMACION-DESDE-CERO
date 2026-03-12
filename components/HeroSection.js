@@ -4,11 +4,11 @@ export default function HeroSection() {
     const { t } = useLanguage();
 
     return (
-        <section id="hero" className="relative min-h-screen flex flex-col justify-center items-center overflow-hidden pt-32 sm:pt-[200px] pb-20">
+        <section id="hero" className="relative min-h-[90vh] flex flex-col justify-center items-center overflow-hidden pt-24 sm:pt-[180px] pb-16">
             {/* Decorative Theme-Aware Orbs */}
-            <div className="glow-orb w-96 h-96 top-10 -left-20 absolute animate-float" style={{ backgroundColor: 'var(--color-primary)', opacity: 0.5 }} />
-            <div className="glow-orb w-80 h-80 bottom-10 -right-20 absolute animate-float" style={{ backgroundColor: 'var(--color-secondary)', opacity: 0.4, animationDelay: '3s' }} />
-            <div className="glow-orb w-64 h-64 top-1/2 left-1/2 absolute -translate-x-1/2 -translate-y-1/2 animate-pulse-slow" style={{ backgroundColor: 'var(--color-primary)', opacity: 0.3 }} />
+            <div className="glow-orb w-64 h-64 sm:w-96 sm:h-96 top-5 -left-10 sm:top-10 sm:-left-20 absolute animate-float" style={{ backgroundColor: 'var(--color-primary)', opacity: 0.5 }} />
+            <div className="glow-orb w-56 h-56 sm:w-80 sm:h-80 bottom-5 -right-10 sm:bottom-10 sm:-right-20 absolute animate-float" style={{ backgroundColor: 'var(--color-secondary)', opacity: 0.4, animationDelay: '3s' }} />
+            <div className="glow-orb w-48 h-48 sm:w-64 sm:h-64 top-1/2 left-1/2 absolute -translate-x-1/2 -translate-y-1/2 animate-pulse-slow" style={{ backgroundColor: 'var(--color-primary)', opacity: 0.3 }} />
 
             {/* Grid Pattern Overlay */}
             <div
@@ -40,7 +40,7 @@ export default function HeroSection() {
                 </div>
 
                 {/* Title */}
-                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-extrabold mb-8 tracking-tight animate-slide-up leading-[1.1]" style={{ color: 'var(--color-text)' }}>
+                <h1 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-extrabold mb-6 sm:mb-8 tracking-tight animate-slide-up leading-tight sm:leading-[1.1]" style={{ color: 'var(--color-text)' }}>
                     {t('hero.title_1')}
                     <br />
                     <span 
@@ -50,15 +50,15 @@ export default function HeroSection() {
                         {t('hero.title_2')}
                     </span>
                     <br />
-                    <span className="text-xl sm:text-2xl md:text-3xl lg:text-5xl font-light opacity-80" style={{ color: 'var(--color-text)' }}>
+                    <span className="text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-5xl font-light opacity-80" style={{ color: 'var(--color-text)' }}>
                         {t('hero.title_3')}
                     </span>
                 </h1>
-
+ 
                 {/* Subtitle */}
-                <p className="text-lg sm:text-xl font-medium mb-10 max-w-2xl mx-auto leading-relaxed animate-slide-up" style={{ animationDelay: '0.2s', color: 'var(--color-text)' }}>
+                <p className="text-base sm:text-lg md:text-xl font-medium mb-8 sm:mb-10 max-w-2xl mx-auto leading-relaxed animate-slide-up" style={{ animationDelay: '0.2s', color: 'var(--color-text)' }}>
                     {t('hero.subtitle')}
-                    <span className="block mt-2 text-base font-semibold" style={{ color: 'var(--color-text)' }}>
+                    <span className="block mt-2 text-sm sm:text-base font-semibold" style={{ color: 'var(--color-text)' }}>
                         {t('hero.subtitle_sub')}
                     </span>
                 </p>
