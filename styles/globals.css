@@ -91,6 +91,7 @@
     overflow-x: hidden !important;
     width: 100%;
     position: relative;
+    max-width: 100vw;
   }
 
   /* Smooth transition for ALL theme-dependent elements */
@@ -652,7 +653,7 @@
 
   @media (max-width: 640px) {
     .animate-marquee {
-      animation-duration: 120s;
+      animation-duration: 150s;
     }
   }
 

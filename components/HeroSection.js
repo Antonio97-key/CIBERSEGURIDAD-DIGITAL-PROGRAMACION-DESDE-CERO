@@ -20,7 +20,7 @@ export default function HeroSection() {
             />
 
             {/* Content */}
-            <div className="relative z-10 text-center px-4 sm:px-6 max-w-7xl mx-auto w-full flex flex-col items-center">
+            <div className="relative z-10 text-center px-4 sm:px-6 max-w-7xl mx-auto w-full flex flex-col items-center justify-center overflow-x-hidden">
                 {/* Scrolling Notice - Standardized width and centered */}
                 <div className="mb-6 sm:mb-12 news-marquee-container w-full max-w-full overflow-hidden py-3 cursor-default select-none pointer-events-none bg-surface-hover/30 backdrop-blur-sm rounded-xl">
                     <div className="news-track flex gap-8 sm:gap-16 animate-marquee whitespace-nowrap">
